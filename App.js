@@ -2,24 +2,22 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-// الشاشات
-import SplashScreen from './SplashScreen';
-import ProfileSettingScreen from './ProfileSettingScreen';
-import ProfileEditScreen from './ProfileEditScreen';
+import IntroScreen from './IntroScreen';
+import LoginScreen from './LoginScreen';
+import SignUpScreen from './SignUpScreen';
 
 const Stack = createNativeStackNavigator();
 
-export default function App() {
+const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Profile"
-        screenOptions={{ headerShown: false }}
-      >
-        <Stack.Screen name="Splash" component={SplashScreen} />
-        <Stack.Screen name="Profile" component={ProfileSettingScreen} />
-        <Stack.Screen name="ProfileEdit" component={ProfileEditScreen} />
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Intro" component={IntroScreen} />
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="SignUp" component={SignUpScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
+};
+
+export default App;
