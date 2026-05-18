@@ -5,9 +5,10 @@ import {
   TouchableOpacity,
   StatusBar,
   ImageBackground,
+  Modal,
 } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { profileStyles, bottomNavStyles, COLORS } from './styles';
+import { profileStyles, bottomNavStyles, colors } from './styles';
 
 const MenuItem = ({ title, icon, danger, onPress }) => {
   return (
@@ -19,7 +20,7 @@ const MenuItem = ({ title, icon, danger, onPress }) => {
       <MaterialIcons
         name="chevron-left"
         size={32}
-        color={danger ? COLORS.DARK_RED : COLORS.BLACK}
+        color={danger ? colors.red : colors.black}
       />
 
       <View style={profileStyles.menuRight}>
@@ -30,20 +31,20 @@ const MenuItem = ({ title, icon, danger, onPress }) => {
         <MaterialIcons
           name={icon}
           size={30}
-          color={danger ? COLORS.DARK_RED : COLORS.BLUE}
+          color={danger ? colors.red :colors.blue}
         />
       </View>
     </TouchableOpacity>
   );
 };
 
-const BottomTab = ({ icon, label, active }) => {
+const BottomTab = ({ icon, label, active,onPress }) => {
   return (
     <TouchableOpacity style={bottomNavStyles.tabItem} activeOpacity={0.7}>
       <MaterialIcons
         name={icon}
         size={22}
-        color={active ? COLORS.BLUE : COLORS.GRAY}
+        color={active ? colors.blue : colors.gray}
       />
       <Text style={[bottomNavStyles.tabText, active && bottomNavStyles.activeTabText]}>
         {label}
@@ -53,18 +54,24 @@ const BottomTab = ({ icon, label, active }) => {
 };
 
 export default function ProfileSettingScreen({ navigation }) {
+
+  const [
+    deleteModalVisible,
+    setDeleteModalVisible
+  ] = React.useState(false);
+
   return (
     <View style={profileStyles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor={COLORS.BG} />
+      <StatusBar barStyle="dark-content" backgroundColor={colors.bg} />
 
       <View style={profileStyles.header}>
         <View style={profileStyles.statusFake}>
           <Text style={profileStyles.timeText}>9:41</Text>
 
           <View style={profileStyles.statusIcons}>
-            <MaterialIcons name="signal-cellular-4-bar" size={15} color={COLORS.BLACK} />
-            <MaterialIcons name="wifi" size={15} color={COLORS.BLACK} />
-            <MaterialIcons name="battery-full" size={18} color={COLORS.BLACK} />
+            <MaterialIcons name="signal-cellular-4-bar" size={15} color={colors.black} />
+            <MaterialIcons name="wifi" size={15} color={colors.black} />
+            <MaterialIcons name="battery-full" size={18} color={colors.black} />
           </View>
         </View>
 
@@ -73,7 +80,7 @@ export default function ProfileSettingScreen({ navigation }) {
             activeOpacity={0.7}
             onPress={() => navigation?.goBack?.()}
           >
-            <MaterialIcons name="arrow-back" size={22} color={COLORS.BLUE} />
+            <MaterialIcons name="arrow-back" size={22} color={colors.blue} />
           </TouchableOpacity>
 
           <Text style={profileStyles.title}>إعدادات الملف الشخصي</Text>
@@ -89,7 +96,7 @@ export default function ProfileSettingScreen({ navigation }) {
 
         <View style={profileStyles.avatarWrapper}>
           <View style={profileStyles.avatarCircle}>
-            <MaterialIcons name="person" size={72} color={COLORS.BLUE} />
+            <MaterialIcons name="person" size={72} color={colors.blue} />
           </View>
         </View>
       </View>
@@ -97,28 +104,115 @@ export default function ProfileSettingScreen({ navigation }) {
       <Text style={profileStyles.userName}>غيداء بندر</Text>
 
       <View style={profileStyles.menuContainer}>
-        <MenuItem
-          title="تعديل حسابي "
-          icon="person"
-          onPress={() => navigation.navigate('ProfileEdit')}
+
+  <MenuItem
+    title="تعديل حسابي"
+    icon="person"
+    onPress={() =>
+      navigation.navigate(
+        'ProfileEdit'
+      )
+    }
+  />
+
+  <MenuItem
+    title="تغيير كلمة السر "
+    icon="lock"
+    onPress={() =>
+      navigation.navigate(
+        'ChangePassword'
+      )
+    }
+  />
+
+  <MenuItem
+    title="إدارة حد الإنفاق"
+    icon="insert-chart"
+    onPress={() =>
+      navigation.navigate(
+        'SpendingLimit'
+      )
+    }
+  />
+
+  <MenuItem
+  title="حذف الحساب"
+  icon="warning"
+  danger
+  onPress={() =>
+    setDeleteModalVisible(true)
+  }
+/>
+
+</View>
+<Modal
+  visible={deleteModalVisible}
+  transparent
+  animationType="fade"
+  onRequestClose={() =>
+    setDeleteModalVisible(false)
+  }
+>
+
+  <View style={profileStyles.deleteOverlay}>
+
+    <View style={profileStyles.deleteModalBox}>
+
+      <View style={profileStyles.deleteIconCircle}>
+
+        <MaterialIcons
+          name="report"
+          size={50}
+          color={colors.red}
         />
 
-        <MenuItem title="تغيير كلمة السر " icon="lock" />
-        <MenuItem title="إدارة حد الإنفاق" icon="insert-chart" />
-        <MenuItem title="حذف الحساب" icon="warning" danger />
       </View>
 
-      <View style={bottomNavStyles.bottomNav}>
-        <BottomTab icon="more-horiz" label="المزيد" active />
-        <BottomTab icon="bar-chart" label="التقارير" />
+      <Text style={profileStyles.deleteModalTitle}>
+        حذف الحساب
+      </Text>
 
-        <TouchableOpacity style={bottomNavStyles.addButton} activeOpacity={0.8}>
-          <MaterialIcons name="add" size={42} color={COLORS.WHITE} />
+      <Text style={profileStyles.deleteModalText}>
+        هل أنت متأكدة من حذف الحساب؟ لا يمكن التراجع عن هذا الإجراء
+      </Text>
+
+      <View style={profileStyles.deleteModalButtons}>
+
+        <TouchableOpacity
+          style={profileStyles.deleteCancelBtn}
+          onPress={() =>
+            setDeleteModalVisible(false)
+          }
+        >
+          <Text style={profileStyles.deleteCancelText}>
+            إلغاء
+          </Text>
         </TouchableOpacity>
 
-        <BottomTab icon="receipt-long" label="الفواتير" />
-        <BottomTab icon="home" label="الرئيسية" />
+        <TouchableOpacity
+          style={profileStyles.deleteConfirmBtn}
+          onPress={() => {
+
+            setDeleteModalVisible(false);
+
+            navigation.navigate(
+              'Login'
+            );
+
+          }}
+        >
+          <Text style={profileStyles.deleteConfirmText}>
+            حذف
+          </Text>
+        </TouchableOpacity>
+
       </View>
+
+    </View>
+
+  </View>
+
+</Modal>
     </View>
   );
 }
