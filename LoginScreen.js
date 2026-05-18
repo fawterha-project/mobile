@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
+
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+
 import { loginStyles, colors } from './styles';
 
 const LoginScreen = ({ navigation }) => {
   const [hidePassword, setHidePassword] = useState(true);
+
   const [rememberMe, setRememberMe] = useState(false);
+
+  const [email, setEmail] = useState('');
+
+  const [password, setPassword] = useState('');
 
   return (
     <View style={loginStyles.container}>
@@ -19,18 +26,25 @@ const LoginScreen = ({ navigation }) => {
       <Text style={loginStyles.title}>تسجيل الدخول</Text>
 
       <Image
-        source={require('./android/app/src/assets/images/login_illustration.png')}
+        source={require('./android/app/src/main/assets/images/login_illustration.png')}
         style={loginStyles.illustration}
         resizeMode="contain"
       />
 
       <Text style={loginStyles.welcome}>حياك من جديد 👋</Text>
+
       <Text style={loginStyles.subtitle}>ابدأ بتنظيم فواتيرك الآن</Text>
 
       <Text style={loginStyles.emailLabel}>البريد الإلكتروني</Text>
-      <TextInput style={loginStyles.emailInput} />
 
-      <Text style={loginStyles.passwordLabel}>كلمة المرور </Text>
+      <TextInput
+        style={loginStyles.emailInput}
+        keyboardType="email-address"
+        value={email}
+        onChangeText={setEmail}
+      />
+
+      <Text style={loginStyles.passwordLabel}>كلمة السر </Text>
 
       <View style={loginStyles.passwordBox}>
         <TouchableOpacity onPress={() => setHidePassword(!hidePassword)}>
@@ -44,11 +58,16 @@ const LoginScreen = ({ navigation }) => {
         <TextInput
           style={loginStyles.passwordInput}
           secureTextEntry={hidePassword}
+          value={password}
+          onChangeText={setPassword}
         />
       </View>
 
-      <TouchableOpacity style={loginStyles.forgotText} onPress={() => {}}>
-        <Text style={loginStyles.forgotTextValue}>نسيت كلمة المرور؟</Text>
+      <TouchableOpacity
+        style={loginStyles.forgotText}
+        onPress={() => navigation.navigate('ForgotPasswordScreen')}
+      >
+        <Text style={loginStyles.forgotTextValue}>نسيت كلمة السر </Text>
       </TouchableOpacity>
 
       <TouchableOpacity
@@ -69,7 +88,15 @@ const LoginScreen = ({ navigation }) => {
         </View>
       </TouchableOpacity>
 
-      <TouchableOpacity style={loginStyles.loginButton}>
+      <TouchableOpacity
+        style={[
+          loginStyles.loginButton,
+
+          (!email || !password) && loginStyles.loginButtonDisabled,
+        ]}
+        disabled={!email || !password}
+        onPress={() => navigation.replace('HomeWithInvoicesScreen')}
+      >
         <Text style={loginStyles.loginButtonText}>تسجيل الدخول</Text>
       </TouchableOpacity>
 
@@ -77,7 +104,7 @@ const LoginScreen = ({ navigation }) => {
         ليس لديك حساب؟{' '}
         <Text
           style={loginStyles.signupLink}
-          onPress={() => navigation.navigate('SignUp')}
+          onPress={() => navigation.navigate('SignUpScreen')}
         >
           إنشاء حساب
         </Text>

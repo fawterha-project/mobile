@@ -14,20 +14,23 @@ const IntroScreen = ({ navigation }) => {
     <View style={introStyles.container}>
       <StatusBar barStyle="dark-content" backgroundColor={colors.white} />
 
+      {/* التموج */}
       <ImageBackground
-        source={require('./android/app/src/assets/images/background.png')}
+        source={require('./android/app/src/main/assets/images/background.png')}
         style={introStyles.waveImage}
         resizeMode="cover"
       />
 
+      {/* صورة الفاتورة */}
       <Image
-        source={require('./android/app/src/assets/images/invoice_intro.png')}
+        source={require('./android/app/src/main/assets/images/invoice_intro.png')}
         style={introStyles.mainImage}
         resizeMode="contain"
       />
 
+      {/* اللوقو */}
       <Image
-        source={require('./android/app/src/assets/images/logo.png')}
+        source={require('./android/app/src/main/assets/images/fawterha.jpg')}
         style={introStyles.logo}
         resizeMode="contain"
       />
@@ -41,7 +44,7 @@ const IntroScreen = ({ navigation }) => {
       <TouchableOpacity
         style={introStyles.button}
         activeOpacity={0.8}
-        onPress={() => navigation.navigate('Login')}
+        onPress={() => navigation.navigate('LoginScreen')}
       >
         <Text style={introStyles.buttonText}>جاهزة؟ ابدأ!</Text>
       </TouchableOpacity>

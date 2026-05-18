@@ -10,11 +10,9 @@ const SignUpScreen = ({ navigation }) => {
 
   return (
     <View style={signupStyles.container}>
-
-      {/* زر الرجوع */}
       <TouchableOpacity
         style={signupStyles.backIcon}
-        onPress={() => navigation.navigate('Intro')}
+        onPress={() => navigation.navigate('IntroScreen')}
       >
         <MaterialIcons name="arrow-back" size={22} color={colors.blue} />
       </TouchableOpacity>
@@ -22,13 +20,13 @@ const SignUpScreen = ({ navigation }) => {
       <Text style={signupStyles.title}>إنشاء حساب</Text>
 
       <Image
-        source={require('./android/app/src/assets/images/login_illustration.png')}
+        source={require('./android/app/src/main/assets/images/login_illustration.png')}
         style={signupStyles.illustration}
         resizeMode="contain"
       />
 
-      <Text style={signupStyles.welcome}>فوترنا، أنشئ حسابك</Text>
-      <Text style={signupStyles.subtitle}>وخلك فواتيرك مرتبة في مكان واحد</Text>
+      <Text style={signupStyles.welcome}>فوترها، أنشئ حسابك</Text>
+      <Text style={signupStyles.subtitle}>وخل فواتيرك مرتبة في مكان واحد</Text>
 
       <Text style={signupStyles.nameLabel}>الاسم</Text>
       <TextInput style={signupStyles.nameInput} />
@@ -36,7 +34,7 @@ const SignUpScreen = ({ navigation }) => {
       <Text style={signupStyles.emailLabel}>البريد الإلكتروني</Text>
       <TextInput style={signupStyles.emailInput} keyboardType="email-address" />
 
-      <Text style={signupStyles.passwordLabel}>كلمة المرور </Text>
+      <Text style={signupStyles.passwordLabel}>كلمة السر </Text>
       <View style={signupStyles.passwordBox}>
         <TouchableOpacity onPress={() => setHidePassword(!hidePassword)}>
           <MaterialIcons
@@ -52,7 +50,7 @@ const SignUpScreen = ({ navigation }) => {
         />
       </View>
 
-      <Text style={signupStyles.confirmPasswordLabel}>تأكيد كلمة المرور </Text>
+      <Text style={signupStyles.confirmPasswordLabel}>تأكيد كلمة السر </Text>
       <View style={signupStyles.confirmPasswordBox}>
         <TouchableOpacity
           onPress={() => setHideConfirmPassword(!hideConfirmPassword)}
@@ -76,31 +74,35 @@ const SignUpScreen = ({ navigation }) => {
       >
         <Text style={signupStyles.termsText}>أوافق على الشروط والأحكام</Text>
 
-        <View style={[
-          signupStyles.checkbox,
-          agree && signupStyles.checkboxActive
-        ]}>
+        <View
+          style={[signupStyles.checkbox, agree && signupStyles.checkboxActive]}
+        >
           {agree && (
             <MaterialIcons name="check" size={12} color={colors.white} />
           )}
         </View>
       </TouchableOpacity>
 
-      <TouchableOpacity style={signupStyles.signupButton}>
+      <TouchableOpacity
+        style={signupStyles.signupButton}
+        onPress={() =>
+          navigation.navigate('VerifyEmailScreen', {
+            source: 'signup',
+          })
+        }
+      >
         <Text style={signupStyles.signupButtonText}>إنشاء حساب</Text>
       </TouchableOpacity>
 
-      {/* زر تسجيل الدخول */}
       <Text style={signupStyles.loginText}>
         لديك حساب؟{' '}
         <Text
           style={signupStyles.loginLink}
-          onPress={() => navigation.navigate('Login')}
+          onPress={() => navigation.navigate('LoginScreen')}
         >
           تسجيل الدخول
         </Text>
       </Text>
-
     </View>
   );
 };
