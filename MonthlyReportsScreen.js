@@ -66,14 +66,6 @@ export default function MonthlyReportsScreen({ navigation }) {
         <TouchableOpacity
           style={monthlyReportsStyles.tabBtn}
           activeOpacity={0.8}
-          onPress={() => navigation.navigate('Reports')}
-        >
-          <Text style={monthlyReportsStyles.tabText}>ملخص</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={monthlyReportsStyles.tabBtn}
-          activeOpacity={0.8}
           onPress={() => navigation.navigate('WeeklyReports')}
         >
           <Text style={monthlyReportsStyles.tabText}>أسبوعي</Text>

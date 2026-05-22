@@ -161,7 +161,7 @@ export default function BillsScreen({
           activeOpacity={0.8}
           onPress={() =>
             navigation.push(
-              'Categories'
+              'CategoriesScreen'
             )
           }
         >

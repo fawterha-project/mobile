@@ -1,5 +1,5 @@
 import React from 'react';
-import BottomNavigation from './BottomNavigation';
+import EmptyBottomNavigation from './EmptyBottomNavigation';
 
 import {
     View,
@@ -253,7 +253,7 @@ export default function EmptyCategoryCommitmentsScreen({
             </View>
 
 
-            <BottomNavigation
+            <EmptyBottomNavigation
                 navigation={navigation}
             />
 

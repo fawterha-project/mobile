@@ -1,5 +1,5 @@
 import React from 'react';
-import BottomNavigation from './BottomNavigation';
+import EmptyBottomNavigation from './EmptyBottomNavigation';
 
 import {
   View,
@@ -119,20 +119,6 @@ export default function EmptyWeeklyReportsScreen({
 
 
       <View style={weeklyReportsStyles.tabsRow}>
-
-        <TouchableOpacity
-          style={weeklyReportsStyles.tabBtn}
-          activeOpacity={0.8}
-          onPress={() =>
-            navigation.navigate('EmptyReports')
-          }
-        >
-          <Text style={weeklyReportsStyles.tabText}>
-            ملخص
-          </Text>
-        </TouchableOpacity>
-
-
         <TouchableOpacity
           style={weeklyReportsStyles.tabBtnActive}
         >
@@ -440,10 +426,10 @@ export default function EmptyWeeklyReportsScreen({
 
       </View>
 
-      <BottomNavigation
-        navigation={navigation}
-      />
-
+      <EmptyBottomNavigation
+                      navigation={navigation}
+                      activeScreen="EmptyWeeklyReports"
+                  />
     </View>
 
   );

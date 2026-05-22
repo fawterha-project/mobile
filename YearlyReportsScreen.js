@@ -66,14 +66,6 @@ export default function YearlyReportsScreen({ navigation }) {
         <TouchableOpacity
           style={yearlyReportsStyles.tabBtn}
           activeOpacity={0.8}
-          onPress={() => navigation.navigate('Reports')}
-        >
-          <Text style={yearlyReportsStyles.tabText}>ملخص</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={yearlyReportsStyles.tabBtn}
-          activeOpacity={0.8}
           onPress={() => navigation.navigate('WeeklyReports')}
         >
           <Text style={yearlyReportsStyles.tabText}>أسبوعي</Text>

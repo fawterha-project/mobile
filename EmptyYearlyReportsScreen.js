@@ -1,5 +1,4 @@
 import React from 'react';
-import BottomNavigation from './BottomNavigation';
 
 import {
   View,
@@ -19,6 +18,7 @@ import {
   profileStyles,
   colors,
 } from './styles';
+import EmptyBottomNavigation from './EmptyBottomNavigation';
 
 const BottomTab = ({ icon, label, active, onPress }) => (
   <TouchableOpacity
@@ -120,23 +120,6 @@ export default function EmptyYearlyReportsScreen({
 
 
       <View style={yearlyReportsStyles.tabsRow}>
-
-        <TouchableOpacity
-          style={yearlyReportsStyles.tabBtn}
-          activeOpacity={0.8}
-          onPress={() =>
-            navigation.navigate(
-              'EmptyReports'
-            )
-          }
-        >
-
-          <Text style={yearlyReportsStyles.tabText}>
-            ملخص
-          </Text>
-
-        </TouchableOpacity>
-
 
         <TouchableOpacity
           style={yearlyReportsStyles.tabBtn}
@@ -459,7 +442,7 @@ export default function EmptyYearlyReportsScreen({
       </View>
 
 
-      <BottomNavigation
+      <EmptyBottomNavigation
         navigation={navigation}
       />
 

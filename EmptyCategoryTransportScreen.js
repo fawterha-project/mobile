@@ -1,5 +1,5 @@
 import React from 'react';
-import BottomNavigation from './BottomNavigation';
+import EmptyBottomNavigation from './EmptyBottomNavigation';
 
 import {
     View,
@@ -17,6 +17,7 @@ import {
     profileStyles,
     colors,
 } from './styles';
+
 
 const BottomTab = ({ icon, label, active }) => (
     <TouchableOpacity
@@ -201,7 +202,7 @@ export default function EmptyCategoryTransportScreen({
 
             </View>
 
-            <BottomNavigation
+            <EmptyBottomNavigation 
                 navigation={navigation}
             />
 

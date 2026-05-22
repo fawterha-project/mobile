@@ -1,5 +1,5 @@
 import React from 'react';
-import BottomNavigation from './BottomNavigation';
+import EmptyBottomNavigation from './EmptyBottomNavigation';
 
 import {
     View,
@@ -213,7 +213,7 @@ export default function EmptyCategoryShoppingScreen({
 
             </View>
 
-            <BottomNavigation
+            <EmptyBottomNavigation
                 navigation={navigation}
             />
 

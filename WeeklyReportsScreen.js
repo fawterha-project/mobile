@@ -63,14 +63,6 @@ export default function WeeklyReportsScreen({ navigation }) {
       </View>
 
       <View style={weeklyReportsStyles.tabsRow}>
-        <TouchableOpacity
-          style={weeklyReportsStyles.tabBtn}
-          activeOpacity={0.8}
-          onPress={() => navigation.navigate('Reports')}
-        >
-          <Text style={weeklyReportsStyles.tabText}>ملخص</Text>
-        </TouchableOpacity>
-
         <TouchableOpacity style={weeklyReportsStyles.tabBtnActive}>
           <Text style={weeklyReportsStyles.tabTextActive}>أسبوعي</Text>
         </TouchableOpacity>

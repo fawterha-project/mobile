@@ -25,6 +25,2171 @@ export const colors = {
   bg: '#EAF1FF', // ← هذا ناقص غالبًا
 };
 
+export const introStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.white,
+  },
+
+  mainImage: {
+    position: 'absolute',
+    top: 100,
+    alignSelf: 'center',
+    width: 140,
+    height: 260,
+    zIndex: 2,
+  },
+
+  waveImage: {
+    position: 'absolute',
+    top: 214,
+    left: 0,
+    right: 0,
+    width: '100%',
+    height: 130,
+    zIndex: 1,
+  },
+
+  logo: {
+    position: 'absolute',
+    top: 350,
+    alignSelf: 'center',
+    width: 220,
+    height: 100,
+  },
+
+  title: {
+    position: 'absolute',
+    top: 550,
+    alignSelf: 'center',
+    fontSize: 25,
+    fontFamily: 'Tajawal-Bold',
+    color: colors.black,
+  },
+
+  description: {
+    position: 'absolute',
+    top: 595,
+    alignSelf: 'center',
+    width: 300,
+    fontSize: 16,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+    textAlign: 'center',
+  },
+
+  button: {
+    position: 'absolute',
+    top: 650,
+    alignSelf: 'center',
+    width: 200,
+    height: 48,
+    backgroundColor: colors.blue,
+    borderRadius: 6,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  buttonText: {
+    color: colors.white,
+    fontSize: 16,
+    fontFamily: 'Tajawal-Bold',
+  },
+});
+
+export const loginStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.white,
+  },
+
+  backIcon: {
+    position: 'absolute',
+    left: 20,
+    top: 55,
+  },
+
+  title: {
+    position: 'absolute',
+    top: 50,
+    alignSelf: 'center',
+    fontSize: 20,
+    fontFamily: 'Tajawal-Bold',
+    color: colors.blue,
+  },
+
+  illustration: {
+    position: 'absolute',
+    top: 125,
+    right: 30,
+    width: 80,
+    height: 80,
+  },
+
+  welcome: {
+    position: 'absolute',
+    top: 132,
+    right: 110,
+    fontSize: 20,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.black,
+    textAlign: 'right',
+  },
+
+  subtitle: {
+    position: 'absolute',
+    top: 170,
+    right: 110,
+    fontSize: 18,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+    textAlign: 'right',
+  },
+
+  emailLabel: {
+    position: 'absolute',
+    top: 260,
+    right: 54,
+    fontSize: 18,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+  },
+
+  emailInput: {
+    position: 'absolute',
+    top: 295,
+    left: 30,
+    width: 330,
+    height: 45,
+    borderWidth: 1,
+    borderColor: '#D9E2EF',
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    textAlign: 'right',
+    fontFamily: 'Tajawal-Regular',
+  },
+
+  passwordLabel: {
+    position: 'absolute',
+    top: 360,
+    right: 54,
+    fontSize: 18,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+  },
+
+  passwordBox: {
+    position: 'absolute',
+    top: 395,
+    left: 30,
+    width: 330,
+    height: 45,
+    borderWidth: 1,
+    borderColor: '#D9E2EF',
+    borderRadius: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 12,
+  },
+
+  passwordInput: {
+    flex: 1,
+    textAlign: 'right',
+    fontFamily: 'Tajawal-Regular',
+  },
+
+  forgotText: {
+    position: 'absolute',
+    top: 445,
+    left: 40,
+  },
+
+  forgotTextValue: {
+    fontSize: 12,
+    color: colors.blue,
+    fontFamily: 'Tajawal-Regular',
+  },
+
+  rememberBox: {
+    position: 'absolute',
+    top: 445,
+    right: 40,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  rememberText: {
+    fontSize: 11,
+    color: colors.gray,
+    fontFamily: 'Tajawal-Regular',
+    marginRight: 5,
+  },
+
+  checkbox: {
+    width: 14,
+    height: 14,
+    borderWidth: 1,
+    borderColor: colors.blue,
+    borderRadius: 3,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  checkboxActive: {
+    backgroundColor: colors.blue,
+  },
+
+  loginButton: {
+    position: 'absolute',
+    top: 520,
+    alignSelf: 'center',
+    width: 180,
+    height: 44,
+    backgroundColor: colors.blue,
+    borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  loginButtonText: {
+    color: colors.white,
+    fontSize: 16,
+    fontFamily: 'Tajawal-Bold',
+  },
+
+  signupText: {
+    position: 'absolute',
+    top: 570,
+    alignSelf: 'center',
+    fontSize: 12,
+    color: colors.blue,
+    fontFamily: 'Tajawal-Regular',
+  },
+
+  signupLink: {
+    color: colors.blue,
+    fontFamily: 'Tajawal-Regular',
+    textDecorationLine: 'underline',
+  },
+  loginButtonDisabled: {
+    opacity: 0.5,
+  },
+});
+
+export const signupStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.white,
+  },
+
+  backIcon: {
+    position: 'absolute',
+    left: 20,
+    top: 55,
+  },
+
+  title: {
+    position: 'absolute',
+    top: 50,
+    alignSelf: 'center',
+    fontSize: 20,
+    fontFamily: 'Tajawal-Bold',
+    color: colors.blue,
+  },
+
+  illustration: {
+    position: 'absolute',
+    top: 125,
+    right: 30,
+    width: 80,
+    height: 80,
+  },
+
+  welcome: {
+    position: 'absolute',
+    top: 132,
+    right: 110,
+    fontSize: 20,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.black,
+    textAlign: 'right',
+  },
+
+  subtitle: {
+    position: 'absolute',
+    top: 170,
+    right: 110,
+    fontSize: 18,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+    textAlign: 'right',
+  },
+
+  nameLabel: {
+    position: 'absolute',
+    top: 225,
+    right: 45,
+    fontSize: 18,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+  },
+
+  nameInput: {
+    position: 'absolute',
+    top: 255,
+    left: 30,
+    width: 330,
+    height: 45,
+    borderWidth: 1,
+    borderColor: '#D9E2EF',
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    textAlign: 'right',
+    fontFamily: 'Tajawal-Regular',
+  },
+
+  emailLabel: {
+    position: 'absolute',
+    top: 322,
+    right: 45,
+    fontSize: 18,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+  },
+
+  emailInput: {
+    position: 'absolute',
+    top: 352,
+    left: 30,
+    width: 330,
+    height: 45,
+    borderWidth: 1,
+    borderColor: '#D9E2EF',
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    textAlign: 'right',
+    fontFamily: 'Tajawal-Regular',
+  },
+
+  passwordLabel: {
+    position: 'absolute',
+    top: 424,
+    right: 45,
+    fontSize: 18,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+  },
+
+  passwordBox: {
+    position: 'absolute',
+    top: 454,
+    left: 30,
+    width: 330,
+    height: 45,
+    borderWidth: 1,
+    borderColor: '#D9E2EF',
+    borderRadius: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 12,
+  },
+
+  confirmPasswordLabel: {
+    position: 'absolute',
+    top: 526,
+    right: 45,
+    fontSize: 18,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+  },
+
+  confirmPasswordBox: {
+    position: 'absolute',
+    top: 556,
+    left: 30,
+    width: 330,
+    height: 45,
+    borderWidth: 1,
+    borderColor: '#D9E2EF',
+    borderRadius: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 12,
+  },
+
+  passwordInput: {
+    flex: 1,
+    textAlign: 'right',
+    fontFamily: 'Tajawal-Regular',
+  },
+
+  termsBox: {
+    position: 'absolute',
+    top: 620,
+    right: 40,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  termsText: {
+    fontSize: 12,
+    color: colors.blue,
+    fontFamily: 'Tajawal-Bold',
+    marginRight: 5,
+  },
+
+  checkbox: {
+    width: 14,
+    height: 14,
+    borderWidth: 1,
+    borderColor: colors.blue,
+    borderRadius: 3,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  checkboxActive: {
+    backgroundColor: colors.blue,
+  },
+
+  signupButton: {
+    position: 'absolute',
+    top: 690,
+    alignSelf: 'center',
+    width: 168,
+    height: 44,
+    backgroundColor: colors.blue,
+    borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  signupButtonText: {
+    color: colors.white,
+    fontSize: 16,
+    fontFamily: 'Tajawal-Bold',
+  },
+
+  loginText: {
+    position: 'absolute',
+    top: 748,
+    alignSelf: 'center',
+    fontSize: 12,
+    color: colors.blue,
+    fontFamily: 'Tajawal-Regular',
+  },
+
+  loginLink: {
+    color: colors.blue,
+    fontFamily: 'Tajawal-Regular',
+    textDecorationLine: 'underline',
+  },
+  signupButtonDisabled: {
+  opacity: 0.5,
+},
+});
+
+export const forgotPasswordStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.white,
+  },
+
+  waveImage: {
+    position: 'absolute',
+    top: 135,
+    left: 0,
+    right: 0,
+    width: '100%',
+    height: 120,
+  },
+
+  mainImage: {
+    position: 'absolute',
+    top: 60,
+    alignSelf: 'center',
+    width: 250,
+    height: 250,
+    zIndex: 2,
+  },
+
+  title: {
+    position: 'absolute',
+    top: 275,
+    alignSelf: 'center',
+    fontSize: 20,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.black,
+  },
+
+  description: {
+    position: 'absolute',
+    top: 315,
+    alignSelf: 'center',
+    width: 260,
+    fontSize: 16,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+    textAlign: 'center',
+    lineHeight: 24,
+  },
+
+  emailLabel: {
+    position: 'absolute',
+    top: 385,
+    right: 45,
+    fontSize: 16,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+  },
+
+  emailInput: {
+    position: 'absolute',
+    top: 415,
+    left: 30,
+    width: 330,
+    height: 45,
+    borderWidth: 1,
+    borderColor: '#D9E2EF',
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    textAlign: 'right',
+    fontFamily: 'Tajawal-Regular',
+  },
+
+  resendRow: {
+    position: 'absolute',
+    top: 600,
+    alignSelf: 'center',
+    flexDirection: 'row-reverse',
+    alignItems: 'center',
+  },
+
+  codeText: {
+    fontSize: 13,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.black,
+  },
+
+  resendLink: {
+    fontSize: 13,
+    color: colors.black,
+    fontFamily: 'Tajawal-Regular',
+    textDecorationLine: 'underline',
+    marginRight: 5,
+  },
+  verifyButton: {
+    position: 'absolute',
+    top: 535,
+    alignSelf: 'center',
+    width: 220,
+    height: 50,
+    backgroundColor: colors.blue,
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  verifyButtonText: {
+    color: colors.white,
+    fontSize: 16,
+    fontFamily: 'Tajawal-Bold',
+  },
+
+  orText: {
+    position: 'absolute',
+    top: 605,
+    alignSelf: 'center',
+    fontSize: 14,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.black,
+  },
+
+  smsText: {
+    position: 'absolute',
+    top: 630,
+    alignSelf: 'center',
+    fontSize: 14,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.black,
+  },
+
+  phoneIcon: {
+    position: 'absolute',
+    top: 662,
+    alignSelf: 'center',
+  },
+
+  rememberText: {
+    position: 'absolute',
+    top: 755,
+    alignSelf: 'center',
+    fontSize: 12,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.blue,
+  },
+
+  loginLink: {
+    color: colors.blue,
+    fontFamily: 'Tajawal-Regular',
+    textDecorationLine: 'underline',
+  },
+});
+
+export const forgotPasswordPhoneStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.white,
+  },
+
+  waveImage: {
+    position: 'absolute',
+    top: 135,
+    left: 0,
+    right: 0,
+    width: '100%',
+    height: 120,
+  },
+
+  mainImage: {
+    position: 'absolute',
+    top: 60,
+    alignSelf: 'center',
+    width: 250,
+    height: 250,
+    zIndex: 2,
+  },
+
+  title: {
+    position: 'absolute',
+    top: 275,
+    alignSelf: 'center',
+    fontSize: 20,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.black,
+  },
+
+  description: {
+    position: 'absolute',
+    top: 315,
+    alignSelf: 'center',
+    width: 260,
+    fontSize: 16,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+    textAlign: 'center',
+    lineHeight: 24,
+  },
+
+  phoneLabel: {
+    position: 'absolute',
+    top: 385,
+    right: 45,
+    fontSize: 16,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+  },
+
+  phoneBox: {
+    position: 'absolute',
+    top: 415,
+    left: 30,
+    width: 330,
+    height: 45,
+    borderWidth: 1,
+    borderColor: '#D9E2EF',
+    borderRadius: 8,
+    flexDirection: 'row-reverse',
+    alignItems: 'center',
+    paddingHorizontal: 12,
+    backgroundColor: colors.white,
+  },
+
+  phoneInput: {
+    flex: 1,
+    height: 45,
+    textAlign: 'left',
+    fontFamily: 'Tajawal-Regular',
+  },
+
+  countryCode: {
+    fontSize: 13,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.black,
+    marginLeft: 8,
+  },
+
+  resendRow: {
+    position: 'absolute',
+    top: 485,
+    alignSelf: 'center',
+    flexDirection: 'row-reverse',
+    alignItems: 'center',
+  },
+
+  codeText: {
+    fontSize: 13,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.black,
+  },
+
+  resendLink: {
+    fontSize: 13,
+    color: colors.black,
+    fontFamily: 'Tajawal-Regular',
+    textDecorationLine: 'underline',
+    marginRight: 5,
+  },
+
+  verifyButton: {
+    position: 'absolute',
+    top: 535,
+    alignSelf: 'center',
+    width: 220,
+    height: 50,
+    backgroundColor: colors.blue,
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  verifyButtonDisabled: {
+    opacity: 0.5,
+  },
+
+  verifyButtonText: {
+    color: colors.white,
+    fontSize: 16,
+    fontFamily: 'Tajawal-Bold',
+  },
+
+  orText: {
+    position: 'absolute',
+    top: 605,
+    alignSelf: 'center',
+    fontSize: 14,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.black,
+  },
+
+  smsText: {
+    position: 'absolute',
+    top: 630,
+    alignSelf: 'center',
+    fontSize: 14,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.black,
+  },
+
+  phoneIcon: {
+    position: 'absolute',
+    top: 662,
+    alignSelf: 'center',
+  },
+
+  rememberText: {
+    position: 'absolute',
+    top: 755,
+    alignSelf: 'center',
+    fontSize: 12,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.blue,
+  },
+
+  loginLink: {
+    color: colors.blue,
+    fontFamily: 'Tajawal-Regular',
+    textDecorationLine: 'underline',
+  },
+});
+
+export const verifyCodeStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.white,
+  },
+
+  backIcon: {
+    position: 'absolute',
+    top: 55,
+    left: 20,
+  },
+
+  title: {
+    position: 'absolute',
+    top: 58,
+    alignSelf: 'center',
+    fontSize: 20,
+    fontFamily: 'Tajawal-Bold',
+    color: colors.blue,
+  },
+
+  label: {
+    position: 'absolute',
+    top: 290,
+    alignSelf: 'center',
+    fontSize: 18,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.black,
+  },
+
+  codeRow: {
+    position: 'absolute',
+    top: 365,
+    alignSelf: 'center',
+    flexDirection: 'row',
+    gap: 25,
+  },
+
+  codeBox: {
+    width: 50,
+    height: 50,
+    borderWidth: 1,
+    borderColor: '#D9E2EF',
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  codeBoxActive: {
+    borderColor: colors.blue,
+  },
+
+  codeText: {
+    fontSize: 24,
+    color: colors.blue,
+    fontFamily: 'Tajawal-Bold',
+  },
+
+  hiddenInput: {
+    position: 'absolute',
+    opacity: 0,
+    width: 1,
+    height: 1,
+  },
+
+  resendRow: {
+    position: 'absolute',
+    top: 455,
+    alignSelf: 'center',
+    flexDirection: 'row-reverse',
+    alignItems: 'center',
+  },
+
+  resendText: {
+    fontSize: 14,
+    color: colors.gray,
+    fontFamily: 'Tajawal-Regular',
+  },
+
+  resendLink: {
+    fontSize: 14,
+    color: colors.gray,
+    textDecorationLine: 'underline',
+    fontFamily: 'Tajawal-Regular',
+    marginRight: 5,
+  },
+
+  verifyButton: {
+    position: 'absolute',
+    top: 600,
+    alignSelf: 'center',
+    width: 200,
+    height: 55,
+    backgroundColor: colors.blue,
+    borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  verifyButtonDisabled: {
+    opacity: 0.5,
+  },
+
+  verifyButtonText: {
+    color: colors.white,
+    fontSize: 16,
+    fontFamily: 'Tajawal-Bold',
+  },
+});
+
+export const verifyEmailStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.white,
+  },
+
+  backIcon: {
+    position: 'absolute',
+    top: 55,
+    left: 20,
+  },
+
+  title: {
+    position: 'absolute',
+    top: 58,
+    alignSelf: 'center',
+    fontSize: 20,
+    fontFamily: 'Tajawal-Bold',
+    color: colors.blue,
+  },
+
+  label: {
+    position: 'absolute',
+    top: 290,
+    alignSelf: 'center',
+    fontSize: 18,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.black,
+  },
+
+  codeRow: {
+    position: 'absolute',
+    top: 365,
+    alignSelf: 'center',
+    flexDirection: 'row',
+    gap: 25,
+  },
+
+  codeBox: {
+    width: 50,
+    height: 50,
+    borderWidth: 1,
+    borderColor: '#D9E2EF',
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  codeBoxActive: {
+    borderColor: colors.blue,
+  },
+
+  codeText: {
+    fontSize: 24,
+    color: colors.blue,
+    fontFamily: 'Tajawal-Bold',
+  },
+
+  hiddenInput: {
+    position: 'absolute',
+    opacity: 0,
+    width: 1,
+    height: 1,
+  },
+
+  resendRow: {
+    position: 'absolute',
+    top: 455,
+    alignSelf: 'center',
+    flexDirection: 'row-reverse',
+    alignItems: 'center',
+  },
+
+  resendText: {
+    fontSize: 14,
+    color: colors.gray,
+    fontFamily: 'Tajawal-Regular',
+  },
+
+  resendLink: {
+    fontSize: 14,
+    color: colors.gray,
+    textDecorationLine: 'underline',
+    fontFamily: 'Tajawal-Regular',
+    marginRight: 5,
+  },
+
+  verifyButton: {
+    position: 'absolute',
+    top: 600,
+    alignSelf: 'center',
+    width: 200,
+    height: 55,
+    backgroundColor: colors.blue,
+    borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  verifyButtonDisabled: {
+    opacity: 0.5,
+  },
+
+  verifyButtonText: {
+    color: colors.white,
+    fontSize: 16,
+    fontFamily: 'Tajawal-Bold',
+  },
+});
+
+export const successfulSignUpStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.blue,
+  },
+
+  image: {
+    position: 'absolute',
+    top: 210,
+    alignSelf: 'center',
+    width: 280,
+    height: 280,
+  },
+
+  title: {
+    position: 'absolute',
+    top: 470,
+    alignSelf: 'center',
+    fontSize: 20,
+    fontFamily: 'Tajawal-Bold',
+    color: colors.white,
+  },
+
+  description: {
+    position: 'absolute',
+    top: 510,
+    alignSelf: 'center',
+    fontSize: 18,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.white,
+  },
+});
+
+export const resetPasswordStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.white,
+  },
+
+  backIcon: {
+    position: 'absolute',
+    top: 55,
+    left: 20,
+    zIndex: 5,
+  },
+
+  title: {
+    position: 'absolute',
+    top: 58,
+    alignSelf: 'center',
+    fontSize: 20,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.blue,
+    zIndex: 5,
+  },
+
+  waveImage: {
+    position: 'absolute',
+    top: 135,
+    left: 0,
+    right: 0,
+    width: '100%',
+    height: 120,
+  },
+
+  image: {
+    position: 'absolute',
+    top: 70,
+    alignSelf: 'center',
+    width: 260,
+    height: 260,
+    zIndex: 2,
+  },
+
+  description: {
+    position: 'absolute',
+    top: 275,
+    alignSelf: 'center',
+    fontSize: 16,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.black,
+  },
+
+  passwordLabel: {
+    position: 'absolute',
+    top: 340,
+    right: 45,
+    fontSize: 16,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+  },
+
+  passwordBox: {
+    position: 'absolute',
+    top: 370,
+    left: 30,
+    width: 330,
+    height: 45,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 12,
+    backgroundColor: colors.white,
+  },
+
+  confirmPasswordLabel: {
+    position: 'absolute',
+    top: 440,
+    right: 45,
+    fontSize: 16,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+  },
+
+  confirmPasswordBox: {
+    position: 'absolute',
+    top: 470,
+    left: 30,
+    width: 330,
+    height: 45,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 12,
+    backgroundColor: colors.white,
+  },
+
+  passwordInput: {
+    flex: 1,
+    textAlign: 'right',
+    fontFamily: 'Tajawal-Regular',
+    color: colors.black,
+  },
+
+  strengthRow: {
+    position: 'absolute',
+    top: 535,
+    left: 60,
+    right: 60,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  strengthLines: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginRight: 8,
+  },
+
+  strengthLine: {
+    width: 55,
+    height: 4,
+    backgroundColor: colors.lightGray,
+    borderRadius: 10,
+    marginHorizontal: 2,
+  },
+
+  strengthLineActive: {
+    backgroundColor: colors.blue,
+  },
+
+  strengthText: {
+    fontSize: 12,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+    marginRight: 4,
+  },
+
+  requirementsBox: {
+    position: 'absolute',
+    top: 565,
+    left: 30,
+    width: 330,
+    backgroundColor: colors.lightBlue,
+    borderRadius: 8,
+    paddingVertical: 12,
+    paddingHorizontal: 18,
+  },
+
+  requirementsTitle: {
+    alignSelf: 'flex-end',
+    fontSize: 14,
+    fontFamily: 'Tajawal-Bold',
+    color: colors.blue,
+    marginBottom: 8,
+  },
+
+  requirementRow: {
+    flexDirection: 'row-reverse',
+    alignItems: 'center',
+    marginBottom: 5,
+  },
+
+  requirementText: {
+    fontSize: 12,
+    fontFamily: 'Tajawal-Regular',
+    marginRight: 5,
+  },
+
+  validText: {
+    color: colors.gray,
+  },
+
+  invalidText: {
+    color: colors.red,
+  },
+
+  button: {
+    position: 'absolute',
+    top: 715,
+    alignSelf: 'center',
+    width: 200,
+    height: 50,
+    backgroundColor: colors.blue,
+    borderRadius: 6,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  buttonDisabled: {
+    opacity: 0.5,
+  },
+
+  buttonText: {
+    color: colors.white,
+    fontSize: 14,
+    fontFamily: 'Tajawal-Bold',
+  },
+});
+
+export const noInternetStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.lightBackground,
+  },
+
+  logo: {
+    position: 'absolute',
+    top: 55,
+    right: 20,
+    width: 100,
+    height: 45,
+  },
+
+  notificationIcon: {
+    position: 'absolute',
+    top: 62,
+    left: 25,
+  },
+
+  noWifiImage: {
+    position: 'absolute',
+    top: 245,
+    alignSelf: 'center',
+    width: 280,
+    height: 210,
+  },
+
+  title: {
+    position: 'absolute',
+    top: 470,
+    alignSelf: 'center',
+    fontSize: 20,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.black,
+  },
+
+  description: {
+    position: 'absolute',
+    top: 505,
+    alignSelf: 'center',
+    fontSize: 16,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.black,
+  },
+});
+
+export const faqStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.white,
+  },
+
+  backIcon: {
+    position: 'absolute',
+    top: 65,
+    left: 28,
+  },
+
+  title: {
+    position: 'absolute',
+    top: 65,
+    alignSelf: 'center',
+    fontSize: 20,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.blue,
+  },
+
+  subtitle: {
+    position: 'absolute',
+    top: 125,
+    alignSelf: 'center',
+    fontSize: 14,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.black,
+  },
+
+  listContainer: {
+    position: 'absolute',
+    top: 180,
+    left: 28,
+    right: 28,
+  },
+
+  questionBox: {
+    backgroundColor: colors.lightBlue,
+    borderRadius: 12,
+    paddingHorizontal: 14,
+    paddingVertical: 10,
+    marginBottom: 12,
+  },
+
+  questionBoxActive: {
+    backgroundColor: colors.blue,
+    paddingBottom: 22,
+  },
+
+  questionHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+
+  questionText: {
+    textAlign: 'right',
+    fontSize: 14,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.blue,
+  },
+
+  questionTextActive: {
+    color: colors.white,
+  },
+
+  answerText: {
+    marginTop: 16,
+    textAlign: 'right',
+    fontSize: 14,
+    lineHeight: 22,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.white,
+  },
+
+  contactContainer: {
+    position: 'absolute',
+    bottom: 62,
+    alignSelf: 'center',
+    flexDirection: 'row-reverse',
+    alignItems: 'center',
+  },
+
+  contactText: {
+    fontSize: 14,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.black,
+    marginLeft: 4,
+  },
+
+  contactLink: {
+    fontSize: 14,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.black,
+    textDecorationLine: 'underline',
+  },
+});
+
+export const homeStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.white,
+  },
+
+  notificationIcon: {
+    position: 'absolute',
+    top: 55,
+    left: 22,
+  },
+
+  logo: {
+    position: 'absolute',
+    top: 55,
+    right: 25,
+    width: 95,
+    height: 40,
+  },
+
+  helloText: {
+    position: 'absolute',
+    top: 92,
+    right: 25,
+    textAlign: 'right',
+    fontSize: 20,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.black,
+  },
+
+  subText: {
+    position: 'absolute',
+    top: 124,
+    right: 25,
+    textAlign: 'right',
+    fontSize: 14,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+  },
+
+  summaryCard: {
+    position: 'absolute',
+    top: 150,
+    alignSelf: 'center',
+    width: 340,
+    height: 135,
+    backgroundColor: colors.blue,
+    borderRadius: 14,
+    paddingTop: 14,
+    paddingHorizontal: 14,
+  },
+
+  monthBadge: {
+    backgroundColor: colors.white,
+    borderRadius: 20,
+    alignSelf: 'flex-start',
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+  },
+
+  monthBadgeText: {
+    fontSize: 10,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.blue,
+  },
+
+  summaryTitle: {
+    position: 'absolute',
+    top: 10,
+    right: 16,
+    fontSize: 16,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.white,
+  },
+
+  amount: {
+    position: 'absolute',
+    top: 35,
+    right: 18,
+    fontSize: 25,
+    fontFamily: 'Tajawal-Bold',
+    color: colors.white,
+  },
+
+  currency: {
+    position: 'absolute',
+    top: 60,
+    right: 15,
+    fontSize: 15,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.white,
+  },
+
+  progressLine: {
+    position: 'absolute',
+    left: 22,
+    bottom: 42,
+    width: 170,
+    height: 2,
+    backgroundColor: colors.white,
+    borderRadius: 10,
+  },
+
+  progressDot: {
+    position: 'absolute',
+    left: 0,
+    top: -3,
+    width: 8,
+    height: 8,
+    borderRadius: 8,
+    backgroundColor: colors.white,
+  },
+
+  progressNumbers: {
+    position: 'absolute',
+    left: 20,
+    width: 170,
+    bottom: 22,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+
+  progressText: {
+    fontSize: 9,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.white,
+  },
+
+  averageBadge: {
+    position: 'absolute',
+    right: 12,
+    bottom: 20,
+    backgroundColor: colors.white,
+    borderRadius: 14,
+    paddingHorizontal: 2,
+    paddingVertical: 2,
+  },
+
+  averageText: {
+    fontSize: 10,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.blue,
+  },
+
+  chartCard: {
+    position: 'absolute',
+    top: 305,
+    marginTop: -10,
+    paddingTop: 10,
+    alignSelf: 'center',
+    width: 340,
+    height: 200,
+    backgroundColor: colors.white,
+    borderRadius: 18,
+    padding: 16,
+    elevation: 4,
+  },
+
+  sectionTitle: {
+    textAlign: 'right',
+    fontSize: 16,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.black,
+  },
+
+  chartContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 8,
+  },
+
+  chartWrapper: {
+    width: 140,
+    height: 140,
+    marginTop: -20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: -15,
+  },
+
+  chartCenter: {
+    position: 'absolute',
+    width: 74,
+    height: 74,
+    borderRadius: 37,
+    backgroundColor: colors.white,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  chartCenterTitle: {
+    fontSize: 10,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+  },
+
+  chartCenterAmount: {
+    fontSize: 20,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.black,
+  },
+
+  chartCenterCurrency: {
+    fontSize: 14,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+    marginTop: -4,
+  },
+
+  categoriesGrid: {
+    width: 190,
+    flexDirection: 'row-reverse',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    marginLeft: -15,
+  },
+
+  categoryItem: {
+    width: 45,
+    marginTop: 5,
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+
+  categoryCircle: {
+    width: 38,
+    height: 38,
+    borderRadius: 19,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  categoryName: {
+    marginTop: 4,
+    fontSize: 9,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.black,
+    textAlign: 'center',
+  },
+
+  amountRow: {
+    flexDirection: 'row-reverse',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 1,
+  },
+
+  categoryAmount: {
+    fontSize: 9,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+    marginLeft: 3,
+  },
+
+  categoryCurrency: {
+    fontSize: 9,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+  },
+
+  greenDot: {
+    position: 'absolute',
+    top: -2,
+    right: 6,
+    width: 6,
+    height: 6,
+    borderRadius: 6,
+    backgroundColor: colors.green,
+    zIndex: 2,
+  },
+
+  blueDot: {
+    position: 'absolute',
+    top: -2,
+    right: 6,
+    width: 6,
+    height: 6,
+    borderRadius: 6,
+    backgroundColor: colors.blue,
+    zIndex: 2,
+  },
+
+  yellowDot: {
+    position: 'absolute',
+    top: -2,
+    right: 6,
+    width: 6,
+    height: 6,
+    borderRadius: 6,
+    backgroundColor: colors.yellow,
+    zIndex: 2,
+  },
+
+  purpleDot: {
+    position: 'absolute',
+    top: -2,
+    right: 6,
+    width: 6,
+    height: 6,
+    borderRadius: 6,
+    backgroundColor: colors.purple,
+    zIndex: 2,
+  },
+
+  grayDot: {
+    position: 'absolute',
+    top: -2,
+    right: 6,
+    width: 6,
+    height: 6,
+    borderRadius: 6,
+    backgroundColor: colors.gray,
+    zIndex: 2,
+  },
+
+  cyanDot: {
+    position: 'absolute',
+    top: -2,
+    right: 6,
+    width: 6,
+    height: 6,
+    borderRadius: 6,
+    backgroundColor: colors.cyan,
+    zIndex: 2,
+  },
+
+  redDot: {
+    position: 'absolute',
+    top: -2,
+    right: 6,
+    width: 6,
+    height: 6,
+    borderRadius: 6,
+    backgroundColor: colors.red,
+    zIndex: 2,
+  },
+
+  expenseCard: {
+    position: 'absolute',
+    top: 510,
+    alignSelf: 'center',
+    width: 340,
+    height: 95,
+    backgroundColor: colors.white,
+    borderRadius: 18,
+    padding: 12,
+    elevation: 4,
+  },
+
+  expenseCardTitle: {
+    position: 'absolute',
+    top: 10,
+    right: 16,
+    fontSize: 16,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.black,
+  },
+
+  basketImage: {
+    position: 'absolute',
+    left: 30,
+    top: 490,
+    width: 130,
+    height: 130,
+    zIndex: 10,
+  },
+
+  emptyTitle: {
+    position: 'absolute',
+    top: 42,
+    right: 15,
+    fontSize: 18,
+    fontFamily: 'Tajawal-Bold',
+    color: colors.blue,
+  },
+
+  emptyDescription: {
+    position: 'absolute',
+    top: 72,
+    right: 15,
+    width: 190,
+    fontSize: 12,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+    textAlign: 'right',
+  },
+
+  invoiceCard: {
+    position: 'absolute',
+    top: 615,
+    alignSelf: 'center',
+    width: 340,
+    height: 150,
+    paddingHorizontal: 14,
+    backgroundColor: colors.white,
+    borderRadius: 18,
+    padding: 12,
+    elevation: 4,
+    alignItems: 'center',
+  },
+
+  invoiceHeader: {
+    width: '100%',
+    flexDirection: 'row-reverse',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+
+  invoiceSectionTitle: {
+    fontSize: 16,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.black,
+  },
+
+  showAllText: {
+    fontSize: 12,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.blue,
+  },
+
+  receiptImage: {
+    position: 'absolute',
+    top: 35,
+    alignSelf: 'center',
+    width: 55,
+    height: 55,
+  },
+
+  invoiceEmptyTitle: {
+    position: 'absolute',
+    top: 83,
+    alignSelf: 'center',
+    fontSize: 16,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.blue,
+  },
+
+  invoiceEmptyDescription: {
+    position: 'absolute',
+    top: 103,
+    alignSelf: 'center',
+    fontSize: 10,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+  },
+});
+
+export const homeWithInvoicesStyles={
+
+container:{
+flex:1,
+backgroundColor:colors.white,
+},
+
+header:{
+flexDirection:'row',
+justifyContent:'space-between',
+alignItems:'center',
+paddingHorizontal:24,
+marginTop:45,
+},
+
+logo:{
+alignSelf:'flex-end',
+width:95,
+height:40,
+},
+
+helloText:{
+marginTop:15,
+textAlign:'right',
+fontSize:25,
+fontFamily:'Tajawal-Bold',
+color:colors.black,
+},
+
+subText:{
+marginTop:5,
+textAlign:'right',
+fontSize:16,
+fontFamily:'Tajawal-Regular',
+color:colors.gray,
+},
+
+
+/* scan */
+
+scanCard:{
+marginHorizontal:20,
+marginTop:10,
+backgroundColor:'#0D5BD7',
+borderRadius:28,
+padding:20,
+elevation:5,
+},
+
+scanTitle:{
+fontSize:20,
+fontFamily:'Tajawal-Bold',
+color:colors.white,
+textAlign:'center',
+},
+
+scanSub:{
+fontSize:16,
+color:'#DCE8FF',
+marginTop:1,
+textAlign:'center',
+},
+
+scanRow:{
+flexDirection:'row-reverse',
+justifyContent:'space-between',
+marginTop:10,
+},
+
+uploadButton:{
+width:'48%',
+height:100,
+borderRadius:18,
+backgroundColor:'#B55CFF',
+justifyContent:'center',
+alignItems:'center',
+},
+
+cameraButton:{
+width:'48%',
+height:100,
+borderRadius:18,
+backgroundColor:'#3D7BFF',
+justifyContent:'center',
+alignItems:'center',
+},
+
+scanText:{
+marginTop:8,
+fontSize:18,
+fontFamily:'Tajawal-Medium',
+color:'white',
+},
+
+supportText:{
+textAlign:'center',
+marginTop:15,
+fontSize:12,
+color:'#D8E6FF',
+},
+
+
+/* sections */
+
+sectionTitle:{
+fontSize:20,
+fontFamily:'Tajawal-Bold',
+color:colors.black,
+textAlign:'right',
+},
+
+journeySub:{
+fontSize:18,
+color:colors.gray,
+textAlign:'right',
+marginTop:1,
+},
+
+
+/* journey */
+
+journeyCard:{
+marginHorizontal:15,
+marginTop:18,
+backgroundColor:'white',
+borderRadius:24,
+padding:20,
+elevation:5,
+},
+
+timelineContainer:{
+flexDirection:'row-reverse',
+justifyContent:'space-between',
+alignItems:'flex-start',
+marginTop:20,
+},
+
+stepBlock:{
+width:'20%',
+alignItems:'center',
+},
+
+timelineLine:{
+flex:1,
+height:3,
+backgroundColor:'#E6EAFF',
+marginTop:28,
+marginHorizontal:4,
+},
+
+stepCircle:{
+width:60,
+height:60,
+borderRadius:29,
+justifyContent:'center',
+alignItems:'center',
+elevation:3,
+},
+
+stepTitle:{
+fontSize:14,
+fontFamily:'Tajawal-Bold',
+textAlign:'center',
+marginTop:5,
+},
+
+stepDesc:{
+fontSize:12,
+textAlign:'center',
+color:'#8C93A3',
+marginTop:4,
+},
+
+bottomJourneyText:{
+fontSize:14,
+textAlign:'center',
+marginTop:15,
+color:'#8C93A3',
+},
+
+
+/* categories */
+
+chartCard:{
+marginHorizontal:15,
+marginTop:18,
+backgroundColor:'white',
+borderRadius:24,
+padding:15,
+elevation:5,
+},
+
+categoriesGrid:{
+flexDirection:'row-reverse',
+flexWrap:'wrap',
+justifyContent:'space-between',
+marginTop:5,
+},
+
+categoryItem:{
+width:'22%',
+alignItems:'center',
+marginBottom:8,
+},
+
+categoryCircle:{
+width:65,
+height:55,
+borderRadius:28,
+justifyContent:'center',
+alignItems:'center',
+},
+
+categoryName:{
+marginTop:8,
+fontSize:16,
+fontFamily:'Tajawal-Regular',
+color:colors.black,
+},
+
+categoryAmount:{
+fontSize:12,
+color:colors.gray,
+marginTop:3,
+},
+
+
+/* invoices */
+
+invoiceCard:{
+marginHorizontal:15,
+marginTop:18,
+marginBottom:25,
+backgroundColor:'white',
+borderRadius:24,
+padding:18,
+elevation:5,
+},
+
+invoiceHeader:{
+flexDirection:'row-reverse',
+justifyContent:'space-between',
+alignItems:'center',
+marginBottom:15,
+},
+
+showAll:{
+fontSize:16,
+color:colors.blue,
+fontFamily:'Tajawal-Regular',
+},
+
+invoiceRow:{
+height:65,
+borderBottomWidth:1,
+borderBottomColor:'#ECECEC',
+flexDirection:'row-reverse',
+justifyContent:'space-between',
+alignItems:'center',
+},
+
+invoiceRight:{
+flexDirection:'row-reverse',
+alignItems:'center',
+flexShrink:1,
+},
+
+invoiceLogo:{
+width:50,
+height:50,
+borderRadius:20,
+marginLeft:12,
+},
+
+invoiceStore:{
+fontSize:16,
+fontFamily:'Tajawal-Medium',
+color:colors.black,
+textAlign:'right',
+marginBottom:3,
+},
+
+invoiceDate:{
+fontSize:14,
+marginTop:4,
+color:colors.gray,
+},
+
+invoiceAmountBox:{
+flexDirection:'row-reverse',
+alignItems:'center',
+},
+
+invoiceAmount:{
+fontSize:18,
+fontFamily:'Tajawal-Bold',
+color:colors.black,
+},
+
+invoiceCurrency:{
+fontSize:14,
+marginRight:4,
+color:colors.gray,
+},
+emptyCard:{
+alignItems:'center',
+paddingVertical:30,
+},
+
+emptyIcon:{
+width:80,
+height:80,
+borderRadius:40,
+backgroundColor:'#F5F7FB',
+justifyContent:'center',
+alignItems:'center',
+marginBottom:15,
+},
+
+emptyTitle:{
+fontSize:18,
+fontFamily:'Tajawal-Bold',
+color:colors.black,
+textAlign:'center',
+},
+
+emptySub:{
+fontSize:14,
+fontFamily:'Tajawal-Regular',
+color:colors.gray,
+marginTop:8,
+textAlign:'center',
+paddingHorizontal:20,
+},
+
+};
+
 export const profileStyles = StyleSheet.create({
   container: {
     flex: 1,
@@ -1487,470 +3652,6 @@ export const notFoundStyles = StyleSheet.create({
     textAlign: 'center',
   },
 });
-export const reportsStyles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.white,
-  },
-
-  headerRow: {
-    height: 48,
-    paddingHorizontal: 24,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-
-  title: {
-    fontSize: 20,
-    color: colors.black,
-    fontFamily: 'Tajawal-Medium',
-  },
-
-  tabsRow: {
-    height: 48,
-    marginHorizontal: 34,
-    marginTop: 18,
-    borderRadius: 10,
-    backgroundColor: colors.white,
-    borderWidth: 1,
-    borderColor: colors.border,
-    elevation: 3,
-    paddingHorizontal: 6,
-    flexDirection: 'row-reverse',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-
-  tabBtnActive: {
-    width: 70,
-    height: 36,
-    borderRadius: 8,
-    backgroundColor: colors.blue,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  tabBtn: {
-    width: 70,
-    height: 36,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  tabTextActive: {
-    fontSize: 16,
-    color: colors.white,
-    fontFamily: 'Tajawal-Medium',
-  },
-
-  tabText: {
-    fontSize: 15,
-    color: colors.blue,
-    fontFamily: 'Tajawal-Regular',
-  },
-
-  summaryCard: {
-    height: 128,
-    marginHorizontal: 34,
-    marginTop: 24,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: colors.border,
-    backgroundColor: colors.white,
-    paddingHorizontal: 14,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-
-  summaryImage: {
-    width: 150,
-    height: 150,
-  },
-
-  summaryInfo: {
-    flex: 1,
-    alignItems: 'flex-end',
-  },
-
-  summaryTitle: {
-    fontSize: 18,
-    color: colors.black,
-    fontFamily: 'Tajawal-Medium',
-  },
-
-  summaryAmount: {
-    marginTop: 8,
-    fontSize: 16,
-    color: colors.blue,
-    fontFamily: 'Tajawal-Medium',
-  },
-
-  summarySubText: {
-    marginTop: 8,
-    fontSize: 14,
-    color: colors.gray,
-    fontFamily: 'Tajawal-Regular',
-  },
-
-  percentText: {
-    fontSize: 16,
-    color: colors.red,
-    fontFamily: 'Tajawal-Medium',
-  },
-
-  countCard: {
-    width: 145,
-    height: 100,
-    alignSelf: 'flex-end',
-    marginRight: 34,
-    marginTop: 22,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: colors.border,
-    backgroundColor: colors.white,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  countTitle: {
-    fontSize: 18,
-    color: colors.black,
-    fontFamily: 'Tajawal-Regular',
-  },
-
-  countValue: {
-    marginTop: 12,
-    fontSize: 16,
-    color: colors.blue,
-    fontFamily: 'Tajawal-Medium',
-  },
-
-  chartCard: {
-    height: 250,
-    marginHorizontal: 34,
-    marginTop: 24,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: colors.border,
-    backgroundColor: colors.white,
-    paddingHorizontal: 12,
-    paddingTop: 14,
-  },
-
-  chartHeader: {
-    flexDirection: 'row-reverse',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-
-  chartTitle: {
-    fontSize: 18,
-    color: colors.black,
-    fontFamily: 'Tajawal-Medium',
-  },
-
-  daysBtn: {
-    width: 78,
-    height: 34,
-    borderRadius: 16,
-    backgroundColor: colors.white,
-    borderWidth: 1,
-    borderColor: colors.border,
-    alignItems: 'center',
-    justifyContent: 'center',
-    elevation: 2,
-  },
-
-  daysBtnText: {
-    fontSize: 14,
-    color: colors.blue,
-    fontFamily: 'Tajawal-Regular',
-  },
-
-  chartImage: {
-    width: '100%',
-    height: 130,
-    marginTop: 10,
-  },
-
-  chartGraph: {
-    marginTop: 6,
-    alignSelf: 'center',
-    borderRadius: 8,
-  },
-});
-
-export const emptyReportsStyles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.white,
-  },
-
-  headerRow: {
-    height: 48,
-    paddingHorizontal: 24,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-
-  title: {
-    fontSize: 20,
-    color: colors.black,
-    fontFamily: 'Tajawal-Medium',
-  },
-
-  headerSpace: {
-    width: 32,
-  },
-
-  tabsRow: {
-    height: 48,
-    marginHorizontal: 34,
-    marginTop: 18,
-    borderRadius: 10,
-    backgroundColor: colors.white,
-    borderWidth: 1,
-    borderColor: '#E5E7EB',
-    elevation: 3,
-    paddingHorizontal: 6,
-    flexDirection: 'row-reverse',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-
-  tabBtnActive: {
-    width: 70,
-    height: 36,
-    borderRadius: 8,
-    backgroundColor: colors.blue,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  tabBtn: {
-    width: 70,
-    height: 36,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  tabTextActive: {
-    fontSize: 16,
-    color: colors.white,
-    fontFamily: 'Tajawal-Medium',
-  },
-
-  tabText: {
-    fontSize: 15,
-    color: colors.blue,
-    fontFamily: 'Tajawal-Regular',
-  },
-
-  summaryCard: {
-    height: 135,
-    marginHorizontal: 34,
-    marginTop: 24,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: '#E5E7EB',
-    backgroundColor: colors.white,
-    paddingHorizontal: 14,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-
-  summaryImage: {
-    width: 145,
-    height: 110,
-    opacity: 0.45,
-  },
-
-  summaryInfo: {
-    flex: 1,
-    alignItems: 'flex-end',
-  },
-
-  summaryTitle: {
-    fontSize: 18,
-    color: colors.black,
-    fontFamily: 'Tajawal-Medium',
-  },
-
-  emptyAmount: {
-    marginTop: 10,
-    fontSize: 24,
-    color: colors.blue,
-    fontFamily: 'Tajawal-Medium',
-  },
-
-  summarySubText: {
-    marginTop: 10,
-    fontSize: 15,
-    color: colors.gray,
-    fontFamily: 'Tajawal-Regular',
-  },
-
-  countCard: {
-    height: 110,
-    marginHorizontal: 34,
-    marginTop: 18,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: '#E5E7EB',
-    backgroundColor: colors.white,
-    paddingHorizontal: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-
-  countIconBox: {
-    width: 58,
-    height: 58,
-    borderRadius: 18,
-    backgroundColor: colors.bg,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  countInfo: {
-    flex: 1,
-    alignItems: 'flex-end',
-  },
-
-  countTitle: {
-    fontSize: 18,
-    color: colors.black,
-    fontFamily: 'Tajawal-Regular',
-  },
-
-  countValue: {
-    marginTop: 8,
-    fontSize: 22,
-    color: colors.blue,
-    fontFamily: 'Tajawal-Medium',
-  },
-
-  countSubText: {
-    marginTop: 4,
-    fontSize: 14,
-    color: colors.gray,
-    fontFamily: 'Tajawal-Regular',
-  },
-
-  chartCard: {
-    height: 250,
-    marginHorizontal: 34,
-    marginTop: 18,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: '#E5E7EB',
-    backgroundColor: colors.white,
-    paddingHorizontal: 12,
-    paddingTop: 14,
-  },
-
-  chartHeader: {
-    flexDirection: 'row-reverse',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-
-  chartTitle: {
-    fontSize: 18,
-    color: colors.black,
-    fontFamily: 'Tajawal-Medium',
-  },
-
-  daysBtn: {
-    width: 78,
-    height: 34,
-    borderRadius: 16,
-    backgroundColor: colors.white,
-    borderWidth: 1,
-    borderColor: '#E5E7EB',
-    alignItems: 'center',
-    justifyContent: 'center',
-    elevation: 2,
-  },
-
-  daysBtnText: {
-    fontSize: 14,
-    color: colors.blue,
-    fontFamily: 'Tajawal-Regular',
-  },
-
-  emptyChart: {
-    flex: 1,
-    marginTop: 16,
-    position: 'relative',
-    justifyContent: 'center',
-  },
-
-  gridRow: {
-    position: 'relative',
-    height: 1,
-    backgroundColor: '#E5E7EB',
-    marginVertical: 15,
-    marginLeft: 55,
-    marginRight: 8,
-    opacity: 0.7,
-  },
-
-  emptyChartCenter: {
-    position: 'absolute',
-    alignSelf: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-    top: 58,
-  },
-
-  chartIconCircle: {
-    width: 62,
-    height: 62,
-    borderRadius: 31,
-    backgroundColor: colors.lightGray,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 8,
-  },
-
-  noDataText: {
-    fontSize: 14,
-    color: colors.gray,
-    fontFamily: 'Tajawal-Regular',
-  },
-
-  yAxis: {
-    position: 'absolute',
-    left: 0,
-    top: 3,
-    height: 150,
-    justifyContent: 'space-between',
-  },
-
-  axisText: {
-    fontSize: 12,
-    color: colors.gray,
-    fontFamily: 'Tajawal-Regular',
-  },
-
-  daysRow: {
-    position: 'absolute',
-    left: 50,
-    right: 0,
-    bottom: 0,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-
-  dayText: {
-    fontSize: 12,
-    color: colors.gray,
-    fontFamily: 'Tajawal-Regular',
-  },
-});
 
 export const weeklyReportsStyles = StyleSheet.create({
   container: {
@@ -2814,7 +4515,6 @@ export const cameraPermissionStyles = StyleSheet.create({
 });
 
 export const cameraStyles = StyleSheet.create({
-
   container: {
     flex: 1,
     backgroundColor: colors.black,
@@ -2837,7 +4537,7 @@ export const cameraStyles = StyleSheet.create({
 
   title: {
     position: 'absolute',
-    top: 110,
+    top: 85,
     alignSelf: 'center',
     color: colors.white,
     fontSize: 18,
@@ -2850,14 +4550,16 @@ export const cameraStyles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: colors.overlay,
+    backgroundColor: 'rgba(0,0,0,0.55)',
     justifyContent: 'center',
     alignItems: 'center',
+    paddingBottom: 10,
   },
 
+  // ✨ تم تكبير وتطويل إطار السكان
   scanFrame: {
-    width: 260,
-    height: 320,
+    width: '80%',
+    height: 600,
     borderWidth: 3,
     borderColor: colors.white,
     borderRadius: 18,
@@ -2900,7 +4602,7 @@ export const cameraStyles = StyleSheet.create({
     position: 'absolute',
     width: '100%',
     height: '100%',
-    backgroundColor: colors.overlay,
+    backgroundColor: 'rgba(0,0,0,0.55)',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -2918,7 +4620,7 @@ export const cameraStyles = StyleSheet.create({
     width: 90,
     height: 90,
     borderRadius: 45,
-    backgroundColor: colors.lightBlue,
+    backgroundColor: '#F2F6FF',
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 20,
@@ -2952,5 +4654,306 @@ export const cameraStyles = StyleSheet.create({
     fontSize: 18,
     fontFamily: 'Tajawal-Bold',
   },
-
 });
+
+export const failedScanStyles = {
+  ...cameraStyles,
+  scanFrame: {
+    ...cameraStyles.scanFrame,
+
+    borderColor: '#FF3B3B',
+    borderWidth: 2,
+    borderRadius: 12,
+
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  errorIconCircle: {
+    width: 90,
+    height: 90,
+    borderRadius: 45,
+
+    backgroundColor: '#FF2E2E',
+
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    marginBottom: 25,
+  },
+
+  errorTitle: {
+    fontSize: 20,
+    fontFamily: 'Tajawal-Bold',
+    color: colors.white,
+    textAlign: 'center',
+  },
+
+  errorSubtitle: {
+    fontSize: 14,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.white,
+    textAlign: 'center',
+
+    width: 180,
+    marginTop: 10,
+  },
+};
+
+export const blurScanStyles = {
+  ...cameraStyles,
+
+  scanFrame: {
+    ...cameraStyles.scanFrame,
+
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    backgroundColor: 'rgba(255,255,255,0.04)',
+  },
+
+  warningIcon: {
+    marginBottom: 18,
+  },
+
+  title: {
+    fontSize: 20,
+    fontFamily: 'Tajawal-Bold',
+    color: colors.white,
+    textAlign: 'center',
+    marginTop: 5,
+  },
+
+  subtitle: {
+    width: 180,
+
+    fontSize: 14,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.white,
+
+    textAlign: 'center',
+    lineHeight: 24,
+    marginTop: 8,
+  },
+};
+
+export const invoiceAddedStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.white,
+    alignItems: 'center',
+    paddingTop: 70,
+  },
+
+  closeButton: {
+    position: 'absolute',
+    top: 55,
+    left: 25,
+  },
+
+  image: {
+    width: 270,
+    height: 270,
+    marginTop: 50,
+  },
+
+  title: {
+    fontSize: 22,
+    fontFamily: 'Tajawal-Bold',
+    color: colors.black,
+    marginTop: 25,
+  },
+
+  subtitle: {
+    fontSize: 18,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+    marginTop: 10,
+  },
+
+  viewButton: {
+    width: '75%',
+    height: 55,
+    borderRadius: 10,
+    backgroundColor: colors.blue,
+
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    marginTop: 70,
+  },
+
+  viewText: {
+    color: colors.white,
+    fontSize: 18,
+    fontFamily: 'Tajawal-Bold',
+  },
+
+  newButton: {
+    width: '75%',
+    height: 55,
+    borderRadius: 10,
+
+    borderWidth: 1.5,
+    borderColor: colors.blue,
+
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    marginTop: 15,
+  },
+
+  newText: {
+    color: colors.blue,
+    fontSize: 18,
+    fontFamily: 'Tajawal-Bold',
+  },
+});
+
+export const invoiceStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.white,
+    paddingHorizontal: 25,
+    paddingTop: 60,
+  },
+
+  backButton: {
+    position: 'absolute',
+    top: 60,
+    left: 25,
+  },
+
+  title: {
+    fontSize: 24,
+    fontFamily: 'Tajawal-Bold',
+    textAlign: 'center',
+    color: colors.black,
+    marginBottom: 35,
+  },
+
+  card: {
+    borderWidth: 1,
+    borderColor: '#E8E8E8',
+    borderRadius: 15,
+    padding: 15,
+  },
+
+  receiptImage: {
+    width: 300,
+    height: 260,
+    alignSelf: 'center',
+  },
+
+  line: {
+    height: 1,
+    backgroundColor: '#ECECEC',
+    marginVertical: 15,
+  },
+
+  infoRow: {
+    flexDirection: 'row-reverse',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+
+  iconBox: {
+    width: 60,
+    height: 60,
+    borderRadius: 12,
+    backgroundColor: '#E6FAEC',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  storeName: {
+    fontSize: 20,
+    fontFamily: 'Tajawal-Regular',
+    textAlign: 'right',
+  },
+
+  amount: {
+    fontSize: 35,
+    fontFamily: 'Tajawal-Bold',
+    textAlign: 'right',
+  },
+
+  currency: {
+    fontSize: 18,
+  },
+
+  // ✨ عدلته
+  detailsRow: {
+    flexDirection: 'row',
+    borderTopWidth: 1,
+    borderColor: '#ECECEC',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+
+  // ✨ جديد
+  detailTitle: {
+    fontSize: 14,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+    textAlign: 'right',
+  },
+
+  // ✨ جديد
+  detailValue: {
+    fontSize: 14,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.black,
+    textAlign: 'left',
+  },
+
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 30,
+  },
+
+  deleteButton: {
+    width: 70,
+    height: 60,
+    borderRadius: 15,
+    borderWidth: 1,
+    borderColor: '#ECECEC',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  deleteText: {
+    color: '#FF4D4D',
+    marginTop: 5,
+  },
+
+  saveButton: {
+    flex: 1,
+    height: 60,
+    borderRadius: 15,
+    backgroundColor: colors.blue,
+    marginLeft: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  saveText: {
+    color: colors.white,
+    fontSize: 22,
+    fontFamily: 'Tajawal-Bold',
+  },
+});
+
+export const displayInvoiceStyles = {
+  ...invoiceStyles,
+
+  detailsRow: {
+    ...invoiceStyles.detailsRow,
+
+    height: 45,
+    alignItems: 'center',
+    marginBottom: 0,
+  },
+};

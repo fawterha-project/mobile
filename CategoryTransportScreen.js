@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import BottomNavigation from './BottomNavigation';
+import InvoiceSwipeActions from './InvoiceSwipeActions';
 
 import {
     View,
@@ -14,7 +15,6 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import {
     categoryFoodStyles,
-    bottomNavStyles,
     profileStyles,
     colors,
     notFoundStyles,
@@ -30,41 +30,6 @@ const transportBills = [
     },
 ];
 
-const BottomTab = ({
-    icon,
-    label,
-    active
-}) => (
-
-    <TouchableOpacity
-        style={bottomNavStyles.tabItem}
-        activeOpacity={0.7}
-    >
-
-        <MaterialIcons
-            name={icon}
-            size={22}
-            color={
-                active
-                    ? colors.blue
-                    : colors.gray
-            }
-        />
-
-        <Text
-            style={[
-                bottomNavStyles.tabText,
-                active &&
-                bottomNavStyles.activeTabText
-            ]}
-        >
-            {label}
-        </Text>
-
-    </TouchableOpacity>
-
-);
-
 export default function CategoryTransportScreen({
     navigation
 }) {
@@ -72,8 +37,16 @@ export default function CategoryTransportScreen({
     const [searchText, setSearchText] =
         useState('');
 
+    const [bills, setBills] =
+        useState(transportBills);
+
+    const [
+        successMessage,
+        setSuccessMessage
+    ] = useState('');
+
     const filteredBills =
-        transportBills.filter(item =>
+        bills.filter(item =>
             item.name.includes(
                 searchText.trim()
             )
@@ -85,28 +58,20 @@ export default function CategoryTransportScreen({
 
     return (
 
-        <View
-            style={categoryFoodStyles.container}
-        >
+        <View style={categoryFoodStyles.container}>
 
             <StatusBar
                 barStyle="dark-content"
                 backgroundColor={colors.white}
             />
 
-            <View
-                style={profileStyles.statusFake}
-            >
+            <View style={profileStyles.statusFake}>
 
-                <Text
-                    style={profileStyles.timeText}
-                >
+                <Text style={profileStyles.timeText}>
                     9:41
                 </Text>
 
-                <View
-                    style={profileStyles.statusIcons}
-                >
+                <View style={profileStyles.statusIcons}>
 
                     <MaterialIcons
                         name="signal-cellular-4-bar"
@@ -131,9 +96,7 @@ export default function CategoryTransportScreen({
             </View>
 
 
-            <View
-                style={categoryFoodStyles.headerRow}
-            >
+            <View style={categoryFoodStyles.headerRow}>
 
                 <TouchableOpacity
                     activeOpacity={0.7}
@@ -150,15 +113,11 @@ export default function CategoryTransportScreen({
 
                 </TouchableOpacity>
 
-                <Text
-                    style={categoryFoodStyles.title}
-                >
+                <Text style={categoryFoodStyles.title}>
                     النقل
                 </Text>
 
-                <View
-                    style={categoryFoodStyles.headerSpace}
-                />
+                <View style={categoryFoodStyles.headerSpace} />
 
             </View>
 
@@ -208,7 +167,8 @@ export default function CategoryTransportScreen({
                                 categoryFoodStyles.summaryCount
                             }
                         >
-                            1 فاتورة </Text>
+                            {bills.length} فواتير
+                        </Text>
 
                         <Text
                             style={[
@@ -218,7 +178,16 @@ export default function CategoryTransportScreen({
                                 }
                             ]}
                         >
-                            300 ريال
+
+                            {
+                                bills.reduce(
+                                    (sum, item) =>
+                                        sum + Number(item.amount),
+                                    0
+                                )
+                            }
+                            ريال
+
                         </Text>
 
                         <Text
@@ -237,7 +206,9 @@ export default function CategoryTransportScreen({
 
 
             <View
-                style={categoryFoodStyles.searchBox}
+                style={
+                    categoryFoodStyles.searchBox
+                }
             >
 
                 <MaterialIcons
@@ -255,114 +226,214 @@ export default function CategoryTransportScreen({
                         categoryFoodStyles.searchInput
                     }
                     value={searchText}
-                    onChangeText={setSearchText}
+                    onChangeText={
+                        setSearchText
+                    }
                 />
 
             </View>
 
 
-            {showNotFound ? (
+            {
+                showNotFound ? (
 
-                <View
-                    style={
-                        notFoundStyles.emptySearchContent
-                    }
-                >
-
-                    <Text
+                    <View
                         style={
-                            notFoundStyles.emptySearchTitle
+                            notFoundStyles.emptySearchContent
                         }
                     >
-                        ما لقينا أي فاتورة
-                    </Text>
 
-                    <Text
-                        style={
-                            notFoundStyles.emptySearchText
-                        }
-                    >
-                        جرب تبحث بكلمة ثانية أو تأكد من كتابة الاسم صح ✨
-                    </Text>
-
-                </View>
-
-            ) : (
-
-                <View
-                    style={
-                        categoryFoodStyles.listContainer
-                    }
-                >
-
-                    {filteredBills.map(item => (
-
-                        <View
-                            key={item.id}
+                        <Text
                             style={
-                                categoryFoodStyles.billItem
+                                notFoundStyles.emptySearchTitle
                             }
                         >
+                            ما لقينا أي فاتورة
+                        </Text>
 
-                            <Text
-                                style={
-                                    categoryFoodStyles.amount
-                                }
-                            >
+                        <Text
+                            style={
+                                notFoundStyles.emptySearchText
+                            }
+                        >
+                            جرب تبحث بكلمة ثانية ✨
+                        </Text>
 
-                                {item.amount}
+                    </View>
 
-                                <Text
-                                    style={
-                                        categoryFoodStyles.currency
-                                    }
+                ) : (
+
+                    <View
+                        style={
+                            categoryFoodStyles.listContainer
+                        }
+                    >
+
+                        {
+                            filteredBills.map(item => (
+
+                                <InvoiceSwipeActions
+                                    key={item.id}
+                                    item={item}
+
+                                    onDelete={(item) => {
+
+                                        setBills(
+                                            prev =>
+                                                prev.filter(
+                                                    bill =>
+                                                        bill.id !== item.id
+                                                )
+                                        );
+
+                                        setSuccessMessage(
+                                            'تم حذف الفاتورة'
+                                        );
+
+                                        setTimeout(() => {
+                                            setSuccessMessage('');
+                                        }, 3000);
+
+                                    }}
+
+                                    onChangeCategory={(
+                                        item,
+                                        newCategory
+                                    ) => {
+
+                                        setBills(
+                                            prev =>
+                                                prev.filter(
+                                                    bill =>
+                                                        bill.id !== item.id
+                                                )
+                                        );
+
+                                        setSuccessMessage(
+                                            `تم نقل الفاتورة إلى ${newCategory}`
+                                        );
+
+                                        setTimeout(() => {
+                                            setSuccessMessage('');
+                                        }, 3000);
+
+                                    }}
+
                                 >
-                                    ريال
-                                </Text>
 
-                            </Text>
+                                    <View
+                                        style={
+                                            categoryFoodStyles.billItem
+                                        }
+                                    >
 
+                                        <Text
+                                            style={
+                                                categoryFoodStyles.amount
+                                            }
+                                        >
 
-                            <View
-                                style={
-                                    categoryFoodStyles.billInfo
-                                }
-                            >
+                                            {item.amount}
 
-                                <Text
-                                    style={
-                                        categoryFoodStyles.billName
-                                    }
-                                >
-                                    {item.name}
-                                </Text>
+                                            <Text
+                                                style={
+                                                    categoryFoodStyles.currency
+                                                }
+                                            >
+                                                ريال
+                                            </Text>
 
-                                <Text
-                                    style={
-                                        categoryFoodStyles.billDate
-                                    }
-                                >
-                                    {item.date}
-                                </Text>
-
-                            </View>
+                                        </Text>
 
 
-                            <Image
-                                source={item.image}
-                                style={
-                                    categoryFoodStyles.billLogo
-                                }
-                                resizeMode="contain"
-                            />
+                                        <View
+                                            style={
+                                                categoryFoodStyles.billInfo
+                                            }
+                                        >
 
-                        </View>
+                                            <Text
+                                                style={
+                                                    categoryFoodStyles.billName
+                                                }
+                                            >
+                                                {item.name}
+                                            </Text>
 
-                    ))}
+                                            <Text
+                                                style={
+                                                    categoryFoodStyles.billDate
+                                                }
+                                            >
+                                                {item.date}
+                                            </Text>
 
-                </View>
+                                        </View>
 
-            )}
+
+                                        <Image
+                                            source={item.image}
+                                            style={
+                                                categoryFoodStyles.billLogo
+                                            }
+                                            resizeMode="contain"
+                                        />
+
+                                    </View>
+
+                                </InvoiceSwipeActions>
+
+                            ))
+                        }
+
+                    </View>
+
+                )
+            }
+
+
+            {
+                successMessage !== '' && (
+
+                    <View
+                        style={{
+                            position: 'absolute',
+                            top: 100,
+                            left: 20,
+                            right: 20,
+                            backgroundColor: '#E8F9EE',
+                            padding: 16,
+                            borderRadius: 18,
+                            flexDirection: 'row-reverse',
+                            alignItems: 'center',
+                            elevation: 6,
+                            zIndex: 999
+                        }}
+                    >
+
+                        <MaterialIcons
+                            name='check-circle'
+                            size={28}
+                            color='#16A34A'
+                        />
+
+                        <Text
+                            style={{
+                                marginRight: 10,
+                                fontSize: 16,
+                                color: '#15803D',
+                                fontFamily: 'Tajawal-Medium'
+                            }}
+                        >
+
+                            {successMessage}
+
+                        </Text>
+
+                    </View>
+
+                )
+            }
 
             <BottomNavigation
                 navigation={navigation}

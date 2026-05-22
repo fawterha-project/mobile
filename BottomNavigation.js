@@ -1,177 +1,176 @@
 import React, { useState } from 'react';
+
 import More from './More';
 
 import {
-    View,
-    Text,
-    TouchableOpacity,
+  View,
+  Text,
+  TouchableOpacity,
 } from 'react-native';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import {
-    bottomNavStyles,
-    colors,
+  bottomNavStyles,
+  colors,
 } from './styles';
 
 import AddBill from './AddBill';
 
 const BottomTab = ({
-    icon,
-    label,
-    active,
-    onPress,
+  icon,
+  label,
+  active,
+  onPress,
 }) => (
 
-    <TouchableOpacity
-        style={bottomNavStyles.tabItem}
-        activeOpacity={0.7}
-        onPress={onPress}
+  <TouchableOpacity
+    style={bottomNavStyles.tabItem}
+    activeOpacity={0.7}
+    onPress={onPress}
+  >
+
+    <MaterialIcons
+      name={icon}
+      size={22}
+      color={
+        active
+          ? colors.blue
+          : colors.gray
+      }
+    />
+
+    <Text
+      style={[
+        bottomNavStyles.tabText,
+        active &&
+        bottomNavStyles.activeTabText,
+      ]}
     >
+      {label}
+    </Text>
 
-        <MaterialIcons
-            name={icon}
-            size={22}
-            color={
-                active
-                    ? colors.blue
-                    : colors.gray
-            }
-        />
-
-        <Text
-            style={[
-                bottomNavStyles.tabText,
-                active &&
-                bottomNavStyles.activeTabText,
-            ]}
-        >
-            {label}
-        </Text>
-
-    </TouchableOpacity>
+  </TouchableOpacity>
 
 );
 
 export default function BottomNavigation({
-    navigation,
-    activeScreen,
+  navigation,
+  activeScreen,
 }) {
 
-    const [showAddBill, setShowAddBill] =
-        useState(false);
+  const [showAddBill, setShowAddBill] =
+    useState(false);
 
-    const [showMore, setShowMore] =
-        useState(false);
+  const [showMore, setShowMore] =
+    useState(false);
 
-    return (
+  return (
 
-        <>
+    <>
 
-            <View
-                style={bottomNavStyles.bottomNav}
-            >
+      <View
+        style={bottomNavStyles.bottomNav}
+      >
 
-                <BottomTab
-                    icon="more-horiz"
-                    label="المزيد"
-                    active={showMore}
-                    onPress={() => {
-                        setShowMore(true);
-                    }}
-                />
-
-
-                <BottomTab
-                    icon="bar-chart"
-                    label="التقارير"
-                    active={
-                        !showMore &&
-                        activeScreen === 'Reports'
-                    }
-                    onPress={() => {
-                        setShowMore(false);
-
-                        navigation.navigate(
-                            'Reports'
-                        );
-                    }}
-                />
+        <BottomTab
+          icon="more-horiz"
+          label="المزيد"
+          active={showMore}
+          onPress={() => {
+            setShowMore(true);
+          }}
+        />
 
 
-                <TouchableOpacity
-                    style={
-                        bottomNavStyles.addButton
-                    }
-                    activeOpacity={0.8}
-                    onPress={() => {
-                        setShowAddBill(true);
-                    }}
-                >
+        <BottomTab
+          icon="bar-chart"
+          label="التقارير"
+          active={activeScreen === 'WeeklyReports'}
+          onPress={() => {
 
-                    <MaterialIcons
-                        name="add"
-                        size={42}
-                        color={colors.white}
-                    />
+            setShowMore(false);
 
-                </TouchableOpacity>
+            navigation.navigate(
+              'WeeklyReports'
+            );
+
+          }}
+        />
 
 
-                <BottomTab
-                    icon="receipt"
-                    label="الفواتير"
-                    active={
-                        !showMore &&
-                        activeScreen === 'Bills'
-                    }
-                    onPress={() => {
-                        setShowMore(false);
+        <TouchableOpacity
+          style={
+            bottomNavStyles.addButton
+          }
+          activeOpacity={0.8}
+          onPress={() => {
+            setShowAddBill(true);
+          }}
+        >
 
-                        navigation.navigate(
-                            'Bills'
-                        );
-                    }}
-                />
+          <MaterialIcons
+            name="add"
+            size={42}
+            color={colors.white}
+          />
 
-
-                <BottomTab
-                    icon="home"
-                    label="الرئيسية"
-                    active={
-                        !showMore &&
-                        activeScreen === 'Home'
-                    }
-                    onPress={() => {
-                        setShowMore(false);
-
-                        navigation.navigate(
-                            'Home'
-                        );
-                    }}
-                />
-
-            </View>
+        </TouchableOpacity>
 
 
-            <AddBill
-                visible={showAddBill}
-                onClose={() =>
-                    setShowAddBill(false)
-                }
-                navigation={navigation}
-            />
+        <BottomTab
+          icon="receipt"
+          label="الفواتير"
+          active={activeScreen === 'Bills'}
+          onPress={() => {
+
+            setShowMore(false);
+
+            navigation.navigate(
+              'BillsScreen'
+            );
+
+          }}
+        />
 
 
-            <More
-                visible={showMore}
-                onClose={() =>
-                    setShowMore(false)
-                }
-                navigation={navigation}
-            />
+        <BottomTab
+          icon="home"
+          label="الرئيسية"
+          active={activeScreen === 'Home'}
+          onPress={() => {
 
-        </>
+            setShowMore(false);
 
-    );
+            navigation.navigate(
+              'HomeWithInvoicesScreen'
+            );
+
+          }}
+        />
+
+      </View>
+
+
+      <AddBill
+        visible={showAddBill}
+        onClose={() =>
+          setShowAddBill(false)
+        }
+        navigation={navigation}
+      />
+
+
+      <More
+        visible={showMore}
+        onClose={() =>
+          setShowMore(false)
+        }
+        navigation={navigation}
+      />
+
+    </>
+
+  );
+
 }

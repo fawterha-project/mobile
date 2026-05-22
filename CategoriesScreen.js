@@ -296,7 +296,7 @@ export default function CategoriesScreen({
           activeOpacity={0.8}
           onPress={() =>
             navigation.navigate(
-              'Bills'
+              'BillsScreen'
             )
           }
         >
@@ -439,6 +439,7 @@ export default function CategoriesScreen({
 
       <BottomNavigation
         navigation={navigation}
+        activeScreen="Bills"
       />
 
     </View>

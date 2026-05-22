@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import BottomNavigation from './BottomNavigation';
+import EmptyBottomNavigation from './EmptyBottomNavigation';
 
 import {
   View,
@@ -414,10 +414,10 @@ export default function EmptyCategoriesScreen({
 
       )}
 
-      <BottomNavigation
-        navigation={navigation}
-      />
-
+     <EmptyBottomNavigation
+                     navigation={navigation}
+                     activeScreen="EmptyBills"
+                 />
     </View>
 
   );
