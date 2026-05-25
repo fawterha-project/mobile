@@ -1,117 +1,272 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
+
+import {
+View,
+Text,
+TextInput,
+TouchableOpacity,
+Image,
+Alert
+} from 'react-native';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-import { loginStyles, colors } from './styles';
+import {
+loginStyles,
+colors
+} from './styles';
+
+import {
+loginUser
+}
+from './services/userService';
+
 
 const LoginScreen = ({ navigation }) => {
-  const [hidePassword, setHidePassword] = useState(true);
 
-  const [rememberMe, setRememberMe] = useState(false);
+const [hidePassword,setHidePassword]=useState(true);
 
-  const [email, setEmail] = useState('');
+const [rememberMe,setRememberMe]=useState(false);
 
-  const [password, setPassword] = useState('');
+const [email,setEmail]=useState('');
 
-  return (
-    <View style={loginStyles.container}>
-      <TouchableOpacity
-        style={loginStyles.backIcon}
-        onPress={() => navigation.goBack()}
-      >
-        <MaterialIcons name="arrow-back" size={22} color={colors.blue} />
-      </TouchableOpacity>
+const [password,setPassword]=useState('');
 
-      <Text style={loginStyles.title}>تسجيل الدخول</Text>
 
-      <Image
-        source={{
-              uri: 'asset:/image/login_illustration.png'}}
-        style={loginStyles.illustration}
-        resizeMode="contain"
-      />
+return(
 
-      <Text style={loginStyles.welcome}>حياك من جديد 👋</Text>
+<View style={loginStyles.container}>
 
-      <Text style={loginStyles.subtitle}>ابدأ بتنظيم فواتيرك الآن</Text>
+<TouchableOpacity
+style={loginStyles.backIcon}
+onPress={()=>navigation.goBack()}
+>
 
-      <Text style={loginStyles.emailLabel}>البريد الإلكتروني</Text>
+<MaterialIcons
+name="arrow-back"
+size={22}
+color={colors.blue}
+/>
 
-      <TextInput
-        style={loginStyles.emailInput}
-        keyboardType="email-address"
-        value={email}
-        onChangeText={setEmail}
-      />
+</TouchableOpacity>
 
-      <Text style={loginStyles.passwordLabel}>كلمة السر </Text>
 
-      <View style={loginStyles.passwordBox}>
-        <TouchableOpacity onPress={() => setHidePassword(!hidePassword)}>
-          <MaterialIcons
-            name={hidePassword ? 'visibility-off' : 'visibility'}
-            size={18}
-            color={colors.black}
-          />
-        </TouchableOpacity>
+<Text style={loginStyles.title}>
+تسجيل الدخول
+</Text>
 
-        <TextInput
-          style={loginStyles.passwordInput}
-          secureTextEntry={hidePassword}
-          value={password}
-          onChangeText={setPassword}
-        />
-      </View>
 
-      <TouchableOpacity
-        style={loginStyles.forgotText}
-        onPress={() => navigation.navigate('ForgotPasswordScreen')}
-      >
-        <Text style={loginStyles.forgotTextValue}>نسيت كلمة السر </Text>
-      </TouchableOpacity>
+<Image
+source={{
+uri:'asset:/image/login_illustration.png'
+}}
+style={loginStyles.illustration}
+resizeMode="contain"
+/>
 
-      <TouchableOpacity
-        style={loginStyles.rememberBox}
-        onPress={() => setRememberMe(!rememberMe)}
-      >
-        <Text style={loginStyles.rememberText}>تذكرني</Text>
 
-        <View
-          style={[
-            loginStyles.checkbox,
-            rememberMe && loginStyles.checkboxActive,
-          ]}
-        >
-          {rememberMe && (
-            <MaterialIcons name="check" size={12} color={colors.white} />
-          )}
-        </View>
-      </TouchableOpacity>
+<Text style={loginStyles.welcome}>
+حياك من جديد 👋
+</Text>
 
-      <TouchableOpacity
-        style={[
-          loginStyles.loginButton,
+<Text style={loginStyles.subtitle}>
+ابدأ بتنظيم فواتيرك الآن
+</Text>
 
-          (!email || !password) && loginStyles.loginButtonDisabled,
-        ]}
-        disabled={!email || !password}
-        onPress={() => navigation.replace('HomeWithInvoicesScreen')}
-      >
-        <Text style={loginStyles.loginButtonText}>تسجيل الدخول</Text>
-      </TouchableOpacity>
 
-      <Text style={loginStyles.signupText}>
-        ليس لديك حساب؟{' '}
-        <Text
-          style={loginStyles.signupLink}
-          onPress={() => navigation.navigate('SignUpScreen')}
-        >
-          إنشاء حساب
-        </Text>
-      </Text>
-    </View>
-  );
+<Text style={loginStyles.emailLabel}>
+البريد الإلكتروني
+</Text>
+
+
+<TextInput
+style={loginStyles.emailInput}
+keyboardType="email-address"
+value={email}
+onChangeText={setEmail}
+/>
+
+
+<Text style={loginStyles.passwordLabel}>
+كلمة السر
+</Text>
+
+
+<View style={loginStyles.passwordBox}>
+
+<TouchableOpacity
+onPress={()=>
+setHidePassword(
+!hidePassword
+)}
+>
+
+<MaterialIcons
+name={
+hidePassword
+?
+'visibility-off'
+:
+'visibility'
+}
+size={18}
+color={colors.black}
+/>
+
+</TouchableOpacity>
+
+
+<TextInput
+style={loginStyles.passwordInput}
+secureTextEntry={hidePassword}
+value={password}
+onChangeText={setPassword}
+/>
+
+</View>
+
+
+<TouchableOpacity
+style={loginStyles.forgotText}
+onPress={()=>
+navigation.navigate(
+'ForgotPasswordScreen'
+)}
+>
+
+<Text style={loginStyles.forgotTextValue}>
+نسيت كلمة السر
+</Text>
+
+</TouchableOpacity>
+
+
+<TouchableOpacity
+style={loginStyles.rememberBox}
+onPress={()=>
+setRememberMe(
+!rememberMe
+)}
+>
+
+<Text style={loginStyles.rememberText}>
+تذكرني
+</Text>
+
+
+<View
+style={[
+loginStyles.checkbox,
+rememberMe &&
+loginStyles.checkboxActive
+]}
+>
+
+{
+rememberMe &&
+
+<MaterialIcons
+name="check"
+size={12}
+color={colors.white}
+/>
+
+}
+
+</View>
+
+</TouchableOpacity>
+
+
+
+<TouchableOpacity
+style={[
+loginStyles.loginButton,
+(!email||!password)
+&&
+loginStyles.loginButtonDisabled
+]}
+
+disabled={!email||!password}
+
+onPress={async()=>{
+
+try{
+
+const result=
+await loginUser(
+email,
+password
+);
+
+console.log(
+'التسجيل كامل:',
+JSON.stringify(result)
+);
+
+Alert.alert(
+'نجاح',
+'تم تسجيل الدخول'
+);
+
+navigation.replace(
+'HomeScreen',
+{
+user:result.user
+}
+);
+}
+
+catch(error){
+
+Alert.alert(
+'خطأ',
+error?.message ||
+'البريد الإلكتروني أو كلمة المرور غير صحيحة'
+);
+
+console.log(error);
+
+}
+
+}}
+>
+
+<Text
+style={loginStyles.loginButtonText}
+>
+
+تسجيل الدخول
+
+</Text>
+
+</TouchableOpacity>
+
+
+
+<Text style={loginStyles.signupText}>
+
+ليس لديك حساب؟
+
+<Text
+style={loginStyles.signupLink}
+onPress={()=>
+navigation.navigate(
+'SignUpScreen'
+)}
+>
+
+إنشاء حساب
+
+</Text>
+
+</Text>
+
+
+</View>
+
+);
+
 };
 
 export default LoginScreen;

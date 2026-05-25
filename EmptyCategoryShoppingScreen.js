@@ -1,5 +1,13 @@
-import React from 'react';
+import React, {
+    useEffect,
+    useState
+} from 'react';
+
 import EmptyBottomNavigation from './EmptyBottomNavigation';
+import {
+    getReceipts
+}
+    from './services/homeService';
 
 import {
     View,
@@ -49,6 +57,67 @@ export default function EmptyCategoryShoppingScreen({
     navigation,
 }) {
 
+    const [
+        receipts,
+        setReceipts
+    ] = useState([]);
+
+    useEffect(() => {
+
+        loadData();
+
+    }, []);
+
+
+    const loadData =
+        async () => {
+
+            try {
+
+                const data =
+                    await getReceipts();
+
+                const shoppingReceipts =
+
+                    data.filter(
+
+                        item =>
+
+                            item?.categories
+                                ?.categorie_name ===
+                            'التسوق'
+
+                    );
+
+                setReceipts(
+                    shoppingReceipts
+                );
+
+            }
+
+            catch (error) {
+
+                console.log(
+                    error
+                );
+
+            }
+
+        };
+
+
+    const totalAmount =
+
+        receipts.reduce(
+
+            (sum, item) =>
+
+                sum +
+                (item.total_price || 0),
+
+            0
+
+        );
     return (
 
         <View style={categoryFoodStyles.container}>
@@ -148,7 +217,7 @@ export default function EmptyCategoryShoppingScreen({
                     <Text
                         style={categoryFoodStyles.summaryCount}
                     >
-                        0 فواتير
+                        {receipts.length} فواتير
                     </Text>
 
                     <Text
@@ -159,7 +228,7 @@ export default function EmptyCategoryShoppingScreen({
                             },
                         ]}
                     >
-                        0 ريال
+                        {totalAmount} ريال
                     </Text>
 
                     <Text
@@ -188,30 +257,67 @@ export default function EmptyCategoryShoppingScreen({
 
             </View>
 
-            <View
-                style={categoryFoodStyles.emptyCategoryContent}
-            >
+            {
 
-                <MaterialIcons
-                    name="shopping-bag"
-                    size={82}
-                    color={colors.border}
-                    style={categoryFoodStyles.emptyCategoryIcon}
-                />
+                receipts.length === 0
 
-                <Text
-                    style={categoryFoodStyles.emptyCategoryTitle}
-                >
-                    ما عندك فواتير تسوق
-                </Text>
+                    ?
 
-                <Text
-                    style={categoryFoodStyles.emptyCategoryText}
-                >
-                    أول فاتورة تسوق تضيفها بتظهر هنا ✨
-                </Text>
+                    <View
+                        style={
+                            categoryFoodStyles.emptyCategoryContent
+                        }
+                    >
 
-            </View>
+                        <MaterialIcons
+                            name="shopping-bag"
+                            size={82}
+                            color={colors.border}
+                        />
+
+                        <Text
+                            style={
+                                categoryFoodStyles.emptyCategoryTitle
+                            }
+                        >
+
+                            ما عندك فواتير تسوق
+
+                        </Text>
+
+                    </View>
+
+                    :
+
+                    receipts.map(item => (
+
+                        <View
+                            key={item.invoice_id}
+                            style={{
+                                padding: 15,
+                                borderBottomWidth: 1,
+                                borderBottomColor: '#EEE'
+                            }}
+                        >
+
+                            <Text>
+
+                                {item.merchant_name}
+
+                            </Text>
+
+                            <Text>
+
+                                {item.total_price}
+                                ريال
+
+                            </Text>
+
+                        </View>
+
+                    ))
+
+            }
 
             <EmptyBottomNavigation
                 navigation={navigation}

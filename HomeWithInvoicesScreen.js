@@ -1,4 +1,8 @@
-import React from 'react';
+import React, {
+    useEffect,
+    useState
+} from 'react';
+
 import {
     View,
     Text,
@@ -7,18 +11,75 @@ import {
     ScrollView,
 } from 'react-native';
 
+
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import BottomNavigation from './BottomNavigation';
-
+import {
+getReceipts
+}
+from './services/homeService';
 import {
     homeWithInvoicesStyles,
     colors
 } from './styles';
 
 export default function HomeWithInvoicesScreen({
-    navigation
+    navigation,
+    route
 }) {
+
+    const user =
+        route?.params?.user;
+    const [receipts, setReceipts] =
+        useState([]);
+
+    useEffect(() => {
+
+        loadHome();
+
+    }, []);
+
+    const loadHome =
+        async () => {
+
+            try {
+
+                const receiptsData =
+                    await getReceipts();
+
+                console.log(
+                    'الفواتير:',
+                    receiptsData
+                );
+
+                console.log(
+                    'تم جلب:',
+                    receiptsData?.length
+                );
+
+                setReceipts(
+                    receiptsData
+                );
+
+            }
+
+            catch (error) {
+
+                console.log(
+                    'خطأ الفواتير:',
+                    JSON.stringify(error)
+                );
+
+                console.log(
+                    'تفاصيل الخطأ:',
+                    error
+                );
+
+            }
+
+        };
+
 
     const categories = [
 
@@ -32,7 +93,7 @@ export default function HomeWithInvoicesScreen({
 
         {
             icon: 'restaurant',
-            name: 'مطاعم',
+            name: 'المطاعم',
             amount: '240',
             iconColor: '#2563FF',
             bgColor: '#EEF4FF',
@@ -80,37 +141,6 @@ export default function HomeWithInvoicesScreen({
 
     ];
 
-    const invoices = [
-
-        {
-            store: 'أتش اند أم',
-            amount: '320',
-            time: 'اليوم - 10:30 ص',
-            logo: {
-                uri: 'asset:/image/H&M.png'
-            }
-        },
-
-        {
-            store: 'اكسترا',
-            amount: '230',
-            time: 'أمس - 10:30 ص',
-            logo: {
-                uri: 'asset:/image/extra.png'
-            }
-        },
-
-        {
-            store: 'نون للتسوق',
-            amount: '120',
-            time: '12 مايو - 1:20 م',
-            logo: {
-                uri: 'asset:/image/noon.png'
-            }
-        }
-
-    ];
-
 
     return (
 
@@ -154,7 +184,7 @@ export default function HomeWithInvoicesScreen({
                             style={homeWithInvoicesStyles.helloText}
                         >
 
-                            👋 أهلاً أريام
+                            👋 أهلاً {user?.first_name || ''}
 
                         </Text>
 
@@ -534,70 +564,80 @@ export default function HomeWithInvoicesScreen({
 
 
                     {
-                        invoices.map((invoice, index) => (
+                        receipts?.length > 0 ?
 
-                            <TouchableOpacity
-                                key={index}
-                                style={homeWithInvoicesStyles.invoiceRow}
-                            >
+                            receipts.map((invoice, index) => (
 
-                                <View
-                                    style={homeWithInvoicesStyles.invoiceRight}
+                                <TouchableOpacity
+                                    key={index}
+                                    style={homeWithInvoicesStyles.invoiceRow}
                                 >
 
-                                    <Image
-                                        source={invoice.logo}
-                                        style={homeWithInvoicesStyles.invoiceLogo}
-                                    />
+                                    <View
+                                        style={homeWithInvoicesStyles.invoiceRight}
+                                    >
 
-                                    <View>
+                                        <View>
+
+                                            <Text
+                                                style={homeWithInvoicesStyles.invoiceStore}
+                                            >
+
+                                                {invoice.merchant_name}
+
+                                            </Text>
+
+                                            <Text
+                                                style={homeWithInvoicesStyles.invoiceDate}
+                                            >
+
+                                                {invoice.issued_at?.split('T')[0]}
+
+                                            </Text>
+
+                                        </View>
+
+                                    </View>
+
+                                    <View
+                                        style={homeWithInvoicesStyles.invoiceAmountBox}
+                                    >
 
                                         <Text
-                                            style={homeWithInvoicesStyles.invoiceStore}
+                                            style={homeWithInvoicesStyles.invoiceAmount}
                                         >
 
-                                            {invoice.store}
+                                            {invoice.total_price}
 
                                         </Text>
 
                                         <Text
-                                            style={homeWithInvoicesStyles.invoiceDate}
+                                            style={homeWithInvoicesStyles.invoiceCurrency}
                                         >
 
-                                            {invoice.time}
+                                            ريال
 
                                         </Text>
 
                                     </View>
 
-                                </View>
+                                </TouchableOpacity>
 
+                            ))
 
-                                <View
-                                    style={homeWithInvoicesStyles.invoiceAmountBox}
-                                >
+                            :
 
-                                    <Text
-                                        style={homeWithInvoicesStyles.invoiceAmount}
-                                    >
+                            <Text
+                                style={{
+                                    textAlign: 'center',
+                                    marginTop: 20
+                                }}
+                            >
 
-                                        {invoice.amount}
+                                لا توجد فواتير
 
-                                    </Text>
+                            </Text>
 
-                                    <Text
-                                        style={homeWithInvoicesStyles.invoiceCurrency}
-                                    >
-
-                                        ريال
-
-                                    </Text>
-
-                                </View>
-
-                            </TouchableOpacity>
-
-                        ))
                     }
 
                 </View>

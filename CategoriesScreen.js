@@ -31,7 +31,7 @@ const categories = [
 
   {
     id: 2,
-    name: 'مطاعم',
+    name: 'المطاعم',
     count: '2 فواتير ',
     icon: 'restaurant',
     color: '#2563EB',

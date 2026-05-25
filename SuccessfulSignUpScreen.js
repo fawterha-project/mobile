@@ -5,7 +5,9 @@ import { successfulSignUpStyles, colors } from './styles';
 const SuccessfulSignUpScreen = ({ navigation }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigation.replace('HomeScreen');//هنا احط الشاشه الريسيه الفاضيه
+      navigation.replace(
+'HomeScreen'
+);//هنا احط الشاشه الريسيه الفاضيه
     }, 5000);
 
     return () => clearTimeout(timer);

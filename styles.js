@@ -1851,6 +1851,40 @@ export const homeStyles = StyleSheet.create({
     fontFamily: 'Tajawal-Regular',
     color: colors.gray,
   },
+  invoiceItem:{
+
+flexDirection:'row',
+justifyContent:'space-between',
+alignItems:'center',
+paddingVertical:15,
+borderBottomWidth:1,
+borderBottomColor:'#F1F1F1'
+
+},
+
+invoiceStore:{
+
+fontSize:16,
+fontWeight:'700',
+color:'#111827'
+
+},
+
+invoiceDate:{
+
+fontSize:13,
+color:'#9CA3AF',
+marginTop:4
+
+},
+
+invoiceAmount:{
+
+fontSize:18,
+fontWeight:'700',
+color:'#111827'
+
+},
 });
 
 export const homeWithInvoicesStyles={

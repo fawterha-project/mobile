@@ -1,5 +1,12 @@
-import React from 'react';
+import React, {
+    useEffect,
+    useState
+} from 'react';
 import EmptyBottomNavigation from './EmptyBottomNavigation';
+import {
+    getReceipts
+}
+    from './services/homeService';
 
 import {
     View,
@@ -57,6 +64,67 @@ export default function EmptyCategoryGroceriesScreen({
     navigation,
 }) {
 
+    const [
+        receipts,
+        setReceipts
+    ] = useState([]);
+
+    useEffect(() => {
+
+        loadData();
+
+    }, []);
+
+
+    const loadData =
+        async () => {
+
+            try {
+
+                const data =
+                    await getReceipts();
+
+                const groceriesReceipts =
+
+                    data.filter(
+
+                        item =>
+
+                            item?.categories
+                                ?.categorie_name ===
+                            'المقاضي'
+
+                    );
+
+                setReceipts(
+                    groceriesReceipts
+                );
+
+            }
+
+            catch (error) {
+
+                console.log(
+                    error
+                );
+
+            }
+
+        };
+
+
+    const totalAmount =
+
+        receipts.reduce(
+
+            (sum, item) =>
+
+                sum +
+                (item.total_price || 0),
+
+            0
+
+        );
     return (
 
         <View style={categoryFoodStyles.container}>
@@ -115,7 +183,7 @@ export default function EmptyCategoryGroceriesScreen({
                 </TouchableOpacity>
 
                 <Text style={categoryFoodStyles.title}>
-                    مقاضي
+                    المقاضي
                 </Text>
 
                 <View
@@ -161,7 +229,7 @@ export default function EmptyCategoryGroceriesScreen({
                             categoryFoodStyles.summaryTitle
                         }
                     >
-                        مقاضي
+                        المقاضي
                     </Text>
 
                     <Text
@@ -169,7 +237,7 @@ export default function EmptyCategoryGroceriesScreen({
                             categoryFoodStyles.summaryCount
                         }
                     >
-                        0 فواتير
+                        {receipts.length} فواتير
                     </Text>
 
                     <Text
@@ -180,7 +248,7 @@ export default function EmptyCategoryGroceriesScreen({
                             }
                         ]}
                     >
-                        0 ريال
+                        {totalAmount} ريال
                     </Text>
 
                     <Text
@@ -219,38 +287,67 @@ export default function EmptyCategoryGroceriesScreen({
             </View>
 
 
-            <View
-                style={
-                    categoryFoodStyles.emptyCategoryContent
-                }
-            >
+            {
 
-                <MaterialIcons
-                    name="shopping-basket"
-                    size={82}
-                    color={colors.border}
-                    style={
-                        categoryFoodStyles.emptyCategoryIcon
-                    }
-                />
+                receipts.length === 0
 
-                <Text
-                    style={
-                        categoryFoodStyles.emptyCategoryTitle
-                    }
-                >
-                    ما عندك فواتير مقاضي
-                </Text>
+                    ?
 
-                <Text
-                    style={
-                        categoryFoodStyles.emptyCategoryText
-                    }
-                >
-                    أول فاتورة مقاضي تضيفها بتظهر هنا ✨
-                </Text>
+                    <View
+                        style={
+                            categoryFoodStyles.emptyCategoryContent
+                        }
+                    >
 
-            </View>
+                        <MaterialIcons
+                            name="shopping-basket"
+                            size={82}
+                            color={colors.border}
+                        />
+
+                        <Text
+                            style={
+                                categoryFoodStyles.emptyCategoryTitle
+                            }
+                        >
+
+                            ما عندك فواتير مقاضي
+
+                        </Text>
+
+                    </View>
+
+                    :
+
+                    receipts.map(item => (
+
+                        <View
+                            key={item.invoice_id}
+                            style={{
+                                padding: 15,
+                                borderBottomWidth: 1,
+                                borderBottomColor: '#EEE'
+                            }}
+                        >
+
+                            <Text>
+
+                                {item.merchant_name}
+
+                            </Text>
+
+                            <Text>
+
+                                {item.total_price}
+                                ريال
+
+                            </Text>
+
+                        </View>
+
+                    ))
+
+            }
 
 
             <EmptyBottomNavigation

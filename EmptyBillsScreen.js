@@ -1,5 +1,13 @@
-import React, { useState } from 'react';
+import React, {
+    useState,
+    useEffect
+} from 'react';
+
 import EmptyBottomNavigation from './EmptyBottomNavigation';
+import {
+    getReceipts
+}
+    from './services/homeService';
 
 import {
     View,
@@ -60,11 +68,65 @@ export default function EmptyBillsScreen({
     navigation,
 }) {
 
+    const [
+        receipts,
+        setReceipts
+    ] = useState([]);
+
+    useEffect(() => {
+
+        loadData();
+
+    }, []);
+
+    const loadData =
+        async () => {
+
+            try {
+
+                const data =
+                    await getReceipts();
+
+                setReceipts(
+                    data
+                );
+
+            }
+
+            catch (error) {
+
+                console.log(
+                    error
+                );
+
+            }
+
+        };
     const [searchText, setSearchText] =
         useState('');
 
+    const filteredReceipts =
+
+        receipts.filter(
+
+            item =>
+
+                item.merchant_name
+                    ?.includes(
+                        searchText.trim()
+                    )
+
+        );
+
     const showNotFound =
-        searchText.trim().length > 0;
+
+        searchText.trim()
+            .length > 0
+
+        &&
+
+        filteredReceipts
+            .length === 0;
 
     return (
 
@@ -196,68 +258,116 @@ export default function EmptyBillsScreen({
             </View>
 
 
-            {showNotFound ? (
+            {showNotFound ?
 
-                <View
-                    style={
-                        notFoundStyles.emptySearchContent
-                    }
-                >
+                (
 
-                    <Text
+                    <View
                         style={
-                            notFoundStyles.emptySearchTitle
+                            notFoundStyles.emptySearchContent
                         }
                     >
-                        ما لقينا أي فاتورة
-                    </Text>
 
-                    <Text
-                        style={
-                            notFoundStyles.emptySearchText
-                        }
-                    >
-                        جربي تبحثي بكلمة ثانية ✨
-                    </Text>
+                        <Text
+                            style={
+                                notFoundStyles.emptySearchTitle
+                            }
+                        >
 
-                </View>
+                            ما لقينا أي فاتورة
 
-            ) : (
+                        </Text>
 
-                <View
-                    style={
-                        billsStyles.emptyContent
-                    }
-                >
+                        <Text
+                            style={
+                                notFoundStyles.emptySearchText
+                            }
+                        >
 
-                    <MaterialIcons
-                        name="receipt-long"
-                        size={82}
-                        color={colors.gray}
-                        style={
-                            billsStyles.emptyIcon
-                        }
-                    />
+                            جربي تبحثي بكلمة ثانية ✨
 
-                    <Text
-                        style={
-                            billsStyles.emptyTitle
-                        }
-                    >
-                        ما عندك فواتير حالياً
-                    </Text>
+                        </Text>
 
-                    <Text
-                        style={
-                            billsStyles.emptyText
-                        }
-                    >
-                        أول فاتورة تضيفها بتظهر هنا ✨
-                    </Text>
+                    </View>
 
-                </View>
+                )
 
-            )}
+                :
+
+                filteredReceipts.length === 0
+
+                    ?
+
+                    (
+
+                        <View
+                            style={
+                                billsStyles.emptyContent
+                            }
+                        >
+
+                            <MaterialIcons
+                                name="receipt-long"
+                                size={82}
+                                color={colors.gray}
+                            />
+
+                            <Text
+                                style={
+                                    billsStyles.emptyTitle
+                                }
+                            >
+
+                                ما عندك فواتير حالياً
+
+                            </Text>
+
+                        </View>
+
+                    )
+
+                    :
+
+                    filteredReceipts.map(item => (
+
+                        <TouchableOpacity
+                            key={item.invoice_id}
+                            style={{
+                                backgroundColor: '#fff',
+                                padding: 15,
+                                marginHorizontal: 20,
+                                marginBottom: 10,
+                                borderRadius: 15
+                            }}
+                        >
+
+                            <Text>
+
+                                {item.merchant_name}
+
+                            </Text>
+
+                            <Text>
+
+                                {
+                                    item.issued_at
+                                        ?.split('T')[0]
+                                }
+
+                            </Text>
+
+                            <Text>
+
+                                {item.total_price}
+                                ريال
+
+                            </Text>
+
+                        </TouchableOpacity>
+
+                    ))
+
+            }
 
             <EmptyBottomNavigation
                 navigation={navigation}

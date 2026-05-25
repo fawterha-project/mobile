@@ -1,5 +1,13 @@
-import React from 'react';
+import React, {
+    useEffect,
+    useState
+} from 'react';
+
 import EmptyBottomNavigation from './EmptyBottomNavigation';
+import {
+    getReceipts
+}
+    from './services/homeService';
 
 import {
     View,
@@ -56,6 +64,67 @@ const BottomTab = ({
 export default function EmptyCategoryHealthScreen({
     navigation,
 }) {
+    const [
+        receipts,
+        setReceipts
+    ] = useState([]);
+
+    useEffect(() => {
+
+        loadData();
+
+    }, []);
+
+
+    const loadData =
+        async () => {
+
+            try {
+
+                const data =
+                    await getReceipts();
+
+                const healthReceipts =
+
+                    data.filter(
+
+                        item =>
+
+                            item?.categories
+                                ?.categorie_name ===
+                            'الصحة'
+
+                    );
+
+                setReceipts(
+                    healthReceipts
+                );
+
+            }
+
+            catch (error) {
+
+                console.log(
+                    error
+                );
+
+            }
+
+        };
+
+
+    const totalAmount =
+
+        receipts.reduce(
+
+            (sum, item) =>
+
+                sum +
+                (item.total_price || 0),
+
+            0
+
+        );
 
     return (
 
@@ -169,7 +238,7 @@ export default function EmptyCategoryHealthScreen({
                             categoryFoodStyles.summaryCount
                         }
                     >
-                        0 فواتير
+                        {receipts.length} فواتير
                     </Text>
 
                     <Text
@@ -180,7 +249,7 @@ export default function EmptyCategoryHealthScreen({
                             }
                         ]}
                     >
-                        0 ريال
+                        {totalAmount} ريال
                     </Text>
 
                     <Text
@@ -218,39 +287,67 @@ export default function EmptyCategoryHealthScreen({
 
             </View>
 
+            {
 
-            <View
-                style={
-                    categoryFoodStyles.emptyCategoryContent
-                }
-            >
+                receipts.length === 0
 
-                <MaterialIcons
-                    name="favorite-border"
-                    size={82}
-                    color={colors.border}
-                    style={
-                        categoryFoodStyles.emptyCategoryIcon
-                    }
-                />
+                    ?
 
-                <Text
-                    style={
-                        categoryFoodStyles.emptyCategoryTitle
-                    }
-                >
-                    ما عندك فواتير صحة
-                </Text>
+                    <View
+                        style={
+                            categoryFoodStyles.emptyCategoryContent
+                        }
+                    >
 
-                <Text
-                    style={
-                        categoryFoodStyles.emptyCategoryText
-                    }
-                >
-                    أول فاتورة صحة تضيفها بتظهر هنا ✨
-                </Text>
+                        <MaterialIcons
+                            name="favorite-border"
+                            size={82}
+                            color={colors.border}
+                        />
 
-            </View>
+                        <Text
+                            style={
+                                categoryFoodStyles.emptyCategoryTitle
+                            }
+                        >
+
+                            ما عندك فواتير صحة
+
+                        </Text>
+
+                    </View>
+
+                    :
+
+                    receipts.map(item => (
+
+                        <View
+                            key={item.invoice_id}
+                            style={{
+                                padding: 15,
+                                borderBottomWidth: 1,
+                                borderBottomColor: '#EEE'
+                            }}
+                        >
+
+                            <Text>
+
+                                {item.merchant_name}
+
+                            </Text>
+
+                            <Text>
+
+                                {item.total_price}
+                                ريال
+
+                            </Text>
+
+                        </View>
+
+                    ))
+
+            }
 
 
             <EmptyBottomNavigation

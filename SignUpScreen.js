@@ -1,145 +1,366 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
+
+import {
+    View,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    Image,
+    Alert
+} from 'react-native';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-import { signupStyles, colors } from './styles';
+import {
+    signupStyles,
+    colors
+} from './styles';
 
-const SignUpScreen = ({ navigation }) => {
-  const [hidePassword, setHidePassword] = useState(true);
-  const [hideConfirmPassword, setHideConfirmPassword] = useState(true);
-  const [agree, setAgree] = useState(false);
+import {
+    signupUser
+}
+    from './services/userService';
 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+const SignUpScreen = ({
+    navigation
+}) => {
 
-  const isFormValid = name && email && password && confirmPassword && agree;
+    const [hidePassword, setHidePassword] = useState(true);
 
-  return (
-    <View style={signupStyles.container}>
-      <TouchableOpacity
-  style={signupStyles.backIcon}
-  onPress={() => navigation.goBack()}
->
-        <MaterialIcons name="arrow-back" size={22} color={colors.blue} />
-      </TouchableOpacity>
+    const [
+        hideConfirmPassword,
+        setHideConfirmPassword
+    ] = useState(true);
 
-      <Text style={signupStyles.title}>إنشاء حساب</Text>
+    const [agree, setAgree] = useState(false);
 
-      <Image
-        source={{
-          uri: 'asset:/image/login_illustration.png'
-        }}
-        style={signupStyles.illustration}
-        resizeMode="contain"
-      />
+    const [name, setName] = useState('');
 
-      <Text style={signupStyles.welcome}>فوترها، أنشئ حسابك</Text>
+    const [email, setEmail] = useState('');
 
-      <Text style={signupStyles.subtitle}>وخل فواتيرك مرتبة في مكان واحد</Text>
+    const [password, setPassword] = useState('');
 
-      <Text style={signupStyles.nameLabel}>الاسم</Text>
+    const [
+        confirmPassword,
+        setConfirmPassword
+    ] = useState('');
 
-      <TextInput
-        style={signupStyles.nameInput}
-        value={name}
-        onChangeText={setName}
-      />
+    const isFormValid =
 
-      <Text style={signupStyles.emailLabel}>البريد الإلكتروني</Text>
+        name &&
+        email &&
+        password &&
+        confirmPassword &&
+        agree;
 
-      <TextInput
-        style={signupStyles.emailInput}
-        keyboardType="email-address"
-        value={email}
-        onChangeText={setEmail}
-      />
+    return (
 
-      <Text style={signupStyles.passwordLabel}>كلمة المرور </Text>
+        <View style={signupStyles.container}>
 
-      <View style={signupStyles.passwordBox}>
-        <TouchableOpacity onPress={() => setHidePassword(!hidePassword)}>
-          <MaterialIcons
-            name={hidePassword ? 'visibility-off' : 'visibility'}
-            size={18}
-            color={colors.black}
-          />
-        </TouchableOpacity>
+            <TouchableOpacity
+                style={signupStyles.backIcon}
+                onPress={() =>
+                    navigation.goBack()
+                }
+            >
 
-        <TextInput
-          style={signupStyles.passwordInput}
-          secureTextEntry={hidePassword}
-          value={password}
-          onChangeText={setPassword}
-        />
-      </View>
+                <MaterialIcons
+                    name="arrow-back"
+                    size={22}
+                    color={colors.blue}
+                />
 
-      <Text style={signupStyles.confirmPasswordLabel}>تأكيد كلمة المرور </Text>
+            </TouchableOpacity>
 
-      <View style={signupStyles.confirmPasswordBox}>
-        <TouchableOpacity
-          onPress={() => setHideConfirmPassword(!hideConfirmPassword)}
-        >
-          <MaterialIcons
-            name={hideConfirmPassword ? 'visibility-off' : 'visibility'}
-            size={18}
-            color={colors.black}
-          />
-        </TouchableOpacity>
 
-        <TextInput
-          style={signupStyles.passwordInput}
-          secureTextEntry={hideConfirmPassword}
-          value={confirmPassword}
-          onChangeText={setConfirmPassword}
-        />
-      </View>
+            <Text style={signupStyles.title}>
+                إنشاء حساب
+            </Text>
 
-      <TouchableOpacity
-        style={signupStyles.termsBox}
-        onPress={() => setAgree(!agree)}
-      >
-        <Text style={signupStyles.termsText}>أوافق على الشروط والأحكام</Text>
+            <Image
+                source={{
+                    uri: 'asset:/image/login_illustration.png'
+                }}
+                style={signupStyles.illustration}
+                resizeMode="contain"
+            />
 
-        <View
-          style={[signupStyles.checkbox, agree && signupStyles.checkboxActive]}
-        >
-          {agree && (
-            <MaterialIcons name="check" size={12} color={colors.white} />
-          )}
+            <Text style={signupStyles.welcome}>
+                فوترها، أنشئ حسابك
+            </Text>
+
+            <Text style={signupStyles.subtitle}>
+                وخل فواتيرك مرتبة في مكان واحد
+            </Text>
+
+
+            <Text style={signupStyles.nameLabel}>
+                الاسم
+            </Text>
+
+            <TextInput
+                style={signupStyles.nameInput}
+                value={name}
+                onChangeText={setName}
+            />
+
+            <Text style={signupStyles.emailLabel}>
+                البريد الإلكتروني
+            </Text>
+
+            <TextInput
+                style={signupStyles.emailInput}
+                keyboardType="email-address"
+                value={email}
+                onChangeText={setEmail}
+            />
+
+            <Text style={signupStyles.passwordLabel}>
+                كلمة المرور
+            </Text>
+
+            <View style={signupStyles.passwordBox}>
+
+                <TouchableOpacity
+                    onPress={() =>
+                        setHidePassword(
+                            !hidePassword
+                        )
+                    }
+                >
+
+                    <MaterialIcons
+                        name={
+                            hidePassword
+                                ?
+                                'visibility-off'
+                                :
+                                'visibility'
+                        }
+                        size={18}
+                        color={colors.black}
+                    />
+
+                </TouchableOpacity>
+
+                <TextInput
+                    style={signupStyles.passwordInput}
+                    secureTextEntry={hidePassword}
+                    value={password}
+                    onChangeText={setPassword}
+                />
+
+            </View>
+
+
+            <Text style={signupStyles.confirmPasswordLabel}>
+                تأكيد كلمة المرور
+            </Text>
+
+            <View
+                style={signupStyles.confirmPasswordBox}
+            >
+
+                <TouchableOpacity
+                    onPress={() =>
+                        setHideConfirmPassword(
+                            !hideConfirmPassword
+                        )
+                    }
+                >
+
+                    <MaterialIcons
+                        name={
+                            hideConfirmPassword
+                                ?
+                                'visibility-off'
+                                :
+                                'visibility'
+                        }
+                        size={18}
+                        color={colors.black}
+                    />
+
+                </TouchableOpacity>
+
+                <TextInput
+                    style={signupStyles.passwordInput}
+                    secureTextEntry={
+                        hideConfirmPassword
+                    }
+                    value={confirmPassword}
+                    onChangeText={setConfirmPassword}
+                />
+
+            </View>
+
+
+            <TouchableOpacity
+                style={signupStyles.termsBox}
+                onPress={() =>
+                    setAgree(!agree)
+                }
+            >
+
+                <Text style={signupStyles.termsText}>
+                    أوافق على الشروط والأحكام
+                </Text>
+
+                <View
+                    style={[
+                        signupStyles.checkbox,
+                        agree &&
+                        signupStyles.checkboxActive
+                    ]}
+                >
+
+                    {agree && (
+
+                        <MaterialIcons
+                            name="check"
+                            size={12}
+                            color={colors.white}
+                        />
+
+                    )}
+
+                </View>
+
+            </TouchableOpacity>
+
+
+            <TouchableOpacity
+                style={[
+                    signupStyles.signupButton,
+                    !isFormValid &&
+                    signupStyles.signupButtonDisabled
+                ]}
+
+                disabled={!isFormValid}
+
+                onPress={async () => {
+
+                    if (password !== confirmPassword) {
+
+                        Alert.alert(
+                            'خطأ',
+                            'كلمتا المرور غير متطابقتين'
+                        );
+
+                        return;
+
+                    }
+
+                    const emailRegex =
+                        /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                    if (
+                        !emailRegex.test(email)
+                    ) {
+
+                        Alert.alert(
+                            'خطأ',
+                            'البريد الإلكتروني غير صحيح'
+                        );
+
+                        return;
+
+                    }
+
+                    try {
+
+                        const result =
+                            await signupUser(
+                                name,
+                                email,
+                                password
+                            );
+
+                        console.log(
+                            'تم إنشاء الحساب:',
+                            result
+                        );
+
+                        Alert.alert(
+                            'نجاح',
+                            'تم إرسال رمز التحقق',
+                            [
+                                {
+                                    text: 'موافق',
+                                    onPress: () => {
+
+                                        navigation.navigate(
+                                            'VerifyEmailScreen',
+                                            {
+                                                email,
+                                                source: 'signup',
+                                                user: {
+                                                    first_name: name
+                                                }
+                                            }
+                                        );
+
+                                    }
+                                }
+                            ]
+                        );
+
+                    }
+
+                    catch (error) {
+
+                        console.log(
+                            'Signup Error:',
+                            error
+                        );
+
+                        Alert.alert(
+                            'خطأ',
+                            'فشل إنشاء الحساب'
+                        );
+
+                    }
+
+                }}
+
+            >
+
+                <Text
+                    style={
+                        signupStyles.signupButtonText
+                    }
+                >
+
+                    إنشاء حساب
+
+                </Text>
+
+            </TouchableOpacity>
+
+
+            <Text style={signupStyles.loginText}>
+
+                لديك حساب؟{' '}
+
+                <Text
+                    style={signupStyles.loginLink}
+                    onPress={() =>
+                        navigation.navigate(
+                            'LoginScreen'
+                        )
+                    }
+                >
+
+                    تسجيل الدخول
+
+                </Text>
+
+            </Text>
+
         </View>
-      </TouchableOpacity>
 
-      <TouchableOpacity
-        style={[
-          signupStyles.signupButton,
-          !isFormValid && signupStyles.signupButtonDisabled,
-        ]}
+    );
 
-        disabled={!isFormValid}
-
-        onPress={() =>
-          navigation.navigate(
-            'HomeScreen'
-          )
-        }
-      >
-        <Text style={signupStyles.signupButtonText}>إنشاء حساب</Text>
-      </TouchableOpacity>
-
-      <Text style={signupStyles.loginText}>
-        لديك حساب؟{' '}
-        <Text
-          style={signupStyles.loginLink}
-          onPress={() => navigation.navigate('Login')}
-        >
-          تسجيل الدخول
-        </Text>
-      </Text>
-    </View>
-  );
 };
 
 export default SignUpScreen;

@@ -1,4 +1,14 @@
-import React from 'react';
+import React, {
+  useState,
+  useEffect
+} from 'react';
+
+import {
+  getSummary,
+  getReceipts
+}
+  from './services/homeService';
+
 import {
   View,
   Text,
@@ -6,6 +16,7 @@ import {
   Image,
   ScrollView,
 } from 'react-native';
+
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
@@ -17,75 +28,155 @@ import {
 } from './styles';
 
 export default function HomeScreen({
-  navigation
+
+  navigation,
+  route
+
 }) {
 
-  const categories = [
+  const user =
+    route?.params?.user;
 
-    {
-      icon: 'shopping-basket',
-      name: 'المقاضي',
-      amount: '0',
-      iconColor: '#22C55E',
-      bgColor: '#EAFBF0',
-      screen: 'EmptyCategoryGroceries'
-    },
 
-    {
-      icon: 'restaurant',
-      name: 'مطاعم',
-      amount: '0',
-      iconColor: '#2563FF',
-      bgColor: '#EEF4FF',
-      screen: 'EmptyCategoryRestaurants'
-    },
+  const [summary, setSummary] =
+    useState(null);
 
-    {
-      icon: 'shopping-bag',
-      name: 'التسوق',
-      amount: '0',
-      iconColor: '#A020F0',
-      bgColor: '#F6EAFF',
-      screen: 'EmptyCategoryShopping'
-    },
+  const [receipts, setReceipts] =
+    useState([]);
 
-    {
-      icon: 'directions-bus',
-      name: 'النقل',
-      amount: '0',
-      iconColor: '#FFB000',
-      bgColor: '#FFF6E7',
-      screen: 'EmptyCategoryTransport'
-    },
+  useEffect(() => {
 
-    {
-      icon: 'favorite',
-      name: 'الصحة',
-      amount: '0',
-      iconColor: '#FF4B5C',
-      bgColor: '#FFECEF',
-      screen: 'EmptyCategoryHealth'
-    },
+    loadHome();
 
-    {
-      icon: 'event',
-      name: 'الالتزامات',
-      amount: '0',
-      iconColor: '#12C6D7',
-      bgColor: '#EAFBFC',
-      screen: 'EmptyCategoryCommitments'
-    },
+  }, []);
 
-    {
-      icon: 'more-horiz',
-      name: 'أخرى',
-      amount: '0',
-      iconColor: '#8C8FA1',
-      bgColor: '#F3F3F6',
-      screen: 'EmptyCategoryOther'
-    }
+  const loadHome =
+    async () => {
 
-  ];
+      try {
+
+        const receiptsData =
+          await getReceipts();
+
+        console.log(
+          'الفواتير:',
+          receiptsData
+        );
+
+        console.log(
+          'تم جلب:',
+          receiptsData?.length
+        );
+
+        setReceipts(
+          receiptsData
+        );
+
+      }
+
+      catch (error) {
+
+        console.log(
+          'خطأ الفواتير:',
+          JSON.stringify(error)
+        );
+
+        console.log(
+          'تفاصيل الخطأ:',
+          error
+        );
+
+      }
+
+    };
+const categories=[
+
+{
+icon:'shopping-basket',
+name:'المقاضي',
+iconColor:'#22C55E',
+bgColor:'#EAFBF0',
+screen:'EmptyCategoryGroceries'
+},
+
+{
+icon:'restaurant',
+name:'المطاعم',
+iconColor:'#2563FF',
+bgColor:'#EEF4FF',
+screen:'EmptyCategoryRestaurants'
+},
+
+{
+icon:'shopping-bag',
+name:'التسوق',
+iconColor:'#A020F0',
+bgColor:'#F6EAFF',
+screen:'EmptyCategoryShopping'
+},
+
+{
+icon:'directions-bus',
+name:'النقل',
+iconColor:'#FFB000',
+bgColor:'#FFF6E7',
+screen:'EmptyCategoryTransport'
+},
+
+{
+icon:'favorite',
+name:'الصحة',
+iconColor:'#FF4B5C',
+bgColor:'#FFECEF',
+screen:'EmptyCategoryHealth'
+},
+
+{
+icon:'event',
+name:'الالتزامات',
+iconColor:'#12C6D7',
+bgColor:'#EAFBFC',
+screen:'EmptyCategoryCommitments'
+},
+
+{
+icon:'more-horiz',
+name:'أخرى',
+iconColor:'#8C8FA1',
+bgColor:'#F3F3F6',
+screen:'EmptyCategoryOther'
+}
+
+].map(category=>({
+
+...category,
+
+amount:
+
+receipts
+
+.filter(
+
+receipt=>
+
+receipt?.categories
+?.categorie_name===category.name
+
+)
+
+.reduce(
+
+(sum,receipt)=>
+
+sum+(receipt.total_price||0),
+
+0
+
+)
+
+}));
+
+
   return (
 
     <>
@@ -125,7 +216,7 @@ export default function HomeScreen({
               style={homeWithInvoicesStyles.helloText}
             >
 
-              👋 أهلاً أريام
+              👋 أهلاً {user?.first_name || ''}
 
             </Text>
 
@@ -449,72 +540,7 @@ export default function HomeScreen({
             style={homeWithInvoicesStyles.categoriesGrid}
           >
 
-            {[
-
-              {
-                icon: 'shopping-basket',
-                name: 'المقاضي',
-                amount: '0',
-                iconColor: '#22C55E',
-                bgColor: '#EAFBF0',
-                screen: 'EmptyCategoryGroceries'
-              },
-
-              {
-                icon: 'restaurant',
-                name: 'مطاعم',
-                amount: '0',
-                iconColor: '#2563FF',
-                bgColor: '#EEF4FF',
-                screen: 'EmptyCategoryRestaurants'
-              },
-
-              {
-                icon: 'shopping-bag',
-                name: 'التسوق',
-                amount: '0',
-                iconColor: '#A020F0',
-                bgColor: '#F6EAFF',
-                screen: 'EmptyCategoryShopping'
-              },
-
-              {
-                icon: 'directions-bus',
-                name: 'النقل',
-                amount: '0',
-                iconColor: '#FFB000',
-                bgColor: '#FFF6E7',
-                screen: 'EmptyCategoryTransport'
-              },
-
-              {
-                icon: 'favorite',
-                name: 'الصحة',
-                amount: '0',
-                iconColor: '#FF4B5C',
-                bgColor: '#FFECEF',
-                screen: 'EmptyCategoryHealth'
-              },
-
-              {
-                icon: 'event',
-                name: 'الالتزامات',
-                amount: '0',
-                iconColor: '#12C6D7',
-                bgColor: '#EAFBFC',
-                screen: 'EmptyCategoryCommitments'
-              },
-
-              {
-                icon: 'more-horiz',
-                name: 'أخرى',
-                amount: '0',
-                iconColor: '#8C8FA1',
-                bgColor: '#F3F3F6',
-                screen: 'EmptyCategoryOther'
-              }
-
-            ].map((item, index) => (
+            {categories.map((item, index) => (
 
               <TouchableOpacity
                 key={index}
@@ -570,44 +596,141 @@ export default function HomeScreen({
 
         </View>
         {/* Empty invoices */}
-
         <View
           style={homeWithInvoicesStyles.invoiceCard}
         >
-
           <View
-            style={homeWithInvoicesStyles.emptyCard}
+            style={homeWithInvoicesStyles.invoiceHeader}
           >
 
-            <View
-              style={homeWithInvoicesStyles.emptyIcon}
-            >
-
-              <MaterialIcons
-                name="receipt-long"
-                size={40}
-                color="#C9CED8"
-              />
-
-            </View>
-
             <Text
-              style={homeWithInvoicesStyles.emptyTitle}
+              style={homeWithInvoicesStyles.sectionTitle}
             >
 
-              لا توجد فواتير
+              آخر الفواتير
 
             </Text>
 
-            <Text
-              style={homeWithInvoicesStyles.emptySub}
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate(
+                  'BillsScreen'
+                )
+              }
             >
 
-              ابدأ بإضافة أول فاتورة لرؤية بياناتك وتحليلاتك
+              <Text
+                style={homeWithInvoicesStyles.showAll}
+              >
 
-            </Text>
+                عرض الكل
+
+              </Text>
+
+            </TouchableOpacity>
 
           </View>
+          {
+            receipts.length === 0 ?
+
+              (
+
+                <View
+                  style={homeWithInvoicesStyles.emptyCard}
+                >
+
+                  <View
+                    style={homeWithInvoicesStyles.emptyIcon}
+                  >
+
+                    <MaterialIcons
+                      name="receipt-long"
+                      size={40}
+                      color="#C9CED8"
+                    />
+
+                  </View>
+
+                  <Text
+                    style={homeWithInvoicesStyles.emptyTitle}
+                  >
+
+                    لا توجد فواتير
+
+                  </Text>
+
+                  <Text
+                    style={homeWithInvoicesStyles.emptySub}
+                  >
+
+                    ابدأ بإضافة أول فاتورة لرؤية بياناتك وتحليلاتك
+
+                  </Text>
+
+                </View>
+
+              )
+
+              :
+
+              receipts.slice(0, 3).map((item, index) => (
+
+                <TouchableOpacity
+                  key={index}
+                  style={homeWithInvoicesStyles.invoiceRow}
+                >
+
+                  <View>
+
+                    <Text
+                      style={homeWithInvoicesStyles.invoiceStore}
+                    >
+
+                      {item.merchant_name}
+
+                    </Text>
+
+                    <Text
+                      style={homeWithInvoicesStyles.invoiceDate}
+                    >
+
+                      {
+                        item.issued_at
+                          ?.split('T')[0]
+                      }
+
+                    </Text>
+
+                  </View>
+
+
+                  <View
+                    style={homeWithInvoicesStyles.invoiceAmountBox}
+                  >
+
+                    <Text
+                      style={homeWithInvoicesStyles.invoiceAmount}
+                    >
+
+                      {item.total_price}
+
+                    </Text>
+
+                    <Text
+                      style={homeWithInvoicesStyles.invoiceCurrency}
+                    >
+
+                      ريال
+
+                    </Text>
+
+                  </View>
+
+                </TouchableOpacity>
+
+              ))
+
+          }
 
         </View>
 

@@ -1,5 +1,13 @@
-import React from 'react';
+import React, {
+    useEffect,
+    useState
+} from 'react';
+
 import EmptyBottomNavigation from './EmptyBottomNavigation';
+import {
+    getReceipts
+}
+    from './services/homeService';
 
 import {
     View,
@@ -49,6 +57,67 @@ const BottomTab = ({ icon, label, active }) => (
 export default function EmptyCategoryRestaurantsScreen({
     navigation,
 }) {
+    const [
+        receipts,
+        setReceipts
+    ] = useState([]);
+
+    useEffect(() => {
+
+        loadData();
+
+    }, []);
+
+
+    const loadData =
+        async () => {
+
+            try {
+
+                const data =
+                    await getReceipts();
+
+                const restaurantReceipts =
+
+                    data.filter(
+
+                        item =>
+
+                            item?.categories
+                                ?.categorie_name ===
+                            'المطاعم'
+
+                    );
+
+                setReceipts(
+                    restaurantReceipts
+                );
+
+            }
+
+            catch (error) {
+
+                console.log(
+                    error
+                );
+
+            }
+
+        };
+
+
+    const totalAmount =
+
+        receipts.reduce(
+
+            (sum, item) =>
+
+                sum +
+                (item.total_price || 0),
+
+            0
+
+        );
 
     return (
 
@@ -154,7 +223,7 @@ export default function EmptyCategoryRestaurantsScreen({
                             categoryFoodStyles.summaryTitle
                         }
                     >
-                        مطاعم
+                        المطاعم
                     </Text>
 
                     <Text
@@ -162,7 +231,7 @@ export default function EmptyCategoryRestaurantsScreen({
                             categoryFoodStyles.summaryCount
                         }
                     >
-                        0 فواتير
+                        {receipts.length} فواتير
                     </Text>
 
                     <Text
@@ -173,7 +242,7 @@ export default function EmptyCategoryRestaurantsScreen({
                             },
                         ]}
                     >
-                        0 ريال
+                        {totalAmount} ريال
                     </Text>
 
                     <Text
@@ -207,39 +276,67 @@ export default function EmptyCategoryRestaurantsScreen({
 
             </View>
 
+            {
 
-            <View
-                style={
-                    categoryFoodStyles.emptyCategoryContent
-                }
-            >
+                receipts.length === 0
 
-                <MaterialIcons
-                    name="restaurant"
-                    size={82}
-                    color={colors.border}
-                    style={
-                        categoryFoodStyles.emptyCategoryIcon
-                    }
-                />
+                    ?
 
-                <Text
-                    style={
-                        categoryFoodStyles.emptyCategoryTitle
-                    }
-                >
-                    ما عندك فواتير مطاعم
-                </Text>
+                    <View
+                        style={
+                            categoryFoodStyles.emptyCategoryContent
+                        }
+                    >
 
-                <Text
-                    style={
-                        categoryFoodStyles.emptyCategoryText
-                    }
-                >
-                    أول فاتورة مطعم تضيفها بتظهر هنا ✨
-                </Text>
+                        <MaterialIcons
+                            name="restaurant"
+                            size={82}
+                            color={colors.border}
+                        />
 
-            </View>
+                        <Text
+                            style={
+                                categoryFoodStyles.emptyCategoryTitle
+                            }
+                        >
+
+                            ما عندك فواتير مطاعم
+
+                        </Text>
+
+                    </View>
+
+                    :
+
+                    receipts.map(item => (
+
+                        <View
+                            key={item.invoice_id}
+                            style={{
+                                padding: 15,
+                                borderBottomWidth: 1,
+                                borderBottomColor: '#EEE'
+                            }}
+                        >
+
+                            <Text>
+
+                                {item.merchant_name}
+
+                            </Text>
+
+                            <Text>
+
+                                {item.total_price}
+                                ريال
+
+                            </Text>
+
+                        </View>
+
+                    ))
+
+            }
 
             <EmptyBottomNavigation
                 navigation={navigation}

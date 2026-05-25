@@ -211,7 +211,7 @@ export default function CategoryRestaurantsScreen({
                 }
               >
 
-                مطاعم
+                المطاعم
 
               </Text>
 

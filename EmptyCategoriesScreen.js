@@ -1,4 +1,8 @@
-import React, { useState } from 'react';
+import React, {
+  useState,
+  useEffect
+} from 'react';
+
 import EmptyBottomNavigation from './EmptyBottomNavigation';
 
 import {
@@ -19,6 +23,11 @@ import {
   notFoundStyles,
 } from './styles';
 
+import {
+  getReceipts
+}
+  from './services/homeService';
+
 const categories = [
   {
     id: 1,
@@ -31,7 +40,7 @@ const categories = [
 
   {
     id: 2,
-    name: 'مطاعم',
+    name: 'المطاعم',
     count: '0 فواتير ',
     icon: 'restaurant',
     color: colors.blue,
@@ -128,15 +137,140 @@ export default function EmptyCategoriesScreen({
   const [searchText, setSearchText] =
     useState('');
 
+  const [receipts, setReceipts] =
+    useState([]);
+
+  useEffect(() => {
+
+    loadData();
+
+  }, []);
+
+  const loadData = async () => {
+
+    try {
+
+      const data =
+        await getReceipts();
+
+      setReceipts(
+        data || []
+      );
+
+    }
+
+    catch (error) {
+
+      console.log(
+        'categories error:',
+        error
+      );
+
+    }
+
+  };
+
+  const categories = [
+
+    {
+      id: 1,
+      name: 'المقاضي',
+      icon: 'shopping-basket',
+      color: colors.green,
+      bg: '#EAFBF0',
+    },
+
+    {
+      id: 2,
+      name: 'المطاعم',
+      icon: 'restaurant',
+      color: colors.blue,
+      bg: '#EEF4FF',
+    },
+
+    {
+      id: 3,
+      name: 'التسوق',
+      icon: 'shopping-bag',
+      color: colors.purple,
+      bg: '#F5EEFF',
+    },
+
+    {
+      id: 4,
+      name: 'النقل',
+      icon: 'directions-bus',
+      color: colors.yellow,
+      bg: '#FFF7E8',
+    },
+
+    {
+      id: 5,
+      name: 'الصحة',
+      icon: 'favorite-border',
+      color: colors.red,
+      bg: '#FFF1F2',
+    },
+
+    {
+      id: 6,
+      name: 'الالتزامات',
+      icon: 'event',
+      color: colors.cyan,
+      bg: '#ECFEFF',
+    },
+
+    {
+      id: 7,
+      name: 'أخرى',
+      icon: 'more-horiz',
+      color: colors.gray,
+      bg: colors.lightGray,
+    },
+
+  ];
+
+  const categoriesWithCount =
+
+    categories.map(item => ({
+
+      ...item,
+
+      count:
+
+        receipts.filter(
+
+          receipt =>
+
+            receipt?.categories
+               ?.categorie_name === item.name
+
+        )
+
+          .length +
+
+        ' فواتير'
+
+    }));
+
   const filteredCategories =
-    categories.filter(item =>
-      item.name.includes(
-        searchText.trim()
-      )
+
+    categoriesWithCount.filter(
+
+      item =>
+
+        item.name.includes(
+          searchText.trim()
+        )
+
     );
 
   const showNotFound =
-    searchText.trim().length > 0 &&
+
+    searchText.trim().length > 0
+
+    &&
+
     filteredCategories.length === 0;
 
   const handleCategoryPress = item => {
@@ -414,10 +548,10 @@ export default function EmptyCategoriesScreen({
 
       )}
 
-     <EmptyBottomNavigation
-                     navigation={navigation}
-                     activeScreen="EmptyBills"
-                 />
+      <EmptyBottomNavigation
+        navigation={navigation}
+        activeScreen="EmptyBills"
+      />
     </View>
 
   );
