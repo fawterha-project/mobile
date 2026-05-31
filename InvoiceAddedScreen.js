@@ -19,8 +19,11 @@ const InvoiceAddedScreen = ({
   route
 }) => {
 
-  const { invoiceData } =
-    route.params || {};
+  const {
+    invoiceData,
+    extractedData,
+    attachmentId,
+  } = route.params || {};
 
   return (
 
@@ -90,8 +93,8 @@ const InvoiceAddedScreen = ({
           navigation.navigate(
             'InvoiceDetails',
             {
-              receipt: invoiceData?.receipt
-                || invoiceData
+              extractedData,
+              attachmentId,
             }
           )
         }

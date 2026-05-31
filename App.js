@@ -59,6 +59,10 @@ import FailedScanScreen from './FailedScanScreen';
 import InvoiceAddedScreen from './InvoiceAddedScreen';
 import InvoiceScreen from './InvoiceScreen';
 import UploadInvoiceScreen from './UploadInvoiceScreen';
+import InvoicePreviewScreen from './InvoicePreviewScreen';
+import UploadingInvoiceScreen from './UploadingInvoiceScreen';
+import ProcessingInvoiceScreen from './ProcessingInvoiceScreen';
+import InvoiceSuccessScreen from './InvoiceSuccessScreen';
 
 const Stack=createNativeStackNavigator();
 
@@ -74,7 +78,7 @@ style={{flex:1}}
 
 <Stack.Navigator
 
-initialRouteName="SignUpScreen"
+initialRouteName="LoginScreen"
 
 screenOptions={{
 headerShown:false
@@ -135,6 +139,10 @@ headerShown:false
 <Stack.Screen name="InvoiceAddedScreen" component={InvoiceAddedScreen}/>
 <Stack.Screen name="InvoiceScreen" component={InvoiceScreen}/>
 <Stack.Screen name="UploadInvoice" component={UploadInvoiceScreen}/>
+<Stack.Screen name="InvoicePreview" component={InvoicePreviewScreen}/>
+<Stack.Screen name="UploadingInvoice"component={UploadingInvoiceScreen}/>
+<Stack.Screen name="ProcessingInvoice"component={ProcessingInvoiceScreen}/>
+<Stack.Screen name="InvoiceSuccess" component={InvoiceSuccessScreen}/>
 </Stack.Navigator>
 
 </NavigationContainer>

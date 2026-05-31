@@ -17,7 +17,8 @@ const InvoiceScreen = ({
 
     const {
         extractedData,
-        attachmentId
+        attachmentId,
+        fileData,
     } = route.params || {};
 
     const [
@@ -37,6 +38,14 @@ const InvoiceScreen = ({
                 await createInvoice(
                     attachmentId
                 );
+            console.log(
+                'CREATE INVOICE RESULT:',
+                JSON.stringify(
+                    result,
+                    null,
+                    2
+                )
+            );
 
             console.log(
                 'تم إنشاء الفاتورة:',
@@ -46,10 +55,11 @@ const InvoiceScreen = ({
             navigation.navigate(
                 'InvoiceAddedScreen',
                 {
-                    invoiceData: result
+                    invoiceData: result,
+                    extractedData,
+                    attachmentId,
                 }
             );
-
         }
 
         catch (error) {
@@ -106,7 +116,7 @@ const InvoiceScreen = ({
             <View style={invoiceStyles.card}>
                 <Image
                     source={{
-                        uri: 'asset:/image/receipt.png'
+                        uri: fileData?.uri,
                     }}
                     style={invoiceStyles.receiptImage}
                     resizeMode="stretch"

@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect} from 'react';
 
 import EmptyBottomNavigation from './EmptyBottomNavigation';
 import { getReceipts } from './services/homeService';
 import InvoiceSwipeActions from './InvoiceSwipeActions';
 import { deleteReceipt } from './services/receiptService';
+
 import {
   View,
   Text,

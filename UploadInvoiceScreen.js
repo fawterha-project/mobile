@@ -5,11 +5,68 @@ import {
     Text,
     TouchableOpacity,
 } from 'react-native';
+import { launchImageLibrary } from 'react-native-image-picker';
+import { pick } from '@react-native-documents/picker';
 
 import MaterialIcons from '@react-native-vector-icons/material-icons';
 import { uploadInvoiceStyles as styles } from './styles';
 
 const UploadInvoiceScreen = ({ navigation }) => {
+    const pickImage = async () => {
+
+        const result =
+            await launchImageLibrary({
+
+                mediaType: 'photo',
+
+                quality: 1,
+
+            });
+
+        if (
+            result.didCancel ||
+            !result.assets?.length
+        ) {
+            return;
+        }
+
+        navigation.navigate(
+            'InvoicePreview',
+            {
+                fileData:
+                    result.assets[0],
+            }
+        );
+
+    };
+    const pickPdf = async () => {
+
+        try {
+
+            const [file] = await pick({
+
+                type: ['application/pdf'],
+
+            });
+
+            navigation.navigate(
+                'InvoicePreview',
+                {
+                    fileData: {
+                        uri: file.uri,
+                        type: file.type,
+                        fileName: file.name,
+                    },
+                }
+            );
+
+        } catch (error) {
+
+            console.log(error);
+
+        }
+
+    };
     return (
         <View style={styles.container}>
 
@@ -52,7 +109,10 @@ const UploadInvoiceScreen = ({ navigation }) => {
                     PNG, JPG
                 </Text>
 
-                <TouchableOpacity style={styles.uploadButton}>
+                <TouchableOpacity
+                    style={styles.uploadButton}
+                    onPress={pickImage}
+                >
 
                     <MaterialIcons
                         name="image"
@@ -93,7 +153,10 @@ const UploadInvoiceScreen = ({ navigation }) => {
                     PDF
                 </Text>
 
-                <TouchableOpacity style={styles.uploadButton}>
+                <TouchableOpacity
+                    style={styles.uploadButton}
+                    onPress={pickPdf}
+                >
 
                     <MaterialIcons
                         name="picture-as-pdf"

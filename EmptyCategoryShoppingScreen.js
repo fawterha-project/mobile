@@ -406,8 +406,9 @@ export default function EmptyCategoryShoppingScreen({
                     :
 
                     filteredReceipts.map(item => (
-
                         <InvoiceSwipeActions
+
+                            key={item.invoice_id}
 
                             item={item}
 

@@ -5328,3 +5328,440 @@ export const uploadInvoiceStyles = StyleSheet.create({
     textAlign: 'right',
   },
 });
+export const invoicePreviewStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.white,
+  },
+
+  backIcon: {
+    position: 'absolute',
+    left: 20,
+    top: 55,
+    zIndex: 1,
+  },
+
+  title: {
+    position: 'absolute',
+    top: 80,
+    alignSelf: 'center',
+    fontSize: 20,
+    fontFamily: 'Tajawal-Bold',
+    color: colors.black,
+  },
+
+  invoiceImage: {
+    position: 'absolute',
+    top: 130,
+    left: 35,
+    width: 300,
+    height: 300,
+    borderRadius: 16,
+  },
+
+  changeButton: {
+    position: 'absolute',
+    top: 450,
+    alignSelf: 'center',
+
+    width: 170,
+    height: 42,
+
+    backgroundColor: colors.lightBlue,
+    borderRadius: 12,
+
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    flexDirection: 'row-reverse',
+  },
+
+  changeButtonText: {
+    color: colors.blue,
+    fontSize: 16,
+    fontFamily: 'Tajawal-Regular',
+  },
+
+  checkTitle: {
+    position: 'absolute',
+    top: 510,
+    alignSelf: 'center',
+
+    fontSize: 20,
+    fontFamily: 'Tajawal-Bold',
+    color: colors.black,
+  },
+
+  checkRow1: {
+    position: 'absolute',
+    top: 550,
+    right: 100,
+    flexDirection: 'row-reverse',
+    alignItems: 'center',
+  },
+
+  checkRow2: {
+    position: 'absolute',
+    top: 580,
+    right: 100,
+    flexDirection: 'row-reverse',
+    alignItems: 'center',
+  },
+
+  checkRow3: {
+    position: 'absolute',
+    top: 610,
+    right: 100,
+    flexDirection: 'row-reverse',
+    alignItems: 'center',
+  },
+
+  checkText: {
+    marginRight: 8,
+    fontSize: 16,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+  },
+
+  uploadButton: {
+    position: 'absolute',
+    bottom: 75,
+    alignSelf: 'center',
+
+    width: 310,
+    height: 50,
+
+    backgroundColor: colors.blue,
+    borderRadius: 12,
+
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  uploadButtonText: {
+    color: colors.white,
+    fontSize: 16,
+    fontFamily: 'Tajawal-Bold',
+  },
+});
+export const uploadingInvoiceStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.white,
+  },
+
+  backIcon: {
+    position: 'absolute',
+    left: 20,
+    top: 55,
+    zIndex: 1,
+  },
+
+  title: {
+    position: 'absolute',
+    top: 110,
+    alignSelf: 'center',
+    fontSize: 20,
+    fontFamily: 'Tajawal-Bold',
+    color: colors.black,
+  },
+
+  circleContainer: {
+    position: 'absolute',
+    top: 190,
+    alignSelf: 'center',
+    width: 220,
+    height: 220,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  iconContainer: {
+    position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  percentText: {
+    position: 'absolute',
+    top: 400,
+    alignSelf: 'center',
+    fontSize: 34,
+    fontFamily: 'Tajawal-Bold',
+    color: colors.blue,
+  },
+
+  uploadingTitle: {
+    position: 'absolute',
+    top: 480,
+    alignSelf: 'center',
+    fontSize: 24,
+    fontFamily: 'Tajawal-Bold',
+    color: colors.black,
+  },
+
+  uploadingSubtitle: {
+    position: 'absolute',
+    top: 520,
+    alignSelf: 'center',
+    fontSize: 16,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+  },
+
+  securityCard: {
+    position: 'absolute',
+    bottom: 40,
+    left: 25,
+    width: 340,
+    height: 90,
+    backgroundColor: colors.lightBlue,
+    borderRadius: 16,
+    flexDirection: 'row-reverse',
+    alignItems: 'center',
+    paddingHorizontal: 15,
+  },
+
+  securityTextContainer: {
+    flex: 1,
+    marginRight: 10,
+  },
+
+  securityTitle: {
+    fontSize: 16,
+    fontFamily: 'Tajawal-Bold',
+    color: colors.black,
+    textAlign: 'right',
+  },
+
+  securityDescription: {
+    fontSize: 12,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+    marginTop: 4,
+    textAlign: 'right',
+  },
+});
+
+export const processingInvoiceStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.white,
+  },
+
+  backIcon: {
+    position: 'absolute',
+    left: 20,
+    top: 55,
+    zIndex: 1,
+  },
+
+  title: {
+    position: 'absolute',
+    top: 110,
+    alignSelf: 'center',
+    fontSize: 20,
+    fontFamily: 'Tajawal-Bold',
+    color: colors.black,
+  },
+
+  iconContainer: {
+    position: 'absolute',
+    top: 100,
+    alignSelf: 'center',
+    width: 340,
+    height: 340,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  searchIcon: {
+    position: 'absolute',
+    bottom: 100,
+    right: 110,
+  },
+
+  processingSubtitle: {
+    position: 'absolute',
+    top: 380,
+    alignSelf: 'center',
+    fontSize: 16,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+  },
+
+  processingSubtitle2: {
+    position: 'absolute',
+    top: 410,
+    alignSelf: 'center',
+    fontSize: 16,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+  },
+
+  progressBarBackground: {
+    position: 'absolute',
+    top: 480,
+    alignSelf: 'center',
+    width: 280,
+    height: 10,
+    backgroundColor: '#EEF2FF',
+    borderRadius: 10,
+  },
+
+  progressBarFill: {
+    width: '65%',
+    height: 10,
+    backgroundColor: colors.blue,
+    borderRadius: 10,
+  },
+
+  percentText: {
+    position: 'absolute',
+    top: 500,
+    right: 50,
+    fontSize: 20,
+    fontFamily: 'Tajawal-Bold',
+    color: colors.black,
+  },
+
+  noteCard: {
+    position: 'absolute',
+    bottom: 55,
+    left: 25,
+    width: 340,
+    height: 95,
+    backgroundColor: colors.lightBlue,
+    borderRadius: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  noteText: {
+    fontSize: 15,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.black,
+    marginTop: 3,
+    textAlign: 'center',
+  },
+});
+
+export const invoiceSuccessStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.white,
+  },
+
+  backIcon: {
+    position: 'absolute',
+    left: 20,
+    top: 55,
+    zIndex: 1,
+  },
+
+  title: {
+    position: 'absolute',
+    top: 110,
+    alignSelf: 'center',
+    fontSize: 20,
+    fontFamily: 'Tajawal-Bold',
+    color: colors.black,
+  },
+
+  successContainer: {
+    position: 'absolute',
+    top: 220,
+    alignSelf: 'center',
+  },
+
+  outerCircle: {
+    width: 180,
+    height: 180,
+    borderRadius: 90,
+    backgroundColor: '#EAF8EE',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  innerCircle: {
+    width: 95,
+    height: 95,
+    borderRadius: 47.5,
+    backgroundColor: colors.green,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  successTitle: {
+    position: 'absolute',
+    top: 450,
+    alignSelf: 'center',
+    fontSize: 28,
+    fontFamily: 'Tajawal-Bold',
+    color: colors.black,
+  },
+
+  successSubtitle: {
+    position: 'absolute',
+    top: 510,
+    alignSelf: 'center',
+    fontSize: 18,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+  },
+
+  successSubtitle2: {
+    position: 'absolute',
+    top: 545,
+    alignSelf: 'center',
+    fontSize: 18,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+  },
+
+  viewButton: {
+    position: 'absolute',
+    bottom: 140,
+    alignSelf: 'center',
+
+    width: 320,
+    height: 55,
+
+    backgroundColor: colors.blue,
+    borderRadius: 14,
+
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  viewButtonText: {
+    color: colors.white,
+    fontSize: 18,
+    fontFamily: 'Tajawal-Bold',
+  },
+
+  uploadAnotherButton: {
+    position: 'absolute',
+    bottom: 65,
+    alignSelf: 'center',
+
+    width: 320,
+    height: 55,
+
+    backgroundColor: colors.white,
+
+    borderWidth: 1,
+    borderColor: colors.border,
+
+    borderRadius: 14,
+
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  uploadAnotherButtonText: {
+    color: colors.black,
+    fontSize: 18,
+    fontFamily: 'Tajawal-Regular',
+  },
+});

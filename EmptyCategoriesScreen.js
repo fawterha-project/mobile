@@ -379,27 +379,6 @@ export default function EmptyCategoriesScreen({
       </View>
 
 
-      <View style={categoriesStyles.searchBox}>
-
-        <MaterialIcons
-          name="search"
-          size={22}
-          color={colors.gray}
-        />
-
-        <TextInput
-          placeholder="ابحث عن فاتورة..."
-          placeholderTextColor={
-            colors.gray
-          }
-          style={categoriesStyles.searchInput}
-          value={searchText}
-          onChangeText={setSearchText}
-        />
-
-      </View>
-
-
       <View style={categoriesStyles.filterRow}>
 
         <TouchableOpacity
