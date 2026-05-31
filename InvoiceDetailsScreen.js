@@ -18,62 +18,6 @@ import {
     colors
 } from './styles';
 
-const invoiceData = {
-
-    invoiceNumber: 'INV10111',
-    date: '2024/12/12',
-
-    store: {
-        name: 'نون',
-        address: 'الرياض - حي النرجس',
-        tax: '12345678900003'
-    },
-
-    products: [
-
-        {
-            name: 'لابتوب',
-            qty: 1,
-            price: '50',
-            tax: '7.5',
-            total: '57.5'
-        },
-
-        {
-            name: 'كاشينو',
-            qty: 1,
-            price: '70',
-            tax: '10.5',
-            total: '80.5'
-        },
-
-        {
-            name: 'موبينو',
-            qty: 1,
-            price: '100',
-            tax: '15',
-            total: '115'
-        }
-
-    ],
-
-    summary: {
-        subtotal: '220',
-        vat: '33',
-        total: '253'
-    },
-
-    additionalInfo: {
-        branch: 'فرع النرجس',
-        cashier: 'أحمد محمد',
-        payment: 'بطاقة مدى',
-        order: 'طلب داخلي'
-    },
-
-    qr: 'invoice123'
-
-};
-
 const SectionHeader = ({
     title,
     icon
@@ -107,17 +51,53 @@ const SectionHeader = ({
 );
 
 export default function InvoiceDetailsScreen({
-    navigation
+    navigation,
+    route
 }) {
+    const receipt =
+        route?.params?.receipt;
+
+    console.log(
+        'Receipt Details:',
+        JSON.stringify(receipt, null, 2)
+    );
+
+    const invoiceData = {
+
+        invoiceNumber:
+            receipt?.invoice_number ||
+            'غير متوفر',
+
+        date:
+            receipt?.issued_at
+                ?.split('T')[0] ||
+            '-',
+
+        merchantName:
+            receipt?.merchant_name ||
+            '-',
+
+        paymentMethod:
+            receipt?.payment_method ||
+            '-',
+
+        total:
+            receipt?.total_price ||
+            0,
+
+    };
 
     return (
 
         <View style={invoiceDetailsStyles.container}>
 
             <ScrollView
-                showsVerticalScrollIndicator={false}
-                style={invoiceDetailsStyles.scroll}
-            >
+    showsVerticalScrollIndicator={false}
+    style={invoiceDetailsStyles.scroll}
+    contentContainerStyle={{
+        paddingBottom: 80,
+    }}
+>
 
                 <View
                     style={invoiceDetailsStyles.headerRow}>
@@ -208,34 +188,45 @@ export default function InvoiceDetailsScreen({
                         </Text>
 
                         <Text style={invoiceDetailsStyles.value}>
-                            {invoiceData.store.name}
+                            {invoiceData.merchantName}
                         </Text>
-
                     </View>
 
-                    <View style={invoiceDetailsStyles.row}>
+                    {
+    receipt?.merchant?.address && (
 
-                        <Text style={invoiceDetailsStyles.label}>
-                            عنوان المتجر
-                        </Text>
+        <View style={invoiceDetailsStyles.row}>
 
-                        <Text style={invoiceDetailsStyles.value}>
-                            {invoiceData.store.address}
-                        </Text>
+            <Text style={invoiceDetailsStyles.label}>
+                عنوان المتجر
+            </Text>
 
-                    </View>
+            <Text style={invoiceDetailsStyles.value}>
+                {receipt.merchant.address}
+            </Text>
 
-                    <View style={invoiceDetailsStyles.row}>
+        </View>
 
-                        <Text style={invoiceDetailsStyles.label}>
-                            الرقم الضريبي
-                        </Text>
+    )
+}
 
-                        <Text style={invoiceDetailsStyles.value}>
-                            {invoiceData.store.tax}
-                        </Text>
+                   {
+    receipt?.merchant?.vat_number && (
 
-                    </View>
+        <View style={invoiceDetailsStyles.row}>
+
+            <Text style={invoiceDetailsStyles.label}>
+                الرقم الضريبي
+            </Text>
+
+            <Text style={invoiceDetailsStyles.value}>
+                {receipt.merchant.vat_number}
+            </Text>
+
+        </View>
+
+    )
+}
 
                 </View>
 
@@ -272,36 +263,164 @@ export default function InvoiceDetailsScreen({
 
                     </View>
 
-                    {invoiceData.products.map(
-                        (item, index) => (
+                    {
+    receipt?.invoice_items?.length > 0 ?
 
-                            <View
-                                key={index}
-                                style={invoiceDetailsStyles.productRow}>
+        receipt.invoice_items.map(
+            (product, index) => (
 
-                                <Text style={invoiceDetailsStyles.cell}>
-                                    {item.name}
-                                </Text>
+                <View
+                    key={index}
+                    style={invoiceDetailsStyles.productHeader}
+                >
 
-                                <Text style={invoiceDetailsStyles.cell}>
-                                    {item.qty}
-                                </Text>
+                    <Text
+                        style={invoiceDetailsStyles.cell}
+                    >
+                        {product.invoice_item_name}
+                    </Text>
 
-                                <Text style={invoiceDetailsStyles.cell}>
-                                    {item.price}
-                                </Text>
+                    <Text
+                        style={invoiceDetailsStyles.cell}
+                    >
+                        {product.quantity || '-'}
+                    </Text>
 
-                                <Text style={invoiceDetailsStyles.cell}>
-                                    {item.tax}
-                                </Text>
+                    <Text
+                        style={invoiceDetailsStyles.cell}
+                    >
+                        {product.price_before_vat || '-'}
+                    </Text>
 
-                                <Text style={invoiceDetailsStyles.cell}>
-                                    {item.total}
-                                </Text>
+                    <Text
+                        style={invoiceDetailsStyles.cell}
+                    >
+                        {product.vat_amount || '-'}
+                    </Text>
 
-                            </View>
+                    <Text
+                        style={invoiceDetailsStyles.cell}
+                    >
+                        {product.price_with_vat || '-'}
+                    </Text>
 
-                        ))}
+                </View>
+
+            )
+
+        )
+
+        :
+
+        <View
+            style={{
+                padding: 20,
+                alignItems: 'center',
+            }}
+        >
+
+            <Text>
+                لا توجد تفاصيل منتجات متاحة
+            </Text>
+
+        </View>
+}
+
+               <View style={invoiceDetailsStyles.card}>
+
+    <SectionHeader
+        title="ملخص الفاتورة"
+        icon="payments"
+    />
+
+    <View style={invoiceDetailsStyles.row}>
+
+        <Text style={invoiceDetailsStyles.label}>
+            طريقة الدفع
+        </Text>
+
+        <Text style={invoiceDetailsStyles.value}>
+            {invoiceData.paymentMethod}
+        </Text>
+
+    </View>
+
+    {
+    receipt?.subtotal != null && (
+
+        <View style={invoiceDetailsStyles.row}>
+
+            <Text style={invoiceDetailsStyles.label}>
+                المجموع قبل الضريبة
+            </Text>
+
+            <Text style={invoiceDetailsStyles.value}>
+                {receipt.subtotal} ريال
+            </Text>
+
+        </View>
+
+    )
+}
+    {
+    receipt?.vat_amount != null && (
+
+        <View style={invoiceDetailsStyles.row}>
+
+            <Text style={invoiceDetailsStyles.label}>
+                الضريبة
+            </Text>
+
+            <Text style={invoiceDetailsStyles.value}>
+                {receipt.vat_amount} ريال
+            </Text>
+
+        </View>
+
+    )
+}
+    {
+    receipt?.discount_amount != null && (
+
+        <View style={invoiceDetailsStyles.row}>
+
+            <Text style={invoiceDetailsStyles.label}>
+                الخصم
+            </Text>
+
+            <Text style={invoiceDetailsStyles.value}>
+                {receipt.discount_amount} ريال
+            </Text>
+
+        </View>
+
+    )
+}
+    <View style={invoiceDetailsStyles.row}>
+
+        <Text style={invoiceDetailsStyles.label}>
+            الإجمالي
+        </Text>
+
+        <Text style={invoiceDetailsStyles.value}>
+            {invoiceData.total} ريال
+        </Text>
+
+    </View>
+
+</View>
+
+                    <View style={invoiceDetailsStyles.row}>
+
+                        <Text style={invoiceDetailsStyles.label}>
+                            الإجمالي
+                        </Text>
+
+                        <Text style={invoiceDetailsStyles.value}>
+                            {invoiceData.total} ريال
+                        </Text>
+
+                    </View>
 
                 </View>
 

@@ -15,8 +15,12 @@ import {
 } from './styles';
 
 const InvoiceAddedScreen = ({
-  navigation
+  navigation,
+  route
 }) => {
+
+  const { invoiceData } =
+    route.params || {};
 
   return (
 
@@ -84,7 +88,11 @@ const InvoiceAddedScreen = ({
 
         onPress={() =>
           navigation.navigate(
-            'DisplayInvoiceScreen'
+            'InvoiceDetails',
+            {
+              receipt: invoiceData?.receipt
+                || invoiceData
+            }
           )
         }
 

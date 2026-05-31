@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+import {
+  changePassword
+}
+  from './services/profileService';
 
 import {
   View,
@@ -84,21 +88,62 @@ export default function ChangePasswordScreen({
     passwordsMatch;
 
 
-  const handleSave = () => {
+  const handleSave =
+    async () => {
 
-    Alert.alert(
-      'تم',
-      'تم تحديث كلمة السر بنجاح',
-      [
-        {
-          text: 'حسناً',
-          onPress: () =>
-            navigation.goBack(),
-        },
-      ]
-    );
+      try {
 
-  };
+        await changePassword(
+
+          currentPassword,
+
+          newPassword
+
+        );
+
+        Alert.alert(
+
+          'تم',
+
+          'تم تحديث كلمة السر بنجاح',
+
+          [
+
+            {
+
+              text: 'حسناً',
+
+              onPress: () => {
+
+                navigation.navigate(
+                  'LoginScreen'
+                );
+
+              }
+
+            }
+
+          ]
+
+        );
+
+      }
+
+      catch (error) {
+
+        Alert.alert(
+
+          'خطأ',
+
+          error?.message ||
+
+          'فشل تغيير كلمة السر'
+
+        );
+
+      }
+
+    };
 
 
   return (

@@ -10,6 +10,9 @@ import {
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
+import AsyncStorage
+  from '@react-native-async-storage/async-storage';
+
 import {
   moreStyles,
   colors,
@@ -23,242 +26,249 @@ const More = ({
   navigation,
 }) => {
 
-  const [showSupport,setShowSupport]=
-  useState(false);
+  const [showSupport, setShowSupport] =
+    useState(false);
 
-  return(
+  return (
 
-<>
+    <>
 
-<Modal
-transparent
-visible={visible}
-animationType="fade"
-onRequestClose={onClose}
->
+      <Modal
+        transparent
+        visible={visible}
+        animationType="fade"
+        onRequestClose={onClose}
+      >
 
-<View style={moreStyles.overlay}>
+        <View style={moreStyles.overlay}>
 
-<View style={moreStyles.card}>
+          <View style={moreStyles.card}>
 
-<TouchableOpacity
-style={moreStyles.closeButton}
-onPress={onClose}
->
+            <TouchableOpacity
+              style={moreStyles.closeButton}
+              onPress={onClose}
+            >
 
-<Text style={moreStyles.closeText}>
-×
-</Text>
+              <Text style={moreStyles.closeText}>
+                ×
+              </Text>
 
-</TouchableOpacity>
+            </TouchableOpacity>
 
 
-<Text style={moreStyles.title}>
-المزيد
-</Text>
+            <Text style={moreStyles.title}>
+              المزيد
+            </Text>
 
 
-{/* الملف الشخصي */}
+            {/* الملف الشخصي */}
 
-<TouchableOpacity
-style={moreStyles.item}
-onPress={()=>{
+            <TouchableOpacity
+              style={moreStyles.item}
+              onPress={() => {
 
-onClose();
+                onClose();
 
-navigation.navigate(
-'ProfileSettingScreen'
-);
+                navigation.navigate(
+                  'ProfileSettingScreen'
+                );
 
-}}
->
+              }}
+            >
 
-<Text
-style={[
-moreStyles.itemText,
-moreStyles.profileText,
-]}
->
+              <Text
+                style={[
+                  moreStyles.itemText,
+                  moreStyles.profileText,
+                ]}
+              >
 
-الملف الشخصي
+                الملف الشخصي
 
-</Text>
+              </Text>
 
-<MaterialIcons
-name="person"
-size={26}
-color={colors.blue}
-style={{marginRight:8}}
-/>
+              <MaterialIcons
+                name="person"
+                size={26}
+                color={colors.blue}
+                style={{ marginRight: 8 }}
+              />
 
-</TouchableOpacity>
+            </TouchableOpacity>
 
 
 
-{/* سقف الإنفاق */}
+            {/* سقف الإنفاق */}
 
-<TouchableOpacity
-style={moreStyles.item}
-onPress={()=>{
+            <TouchableOpacity
+              style={moreStyles.item}
+              onPress={() => {
 
-onClose();
+                onClose();
 
-navigation.navigate(
-'SpendingLimit'
-);
+                navigation.navigate(
+                  'SpendingLimit'
+                );
 
-}}
->
+              }}
+            >
 
-<Text
-style={[
-moreStyles.itemText,
-moreStyles.limitText,
-]}
->
+              <Text
+                style={[
+                  moreStyles.itemText,
+                  moreStyles.limitText,
+                ]}
+              >
 
-سقف الإنفاق
+                سقف الإنفاق
 
-</Text>
+              </Text>
 
-<MaterialIcons
-name="report"
-size={26}
-color={colors.blue}
-style={{marginRight:12}}
-/>
+              <MaterialIcons
+                name="report"
+                size={26}
+                color={colors.blue}
+                style={{ marginRight: 12 }}
+              />
 
-</TouchableOpacity>
+            </TouchableOpacity>
 
 
 
-{/* الدعم */}
+            {/* الدعم */}
 
-<TouchableOpacity
-style={moreStyles.item}
-onPress={()=>{
+            <TouchableOpacity
+              style={moreStyles.item}
+              onPress={() => {
 
-setShowSupport(
-true
-);
+                setShowSupport(
+                  true
+                );
 
-}}
->
+              }}
+            >
 
-<Text
-style={[
-moreStyles.itemText,
-moreStyles.supportText,
-]}
->
+              <Text
+                style={[
+                  moreStyles.itemText,
+                  moreStyles.supportText,
+                ]}
+              >
 
-الدعم
+                الدعم
 
-</Text>
+              </Text>
 
-<MaterialIcons
-name="support-agent"
-size={26}
-color={colors.blue}
-style={{marginRight:6}}
-/>
+              <MaterialIcons
+                name="support-agent"
+                size={26}
+                color={colors.blue}
+                style={{ marginRight: 6 }}
+              />
 
-</TouchableOpacity>
+            </TouchableOpacity>
 
 
 
-{/* عن التطبيق */}
+            {/* عن التطبيق */}
 
-<TouchableOpacity
-style={moreStyles.item}
-onPress={()=>{
+            <TouchableOpacity
+              style={moreStyles.item}
+              onPress={() => {
 
-onClose();
+                onClose();
 
-navigation.navigate(
-'FAQScreen'
-);
+                navigation.navigate(
+                  'FAQScreen'
+                );
 
-}}
->
+              }}
+            >
 
-<Text
-style={[
-moreStyles.itemText,
-moreStyles.aboutText,
-]}
->
+              <Text
+                style={[
+                  moreStyles.itemText,
+                  moreStyles.aboutText,
+                ]}
+              >
 
-عن التطبيق
+                عن التطبيق
 
-</Text>
+              </Text>
 
-<Image
-source={{
-              uri: 'asset:/image/fawterha.jpg'}}
-style={[
-moreStyles.smallLogo,
-moreStyles.aboutLogo,
-]}
-resizeMode="contain"
-/>
+              <Image
+                source={{
+                  uri: 'asset:/image/fawterha.jpg'
+                }}
+                style={[
+                  moreStyles.smallLogo,
+                  moreStyles.aboutLogo,
+                ]}
+                resizeMode="contain"
+              />
 
-</TouchableOpacity>
+            </TouchableOpacity>
 
+            {/* تسجيل خروج */}
 
+            <TouchableOpacity
+              style={moreStyles.logoutItem}
+              onPress={async () => {
 
-{/* تسجيل خروج */}
+                await AsyncStorage.removeItem(
+                  'userToken'
+                );
 
-<TouchableOpacity
-style={moreStyles.logoutItem}
-onPress={()=>{
+                await AsyncStorage.removeItem(
+                  'user'
+                );
 
-onClose();
+                onClose();
 
-navigation.navigate(
-'LoginScreen'
-);
+                navigation.replace(
+                  'LoginScreen'
+                );
 
-}}
->
+              }}
+            >
 
-<Text
-style={[
-moreStyles.logoutText,
-moreStyles.logoutTextCustom,
-]}
->
+              <Text
+                style={[
+                  moreStyles.logoutText,
+                  moreStyles.logoutTextCustom,
+                ]}
+              >
 
-تسجيل خروج
+                تسجيل خروج
 
-</Text>
+              </Text>
 
-<MaterialIcons
-name="logout"
-size={26}
-color={colors.blue}
-style={{marginRight:4}}
-/>
+              <MaterialIcons
+                name="logout"
+                size={26}
+                color={colors.blue}
+                style={{ marginRight: 4 }}
+              />
 
-</TouchableOpacity>
+            </TouchableOpacity>
 
-</View>
+          </View>
 
-</View>
+        </View>
 
-</Modal>
+      </Modal>
 
 
-<Support
-visible={showSupport}
-onClose={()=>
-setShowSupport(false)
-}
-/>
+      <Support
+        visible={showSupport}
+        onClose={() =>
+          setShowSupport(false)
+        }
+      />
 
-</>
+    </>
 
-);
+  );
 
 };
 

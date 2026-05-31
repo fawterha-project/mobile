@@ -165,14 +165,14 @@ export default function EmptyBottomNavigation({
                     label="الرئيسية"
 
                     active={
-                        activeScreen === 'Home'
+                        activeScreen === 'HomeScreen'
                     }
 
                     onPress={() => {
 
                         setShowMore(false);
 
-                        navigation.replace(
+                        navigation.navigate(
                             'HomeScreen'
                         );
 

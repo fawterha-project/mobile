@@ -1,4 +1,10 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
+
+import AsyncStorage from
+  '@react-native-async-storage/async-storage';
+
+import api
+  from './services/api';
 
 import {
   View,
@@ -52,7 +58,56 @@ const BottomTab = ({ icon, label, active, onPress }) => (
 export default function EmptyYearlyReportsScreen({
   navigation
 }) {
+  const [yearlyData, setYearlyData] =
+    useState(null);
 
+  const circumference =
+    2 * Math.PI * 50;
+
+  useEffect(() => {
+
+    loadYearlyReport();
+
+  }, []);
+
+  const loadYearlyReport =
+    async () => {
+
+      try {
+
+        const user =
+          JSON.parse(
+            await AsyncStorage.getItem(
+              'user'
+            )
+          );
+
+        const response =
+          await api.get(
+            `/reports/yearly?users_id=${user.users_id}`
+          );
+
+        setYearlyData(
+          response.data.yearly
+        );
+
+        console.log(
+          'السنوي:',
+          response.data.yearly
+        );
+
+      }
+
+      catch (error) {
+
+        console.log(
+          error.response?.data ||
+          error.message
+        );
+
+      }
+
+    };
   return (
 
     <View style={yearlyReportsStyles.container}>
@@ -173,7 +228,7 @@ export default function EmptyYearlyReportsScreen({
         <MaterialIcons
           name="bar-chart"
           size={70}
-          color={colors.gray}
+          color={colors.blue}
         />
 
         <View style={yearlyReportsStyles.summaryInfo}>
@@ -183,13 +238,20 @@ export default function EmptyYearlyReportsScreen({
           </Text>
 
           <Text style={yearlyReportsStyles.summaryAmount}>
-            0 ريال
+            {
+              yearlyData?.total || 0
+            }
+            {' '}ريال
           </Text>
 
           <View style={yearlyReportsStyles.percentRow}>
 
             <Text style={yearlyReportsStyles.summarySubText}>
-              لا توجد بيانات حتى الآن
+              {
+                yearlyData?.invoice_count > 0
+                  ? `${yearlyData.invoice_count} فاتورة`
+                  : 'لا توجد بيانات حتى الآن'
+              }
             </Text>
 
           </View>
@@ -222,12 +284,26 @@ export default function EmptyYearlyReportsScreen({
 
         <LineChart
           data={{
-            labels: ['2021', '2022', '2023', '2024', '2025'],
+
+            labels:
+              yearlyData?.trend?.map(
+                (_, index) =>
+                  `${index + 1}`
+              ) || [],
+
             datasets: [
+
               {
-                data: [0, 0, 0, 0, 0]
+
+                data:
+                  yearlyData?.trend?.map(
+                    item => item.total
+                  ) || [0]
+
               }
+
             ]
+
           }}
 
           width={
@@ -252,9 +328,9 @@ export default function EmptyYearlyReportsScreen({
             backgroundGradientTo: colors.white,
             decimalPlaces: 0,
 
-            color: () => colors.border,
+            color: () => colors.blue,
 
-            labelColor: () => colors.gray,
+            labelColor: () => colors.black,
 
             propsForDots: {
               r: '0'
@@ -299,14 +375,61 @@ export default function EmptyYearlyReportsScreen({
                 fill="none"
               />
 
+              {
+
+                yearlyData?.categories?.map(
+                  (item, index) => {
+
+                    const offset =
+                      yearlyData.categories
+                        .slice(0, index)
+                        .reduce(
+                          (
+                            sum,
+                            cat
+                          ) =>
+                            sum +
+                            (
+                              circumference *
+                              cat.percent
+                            ) /
+                            100,
+                          0
+                        );
+
+                    return (
+
+                      <Circle
+                        key={index}
+                        cx="75"
+                        cy="75"
+                        r="50"
+                        stroke={item.color}
+                        strokeWidth="28"
+                        fill="none"
+                        strokeDasharray={`${(circumference * item.percent) / 100} ${circumference}`}
+                        strokeDashoffset={-offset}
+                        rotation="-90"
+                        origin="75,75"
+                      />
+
+                    );
+
+                  }
+
+                )
+
+              }
+
             </Svg>
 
             <View style={yearlyReportsStyles.donutInner}>
 
               <Text style={yearlyReportsStyles.donutAmount}>
-                0
+                {
+                  yearlyData?.total || 0
+                }
               </Text>
-
               <Text style={yearlyReportsStyles.donutCurrency}>
                 ريال
               </Text>
@@ -318,122 +441,59 @@ export default function EmptyYearlyReportsScreen({
 
           <View style={yearlyReportsStyles.categoriesGrid}>
 
-            {[
-              {
-                icon: 'shopping-basket',
-                name: 'مواد غذائية',
-                amount: '0',
-                iconColor: colors.green,
-                bgColor: '#EAFBF0',
-                dotColor: colors.green
-              },
-
-              {
-                icon: 'restaurant',
-                name: 'مطاعم',
-                amount: '0',
-                iconColor: colors.blue,
-                bgColor: '#EEF4FF',
-                dotColor: colors.blue
-              },
-
-              {
-                icon: 'shopping-bag',
-                name: 'التسوق',
-                amount: '0',
-                iconColor: colors.purple,
-                bgColor: '#F5EEFF',
-                dotColor: colors.purple
-              },
-
-              {
-                icon: 'directions-bus',
-                name: 'النقل',
-                amount: '0',
-                iconColor: colors.yellow,
-                bgColor: '#FFF7E8',
-                dotColor: colors.yellow
-              },
-
-              {
-                icon: 'favorite-border',
-                name: 'الصحة',
-                amount: '0',
-                iconColor: colors.red,
-                bgColor: '#FFF1F2',
-                dotColor: colors.red
-              },
-
-              {
-                icon: 'event',
-                name: 'الالتزامات',
-                amount: '0',
-                iconColor: colors.cyan,
-                bgColor: '#ECFEFF',
-                dotColor: colors.cyan
-              },
-
-              {
-                icon: 'more-horiz',
-                name: 'أخرى',
-                amount: '0',
-                iconColor: colors.gray,
-                bgColor: colors.lightGray,
-                dotColor: colors.gray
-              }
-
-            ].map((item, index) => (
-
-              <View
-                key={index}
-                style={yearlyReportsStyles.categoryItem}
-              >
+            {yearlyData?.categories?.map(
+              (item, index) => (
 
                 <View
-                  style={[
-                    yearlyReportsStyles.categoryDot,
-                    {
-                      backgroundColor: item.dotColor
-                    }
-                  ]}
-                />
-
-                <View
-                  style={[
-                    yearlyReportsStyles.categoryCircle,
-                    {
-                      backgroundColor: item.bgColor
-                    }
-                  ]}
+                  key={index}
+                  style={yearlyReportsStyles.categoryItem}
                 >
 
-                  <MaterialIcons
-                    name={item.icon}
-                    size={21}
-                    color={item.iconColor}
+                  <View
+                    style={[
+                      yearlyReportsStyles.categoryDot,
+                      {
+                        backgroundColor: item.color
+                      }
+                    ]}
                   />
 
-                </View>
+                  <View
+                    style={[
+                      yearlyReportsStyles.categoryCircle,
+                      {
+                        backgroundColor: item.bg_color
+                      }
+                    ]}
+                  >
 
-                <Text style={yearlyReportsStyles.categoryName}>
-                  {item.name}
-                </Text>
+                    <MaterialIcons
+                      name={item.icon}
+                      size={21}
+                      color={item.color}
+                    />
 
-                <View style={yearlyReportsStyles.amountRow}>
+                  </View>
 
-                  <Text style={yearlyReportsStyles.categoryAmount}>
-                    {item.amount}
+                  <Text style={yearlyReportsStyles.categoryName}>
+                    {item.categorie_name_full}
                   </Text>
 
-                  <Text style={yearlyReportsStyles.categoryCurrency}>
-                    ريال
-                  </Text>
+                  <View style={yearlyReportsStyles.amountRow}>
+
+                    <Text style={yearlyReportsStyles.categoryAmount}>
+                      {item.total}
+                    </Text>
+
+                    <Text style={yearlyReportsStyles.categoryCurrency}>
+                      ريال
+                    </Text>
+
+                  </View>
 
                 </View>
 
-              </View>
-
-            ))}
+              ))}
 
           </View>
 

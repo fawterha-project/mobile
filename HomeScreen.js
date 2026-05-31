@@ -3,11 +3,18 @@ import React, {
   useEffect
 } from 'react';
 
+import AsyncStorage
+  from '@react-native-async-storage/async-storage';
+
 import {
   getSummary,
   getReceipts
 }
   from './services/homeService';
+import {
+  getNotifications
+}
+  from './services/notificationService';
 
 import {
   View,
@@ -34,8 +41,9 @@ export default function HomeScreen({
 
 }) {
 
-  const user =
-    route?.params?.user;
+  const [user, setUser] =
+    useState(null);
+  route?.params?.user;
 
 
   const [summary, setSummary] =
@@ -44,11 +52,43 @@ export default function HomeScreen({
   const [receipts, setReceipts] =
     useState([]);
 
+  const [
+    notifications,
+    setNotifications
+  ] = useState([]);
+
+  const [
+    showNotifications,
+    setShowNotifications
+  ] = useState(false);
+
   useEffect(() => {
 
-    loadHome();
+    if (user) {
+
+      loadHome();
+
+    }
+
+  }, [user]);
+
+  useEffect(() => {
+
+    loadUser();
 
   }, []);
+
+  const loadUser = async () => {
+
+    const savedUser =
+
+      JSON.parse(
+        await AsyncStorage.getItem('user')
+      );
+
+    setUser(savedUser);
+
+  };
 
   const loadHome =
     async () => {
@@ -72,6 +112,15 @@ export default function HomeScreen({
           receiptsData
         );
 
+        const notificationsData =
+          await getNotifications(
+            user.users_id
+          );
+
+        setNotifications(
+          notificationsData || []
+        );
+
       }
 
       catch (error) {
@@ -89,92 +138,92 @@ export default function HomeScreen({
       }
 
     };
-const categories=[
+  const categories = [
 
-{
-icon:'shopping-basket',
-name:'المقاضي',
-iconColor:'#22C55E',
-bgColor:'#EAFBF0',
-screen:'EmptyCategoryGroceries'
-},
+    {
+      icon: 'shopping-basket',
+      name: 'المقاضي',
+      iconColor: '#22C55E',
+      bgColor: '#EAFBF0',
+      screen: 'EmptyCategoryGroceries'
+    },
 
-{
-icon:'restaurant',
-name:'المطاعم',
-iconColor:'#2563FF',
-bgColor:'#EEF4FF',
-screen:'EmptyCategoryRestaurants'
-},
+    {
+      icon: 'restaurant',
+      name: 'المطاعم',
+      iconColor: '#2563FF',
+      bgColor: '#EEF4FF',
+      screen: 'EmptyCategoryRestaurants'
+    },
 
-{
-icon:'shopping-bag',
-name:'التسوق',
-iconColor:'#A020F0',
-bgColor:'#F6EAFF',
-screen:'EmptyCategoryShopping'
-},
+    {
+      icon: 'shopping-bag',
+      name: 'التسوق',
+      iconColor: '#A020F0',
+      bgColor: '#F6EAFF',
+      screen: 'EmptyCategoryShopping'
+    },
 
-{
-icon:'directions-bus',
-name:'النقل',
-iconColor:'#FFB000',
-bgColor:'#FFF6E7',
-screen:'EmptyCategoryTransport'
-},
+    {
+      icon: 'directions-bus',
+      name: 'النقل',
+      iconColor: '#FFB000',
+      bgColor: '#FFF6E7',
+      screen: 'EmptyCategoryTransport'
+    },
 
-{
-icon:'favorite',
-name:'الصحة',
-iconColor:'#FF4B5C',
-bgColor:'#FFECEF',
-screen:'EmptyCategoryHealth'
-},
+    {
+      icon: 'favorite',
+      name: 'الصحة',
+      iconColor: '#FF4B5C',
+      bgColor: '#FFECEF',
+      screen: 'EmptyCategoryHealth'
+    },
 
-{
-icon:'event',
-name:'الالتزامات',
-iconColor:'#12C6D7',
-bgColor:'#EAFBFC',
-screen:'EmptyCategoryCommitments'
-},
+    {
+      icon: 'event',
+      name: 'الالتزامات',
+      iconColor: '#12C6D7',
+      bgColor: '#EAFBFC',
+      screen: 'EmptyCategoryCommitments'
+    },
 
-{
-icon:'more-horiz',
-name:'أخرى',
-iconColor:'#8C8FA1',
-bgColor:'#F3F3F6',
-screen:'EmptyCategoryOther'
-}
+    {
+      icon: 'more-horiz',
+      name: 'أخرى',
+      iconColor: '#8C8FA1',
+      bgColor: '#F3F3F6',
+      screen: 'EmptyCategoryOther'
+    }
 
-].map(category=>({
+  ].map(category => ({
 
-...category,
+    ...category,
 
-amount:
+    amount:
 
-receipts
+      receipts
 
-.filter(
+        .filter(
 
-receipt=>
+          receipt =>
 
-receipt?.categories
-?.categorie_name===category.name
+            receipt?.categories
+              ?.categorie_name === category.name
 
-)
+        )
 
-.reduce(
+        .reduce(
 
-(sum,receipt)=>
+          (sum, receipt) =>
 
-sum+(receipt.total_price||0),
+            sum + (receipt.total_price || 0),
 
-0
+          0
 
-)
+        )
 
-}));
+  }));
 
 
   return (
@@ -193,13 +242,62 @@ sum+(receipt.total_price||0),
 
         <View style={homeWithInvoicesStyles.header}>
 
-          <TouchableOpacity>
+          <TouchableOpacity
 
-            <MaterialIcons
-              name="notifications"
-              size={24}
-              color={colors.blue}
-            />
+            onPress={() =>
+              setShowNotifications(
+                !showNotifications
+              )
+            }
+
+          >
+
+            <View>
+
+              <MaterialIcons
+                name="notifications"
+                size={24}
+                color={colors.blue}
+              />
+
+              {
+
+                notifications.length > 0
+
+                &&
+
+                <View
+                  style={{
+
+                    position: 'absolute',
+                    top: -6,
+                    right: -6,
+                    backgroundColor: 'red',
+                    width: 18,
+                    height: 18,
+                    borderRadius: 9,
+                    justifyContent: 'center',
+                    alignItems: 'center'
+
+                  }}
+                >
+
+                  <Text
+                    style={{
+                      color: 'white',
+                      fontSize: 10
+                    }}
+                  >
+
+                    {notifications.length}
+
+                  </Text>
+
+                </View>
+
+              }
+
+            </View>
 
           </TouchableOpacity>
 
@@ -216,7 +314,7 @@ sum+(receipt.total_price||0),
               style={homeWithInvoicesStyles.helloText}
             >
 
-              👋 أهلاً {user?.first_name || ''}
+              أهلاً {user?.first_name || ''}
 
             </Text>
 
@@ -262,6 +360,7 @@ sum+(receipt.total_price||0),
 
             <TouchableOpacity
               style={homeWithInvoicesStyles.uploadButton}
+              onPress={() => navigation.navigate('UploadInvoice')}
             >
 
               <MaterialIcons
@@ -605,16 +704,12 @@ sum+(receipt.total_price||0),
 
             <Text
               style={homeWithInvoicesStyles.sectionTitle}
-            >
-
-              آخر الفواتير
-
-            </Text>
+            > آخر الفواتير</Text>
 
             <TouchableOpacity
               onPress={() =>
                 navigation.navigate(
-                  'BillsScreen'
+                  'EmptyBills'
                 )
               }
             >
@@ -678,31 +773,70 @@ sum+(receipt.total_price||0),
                 <TouchableOpacity
                   key={index}
                   style={homeWithInvoicesStyles.invoiceRow}
+
+                  onPress={() =>
+                    navigation.navigate(
+                      'InvoiceDetails',
+                      {
+                        receipt: item
+                      }
+                    )
+                  }
                 >
 
-                  <View>
+                  <View
+                    style={
+                      homeWithInvoicesStyles.invoiceRight
+                    }
+                  >
 
-                    <Text
-                      style={homeWithInvoicesStyles.invoiceStore}
-                    >
-
-                      {item.merchant_name}
-
-                    </Text>
-
-                    <Text
-                      style={homeWithInvoicesStyles.invoiceDate}
-                    >
-
-                      {
-                        item.issued_at
-                          ?.split('T')[0]
+                    <View
+                      style={
+                        homeWithInvoicesStyles.invoiceLogo
                       }
+                    >
 
-                    </Text>
+                      <MaterialIcons
+                        name="receipt-long"
+                        size={24}
+                        color={colors.blue}
+                      />
+
+                    </View>
+
+                    <View
+                      style={
+                        homeWithInvoicesStyles.invoiceInfo
+                      }
+                    >
+
+                      <Text
+                        numberOfLines={2}
+                        ellipsizeMode="tail"
+                        style={
+                          homeWithInvoicesStyles.invoiceStore
+                        }
+                      >
+
+                        {item.merchant_name}
+
+                      </Text>
+
+                      <Text
+                        style={
+                          homeWithInvoicesStyles.invoiceDate
+                        }
+                      >
+
+                        {
+                          item.issued_at?.split('T')[0]
+                        }
+
+                      </Text>
+
+                    </View>
 
                   </View>
-
 
                   <View
                     style={homeWithInvoicesStyles.invoiceAmountBox}
@@ -734,12 +868,131 @@ sum+(receipt.total_price||0),
 
         </View>
 
+        {
+          showNotifications &&
+
+          <TouchableOpacity
+            activeOpacity={1}
+            style={
+              homeWithInvoicesStyles.notificationOverlay
+            }
+
+            onPress={() =>
+              setShowNotifications(false)
+            }
+          >
+
+            <View
+              style={
+                homeWithInvoicesStyles.notificationModal
+              }
+            >
+
+              <Text
+                style={
+                  homeWithInvoicesStyles.notificationTitle
+                }
+              >
+
+                الإشعارات
+
+              </Text>
+
+              <ScrollView
+                showsVerticalScrollIndicator={false}
+              >
+
+                {
+
+                  notifications.length === 0 ?
+
+                    (
+
+                      <Text
+                        style={
+                          homeWithInvoicesStyles.emptyNotificationText
+                        }
+                      >
+
+                        لا توجد إشعارات
+
+                      </Text>
+
+                    )
+
+                    :
+
+                    notifications.map(item => (
+
+                      <View
+                        key={
+                          item.notification_id
+                        }
+                        style={
+                          homeWithInvoicesStyles.notificationCard
+                        }
+                      >
+
+                        <View
+                          style={
+                            homeWithInvoicesStyles.notificationIconCircle
+                          }
+                        >
+
+                          <MaterialIcons
+                            name="notifications"
+                            size={22}
+                            color={colors.blue}
+                          />
+
+                        </View>
+
+                        <View
+                          style={
+                            homeWithInvoicesStyles.notificationContent
+                          }
+                        >
+
+                          <Text
+                            style={
+                              homeWithInvoicesStyles.notificationCardTitle
+                            }
+                          >
+
+                            {item.title}
+
+                          </Text>
+
+                          <Text
+                            style={
+                              homeWithInvoicesStyles.notificationMessage
+                            }
+                          >
+
+                            {item.message}
+
+                          </Text>
+
+                        </View>
+
+                      </View>
+
+                    ))
+
+                }
+
+              </ScrollView>
+
+            </View>
+
+          </TouchableOpacity>
+        }
       </ScrollView>
 
 
       <EmptyBottomNavigation
         navigation={navigation}
-        activeScreen="Home"
+        activeScreen="HomeScreen"
       />
 
     </>

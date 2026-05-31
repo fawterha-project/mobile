@@ -1,4 +1,8 @@
-import React, { useState } from 'react';
+import React, {
+  useState,
+  useEffect
+}
+  from 'react';
 
 import {
   View,
@@ -11,6 +15,19 @@ import {
 } from 'react-native';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+
+import AsyncStorage
+  from '@react-native-async-storage/async-storage';
+
+import {
+
+  getExpenseLimit,
+
+  updateExpenseLimit
+
+}
+
+  from './services/profileService';
 
 import {
   spendingLimitStyles,
@@ -45,46 +62,200 @@ export default function SpendingLimitScreen({
   const [alertText, setAlertText] =
     useState('');
 
+  const [
+
+    userId,
+
+    setUserId
+
+  ]
+
+    =
+
+    useState('');
+
   const displayedAmount =
     selectedLimit === 'غير ذلك'
       ? customAmount || ''
       : selectedLimit || 'اختر المبلغ';
 
-  const handleSave = () => {
+  useEffect(() => {
 
-    if (!selectedLimit) {
+    loadLimit();
 
-      setAlertText(
-        'الرجاء اختيار سقف الإنفاق'
-      );
+  }, []);
 
-      setShowAlert(true);
 
-      return;
-    }
+  const loadLimit =
+    async () => {
 
-    if (
-      selectedLimit === 'غير ذلك'
-      &&
-      !customAmount.trim()
-    ) {
+      try {
 
-      setAlertText(
-        'الرجاء إدخال المبلغ'
-      );
+        const userData =
 
-      setShowAlert(true);
+          JSON.parse(
 
-      return;
-    }
+            await AsyncStorage.getItem(
 
-    setAlertText(
-      'تم تحديث سقف الإنفاق الشهري بنجاح'
-    );
+              'user'
 
-    setShowAlert(true);
+            )
 
-  };
+          );
+
+        setUserId(
+
+          userData.users_id
+
+        );
+
+        const data =
+
+          await getExpenseLimit(
+
+            userData.users_id
+
+          );
+
+        if (
+
+          data?.expense_limit
+            ?.monthly_limit
+
+        ) {
+
+          setSelectedLimit(
+
+            `${data.expense_limit.monthly_limit} رس`
+
+          );
+
+        }
+
+      }
+
+      catch (error) {
+
+        console.log(
+
+          'خطأ حد الإنفاق:',
+
+          error
+
+        );
+
+      }
+
+    };
+
+  const handleSave =
+    async () => {
+
+      try {
+
+        if (
+
+          !selectedLimit
+
+        ) {
+
+          setAlertText(
+
+            'الرجاء اختيار سقف الإنفاق'
+
+          );
+
+          setShowAlert(
+
+            true
+
+          );
+
+          return;
+
+        }
+
+        const amount =
+
+          selectedLimit ===
+
+            'غير ذلك'
+
+            ?
+
+            customAmount
+
+            :
+
+            selectedLimit
+
+              .replace(
+
+                'رس',
+
+                ''
+
+              )
+
+              .replace(
+
+                ',',
+
+                ''
+
+              )
+
+              .trim();
+
+
+        await updateExpenseLimit(
+
+          userId,
+
+          amount
+
+        );
+
+        setAlertText(
+
+          'تم تحديث سقف الإنفاق الشهري بنجاح'
+
+        );
+
+        setShowAlert(
+
+          true
+
+        );
+
+      }
+
+      catch (error) {
+
+        console.log(
+
+          'خطأ حد الانفاق:',
+
+          JSON.stringify(error)
+
+        );
+
+        setAlertText(
+
+          error?.message ||
+
+          JSON.stringify(error)
+
+        );
+
+        setShowAlert(
+
+          true
+
+        );
+
+      }
+    };
 
   return (
 

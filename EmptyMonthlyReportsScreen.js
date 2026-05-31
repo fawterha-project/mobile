@@ -1,5 +1,11 @@
-import React from 'react';
-import EmptyBottomNavigation  from './EmptyBottomNavigation';
+import React, {
+  useState,
+  useEffect,
+} from 'react';
+
+import EmptyBottomNavigation from './EmptyBottomNavigation';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import api from './services/api';
 
 import {
   View,
@@ -51,6 +57,65 @@ const BottomTab = ({ icon, label, active, onPress }) => (
 export default function EmptyMonthlyReportsScreen({
   navigation
 }) {
+  const [monthlyData, setMonthlyData] =
+    useState(null);
+
+  const radius = 50;
+
+  const circumference =
+    2 * Math.PI * radius;
+
+  useEffect(() => {
+
+    loadMonthlyReport();
+
+  }, []);
+
+  const loadMonthlyReport =
+    async () => {
+
+      try {
+
+        const savedUser =
+          JSON.parse(
+            await AsyncStorage.getItem(
+              'user'
+            )
+          );
+
+        if (
+          !savedUser?.users_id
+        ) {
+          return;
+        }
+
+        const response =
+          await api.get(
+            `/reports/monthly?users_id=${savedUser.users_id}`
+          );
+
+        setMonthlyData(
+          response.data.monthly
+        );
+
+        console.log(
+          'الشهري:',
+          response.data.monthly
+        );
+
+      }
+
+      catch (error) {
+
+        console.log(
+          'خطأ الشهري:',
+          error.response?.data ||
+          error.message
+        );
+
+      }
+
+    };
 
   return (
 
@@ -159,7 +224,7 @@ export default function EmptyMonthlyReportsScreen({
         <MaterialIcons
           name="bar-chart"
           size={70}
-          color={colors.gray}
+          color={colors.blue}
         />
 
         <View style={monthlyReportsStyles.summaryInfo}>
@@ -169,12 +234,12 @@ export default function EmptyMonthlyReportsScreen({
           </Text>
 
           <Text style={monthlyReportsStyles.summaryAmount}>
-            0 ريال
+            {monthlyData?.total || 0} ريال
           </Text>
 
           <View style={monthlyReportsStyles.percentRow}>
             <Text style={monthlyReportsStyles.summarySubText}>
-              لا توجد بيانات حتى الآن
+              {monthlyData?.invoice_count || 0} فاتورة
             </Text>
           </View>
 
@@ -206,10 +271,17 @@ export default function EmptyMonthlyReportsScreen({
 
         <LineChart
           data={{
-            labels: ['أ1', 'أ2', 'أ3', 'أ4', 'أ5'],
+            labels:
+              monthlyData?.trend?.map(
+                (_, index) => `أ${index + 1}`
+              ) || [],
+
             datasets: [
               {
-                data: [0, 0, 0, 0, 0]
+                data:
+                  monthlyData?.trend?.map(
+                    item => item.total
+                  ) || [0]
               }
             ]
           }}
@@ -235,8 +307,8 @@ export default function EmptyMonthlyReportsScreen({
             backgroundGradientTo: colors.white,
             decimalPlaces: 0,
 
-            color: () => colors.border,
-            labelColor: () => colors.gray,
+            color: () => colors.blue,
+            labelColor: () => colors.black,
 
             propsForDots: {
               r: '0'
@@ -264,7 +336,6 @@ export default function EmptyMonthlyReportsScreen({
         <View style={monthlyReportsStyles.categoryContainer}>
 
           <View style={monthlyReportsStyles.donutWrapper}>
-
             <Svg
               width="150"
               height="150"
@@ -280,11 +351,61 @@ export default function EmptyMonthlyReportsScreen({
                 fill="none"
               />
 
-            </Svg>
+              {
 
+                monthlyData?.categories?.map(
+                  (item, index) => {
+
+                    const previousPercent =
+                      monthlyData.categories
+                        .slice(0, index)
+                        .reduce(
+                          (sum, cat) =>
+                            sum + cat.percent,
+                          0
+                        );
+
+                    return (
+
+                      <Circle
+                        key={index}
+                        cx="75"
+                        cy="75"
+                        r="50"
+                        stroke={item.color}
+                        strokeWidth="28"
+                        fill="none"
+                        strokeDasharray={circumference}
+                        strokeDashoffset={
+                          circumference -
+                          (
+                            circumference *
+                            item.percent
+                          ) / 100
+                        }
+                        rotation={
+                          -90 +
+                          (
+                            previousPercent *
+                            3.6
+                          )
+                        }
+                        origin="75,75"
+                        strokeLinecap="butt"
+                      />
+
+                    );
+
+                  }
+
+                )
+
+              }
+
+            </Svg>
             <View style={monthlyReportsStyles.donutInner}>
               <Text style={monthlyReportsStyles.donutAmount}>
-                0
+                {monthlyData?.total || 0}
               </Text>
 
               <Text style={monthlyReportsStyles.donutCurrency}>
@@ -297,71 +418,9 @@ export default function EmptyMonthlyReportsScreen({
 
           <View style={monthlyReportsStyles.categoriesGrid}>
 
-            {[
-              {
-                icon: 'shopping-basket',
-                name: 'مواد غذائية',
-                amount: '0',
-                iconColor: colors.green,
-                bgColor: '#EAFBF0',
-                dotColor: colors.green,
-              },
-
-              {
-                icon: 'restaurant',
-                name: 'مطاعم',
-                amount: '0',
-                iconColor: colors.blue,
-                bgColor: '#EEF4FF',
-                dotColor: colors.blue,
-              },
-
-              {
-                icon: 'shopping-bag',
-                name: 'التسوق',
-                amount: '0',
-                iconColor: colors.purple,
-                bgColor: '#F5EEFF',
-                dotColor: colors.purple,
-              },
-
-              {
-                icon: 'directions-bus',
-                name: 'النقل',
-                amount: '0',
-                iconColor: colors.yellow,
-                bgColor: '#FFF7E8',
-                dotColor: colors.yellow,
-              },
-
-              {
-                icon: 'favorite-border',
-                name: 'الصحة',
-                amount: '0',
-                iconColor: colors.red,
-                bgColor: '#FFF1F2',
-                dotColor: colors.red,
-              },
-
-              {
-                icon: 'event',
-                name: 'الالتزامات',
-                amount: '0',
-                iconColor: colors.cyan,
-                bgColor: '#ECFEFF',
-                dotColor: colors.cyan,
-              },
-
-              {
-                icon: 'more-horiz',
-                name: 'أخرى',
-                amount: '0',
-                iconColor: colors.gray,
-                bgColor: colors.lightGray,
-                dotColor: colors.gray,
-              },
-
-            ].map((item, index) => (
+            {(
+              monthlyData?.categories || []
+            ).map((item, index) => (
 
               <View
                 key={index}
@@ -372,7 +431,7 @@ export default function EmptyMonthlyReportsScreen({
                   style={[
                     monthlyReportsStyles.categoryDot,
                     {
-                      backgroundColor: item.dotColor
+                      backgroundColor: item.bg_color
                     }
                   ]}
                 />
@@ -381,7 +440,7 @@ export default function EmptyMonthlyReportsScreen({
                   style={[
                     monthlyReportsStyles.categoryCircle,
                     {
-                      backgroundColor: item.bgColor
+                      backgroundColor: item.bg_color
                     }
                   ]}
                 >
@@ -389,18 +448,18 @@ export default function EmptyMonthlyReportsScreen({
                   <MaterialIcons
                     name={item.icon}
                     size={21}
-                    color={item.iconColor}
+                    color={item.color}
                   />
 
                 </View>
 
                 <Text style={monthlyReportsStyles.categoryName}>
-                  {item.name}
+                  {item.categorie_name_full}
                 </Text>
 
                 <View style={monthlyReportsStyles.amountRow}>
                   <Text style={monthlyReportsStyles.categoryAmount}>
-                    {item.amount}
+                    {item.total}
                   </Text>
 
                   <Text style={monthlyReportsStyles.categoryCurrency}>

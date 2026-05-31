@@ -19,6 +19,7 @@ import FAQScreen from './FAQScreen';
 import CameraPermissionScreen from './CameraPermissionScreen';
 import CameraScreen from './CameraScreen';
 
+
 import ProfileSettingScreen from './ProfileSettingScreen';
 import ProfileEditScreen from './ProfileEditScreen';
 import BillsScreen from './BillsScreen';
@@ -56,8 +57,8 @@ import InvoiceDetailsScreen from './InvoiceDetailsScreen';
 import BlurScanScreen from './BlurScanScreen';
 import FailedScanScreen from './FailedScanScreen';
 import InvoiceAddedScreen from './InvoiceAddedScreen';
-import DisplayInvoiceScreen from './DisplayInvoiceScreen';
 import InvoiceScreen from './InvoiceScreen';
+import UploadInvoiceScreen from './UploadInvoiceScreen';
 
 const Stack=createNativeStackNavigator();
 
@@ -132,9 +133,8 @@ headerShown:false
 <Stack.Screen name="BlurScanScreen" component={BlurScanScreen}/>
 <Stack.Screen name="FailedScanScreen" component={FailedScanScreen}/>
 <Stack.Screen name="InvoiceAddedScreen" component={InvoiceAddedScreen}/>
-<Stack.Screen name="DisplayInvoiceScreen" component={DisplayInvoiceScreen}/>
 <Stack.Screen name="InvoiceScreen" component={InvoiceScreen}/>
-
+<Stack.Screen name="UploadInvoice" component={UploadInvoiceScreen}/>
 </Stack.Navigator>
 
 </NavigationContainer>

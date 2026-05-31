@@ -274,6 +274,63 @@ export const loginStyles = StyleSheet.create({
   loginButtonDisabled: {
     opacity: 0.5,
   },
+  errorOverlay: {
+  flex: 1,
+  backgroundColor: 'rgba(0,0,0,0.45)',
+  justifyContent: 'center',
+  alignItems: 'center',
+},
+
+errorModal: {
+  width: 320,
+  backgroundColor: colors.white,
+  borderRadius: 30,
+  paddingVertical: 30,
+  paddingHorizontal: 25,
+  alignItems: 'center',
+},
+
+errorIconCircle: {
+  width: 90,
+  height: 90,
+  borderRadius: 45,
+  backgroundColor: '#FFEAEA',
+  justifyContent: 'center',
+  alignItems: 'center',
+  marginBottom: 20,
+},
+
+errorTitle: {
+  fontSize: 24,
+  fontFamily: 'Tajawal-Bold',
+  color: '#E53935',
+  textAlign: 'center',
+},
+
+errorText: {
+  fontSize: 15,
+  fontFamily: 'Tajawal-Regular',
+  color: colors.gray,
+  textAlign: 'center',
+  marginTop: 12,
+  lineHeight: 28,
+},
+
+errorButton: {
+  width: 180,
+  height: 50,
+  borderRadius: 14,
+  backgroundColor: '#E53935',
+  justifyContent: 'center',
+  alignItems: 'center',
+  marginTop: 25,
+},
+
+errorButtonText: {
+  color: colors.white,
+  fontSize: 18,
+  fontFamily: 'Tajawal-Bold',
+},
 });
 
 export const signupStyles = StyleSheet.create({
@@ -485,7 +542,64 @@ export const signupStyles = StyleSheet.create({
     textDecorationLine: 'underline',
   },
   signupButtonDisabled: {
-  opacity: 0.5,
+    opacity: 0.5,
+  },
+  passwordOverlay: {
+  flex: 1,
+  backgroundColor: 'rgba(0,0,0,0.45)',
+  justifyContent: 'center',
+  alignItems: 'center',
+},
+
+passwordModal: {
+  width: 320,
+  backgroundColor: colors.white,
+  borderRadius: 30,
+  paddingVertical: 30,
+  paddingHorizontal: 25,
+  alignItems: 'center',
+},
+
+passwordIconCircle: {
+  width: 90,
+  height: 90,
+  borderRadius: 45,
+  backgroundColor: '#F2F6FF',
+  justifyContent: 'center',
+  alignItems: 'center',
+  marginBottom: 20,
+},
+
+passwordTitle: {
+  fontSize: 24,
+  fontFamily: 'Tajawal-Bold',
+  color: colors.blue,
+  textAlign: 'center',
+},
+
+passwordText: {
+  fontSize: 15,
+  fontFamily: 'Tajawal-Regular',
+  color: colors.gray,
+  textAlign: 'center',
+  marginTop: 12,
+  lineHeight: 28,
+},
+
+passwordButton: {
+  width: 180,
+  height: 50,
+  borderRadius: 14,
+  backgroundColor: colors.blue,
+  justifyContent: 'center',
+  alignItems: 'center',
+  marginTop: 25,
+},
+
+passwordButtonText: {
+  color: colors.white,
+  fontSize: 18,
+  fontFamily: 'Tajawal-Bold',
 },
 });
 
@@ -1851,376 +1965,453 @@ export const homeStyles = StyleSheet.create({
     fontFamily: 'Tajawal-Regular',
     color: colors.gray,
   },
-  invoiceItem:{
+  invoiceItem: {
 
-flexDirection:'row',
-justifyContent:'space-between',
-alignItems:'center',
-paddingVertical:15,
-borderBottomWidth:1,
-borderBottomColor:'#F1F1F1'
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: '#F1F1F1'
 
-},
+  },
 
-invoiceStore:{
+  invoiceStore: {
 
-fontSize:16,
-fontWeight:'700',
-color:'#111827'
+    fontSize: 16,
+    fontWeight: '700',
+    color: '#111827'
 
-},
+  },
 
-invoiceDate:{
+  invoiceDate: {
 
-fontSize:13,
-color:'#9CA3AF',
-marginTop:4
+    fontSize: 13,
+    color: '#9CA3AF',
+    marginTop: 4
 
-},
+  },
 
-invoiceAmount:{
+  invoiceAmount: {
 
-fontSize:18,
-fontWeight:'700',
-color:'#111827'
+    fontSize: 18,
+    fontWeight: '700',
+    color: '#111827'
 
-},
+  },
 });
 
-export const homeWithInvoicesStyles={
+export const homeWithInvoicesStyles = {
 
-container:{
-flex:1,
-backgroundColor:colors.white,
-},
+  container: {
+    flex: 1,
+    backgroundColor: colors.white,
+  },
 
-header:{
-flexDirection:'row',
-justifyContent:'space-between',
-alignItems:'center',
-paddingHorizontal:24,
-marginTop:45,
-},
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 24,
+    marginTop: 45,
+  },
 
-logo:{
-alignSelf:'flex-end',
-width:95,
-height:40,
-},
+  logo: {
+    alignSelf: 'flex-end',
+    width: 95,
+    height: 40,
+  },
 
-helloText:{
-marginTop:15,
-textAlign:'right',
-fontSize:25,
-fontFamily:'Tajawal-Bold',
-color:colors.black,
-},
+  helloText: {
+    marginTop: 15,
+    textAlign: 'right',
+    fontSize: 25,
+    fontFamily: 'Tajawal-Bold',
+    color: colors.black,
+  },
 
-subText:{
-marginTop:5,
-textAlign:'right',
-fontSize:16,
-fontFamily:'Tajawal-Regular',
-color:colors.gray,
-},
-
-
-/* scan */
-
-scanCard:{
-marginHorizontal:20,
-marginTop:10,
-backgroundColor:'#0D5BD7',
-borderRadius:28,
-padding:20,
-elevation:5,
-},
-
-scanTitle:{
-fontSize:20,
-fontFamily:'Tajawal-Bold',
-color:colors.white,
-textAlign:'center',
-},
-
-scanSub:{
-fontSize:16,
-color:'#DCE8FF',
-marginTop:1,
-textAlign:'center',
-},
-
-scanRow:{
-flexDirection:'row-reverse',
-justifyContent:'space-between',
-marginTop:10,
-},
-
-uploadButton:{
-width:'48%',
-height:100,
-borderRadius:18,
-backgroundColor:'#B55CFF',
-justifyContent:'center',
-alignItems:'center',
-},
-
-cameraButton:{
-width:'48%',
-height:100,
-borderRadius:18,
-backgroundColor:'#3D7BFF',
-justifyContent:'center',
-alignItems:'center',
-},
-
-scanText:{
-marginTop:8,
-fontSize:18,
-fontFamily:'Tajawal-Medium',
-color:'white',
-},
-
-supportText:{
-textAlign:'center',
-marginTop:15,
-fontSize:12,
-color:'#D8E6FF',
-},
+  subText: {
+    marginTop: 5,
+    textAlign: 'right',
+    fontSize: 16,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+  },
 
 
-/* sections */
+  /* scan */
 
-sectionTitle:{
-fontSize:20,
-fontFamily:'Tajawal-Bold',
-color:colors.black,
-textAlign:'right',
-},
+  scanCard: {
+    marginHorizontal: 20,
+    marginTop: 10,
+    backgroundColor: '#0D5BD7',
+    borderRadius: 28,
+    padding: 20,
+    elevation: 5,
+  },
 
-journeySub:{
-fontSize:18,
-color:colors.gray,
-textAlign:'right',
-marginTop:1,
-},
+  scanTitle: {
+    fontSize: 20,
+    fontFamily: 'Tajawal-Bold',
+    color: colors.white,
+    textAlign: 'center',
+  },
 
+  scanSub: {
+    fontSize: 16,
+    color: '#DCE8FF',
+    marginTop: 1,
+    textAlign: 'center',
+  },
 
-/* journey */
+  scanRow: {
+    flexDirection: 'row-reverse',
+    justifyContent: 'space-between',
+    marginTop: 10,
+  },
 
-journeyCard:{
-marginHorizontal:15,
-marginTop:18,
-backgroundColor:'white',
-borderRadius:24,
-padding:20,
-elevation:5,
-},
+  uploadButton: {
+    width: '48%',
+    height: 100,
+    borderRadius: 18,
+    backgroundColor: '#B55CFF',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 
-timelineContainer:{
-flexDirection:'row-reverse',
-justifyContent:'space-between',
-alignItems:'flex-start',
-marginTop:20,
-},
+  cameraButton: {
+    width: '48%',
+    height: 100,
+    borderRadius: 18,
+    backgroundColor: '#3D7BFF',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 
-stepBlock:{
-width:'20%',
-alignItems:'center',
-},
+  scanText: {
+    marginTop: 8,
+    fontSize: 18,
+    fontFamily: 'Tajawal-Medium',
+    color: 'white',
+  },
 
-timelineLine:{
-flex:1,
-height:3,
-backgroundColor:'#E6EAFF',
-marginTop:28,
-marginHorizontal:4,
-},
-
-stepCircle:{
-width:60,
-height:60,
-borderRadius:29,
-justifyContent:'center',
-alignItems:'center',
-elevation:3,
-},
-
-stepTitle:{
-fontSize:14,
-fontFamily:'Tajawal-Bold',
-textAlign:'center',
-marginTop:5,
-},
-
-stepDesc:{
-fontSize:12,
-textAlign:'center',
-color:'#8C93A3',
-marginTop:4,
-},
-
-bottomJourneyText:{
-fontSize:14,
-textAlign:'center',
-marginTop:15,
-color:'#8C93A3',
-},
+  supportText: {
+    textAlign: 'center',
+    marginTop: 15,
+    fontSize: 12,
+    color: '#D8E6FF',
+  },
 
 
-/* categories */
+  /* sections */
 
-chartCard:{
-marginHorizontal:15,
-marginTop:18,
-backgroundColor:'white',
-borderRadius:24,
-padding:15,
-elevation:5,
-},
+  sectionTitle: {
+    fontSize: 20,
+    fontFamily: 'Tajawal-Bold',
+    color: colors.black,
+    textAlign: 'right',
+  },
 
-categoriesGrid:{
-flexDirection:'row-reverse',
-flexWrap:'wrap',
-justifyContent:'space-between',
-marginTop:5,
-},
-
-categoryItem:{
-width:'22%',
-alignItems:'center',
-marginBottom:8,
-},
-
-categoryCircle:{
-width:65,
-height:55,
-borderRadius:28,
-justifyContent:'center',
-alignItems:'center',
-},
-
-categoryName:{
-marginTop:8,
-fontSize:16,
-fontFamily:'Tajawal-Regular',
-color:colors.black,
-},
-
-categoryAmount:{
-fontSize:12,
-color:colors.gray,
-marginTop:3,
-},
+  journeySub: {
+    fontSize: 18,
+    color: colors.gray,
+    textAlign: 'right',
+    marginTop: 1,
+  },
 
 
-/* invoices */
+  /* journey */
 
-invoiceCard:{
-marginHorizontal:15,
-marginTop:18,
-marginBottom:25,
-backgroundColor:'white',
-borderRadius:24,
-padding:18,
-elevation:5,
-},
+  journeyCard: {
+    marginHorizontal: 15,
+    marginTop: 18,
+    backgroundColor: 'white',
+    borderRadius: 24,
+    padding: 20,
+    elevation: 5,
+  },
 
-invoiceHeader:{
-flexDirection:'row-reverse',
-justifyContent:'space-between',
-alignItems:'center',
-marginBottom:15,
-},
+  timelineContainer: {
+    flexDirection: 'row-reverse',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginTop: 20,
+  },
 
-showAll:{
-fontSize:16,
-color:colors.blue,
-fontFamily:'Tajawal-Regular',
-},
+  stepBlock: {
+    width: '20%',
+    alignItems: 'center',
+  },
 
-invoiceRow:{
-height:65,
-borderBottomWidth:1,
-borderBottomColor:'#ECECEC',
-flexDirection:'row-reverse',
-justifyContent:'space-between',
-alignItems:'center',
-},
+  timelineLine: {
+    flex: 1,
+    height: 3,
+    backgroundColor: '#E6EAFF',
+    marginTop: 28,
+    marginHorizontal: 4,
+  },
 
-invoiceRight:{
-flexDirection:'row-reverse',
-alignItems:'center',
-flexShrink:1,
-},
+  stepCircle: {
+    width: 60,
+    height: 60,
+    borderRadius: 29,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 3,
+  },
 
-invoiceLogo:{
-width:50,
-height:50,
-borderRadius:20,
-marginLeft:12,
-},
+  stepTitle: {
+    fontSize: 14,
+    fontFamily: 'Tajawal-Bold',
+    textAlign: 'center',
+    marginTop: 5,
+  },
 
-invoiceStore:{
-fontSize:16,
-fontFamily:'Tajawal-Medium',
-color:colors.black,
-textAlign:'right',
-marginBottom:3,
-},
+  stepDesc: {
+    fontSize: 12,
+    textAlign: 'center',
+    color: '#8C93A3',
+    marginTop: 4,
+  },
 
-invoiceDate:{
-fontSize:14,
-marginTop:4,
-color:colors.gray,
-},
+  bottomJourneyText: {
+    fontSize: 14,
+    textAlign: 'center',
+    marginTop: 15,
+    color: '#8C93A3',
+  },
 
-invoiceAmountBox:{
-flexDirection:'row-reverse',
-alignItems:'center',
-},
 
-invoiceAmount:{
-fontSize:18,
-fontFamily:'Tajawal-Bold',
-color:colors.black,
-},
+  /* categories */
 
-invoiceCurrency:{
-fontSize:14,
-marginRight:4,
-color:colors.gray,
-},
-emptyCard:{
-alignItems:'center',
-paddingVertical:30,
-},
+  chartCard: {
+    marginHorizontal: 15,
+    marginTop: 18,
+    backgroundColor: 'white',
+    borderRadius: 24,
+    padding: 15,
+    elevation: 5,
+  },
 
-emptyIcon:{
-width:80,
-height:80,
-borderRadius:40,
-backgroundColor:'#F5F7FB',
-justifyContent:'center',
-alignItems:'center',
-marginBottom:15,
-},
+  categoriesGrid: {
+    flexDirection: 'row-reverse',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    marginTop: 5,
+  },
 
-emptyTitle:{
-fontSize:18,
-fontFamily:'Tajawal-Bold',
-color:colors.black,
-textAlign:'center',
-},
+  categoryItem: {
+    width: '22%',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
 
-emptySub:{
-fontSize:14,
-fontFamily:'Tajawal-Regular',
-color:colors.gray,
-marginTop:8,
-textAlign:'center',
-paddingHorizontal:20,
-},
+  categoryCircle: {
+    width: 65,
+    height: 55,
+    borderRadius: 28,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  categoryName: {
+    marginTop: 8,
+    fontSize: 16,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.black,
+  },
+
+  categoryAmount: {
+    fontSize: 12,
+    color: colors.gray,
+    marginTop: 3,
+  },
+
+
+  /* invoices */
+
+  invoiceCard: {
+    marginHorizontal: 15,
+    marginTop: 18,
+    marginBottom: 25,
+    backgroundColor: 'white',
+    borderRadius: 24,
+    padding: 18,
+    elevation: 5,
+  },
+
+  invoiceHeader: {
+    flexDirection: 'row-reverse',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 15,
+  },
+
+  showAll: {
+    fontSize: 16,
+    color: colors.blue,
+    fontFamily: 'Tajawal-Regular',
+  },
+
+  invoiceRow: {
+    height: 78,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ECECEC',
+    flexDirection: 'row-reverse',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 10,
+  },
+
+  invoiceRight: {
+    flexDirection: 'row-reverse',
+    alignItems: 'center',
+    width: '72%',
+    overflow: 'hidden'
+  },
+
+  invoiceLogo: {
+    width: 45,
+    height: 45,
+    borderRadius: 22,
+    marginLeft: 12,
+    backgroundColor: '#F3F4F6',
+  },
+
+  invoiceInfo: {
+    flex: 1,
+    maxWidth: 160
+  },
+
+  invoiceStore: {
+    fontSize: 15,
+    fontFamily: 'Tajawal-Medium',
+    color: colors.black,
+    textAlign: 'right',
+    lineHeight: 22,
+  },
+
+  invoiceDate: {
+    fontSize: 13,
+    marginTop: 4,
+    color: colors.gray,
+    textAlign: 'right',
+  },
+
+  invoiceAmountBox: {
+    width: '28%',
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+  },
+
+  invoiceAmount: {
+    fontSize: 22,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.black,
+  },
+
+  invoiceCurrency: {
+    fontSize: 13,
+    color: colors.gray,
+    marginBottom: 3,
+  },
+
+  emptyIcon: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    backgroundColor: '#F5F7FB',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 15,
+  },
+
+  emptyTitle: {
+    fontSize: 18,
+    fontFamily: 'Tajawal-Bold',
+    color: colors.black,
+    textAlign: 'center',
+  },
+
+  emptySub: {
+    fontSize: 14,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+    marginTop: 8,
+    textAlign: 'center',
+    paddingHorizontal: 20,
+  },
+
+  notificationOverlay: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'rgba(0,0,0,0.35)',
+    paddingHorizontal: 25,
+    paddingTop: 85,
+    alignItems: 'center',
+
+  },
+  notificationModal: {
+    backgroundColor: 'white',
+    borderRadius: 30,
+    padding: 22,
+    maxHeight: 500,
+    width: '100%',
+    elevation: 12
+  },
+  notificationTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'right',
+    marginBottom: 20,
+    color: colors.black
+  },
+
+  notificationCard: {
+    flexDirection: 'row-reverse',
+    alignItems: 'center',
+    backgroundColor: '#FAFAFA',
+    padding: 10,
+    borderRadius: 15,
+    marginBottom: 10
+  },
+
+  notificationIconCircle: {
+    width: 50,
+    height: 50,
+    borderRadius: 28,
+    backgroundColor: '#EEF4FF',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 12
+  },
+
+  notificationContent: {
+    flex: 1
+  },
+
+  notificationCardTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'right',
+    marginBottom: 4
+  },
+
+  notificationMessage: {
+    fontSize: 14,
+    color: '#777',
+    textAlign: 'right',
+    lineHeight: 20
+  },
+
+  emptyNotificationText: {
+    textAlign: 'center',
+    fontSize: 15,
+    color: '#888'
+  },
 
 };
 
@@ -2300,7 +2491,7 @@ export const profileStyles = StyleSheet.create({
 
   userName: {
     textAlign: 'center',
-    marginTop: -18,
+    marginTop: -10,
     marginBottom: 35,
     fontSize: 20,
     color: colors.black,
@@ -3158,13 +3349,8 @@ export const billsStyles = StyleSheet.create({
     fontFamily: 'Tajawal-Medium',
   },
 
-  listContainer: {
-    marginTop: 24,
-    paddingHorizontal: 38,
-  },
-
   billItem: {
-    height: 58,
+    height: 85,
     borderBottomWidth: 1,
     borderBottomColor: '#E5E7EB',
     flexDirection: 'row',
@@ -3172,33 +3358,43 @@ export const billsStyles = StyleSheet.create({
   },
 
   amount: {
-    width: 80,
-    fontSize: 16,
+    fontSize: 18,
     color: colors.black,
-    fontFamily: 'Tajawal-Medium',
-    textAlign: 'left',
+    fontFamily: 'Tajawal-Regular',
+  },
+
+  amountBox: {
+    width: 80,
+    alignItems: 'flex-start',
+    marginLeft: 20,
   },
 
   currency: {
-    fontSize: 14,
+    fontSize: 16,
     color: colors.gray,
     fontFamily: 'Tajawal-Regular',
+    marginTop: 2,
   },
 
   billInfo: {
     flex: 1,
     alignItems: 'flex-end',
     paddingRight: 10,
+    marginLeft: 12,
+    marginTop: 30,
   },
 
   billName: {
-    fontSize: 18,
+    fontSize: 16,
     color: colors.black,
     fontFamily: 'Tajawal-Medium',
+    textAlign: 'right',
+    maxWidth: 190,
+    marginTop: -15,
   },
 
   billDate: {
-    marginTop: 2,
+    marginTop: -3,
     fontSize: 16,
     color: colors.gray,
     fontFamily: 'Tajawal-Regular',
@@ -3210,30 +3406,14 @@ export const billsStyles = StyleSheet.create({
     borderRadius: 21,
   },
 
-  emptyContent: {
-    flex: 1,
+  billLogoCircle: {
+    width: 42,
+    height: 42,
+    borderRadius: 21,
+    backgroundColor: '#F3F4F6',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 40,
-  },
-
-  emptyIcon: {
-    marginBottom: 18,
-  },
-
-  emptyTitle: {
-    fontSize: 22,
-    color: colors.black,
-    fontFamily: 'Tajawal-Medium',
-    marginBottom: 8,
-  },
-
-  emptyText: {
-    fontSize: 16,
-    color: colors.gray,
-    fontFamily: 'Tajawal-Regular',
-    textAlign: 'center',
-    lineHeight: 28,
+    marginRight: 10,
   },
 });
 
@@ -3343,10 +3523,11 @@ export const categoriesStyles = StyleSheet.create({
   },
 
   categoryInfo: {
-    flex: 1,
-    alignItems: 'flex-end',
-    paddingRight: 12,
-  },
+  flex: 1,
+  alignItems: 'flex-end',
+  paddingRight: 12,
+  marginLeft: 10,
+},
 
   categoryName: {
     fontSize: 18,
@@ -3355,11 +3536,13 @@ export const categoriesStyles = StyleSheet.create({
   },
 
   categoryCount: {
-    marginTop: 2,
-    fontSize: 16,
-    color: colors.gray,
-    fontFamily: 'Tajawal-Regular',
-  },
+  marginTop: 2,
+  fontSize: 16,
+  color: colors.gray,
+  fontFamily: 'Tajawal-Regular',
+  textAlign: 'right',
+  alignSelf: 'stretch',
+},
 
   categoryIconBox: {
     width: 40,
@@ -3415,10 +3598,11 @@ export const categoryFoodStyles = StyleSheet.create({
     justifyContent: 'center',
   },
 
-  summaryInfo: {
-    flex: 1,
-    alignItems: 'flex-end',
-  },
+summaryInfo: {
+  flex: 1,
+  alignItems: 'flex-end',
+  paddingLeft: 20,
+},
 
   summaryTitle: {
     fontSize: 18,
@@ -3427,11 +3611,12 @@ export const categoryFoodStyles = StyleSheet.create({
   },
 
   summaryCount: {
-    marginTop: 4,
-    fontSize: 16,
-    color: colors.gray,
-    fontFamily: 'Tajawal-Regular',
-  },
+  marginTop: 4,
+  fontSize: 16,
+  color: colors.gray,
+  fontFamily: 'Tajawal-Regular',
+  paddingLeft: 30,
+},
 
   summaryAmount: {
     marginTop: 4,
@@ -3476,50 +3661,67 @@ export const categoryFoodStyles = StyleSheet.create({
   },
 
   billItem: {
-    height: 58,
+    height: 85,
     borderBottomWidth: 1,
     borderBottomColor: '#E5E7EB',
     flexDirection: 'row',
     alignItems: 'center',
   },
 
+  amountBox: {
+  width: 80,
+  alignItems: 'flex-start',
+  marginLeft: 20,
+},
+
   amount: {
-    width: 80,
-    fontSize: 16,
+    fontSize: 18,
     color: colors.black,
-    fontFamily: 'Tajawal-Medium',
-    textAlign: 'left',
+    fontFamily: 'Tajawal-Regular',
   },
 
   currency: {
-    fontSize: 14,
+    fontSize: 16,
     color: colors.gray,
     fontFamily: 'Tajawal-Regular',
+    marginTop: 2,
   },
 
   billInfo: {
     flex: 1,
     alignItems: 'flex-end',
     paddingRight: 10,
+    marginLeft: 12,
   },
 
   billName: {
-    fontSize: 18,
+    fontSize: 16,
     color: colors.black,
     fontFamily: 'Tajawal-Medium',
+    textAlign: 'right',
+    maxWidth: 190,
   },
 
   billDate: {
-    marginTop: 2,
     fontSize: 16,
     color: colors.gray,
     fontFamily: 'Tajawal-Regular',
   },
 
+
   billLogo: {
     width: 42,
     height: 42,
     borderRadius: 21,
+  },
+
+  billLogoCircle: {
+    width: 42,
+    height: 42,
+    borderRadius: 21,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 10,
   },
 
   emptyCategoryContent: {
@@ -3547,6 +3749,7 @@ export const categoryFoodStyles = StyleSheet.create({
     textAlign: 'center',
     lineHeight: 28,
   },
+
 });
 
 export const emptyCategoriesStyles = StyleSheet.create({
@@ -3755,7 +3958,7 @@ export const weeklyReportsStyles = StyleSheet.create({
   },
 
   summaryCard: {
-    height: 105,
+    height: 100,
     marginHorizontal: 34,
     marginTop: 18,
     borderRadius: 8,
@@ -3768,8 +3971,8 @@ export const weeklyReportsStyles = StyleSheet.create({
   },
 
   summaryIconBox: {
-    width: 70,
-    height: 70,
+    width: 65,
+    height: 65,
     borderRadius: 12,
     backgroundColor: colors.bg,
     alignItems: 'center',
@@ -3782,7 +3985,7 @@ export const weeklyReportsStyles = StyleSheet.create({
   },
 
   summaryTitle: {
-    fontSize: 16,
+    fontSize: 18,
     color: colors.black,
     fontFamily: 'Tajawal-Medium',
   },
@@ -3813,15 +4016,15 @@ export const weeklyReportsStyles = StyleSheet.create({
   },
 
   chartCard: {
-    height: 240,
+    height: 230,
     marginHorizontal: 34,
-    marginTop: 10,
+    marginTop: 6,
     borderRadius: 8,
     borderWidth: 1,
     borderColor: '#E5E7EB',
     backgroundColor: colors.white,
-    paddingHorizontal: 12,
-    paddingTop: 14,
+    paddingHorizontal: 5,
+    paddingTop: 5,
   },
 
   chartHeader: {
@@ -3861,14 +4064,14 @@ export const weeklyReportsStyles = StyleSheet.create({
   },
 
   categoryCard: {
-    height: 220,
+    height: 240,
     marginHorizontal: 20,
-    marginTop: 10,
+    marginTop: 6,
     borderRadius: 18,
     borderWidth: 1,
     borderColor: '#E5E7EB',
     backgroundColor: colors.white,
-    padding: 14,
+    padding: 7,
     elevation: 4,
   },
 
@@ -3882,22 +4085,21 @@ export const weeklyReportsStyles = StyleSheet.create({
   categoryContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     marginTop: 8,
   },
 
   donutWrapper: {
-    width: 140,
-    height: 140,
+    width: 150,
+    height: 150,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: -25,
   },
 
   donutInner: {
     position: 'absolute',
-    width: 74,
-    height: 74,
+    width: 75,
+    height: 75,
     borderRadius: 37,
     backgroundColor: colors.white,
     alignItems: 'center',
@@ -3911,16 +4113,16 @@ export const weeklyReportsStyles = StyleSheet.create({
   },
 
   donutCurrency: {
-    fontSize: 14,
+    fontSize: 16,
     color: colors.gray,
     fontFamily: 'Tajawal-Regular',
   },
 
   categoriesGrid: {
-    width: 190,
+    width: 180,
     flexDirection: 'row-reverse',
     flexWrap: 'wrap',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start'
   },
 
   categoryItem: {
@@ -3940,8 +4142,8 @@ export const weeklyReportsStyles = StyleSheet.create({
   },
 
   categoryCircle: {
-    width: 38,
-    height: 38,
+    width: 35,
+    height: 35,
     borderRadius: 19,
     justifyContent: 'center',
     alignItems: 'center',
@@ -3949,7 +4151,7 @@ export const weeklyReportsStyles = StyleSheet.create({
 
   categoryName: {
     marginTop: 4,
-    fontSize: 9,
+    fontSize: 12,
     color: colors.black,
     fontFamily: 'Tajawal-Regular',
     textAlign: 'center',
@@ -3963,7 +4165,7 @@ export const weeklyReportsStyles = StyleSheet.create({
   },
 
   categoryAmount: {
-    fontSize: 9,
+    fontSize: 11,
     color: colors.gray,
     fontFamily: 'Tajawal-Regular',
     marginLeft: 3,
@@ -3974,6 +4176,7 @@ export const weeklyReportsStyles = StyleSheet.create({
     color: colors.gray,
     fontFamily: 'Tajawal-Regular',
   },
+
 });
 
 export const monthlyReportsStyles = StyleSheet.create({
@@ -4171,8 +4374,8 @@ export const invoiceDetailsStyles = StyleSheet.create({
   },
 
   scroll: {
-    paddingBottom: 120,
-  },
+  flex: 1,
+},
 
   headerRow: {
     height: 55,
@@ -4980,14 +5183,148 @@ export const invoiceStyles = StyleSheet.create({
   },
 });
 
-export const displayInvoiceStyles = {
-  ...invoiceStyles,
-
-  detailsRow: {
-    ...invoiceStyles.detailsRow,
-
-    height: 45,
-    alignItems: 'center',
-    marginBottom: 0,
+export const uploadInvoiceStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.white,
   },
-};
+
+  backIcon: {
+    position: 'absolute',
+    left: 20,
+    top: 55,
+  },
+
+  title: {
+    position: 'absolute',
+    top: 50,
+    alignSelf: 'center',
+    fontSize: 20,
+    fontFamily: 'Tajawal-Bold',
+    color: colors.blue,
+  },
+
+  subtitle: {
+    position: 'absolute',
+    top: 95,
+    alignSelf: 'center',
+    fontSize: 14,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+  },
+
+ imageCard: {
+  position: 'absolute',
+  top: 145,
+  left: 30,
+  width: 330,
+  height: 235,
+    borderWidth: 1,
+   borderColor: '#D9E7FF',
+    borderRadius: 20,
+    alignItems: 'center',
+    backgroundColor: colors.lightBlue,
+  },
+
+  imageCircle: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: colors.white,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 25,
+  },
+
+ cardTitle: {
+  marginTop: 18,
+  fontSize: 16,
+    fontFamily: 'Tajawal-Bold',
+    color: colors.black,
+  },
+
+  cardSubTitle: {
+    marginTop: 5,
+    fontSize: 16,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+  },
+
+  uploadButton: {
+  marginTop: 22,
+
+  width: 190,
+  height: 44,
+
+  backgroundColor: colors.white,
+
+  borderRadius: 12,
+
+  justifyContent: 'center',
+  alignItems: 'center',
+
+  flexDirection: 'row-reverse',
+},
+
+  uploadButtonText: {
+    color: colors.blue,
+    fontSize: 14,
+    fontFamily: 'Tajawal-Bold',
+  },
+
+  pdfCard: {
+  position: 'absolute',
+  top: 400,
+  left: 30,
+  width: 330,
+  height: 235,
+    borderWidth: 1,
+   borderColor: '#D9E7FF',
+    borderRadius: 20,
+    alignItems: 'center',
+    backgroundColor: colors.lightBlue,
+  },
+
+  pdfCircle: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: colors.lightRed,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 25,
+  },
+
+  securityCard: {
+    position: 'absolute',
+    bottom: 40,
+    left: 25,
+    width: 340,
+    height: 90,
+    backgroundColor: colors.lightBlue,
+    borderRadius: 16,
+    flexDirection: 'row-reverse',
+    alignItems: 'center',
+    paddingHorizontal: 15,
+  },
+
+  securityTextContainer: {
+    flex: 1,
+    marginRight: 10,
+  },
+
+  securityTitle: {
+    fontSize: 16,
+    fontFamily: 'Tajawal-Bold',
+    color: colors.black,
+    textAlign: 'right',
+  },
+
+  securityDescription: {
+    fontSize: 12,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+    marginTop: 4,
+    textAlign: 'right',
+  },
+});

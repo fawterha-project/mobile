@@ -1,12 +1,95 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import { invoiceStyles, colors } from './styles';
+import {
+    createInvoice,
+    deleteAttachment
+} from './services/receiptService';
 
-const InvoiceScreen = ({ navigation }) => {
+const InvoiceScreen = ({
+    navigation,
+    route
+}) => {
+
+    const {
+        extractedData,
+        attachmentId
+    } = route.params || {};
+
+    const [
+        showDeleteModal,
+        setShowDeleteModal
+    ] = useState(false);
+
+    console.log(
+        'EXTRACTED:',
+        extractedData
+    );
+    const handleSave = async () => {
+
+        try {
+
+            const result =
+                await createInvoice(
+                    attachmentId
+                );
+
+            console.log(
+                'تم إنشاء الفاتورة:',
+                result
+            );
+
+            navigation.navigate(
+                'InvoiceAddedScreen',
+                {
+                    invoiceData: result
+                }
+            );
+
+        }
+
+        catch (error) {
+
+            console.log(
+                'خطأ إنشاء الفاتورة:',
+                error
+            );
+
+        }
+
+    };
+
+    const handleDelete = async () => {
+
+        try {
+
+            await deleteAttachment(
+                attachmentId
+            );
+
+            setShowDeleteModal(false);
+
+            navigation.replace(
+                'CameraScreen'
+            );
+
+        }
+
+        catch (error) {
+
+            console.log(
+                'خطأ حذف الفاتورة:',
+                error
+            );
+
+        }
+
+    };
+
     return (
         <View style={invoiceStyles.container}>
             {/* زر الرجوع */}
@@ -23,7 +106,8 @@ const InvoiceScreen = ({ navigation }) => {
             <View style={invoiceStyles.card}>
                 <Image
                     source={{
-              uri: 'asset:/image/receipt.png'}}
+                        uri: 'asset:/image/receipt.png'
+                    }}
                     style={invoiceStyles.receiptImage}
                     resizeMode="stretch"
                 />
@@ -32,10 +116,17 @@ const InvoiceScreen = ({ navigation }) => {
 
                 <View style={invoiceStyles.infoRow}>
                     <View>
-                        <Text style={invoiceStyles.storeName}>بندة</Text>
+                        <Text style={invoiceStyles.storeName}>
+                            {
+                                extractedData?.merchant_name ||
+                                'غير معروف'
+                            }
+                        </Text>
 
                         <Text style={invoiceStyles.amount}>
-                            84
+                            {
+                                extractedData?.subtotal || 0
+                            }
                             <Text style={invoiceStyles.currency}> ريال</Text>
                         </Text>
                     </View>
@@ -48,24 +139,44 @@ const InvoiceScreen = ({ navigation }) => {
                 <View style={invoiceStyles.line} />
 
                 <View style={invoiceStyles.detailsRow}>
-                    <Text>#789321</Text>
+                    <Text>
+                        {
+                            extractedData?.invoice_number ||
+                            'غير متوفر'
+                        }
+                    </Text>
                     <Text>رقم الفاتورة</Text>
                 </View>
 
                 <View style={invoiceStyles.detailsRow}>
-                    <Text>2026/04/29</Text>
+                    <Text><Text>
+                        {
+                            extractedData?.date
+                                ?.split('T')[0]
+                        }
+                    </Text></Text>
                     <Text>التاريخ</Text>
                 </View>
 
                 <View style={invoiceStyles.detailsRow}>
-                    <Text>مواد غذائية</Text>
+                    <Text>
+                        {
+                            extractedData
+                                ?.suggested_category
+                        }
+                    </Text>
                     <Text>الفئة</Text>
                 </View>
             </View>
 
             {/* الأزرار */}
             <View style={invoiceStyles.buttonContainer}>
-                <TouchableOpacity style={invoiceStyles.deleteButton}>
+                <TouchableOpacity
+                    style={invoiceStyles.deleteButton}
+                    onPress={() =>
+                        setShowDeleteModal(true)
+                    }
+                >
                     <MaterialIcons name="delete" size={20} color="#FF4D4D" />
 
                     <Text style={invoiceStyles.deleteText}>حذف</Text>
@@ -75,11 +186,7 @@ const InvoiceScreen = ({ navigation }) => {
 
                     style={invoiceStyles.saveButton}
 
-                    onPress={() =>
-                        navigation.navigate(
-                            'InvoiceAddedScreen'
-                        )
-                    }
+                    onPress={handleSave}
 
                 >
 
@@ -93,6 +200,121 @@ const InvoiceScreen = ({ navigation }) => {
 
                 </TouchableOpacity>
             </View>
+
+            {
+                showDeleteModal && (
+
+                    <View
+                        style={{
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            backgroundColor: 'rgba(0,0,0,0.4)',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                        }}
+                    >
+
+                        <View
+                            style={{
+                                width: '85%',
+                                backgroundColor: 'white',
+                                borderRadius: 20,
+                                padding: 24,
+                                alignItems: 'center',
+                            }}
+                        >
+
+                            <MaterialIcons
+                                name="delete"
+                                size={55}
+                                color="#FF4D4D"
+                            />
+
+                            <Text
+                                style={{
+                                    fontSize: 25,
+                                    marginTop: 10,
+                                    color: '#FF4D4D',
+                                }}
+                            >
+                                حذف الفاتورة
+                            </Text>
+
+                            <Text
+                                style={{
+                                    textAlign: 'center',
+                                    marginTop: -5,
+                                    fontSize: 14,
+                                }}
+                            >
+                                سيتم حذف الفاتورة ولن تتمكن من استعادتها لاحقاً
+                            </Text>
+
+                            <View
+                                style={{
+                                    flexDirection: 'row',
+                                    marginTop: 25,
+                                }}
+                            >
+
+                                <TouchableOpacity
+                                    style={{
+                                        flex: 1,
+                                        marginRight: 8,
+                                        padding: 14,
+                                        borderRadius: 12,
+                                        backgroundColor: '#E5E7EB',
+                                        alignItems: 'center',
+
+                                    }}
+                                    onPress={() =>
+                                        setShowDeleteModal(false)
+                                    }
+                                >
+                                    <Text
+                                        style={{
+                                            color: 'black',
+                                            fontSize: 18,
+                                            fontWeight: '600',
+                                        }}
+                                    >
+                                        إلغاء
+                                    </Text>
+                                </TouchableOpacity>
+
+                                <TouchableOpacity
+                                    style={{
+                                        flex: 1,
+                                        marginLeft: 8,
+                                        padding: 14,
+                                        borderRadius: 12,
+                                        backgroundColor: '#FF4D4D',
+                                        alignItems: 'center',
+                                    }}
+                                    onPress={handleDelete}
+                                >
+                                    <Text
+                                        style={{
+                                            color: 'white',
+                                            fontSize: 18,
+                                            fontWeight: '600',
+                                        }}
+                                    >
+                                        حذف
+                                    </Text>
+                                </TouchableOpacity>
+
+                            </View>
+
+                        </View>
+
+                    </View>
+
+                )
+            }
         </View>
     );
 };

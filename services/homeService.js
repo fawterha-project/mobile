@@ -2,54 +2,54 @@ import api from './api';
 
 
 export const getSummary = async (
-users_id
+    users_id
 ) => {
 
-try {
+    try {
 
-const response =
-await api.get(
-`/reports/summary?users_id=${users_id}`
-);
+        const response =
+            await api.get(
+                `/reports/summary?users_id=${users_id}`
+            );
 
-return response.data.summary;
+        return response.data.summary;
 
-}
+    }
 
-catch(error){
+    catch (error) {
 
-throw(
-error.response?.data ||
-error.message
-);
+        throw (
+            error.response?.data ||
+            error.message
+        );
 
-}
+    }
 
 };
 
 
 // جلب الفواتير
+export const getReceipts = async (search = '') => {
 
-export const getReceipts = async () => {
+    try {
 
-try {
+        console.log('Search Value:', search);
 
-const response =
-await api.get(
-'/receipts'
-);
+        const response =
+            await api.get(
+                `/receipts?search=${search}`
+            );
 
-return response.data.receipts;
+        return response.data.receipts;
 
-}
+    }
+    catch (error) {
 
-catch(error){
+        throw (
+            error.response?.data ||
+            error.message
+        );
 
-throw(
-error.response?.data ||
-error.message
-);
-
-}
+    }
 
 };

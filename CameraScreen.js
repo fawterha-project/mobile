@@ -1,15 +1,15 @@
 import React, { useRef, useState } from 'react';
-
 import {
     View,
     Text,
     TouchableOpacity,
 } from 'react-native';
-
+import {
+    uploadReceipt,
+    processReceipt,
+} from './services/receiptService';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-
 import { Camera } from 'react-native-camera-kit';
-
 import {
     cameraStyles,
     colors
@@ -32,6 +32,10 @@ const CameraScreen = ({
         setShowCapturePopup
     ] = useState(false);
 
+    const [
+        invoiceData,
+        setInvoiceData
+    ] = useState(null);
     return (
 
         <View
@@ -100,25 +104,84 @@ const CameraScreen = ({
                         const image =
                             await cameraRef.current.capture();
 
-                        if (image) {
+                        if (!image) {
+                            return;
+                        }
 
-                            console.log(
-                                image.uri
+                        console.log(
+                            'الصورة:',
+                            image
+                        );
+
+                        const uploadResult =
+                            await uploadReceipt(image);
+
+                        console.log(
+                            'رفع:',
+                            uploadResult
+                        );
+
+                        const attachmentId =
+                            uploadResult.attachment
+                                ?.attachment_id;
+
+                        if (!attachmentId) {
+
+                            navigation.navigate(
+                                'FailedScanScreen'
                             );
 
-                            setShowCapturePopup(
-                                true
-                            );
+                            return;
 
                         }
+
+                        const processResult =
+                            await processReceipt(
+                                attachmentId
+                            );
+
+                        console.log(
+                            'البيانات:',
+                            processResult
+                        );
+
+                        if (
+                            !processResult
+                                ?.extracted_data
+                        ) {
+
+                            navigation.navigate(
+                                'FailedScanScreen'
+                            );
+
+                            return;
+
+                        }
+
+                        setInvoiceData({
+
+                            extractedData:
+                                processResult.extracted_data,
+
+                            attachmentId:
+                                attachmentId,
+
+                        });
+
+                        setShowCapturePopup(true);
 
                     }
 
                     catch (error) {
 
                         console.log(
-                            'خطأ:',
-                            error
+                            'ERROR RESPONSE:',
+                            error?.response?.data
+                        );
+
+                        console.log(
+                            'ERROR STATUS:',
+                            error?.response?.status
                         );
 
                     }
@@ -211,7 +274,8 @@ const CameraScreen = ({
                                 );
 
                                 navigation.navigate(
-                                    'InvoiceScreen'
+                                    'InvoiceScreen',
+                                    invoiceData
                                 );
 
                             }}

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-
 import {
     View,
     Text,
     TextInput,
     TouchableOpacity,
     Image,
-    Alert
+    Alert,
+    Modal
 } from 'react-native';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -44,6 +44,39 @@ const SignUpScreen = ({
         confirmPassword,
         setConfirmPassword
     ] = useState('');
+    const [
+        showPasswordModal,
+        setShowPasswordModal
+    ] = useState(false);
+
+    const [
+        passwordMessage,
+        setPasswordMessage
+    ] = useState('');
+    const [
+        showModal,
+        setShowModal
+    ] = useState(false);
+
+    const [
+        modalTitle,
+        setModalTitle
+    ] = useState('');
+
+    const [
+        modalMessage,
+        setModalMessage
+    ] = useState('');
+
+    const [
+        modalIcon,
+        setModalIcon
+    ] = useState('notifications');
+
+    const [
+        modalSuccess,
+        setModalSuccess
+    ] = useState(false);
 
     const isFormValid =
 
@@ -116,8 +149,7 @@ const SignUpScreen = ({
             />
 
             <Text style={signupStyles.passwordLabel}>
-                كلمة المرور
-            </Text>
+                كلمة المرور </Text>
 
             <View style={signupStyles.passwordBox}>
 
@@ -154,8 +186,7 @@ const SignUpScreen = ({
 
 
             <Text style={signupStyles.confirmPasswordLabel}>
-                تأكيد كلمة المرور
-            </Text>
+                تأكيد كلمة المرور </Text>
 
             <View
                 style={signupStyles.confirmPasswordBox}
@@ -239,16 +270,61 @@ const SignUpScreen = ({
                 disabled={!isFormValid}
 
                 onPress={async () => {
+                    const passwordRequirements = [];
+
+                    if (password.length < 8) {
+                        passwordRequirements.push(
+                            '8 أحرف على الأقل'
+                        );
+                    }
+
+                    if (!/[A-Z]/.test(password)) {
+                        passwordRequirements.push(
+                            'حرف كبير واحد على الأقل'
+                        );
+                    }
+
+                    if (!/[0-9]/.test(password)) {
+                        passwordRequirements.push(
+                            'رقم واحد على الأقل'
+                        );
+                    }
+
+                    if (
+                        !/[!@#$%^&*(),.?":{}|<>]/.test(password)
+                    ) {
+                        passwordRequirements.push(
+                            'رمز واحد على الأقل'
+                        );
+                    }
+
+                    if (passwordRequirements.length > 0) {
+
+                        setPasswordMessage(
+                            'يجب أن تحتوي على:\n\n• ' +
+                            passwordRequirements.join('\n• ')
+                        );
+
+                        setShowPasswordModal(true);
+
+                        return;
+                    }
 
                     if (password !== confirmPassword) {
 
-                        Alert.alert(
-                            'خطأ',
+                        setModalTitle('خطأ');
+
+                        setModalMessage(
                             'كلمتا المرور غير متطابقتين'
                         );
 
-                        return;
+                        setModalIcon('error-outline');
 
+                        setModalSuccess(false);
+
+                        setShowModal(true);
+
+                        return;
                     }
 
                     const emailRegex =
@@ -258,10 +334,17 @@ const SignUpScreen = ({
                         !emailRegex.test(email)
                     ) {
 
-                        Alert.alert(
-                            'خطأ',
+                        setModalTitle('خطأ');
+
+                        setModalMessage(
                             'البريد الإلكتروني غير صحيح'
                         );
+
+                        setModalIcon('error-outline');
+
+                        setModalSuccess(false);
+
+                        setShowModal(true);
 
                         return;
 
@@ -281,29 +364,17 @@ const SignUpScreen = ({
                             result
                         );
 
-                        Alert.alert(
-                            'نجاح',
-                            'تم إرسال رمز التحقق',
-                            [
-                                {
-                                    text: 'موافق',
-                                    onPress: () => {
+                        setModalTitle('نجاح');
 
-                                        navigation.navigate(
-                                            'VerifyEmailScreen',
-                                            {
-                                                email,
-                                                source: 'signup',
-                                                user: {
-                                                    first_name: name
-                                                }
-                                            }
-                                        );
-
-                                    }
-                                }
-                            ]
+                        setModalMessage(
+                            'تم إرسال رمز التحقق'
                         );
+
+                        setModalIcon('check-circle');
+
+                        setModalSuccess(true);
+
+                        setShowModal(true);
 
                     }
 
@@ -314,10 +385,18 @@ const SignUpScreen = ({
                             error
                         );
 
-                        Alert.alert(
-                            'خطأ',
+                        setModalTitle('خطأ');
+
+                        setModalMessage(
+                            error?.message ||
                             'فشل إنشاء الحساب'
                         );
+
+                        setModalIcon('error-outline');
+
+                        setModalSuccess(false);
+
+                        setShowModal(true);
 
                     }
 
@@ -356,7 +435,179 @@ const SignUpScreen = ({
                 </Text>
 
             </Text>
+            <Modal
+                transparent
+                visible={showPasswordModal}
+                animationType="fade"
+            >
 
+                <View style={signupStyles.passwordOverlay}>
+
+                    <View style={signupStyles.passwordModal}>
+
+                        <View
+                            style={
+                                signupStyles.passwordIconCircle
+                            }
+                        >
+
+                            <MaterialIcons
+                                name="lock"
+                                size={42}
+                                color={colors.blue}
+                            />
+
+                        </View>
+
+                        <Text
+                            style={
+                                signupStyles.passwordTitle
+                            }
+                        >
+                            كلمة المرور غير مطابقة
+                        </Text>
+
+                        <Text
+                            style={
+                                signupStyles.passwordText
+                            }
+                        >
+                            {passwordMessage}
+                        </Text>
+
+                        <TouchableOpacity
+                            style={
+                                signupStyles.passwordButton
+                            }
+                            onPress={() => {
+
+                                setShowPasswordModal(false);
+
+                                if (modalSuccess) {
+
+                                    navigation.navigate(
+                                        'VerifyEmailScreen',
+                                        {
+                                            email,
+                                            source: 'signup',
+                                            user: {
+                                                first_name: name
+                                            }
+                                        }
+                                    );
+
+                                }
+
+                            }}
+                        >
+
+                            <Text
+                                style={
+                                    signupStyles.passwordButtonText
+                                }
+                            >
+                                حسناً
+                            </Text>
+
+                        </TouchableOpacity>
+
+                    </View>
+
+                </View>
+
+            </Modal>
+            <Modal
+                transparent
+                visible={showModal}
+                animationType="fade"
+            >
+
+                <View style={signupStyles.passwordOverlay}>
+
+                    <View style={signupStyles.passwordModal}>
+
+                        <View
+                            style={[
+                                signupStyles.passwordIconCircle,
+                                {
+                                    backgroundColor:
+                                        modalSuccess
+                                            ? '#F2F6FF'
+                                            : '#FFEAEA'
+                                }
+                            ]}
+                        >
+
+                            <MaterialIcons
+                                name={modalIcon}
+                                size={42}
+                                color={
+                                    modalSuccess
+                                        ? colors.blue
+                                        : '#E53935'
+                                }
+                            />
+
+                        </View>
+
+                        <Text
+                            style={
+                                signupStyles.passwordTitle
+                            }
+                        >
+                            {modalTitle}
+                        </Text>
+
+                        <Text
+                            style={
+                                signupStyles.passwordText
+                            }
+                        >
+                            {modalMessage}
+                        </Text>
+
+                        <TouchableOpacity
+                            style={
+                                signupStyles.passwordButton
+                            }
+
+                            onPress={() => {
+
+                                setShowModal(false);
+
+                                if (modalSuccess) {
+
+                                    navigation.navigate(
+                                        'VerifyEmailScreen',
+                                        {
+                                            email,
+                                            source: 'signup',
+                                            user: {
+                                                first_name: name
+                                            }
+                                        }
+                                    );
+
+                                }
+
+                            }}
+                        >
+
+                            <Text
+                                style={
+                                    signupStyles.passwordButtonText
+                                }
+                            >
+                                حسناً
+                            </Text>
+
+                        </TouchableOpacity>
+
+                    </View>
+
+                </View>
+
+            </Modal>
         </View>
 
     );

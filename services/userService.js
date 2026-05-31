@@ -1,131 +1,146 @@
 import api from './api';
 
 import AsyncStorage
-from '@react-native-async-storage/async-storage';
+    from '@react-native-async-storage/async-storage';
 
 export const signupUser = async (
-name,
-email,
-password
+    name,
+    email,
+    password
 ) => {
 
-try {
+    try {
 
-const response =
-await api.post(
-'/auth/register',
-{
-first_name:name,
-last_name:'',
-email,
-password,
-}
-);
+        const response =
+            await api.post(
+                '/auth/register',
+                {
+                    first_name: name,
+                    last_name: '',
+                    email,
+                    password,
+                }
+            );
 
-// حفظ التوكن
-await AsyncStorage.setItem(
-'userToken',
-response.data.token
-);
+        // حفظ التوكن
+        await AsyncStorage.setItem(
+            'userToken',
+            response.data.token
+        );
 
-// إرساله تلقائياً مع كل الطلبات
-api.defaults.headers.common[
-'Authorization'
-]=`Bearer ${response.data.token}`;
+        // إرساله تلقائياً مع كل الطلبات
+        api.defaults.headers.common[
+            'Authorization'
+        ] = `Bearer ${response.data.token}`;
 
-return response.data;
+        return response.data;
 
-}
+    }
 
-catch(error){
+    catch (error) {
 
-throw(
-error.response?.data ||
-error.message
-);
+        throw (
+            error.response?.data ||
+            error.message
+        );
 
-}
+    }
 
 };
 
 
 
 export const loginUser = async (
-email,
-password
-)=>{
+    email,
+    password
+) => {
 
-try{
+    try {
 
-const response =
-await api.post(
-'/auth/login',
-{
-email,
-password,
-}
-);
+        const response =
+            await api.post(
+                '/auth/login',
+                {
+                    email,
+                    password,
+                }
+            );
 
-console.log(
-'Login Result:',
-response.data
-);
+        console.log(
+            'Login Result:',
+            response.data
+        );
 
-// حفظ التوكن
-await AsyncStorage.setItem(
-'userToken',
-response.data.token
-);
+        await AsyncStorage.setItem(
+            'userToken',
+            response.data.token
+        );
 
-// إرساله تلقائياً مع كل الطلبات
-api.defaults.headers.common[
-'Authorization'
-]=`Bearer ${response.data.token}`;
+        await AsyncStorage.setItem(
 
-return response.data;
+            'user',
 
-}
+            JSON.stringify(
+                response.data.user
+            )
 
-catch(error){
+        );
 
-throw(
-error.response?.data ||
-error.message
-);
+        // حفظ التوكن
+        await AsyncStorage.setItem(
+            'userToken',
+            response.data.token
+        );
 
-}
+        // إرساله تلقائياً مع كل الطلبات
+        api.defaults.headers.common[
+            'Authorization'
+        ] = `Bearer ${response.data.token}`;
+
+        return response.data;
+
+    }
+
+    catch (error) {
+
+        throw (
+            error.response?.data ||
+            error.message
+        );
+
+    }
 
 };
 
 
 
 export const verifySignupCode = async (
-email,
-code
-)=>{
+    email,
+    code
+) => {
 
-try{
+    try {
 
-const response =
-await api.post(
-'/auth/verify-signup',
-{
-email,
-code
-}
-);
+        const response =
+            await api.post(
+                '/auth/verify-signup',
+                {
+                    email,
+                    code
+                }
+            );
 
-return response.data;
+        return response.data;
 
-}
+    }
 
-catch(error){
+    catch (error) {
 
-throw(
-error.response?.data ||
-error.message
-);
+        throw (
+            error.response?.data ||
+            error.message
+        );
 
-}
+    }
 
 };

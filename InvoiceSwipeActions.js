@@ -8,10 +8,10 @@ import {
 } from 'react-native';
 
 import MaterialIcons
-from 'react-native-vector-icons/MaterialIcons';
+    from 'react-native-vector-icons/MaterialIcons';
 
 import { Swipeable }
-from 'react-native-gesture-handler';
+    from 'react-native-gesture-handler';
 
 import {
     profileStyles,
@@ -23,581 +23,591 @@ export default function InvoiceSwipeActions({
     children,
     item,
     onDelete,
-    onChangeCategory
+    onChangeCategory,
+    deleteOnly = false
 
 }) {
 
-const[
-showOptions,
-setShowOptions
-]=useState(false);
+    const [
+        showOptions,
+        setShowOptions
+    ] = useState(false);
 
-const[
-showCategories,
-setShowCategories
-]=useState(false);
+    const [
+        showCategories,
+        setShowCategories
+    ] = useState(false);
 
-const[
-showDeleteModal,
-setShowDeleteModal
-]=useState(false);
+    const [
+        showDeleteModal,
+        setShowDeleteModal
+    ] = useState(false);
 
 
-return(
+    return (
 
-<>
+        <>
 
-<Swipeable
+            <Swipeable
 
-onSwipeableOpen={()=>{
+                onSwipeableOpen={() => {
 
-setShowOptions(true);
+                    setShowOptions(true);
 
-}}
+                }}
 
-renderRightActions={()=>(
-<View style={{width:1}}/>
-)}
+                renderRightActions={() => (
+                    <View style={{ width: 1 }} />
+                )}
 
+            >
+
+                {children}
+
+            </Swipeable>
+
+
+
+            {/* إدارة الفاتورة */}
+
+            <Modal
+                transparent
+                visible={showOptions}
+                animationType="fade"
+            >
+
+                <View
+                    style={profileStyles.deleteOverlay}
+                >
+
+                    <View
+                        style={profileStyles.deleteModalBox}
+                    >
+
+                        <View
+                            style={
+                                profileStyles.deleteIconCircle
+                            }
+                        >
+
+                            <MaterialIcons
+                                name="receipt"
+                                size={42}
+                                color={colors.blue}
+                            />
+
+                        </View>
+
+                        <Text
+                            style={
+                                profileStyles.deleteModalTitle
+                            }
+                        >
+
+                            إدارة الفاتورة
+
+                        </Text>
+
+                        <Text
+    style={
+        profileStyles.deleteModalText
+    }
 >
 
-{children}
-
-</Swipeable>
-
-
-
-{/* إدارة الفاتورة */}
-
-<Modal
-transparent
-visible={showOptions}
-animationType="fade"
->
-
-<View
-style={profileStyles.deleteOverlay}
->
-
-<View
-style={profileStyles.deleteModalBox}
->
-
-<View
-style={
-profileStyles.deleteIconCircle
-}
->
-
-<MaterialIcons
-name="receipt"
-size={42}
-color={colors.blue}
-/>
-
-</View>
-
-<Text
-style={
-profileStyles.deleteModalTitle
-}
->
-
-إدارة الفاتورة
+    {
+        deleteOnly
+            ? 'يمكنك حذف الفاتورة'
+            : 'اختر العملية المطلوبة'
+    }
 
 </Text>
 
-<Text
-style={
-profileStyles.deleteModalText
-}
->
+                        <View
+                            style={{
+                                marginTop: 20,
+                                width: '100%',
+                                paddingHorizontal: 20
+                            }}
+                        >
 
-اختر العملية المطلوبة
-
-</Text>
-
-
-<View
-style={{
-marginTop:20,
-width:'100%',
-paddingHorizontal:20
-}}
->
+                           {
+!deleteOnly && (
 
 <TouchableOpacity
 
-style={{
-height:50,
-borderRadius:12,
-backgroundColor:colors.blue,
-justifyContent:'center',
-alignItems:'center',
-marginBottom:12
-}}
+    style={{
+        height: 50,
+        borderRadius: 12,
+        backgroundColor: colors.blue,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 12
+    }}
 
-onPress={()=>{
+    onPress={() => {
 
-setShowOptions(false);
+        setShowOptions(false);
 
-setShowCategories(true);
+        setShowCategories(true);
 
-}}
+    }}
 >
 
-<Text
-style={{
-color:colors.white,
-fontSize:18,
-fontFamily:'Tajawal-Medium'
-}}
->
+    <Text
+        style={{
+            color: colors.white,
+            fontSize: 18,
+            fontFamily: 'Tajawal-Medium'
+        }}
+    >
 
-إعادة التصنيف
+        إعادة التصنيف
 
-</Text>
+    </Text>
 
 </TouchableOpacity>
 
-
-<TouchableOpacity
-
-style={{
-height:50,
-borderRadius:12,
-backgroundColor:
-colors.lightRed,
-justifyContent:'center',
-alignItems:'center'
-}}
-
-onPress={()=>{
-
-setShowOptions(false);
-
-setShowDeleteModal(true);
-
-}}
->
-
-<Text
-style={{
-color:colors.red,
-fontSize:18,
-fontFamily:'Tajawal-Medium'
-}}
->
-
-حذف الفاتورة
-
-</Text>
-
-</TouchableOpacity>
-
-
-<TouchableOpacity
-
-onPress={()=>
-setShowOptions(false)
+)
 }
 
-style={{
-marginTop:15,
-alignItems:'center'
-}}
->
 
-<Text
-style={{
-color:colors.gray
-}}
->
+                            <TouchableOpacity
 
-إلغاء
+                                style={{
+                                    height: 50,
+                                    borderRadius: 12,
+                                    backgroundColor:
+                                        colors.lightRed,
+                                    justifyContent: 'center',
+                                    alignItems: 'center'
+                                }}
 
-</Text>
+                                onPress={() => {
 
-</TouchableOpacity>
+                                    setShowOptions(false);
 
-</View>
+                                    setShowDeleteModal(true);
 
-</View>
+                                }}
+                            >
 
-</View>
+                                <Text
+                                    style={{
+                                        color: colors.red,
+                                        fontSize: 18,
+                                        fontFamily: 'Tajawal-Medium'
+                                    }}
+                                >
 
-</Modal>
+                                    حذف الفاتورة
 
+                                </Text>
 
+                            </TouchableOpacity>
 
-{/* نافذة إعادة التصنيف */}
 
-<Modal
-transparent
-visible={showCategories}
-animationType="fade"
->
+                            <TouchableOpacity
 
-<View
-style={profileStyles.deleteOverlay}
->
+                                onPress={() =>
+                                    setShowOptions(false)
+                                }
 
-<View
-style={{
-width:'88%',
-backgroundColor:
-colors.white,
-borderRadius:30,
-padding:25,
-alignItems:'center'
-}}
->
+                                style={{
+                                    marginTop: 15,
+                                    alignItems: 'center'
+                                }}
+                            >
 
-<View
-style={{
-width:90,
-height:90,
-borderRadius:45,
-backgroundColor:'#EEF4FF',
-justifyContent:'center',
-alignItems:'center'
-}}
->
+                                <Text
+                                    style={{
+                                        color: colors.gray
+                                    }}
+                                >
 
-<MaterialIcons
-name="receipt"
-size={40}
-color={colors.blue}
-/>
+                                    إلغاء
 
-</View>
+                                </Text>
 
+                            </TouchableOpacity>
 
-<Text
-style={{
-fontSize:30,
-marginTop:18,
-color:colors.blue,
-fontFamily:'Tajawal-Bold'
-}}
->
+                        </View>
 
-إعادة التصنيف
+                    </View>
 
-</Text>
+                </View>
 
+            </Modal>
 
-<Text
-style={{
-fontSize:17,
-color:colors.gray,
-marginTop:8,
-marginBottom:22
-}}
->
 
-اختر التصنيف المناسب لهذه الفاتورة
 
-</Text>
+            {/* نافذة إعادة التصنيف */}
 
+            <Modal
+                transparent
+                visible={showCategories}
+                animationType="fade"
+            >
 
-<View
-style={{
-flexDirection:'row',
-flexWrap:'wrap',
-justifyContent:'space-between',
-width:'100%'
-}}
->
+                <View
+                    style={profileStyles.deleteOverlay}
+                >
 
-{[
+                    <View
+                        style={{
+                            width: '88%',
+                            backgroundColor:
+                                colors.white,
+                            borderRadius: 30,
+                            padding: 25,
+                            alignItems: 'center'
+                        }}
+                    >
 
-{
+                        <View
+                            style={{
+                                width: 90,
+                                height: 90,
+                                borderRadius: 45,
+                                backgroundColor: '#EEF4FF',
+                                justifyContent: 'center',
+                                alignItems: 'center'
+                            }}
+                        >
 
-name:'مقاضي',
-icon:'shopping-basket'
+                            <MaterialIcons
+                                name="receipt"
+                                size={40}
+                                color={colors.blue}
+                            />
 
-},
+                        </View>
 
-{
 
-name:'مطاعم',
-icon:'restaurant'
+                        <Text
+                            style={{
+                                fontSize: 30,
+                                marginTop: 18,
+                                color: colors.blue,
+                                fontFamily: 'Tajawal-Bold'
+                            }}
+                        >
 
-},
+                            إعادة التصنيف
 
-{
+                        </Text>
 
-name:'التسوق',
-icon:'shopping-bag'
 
-},
+                        <Text
+                            style={{
+                                fontSize: 17,
+                                color: colors.gray,
+                                marginTop: 8,
+                                marginBottom: 22
+                            }}
+                        >
 
-{
+                            اختر التصنيف المناسب لهذه الفاتورة
 
-name:'النقل',
-icon:'directions-bus'
+                        </Text>
 
-},
 
-{
+                        <View
+                            style={{
+                                flexDirection: 'row',
+                                flexWrap: 'wrap',
+                                justifyContent: 'space-between',
+                                width: '100%'
+                            }}
+                        >
 
-name:'الصحة',
-icon:'favorite-border'
+                            {[
 
-},
+                                {
 
-{
+                                    name: 'مقاضي',
+                                    icon: 'shopping-basket'
 
-name:'الالتزامات',
-icon:'event'
+                                },
 
-},
+                                {
 
-{
+                                    name: 'مطاعم',
+                                    icon: 'restaurant'
 
-name:'أخرى',
-icon:'more-horiz'
+                                },
 
-}
+                                {
 
-].map((category,index)=>(
+                                    name: 'التسوق',
+                                    icon: 'shopping-bag'
 
-<TouchableOpacity
+                                },
 
-key={index}
+                                {
 
-style={{
-width:'45%',
-height:80,
-backgroundColor:'#F8FAFF',
-borderRadius:20,
-marginBottom:12,
-justifyContent:'center',
-alignItems:'center',
-borderWidth:1,
-borderColor:'#E8EDF7'
-}}
+                                    name: 'النقل',
+                                    icon: 'directions-bus'
 
-onPress={()=>{
+                                },
 
-setShowCategories(false);
+                                {
 
-onChangeCategory(
-item,
-category.name
-);
+                                    name: 'الصحة',
+                                    icon: 'favorite-border'
 
-}}
->
+                                },
 
-<View
-style={{
-width:45,
-height:30,
-borderRadius:21,
-backgroundColor:'#EDF4FF',
-justifyContent:'center',
-alignItems:'center',
-marginBottom:8
-}}
->
+                                {
 
-<MaterialIcons
-name={category.icon}
-size={22}
-color={colors.blue}
-/>
+                                    name: 'الالتزامات',
+                                    icon: 'event'
 
-</View>
+                                },
 
+                                {
 
-<Text
-style={{
-fontSize:17,
-color:colors.black,
-fontFamily:'Tajawal-Medium'
-}}
->
+                                    name: 'أخرى',
+                                    icon: 'more-horiz'
 
-{category.name}
+                                }
 
-</Text>
+                            ].map((category, index) => (
 
-</TouchableOpacity>
+                                <TouchableOpacity
 
-))}
+                                    key={index}
 
-</View>
+                                    style={{
+                                        width: '45%',
+                                        height: 80,
+                                        backgroundColor: '#F8FAFF',
+                                        borderRadius: 20,
+                                        marginBottom: 12,
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        borderWidth: 1,
+                                        borderColor: '#E8EDF7'
+                                    }}
 
+                                    onPress={() => {
 
-<TouchableOpacity
-onPress={()=>
-setShowCategories(false)
-}
->
+                                        setShowCategories(false);
 
-<Text
-style={{
-fontSize:18,
-color:colors.blue,
-marginTop:10
-}}
->
+                                        onChangeCategory(
+                                            item,
+                                            category.name
+                                        );
 
-إلغاء
+                                    }}
+                                >
 
-</Text>
+                                    <View
+                                        style={{
+                                            width: 45,
+                                            height: 30,
+                                            borderRadius: 21,
+                                            backgroundColor: '#EDF4FF',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                            marginBottom: 8
+                                        }}
+                                    >
 
-</TouchableOpacity>
+                                        <MaterialIcons
+                                            name={category.icon}
+                                            size={22}
+                                            color={colors.blue}
+                                        />
 
-</View>
+                                    </View>
 
-</View>
 
-</Modal>
+                                    <Text
+                                        style={{
+                                            fontSize: 17,
+                                            color: colors.black,
+                                            fontFamily: 'Tajawal-Medium'
+                                        }}
+                                    >
 
+                                        {category.name}
 
+                                    </Text>
 
-{/* نافذة تأكيد حذف الفاتورة */}
+                                </TouchableOpacity>
 
-<Modal
-transparent
-visible={showDeleteModal}
-animationType="fade"
->
+                            ))}
 
-<View
-style={profileStyles.deleteOverlay}
->
+                        </View>
 
-<View
-style={{
-width:'88%',
-backgroundColor:colors.white,
-borderRadius:30,
-padding:25,
-alignItems:'center'
-}}
->
 
-<View
-style={{
-width:90,
-height:90,
-borderRadius:45,
-backgroundColor:'#FFECEC',
-justifyContent:'center',
-alignItems:'center'
-}}
->
+                        <TouchableOpacity
+                            onPress={() =>
+                                setShowCategories(false)
+                            }
+                        >
 
-<MaterialIcons
-name="delete"
-size={42}
-color={colors.red}
-/>
+                            <Text
+                                style={{
+                                    fontSize: 18,
+                                    color: colors.blue,
+                                    marginTop: 10
+                                }}
+                            >
 
-</View>
+                                إلغاء
 
+                            </Text>
 
-<Text
-style={{
-fontSize:28,
-marginTop:18,
-color:colors.red,
-fontFamily:'Tajawal-Bold'
-}}
->
+                        </TouchableOpacity>
 
-حذف الفاتورة
+                    </View>
 
-</Text>
+                </View>
 
+            </Modal>
 
-<Text
-style={{
-fontSize:18,
-textAlign:'center',
-color:colors.gray,
-marginTop:8
-}}
->
 
-هل أنت متأكد من حذف الفاتورة؟
 
-</Text>
+            {/* نافذة تأكيد حذف الفاتورة */}
 
+            <Modal
+                transparent
+                visible={showDeleteModal}
+                animationType="fade"
+            >
 
-<TouchableOpacity
+                <View
+                    style={profileStyles.deleteOverlay}
+                >
 
-style={{
-width:'100%',
-height:55,
-backgroundColor:colors.red,
-borderRadius:15,
-marginTop:25,
-justifyContent:'center',
-alignItems:'center'
-}}
+                    <View
+                        style={{
+                            width: '88%',
+                            backgroundColor: colors.white,
+                            borderRadius: 30,
+                            padding: 25,
+                            alignItems: 'center'
+                        }}
+                    >
 
-onPress={()=>{
+                        <View
+                            style={{
+                                width: 90,
+                                height: 90,
+                                borderRadius: 45,
+                                backgroundColor: '#FFECEC',
+                                justifyContent: 'center',
+                                alignItems: 'center'
+                            }}
+                        >
 
-setShowDeleteModal(false);
+                            <MaterialIcons
+                                name="delete"
+                                size={42}
+                                color={colors.red}
+                            />
 
-onDelete(item);
+                        </View>
 
-}}
->
 
-<Text
-style={{
-fontSize:18,
-color:colors.white
-}}
->
+                        <Text
+                            style={{
+                                fontSize: 28,
+                                marginTop: 18,
+                                color: colors.red,
+                                fontFamily: 'Tajawal-Bold'
+                            }}
+                        >
 
-نعم، احذف الفاتورة
+                            حذف الفاتورة
 
-</Text>
+                        </Text>
 
-</TouchableOpacity>
 
+                        <Text
+                            style={{
+                                fontSize: 18,
+                                textAlign: 'center',
+                                color: colors.gray,
+                                marginTop: 8
+                            }}
+                        >
 
-<TouchableOpacity
+                            هل أنت متأكد من حذف الفاتورة؟
 
-style={{
-marginTop:15
-}}
+                        </Text>
 
-onPress={()=>{
 
-setShowDeleteModal(false);
+                        <TouchableOpacity
 
-}}
->
+                            style={{
+                                width: '100%',
+                                height: 55,
+                                backgroundColor: colors.red,
+                                borderRadius: 15,
+                                marginTop: 25,
+                                justifyContent: 'center',
+                                alignItems: 'center'
+                            }}
 
-<Text
-style={{
-fontSize:18,
-color:colors.gray
-}}
->
+                            onPress={() => {
 
-إلغاء
+                                setShowDeleteModal(false);
 
-</Text>
+                                onDelete(item);
 
-</TouchableOpacity>
+                            }}
+                        >
 
-</View>
+                            <Text
+                                style={{
+                                    fontSize: 18,
+                                    color: colors.white
+                                }}
+                            >
 
-</View>
+                                نعم، احذف الفاتورة
 
-</Modal>
+                            </Text>
 
-</>
+                        </TouchableOpacity>
 
-);
+
+                        <TouchableOpacity
+
+                            style={{
+                                marginTop: 15
+                            }}
+
+                            onPress={() => {
+
+                                setShowDeleteModal(false);
+
+                            }}
+                        >
+
+                            <Text
+                                style={{
+                                    fontSize: 18,
+                                    color: colors.gray
+                                }}
+                            >
+
+                                إلغاء
+
+                            </Text>
+
+                        </TouchableOpacity>
+
+                    </View>
+
+                </View>
+
+            </Modal>
+
+        </>
+
+    );
 
 }

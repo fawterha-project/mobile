@@ -3,10 +3,17 @@ import React, {
     useState
 } from 'react';
 import EmptyBottomNavigation from './EmptyBottomNavigation';
+import InvoiceSwipeActions
+    from './InvoiceSwipeActions';
 import {
     getReceipts
 }
     from './services/homeService';
+import {
+    updateInvoiceCategory,
+    deleteReceipt,
+}
+    from './services/receiptService';
 
 import {
     View,
@@ -68,6 +75,10 @@ export default function EmptyCategoryGroceriesScreen({
         receipts,
         setReceipts
     ] = useState([]);
+    const [
+        searchText,
+        setSearchText
+    ] = useState('');
 
     useEffect(() => {
 
@@ -111,6 +122,81 @@ export default function EmptyCategoryGroceriesScreen({
             }
 
         };
+    const categoriesMap = {
+
+        'مقاضي':
+            'b4301466-4e5e-4cf6-b237-68d4224aaed0',
+
+        'مطاعم':
+            '98be0b0f-bac7-4538-acb3-7e8435cf0c7a',
+
+        'التسوق':
+            'cdc3f0de-ffac-41d9-8b45-df5c8d310462',
+
+        'النقل':
+            'f562b33f-a945-44a9-aab7-88d4024bbb42',
+
+        'الصحة':
+            '4d4a1594-25da-4e2f-bec7-6abeccca9756',
+
+        'الالتزامات':
+            'bf5a7c93-bf60-4e45-9167-f1ac86ae2869',
+
+        'أخرى':
+            '02c80bae-7876-4030-894b-41745bf2c12e',
+
+    };
+
+    const handleChangeCategory = async (
+        invoice,
+        categoryName
+    ) => {
+
+        try {
+
+            const categoryId =
+                categoriesMap[
+                categoryName
+                ];
+
+            await updateInvoiceCategory(
+                invoice.invoice_id,
+                categoryId
+            );
+
+            loadData();
+
+        }
+
+        catch (error) {
+
+            console.log(error);
+
+        }
+
+    };
+
+    const handleDelete = async (
+        invoice
+    ) => {
+
+        try {
+
+            await deleteReceipt(
+                invoice.invoice_id
+            );
+
+            loadData();
+
+        }
+
+        catch (error) {
+
+            console.log(error);
+
+        }
+
+    };
 
 
     const totalAmount =
@@ -125,6 +211,22 @@ export default function EmptyCategoryGroceriesScreen({
             0
 
         );
+    const filteredReceipts =
+
+        receipts.filter(
+
+            item =>
+
+                item.merchant_name
+                    ?.toLowerCase()
+                    .includes(
+                        searchText
+                            .trim()
+                            .toLowerCase()
+                    )
+
+        );
+
     return (
 
         <View style={categoryFoodStyles.container}>
@@ -276,20 +378,17 @@ export default function EmptyCategoryGroceriesScreen({
 
                 <TextInput
                     placeholder="ابحث عن فاتورة..."
-                    placeholderTextColor={
-                        colors.gray
-                    }
-                    style={
-                        categoryFoodStyles.searchInput
-                    }
+                    placeholderTextColor={colors.gray}
+                    style={categoryFoodStyles.searchInput}
+                    value={searchText}
+                    onChangeText={setSearchText}
                 />
-
             </View>
 
 
             {
 
-                receipts.length === 0
+                filteredReceipts.length === 0
 
                     ?
 
@@ -318,32 +417,91 @@ export default function EmptyCategoryGroceriesScreen({
                     </View>
 
                     :
+                    filteredReceipts.map(item => (
 
-                    receipts.map(item => (
+                        <InvoiceSwipeActions
 
-                        <View
                             key={item.invoice_id}
-                            style={{
-                                padding: 15,
-                                borderBottomWidth: 1,
-                                borderBottomColor: '#EEE'
-                            }}
+
+                            item={item}
+
+                            onDelete={
+                                handleDelete
+                            }
+
+                            onChangeCategory={
+                                handleChangeCategory
+                            }
+
                         >
 
-                            <Text>
+                            <TouchableOpacity
 
-                                {item.merchant_name}
+                                style={categoryFoodStyles.billItem}
 
-                            </Text>
+                                activeOpacity={0.8}
 
-                            <Text>
+                                onPress={() =>
 
-                                {item.total_price}
-                                ريال
+                                    navigation.navigate(
+                                        'InvoiceDetails',
+                                        {
+                                            receipt: item
+                                        }
+                                    )
 
-                            </Text>
+                                }
 
-                        </View>
+                            >
+
+                                <View style={categoryFoodStyles.amountBox}>
+
+                                    <Text style={categoryFoodStyles.amount}>
+                                        {item.total_price}
+                                    </Text>
+
+                                    <Text style={categoryFoodStyles.currency}>
+                                        ريال
+                                    </Text>
+
+                                </View>
+
+                                <View style={categoryFoodStyles.billInfo}>
+
+                                    <Text
+                                        numberOfLines={2}
+                                        ellipsizeMode="tail"
+                                        style={categoryFoodStyles.billName}
+                                    >
+                                        {item.merchant_name}
+                                    </Text>
+
+                                    <Text style={categoryFoodStyles.billDate}>
+                                        {item.issued_at?.split('T')[0]}
+                                    </Text>
+
+                                </View>
+
+                                <View
+                                    style={[
+                                        categoryFoodStyles.billLogoCircle,
+                                        {
+                                            backgroundColor: '#EAFBF0',
+                                        },
+                                    ]}
+                                >
+
+                                    <MaterialIcons
+                                        name="shopping-basket"
+                                        size={25}
+                                        color="#22C55E"
+                                    />
+
+                                </View>
+
+                            </TouchableOpacity>
+
+                        </InvoiceSwipeActions>
 
                     ))
 
