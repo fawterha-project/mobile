@@ -49,7 +49,7 @@ const AddBill = ({ visible, onClose, navigation }) => {
 
               setTimeout(() => {
                 navigation.navigate(
-                  'CameraPermissionScreen'
+                  'UploadInvoice'
                 );
               }, 300);
             }}
@@ -75,47 +75,39 @@ const AddBill = ({ visible, onClose, navigation }) => {
 
           <TouchableOpacity
             style={addBillStyles.option}
+            onPress={() => {
+
+              onClose();
+
+              setTimeout(() => {
+
+                navigation.navigate(
+                  'UploadInvoice'
+                );
+
+              }, 300);
+
+            }}
           >
             <View style={addBillStyles.optionTextBox}>
 
               <Text style={addBillStyles.optionTitle}>
-                رفع الصورة
+                رفع فاتورة
               </Text>
 
               <Text style={addBillStyles.optionDescription}>
-                اختر صورة من معرض الصور
+                اختر صورة أو ملف PDF من جهازك
               </Text>
 
             </View>
 
             <MaterialIcons
-              name="image"
+              name="upload-file"
               size={28}
               color={colors.blue}
             />
           </TouchableOpacity>
 
-          <TouchableOpacity
-            style={addBillStyles.option}
-          >
-            <View style={addBillStyles.optionTextBox}>
-
-              <Text style={addBillStyles.optionTitle}>
-                رفع ملف
-              </Text>
-
-              <Text style={addBillStyles.optionDescription}>
-                اختر ملف من جهازك PDF, JPG, PNG
-              </Text>
-
-            </View>
-
-            <MaterialIcons
-              name="folder"
-              size={28}
-              color={colors.blue}
-            />
-          </TouchableOpacity>
 
         </View>
 

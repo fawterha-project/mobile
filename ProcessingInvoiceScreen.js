@@ -1,132 +1,68 @@
-import React, {
-  useEffect,
-  useState,
-} from 'react';
+import React, { useEffect, useState } from 'react';
 import { colors } from './styles';
-import {
-  uploadReceipt,
-  processReceipt,
-} from './services/receiptService';
+import { uploadReceipt, processReceipt } from './services/receiptService';
 
-
-import {
-  View,
-  Text,
-  TouchableOpacity,
-} from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 
 import MaterialIcons from '@react-native-vector-icons/material-icons';
 
 import { processingInvoiceStyles as styles } from './styles';
 
+const ProcessingInvoiceScreen = ({ navigation, route }) => {
+  const { fileData } = route.params || {};
 
-const ProcessingInvoiceScreen = ({
-  navigation,
-  route,
-}) => {
+  const [progress, setProgress] = useState(0);
 
-  const { fileData } =
-    route.params || {};
+  const processInvoice = async () => {
+    try {
+      const uploadResult = await uploadReceipt(fileData);
 
-  const [progress, setProgress] =
-    useState(0);
+      const attachmentId = uploadResult?.attachment?.attachment_id;
 
+      const processResult = await processReceipt(attachmentId);
 
-  const processInvoice =
-    async () => {
+      setProgress(100);
 
-      try {
-
-        const uploadResult =
-          await uploadReceipt(
-            fileData
-          );
-
-        const attachmentId =
-          uploadResult?.attachment
-            ?.attachment_id;
-
-        const processResult =
-          await processReceipt(
-            attachmentId
-          );
-
-        setProgress(100);
-
-        navigation.replace(
-          'InvoiceSuccess',
-          {
-            attachmentId,
-            extractedData:
-              processResult?.extracted_data,
-            fileData,
-          }
-        );
-
-      } catch (error) {
-
-        console.log(
-          'PROCESS ERROR:',
-          error
-        );
-
-      }
-
-    };
+      navigation.replace('InvoiceSuccess', {
+        attachmentId,
+        extractedData: processResult?.extracted_data,
+        fileData,
+      });
+    } catch (error) {
+      console.log('PROCESS ERROR:', error);
+    }
+  };
   useEffect(() => {
+    const interval = setInterval(() => {
+      setProgress(prev => {
+        if (prev >= 95) {
+          return prev;
+        }
 
-    const interval =
-      setInterval(() => {
-
-        setProgress(prev => {
-
-          if (prev >= 95) {
-            return prev;
-          }
-
-          return prev + 5;
-
-        });
-
-      }, 500);
+        return prev + 5;
+      });
+    }, 500);
 
     processInvoice();
 
-    return () =>
-      clearInterval(interval);
-
+    return () => clearInterval(interval);
   }, []);
   return (
     <View style={styles.container}>
-
       <TouchableOpacity
         style={styles.backIcon}
         onPress={() => navigation.goBack()}
       >
-        <MaterialIcons
-          name="arrow-back"
-          size={24}
-          color={colors.black}
-        />
+        <MaterialIcons name="arrow-back" size={24} color={colors.black} />
       </TouchableOpacity>
 
-      <Text style={styles.title}>
-        جاري معالجة الفاتورة
-      </Text>
+      <Text style={styles.title}>جاري معالجة الفاتورة</Text>
 
       <View style={styles.iconContainer}>
-        <MaterialIcons
-          name="description"
-          size={110}
-          color="#DCE7FF"
-        />
+        <MaterialIcons name="description" size={110} color={colors.fileIcon} />
 
         <View style={styles.searchIcon}>
-          <MaterialIcons
-            name="search"
-            size={65}
-            color={colors.blue}
-          />
+          <MaterialIcons name="search" size={65} color={colors.blue} />
         </View>
       </View>
 
@@ -134,9 +70,7 @@ const ProcessingInvoiceScreen = ({
         نقوم بقراءة البيانات واستخراجها
       </Text>
 
-      <Text style={styles.processingSubtitle2}>
-        باستخدام الذكاء الاصطناعي
-      </Text>
+      <Text style={styles.processingSubtitle2}>باستخدام الذكاء الاصطناعي</Text>
 
       <View style={styles.progressBarBackground}>
         <View
@@ -148,27 +82,15 @@ const ProcessingInvoiceScreen = ({
           ]}
         />
       </View>
-      <Text style={styles.percentText}>
-        {progress}%
-      </Text>
+      <Text style={styles.percentText}>{progress}%</Text>
 
       <View style={styles.noteCard}>
+        <MaterialIcons name="wb-sunny" size={20} color={colors.yellow} />
 
-        <MaterialIcons
-          name="wb-sunny"
-          size={20}
-          color="#FACC15"
-        />
+        <Text style={styles.noteText}>قد تستغرق المعالجة من 5 إلى 10 ثوان</Text>
 
-        <Text style={styles.noteText}>
-          قد تستغرق المعالجة من 5 إلى 10 ثوان
-        </Text>
-
-        <Text style={styles.noteText}>
-          يرجى الانتظار </Text>
-
+        <Text style={styles.noteText}>يرجى الانتظار </Text>
       </View>
-
     </View>
   );
 };

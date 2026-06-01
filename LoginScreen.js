@@ -210,7 +210,7 @@ const LoginScreen = ({ navigation }) => {
                             JSON.stringify(result)
                         );
 
-                       
+
                         await AsyncStorage.setItem(
                             'user',
                             JSON.stringify(result.user)
@@ -270,69 +270,69 @@ const LoginScreen = ({ navigation }) => {
 
             </Text>
             <Modal
-    transparent
-    visible={showErrorModal}
-    animationType="fade"
->
-
-    <View style={loginStyles.errorOverlay}>
-
-        <View style={loginStyles.errorModal}>
-
-            <View
-                style={
-                    loginStyles.errorIconCircle
-                }
+                transparent
+                visible={showErrorModal}
+                animationType="fade"
             >
 
-                <MaterialIcons
-                    name="error-outline"
-                    size={42}
-                    color="#E53935"
-                />
+                <View style={loginStyles.errorOverlay}>
 
-            </View>
+                    <View style={loginStyles.errorModal}>
 
-            <Text
-                style={
-                    loginStyles.errorTitle
-                }
-            >
-                خطأ
-            </Text>
+                        <View
+                            style={
+                                loginStyles.errorIconCircle
+                            }
+                        >
 
-            <Text
-                style={
-                    loginStyles.errorText
-                }
-            >
-                {errorMessage}
-            </Text>
+                            <MaterialIcons
+                                name="error-outline"
+                                size={42}
+                                color={colors.errorRed}
+                            />
 
-            <TouchableOpacity
-                style={
-                    loginStyles.errorButton
-                }
-                onPress={() =>
-                    setShowErrorModal(false)
-                }
-            >
+                        </View>
 
-                <Text
-                    style={
-                        loginStyles.errorButtonText
-                    }
-                >
-                    حسناً
-                </Text>
+                        <Text
+                            style={
+                                loginStyles.errorTitle
+                            }
+                        >
+                            خطأ
+                        </Text>
 
-            </TouchableOpacity>
+                        <Text
+                            style={
+                                loginStyles.errorText
+                            }
+                        >
+                            {errorMessage}
+                        </Text>
 
-        </View>
+                        <TouchableOpacity
+                            style={
+                                loginStyles.errorButton
+                            }
+                            onPress={() =>
+                                setShowErrorModal(false)
+                            }
+                        >
 
-    </View>
+                            <Text
+                                style={
+                                    loginStyles.errorButtonText
+                                }
+                            >
+                                حسناً
+                            </Text>
 
-</Modal>
+                        </TouchableOpacity>
+
+                    </View>
+
+                </View>
+
+            </Modal>
         </View>
 
     );

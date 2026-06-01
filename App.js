@@ -3,7 +3,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
-import TestConnection from './TestConnection';
 
 import SplashScreen from './SplashScreen';
 import IntroScreen from './IntroScreen';
@@ -11,26 +10,18 @@ import LoginScreen from './LoginScreen';
 import ForgotPasswordScreen from './ForgotPasswordScreen';
 import SignUpScreen from './SignUpScreen';
 import HomeScreen from './HomeScreen';
-import HomeWithInvoicesScreen from './HomeWithInvoicesScreen';
 import VerifyEmailScreen from './VerifyEmailScreen';
 import ResetPasswordScreen from './ResetPasswordScreen';
 import SuccessfulSignUpScreen from './SuccessfulSignUpScreen';
 import FAQScreen from './FAQScreen';
 import CameraPermissionScreen from './CameraPermissionScreen';
 import CameraScreen from './CameraScreen';
+import VerifyCodeScreen from './VerifyCodeScreen';
 
 
 import ProfileSettingScreen from './ProfileSettingScreen';
 import ProfileEditScreen from './ProfileEditScreen';
-import BillsScreen from './BillsScreen';
-import CategoriesScreen from './CategoriesScreen';
-import CategoryGroceriesScreen from './CategoryGroceriesScreen';
-import CategoryShoppingScreen from './CategoryShoppingScreen';
-import CategoryRestaurantsScreen from './CategoryRestaurantsScreen';
-import CategoryTransportScreen from './CategoryTransportScreen';
-import CategoryHealthScreen from './CategoryHealthScreen';
-import CategoryCommitmentsScreen from './CategoryCommitmentsScreen';
-import CategoryOtherScreen from './CategoryOtherScreen';
+
 
 import EmptyCategoriesScreen from './EmptyCategoriesScreen';
 import EmptyBillsScreen from './EmptyBillsScreen';
@@ -45,10 +36,7 @@ import EmptyCategoryOtherScreen from './EmptyCategoryOtherScreen';
 import SpendingLimitScreen from './SpendingLimitScreen';
 import ChangePasswordScreen from './ChangePasswordScreen';
 
-import WeeklyReportsScreen from './WeeklyReportsScreen';
-import MonthlyReportsScreen from './MonthlyReportsScreen';
-import YearlyReportsScreen from './YearlyReportsScreen';
-
+import AddBill from './AddBill.js';
 import EmptyWeeklyReportsScreen from './EmptyWeeklyReportsScreen';
 import EmptyMonthlyReportsScreen from './EmptyMonthlyReportsScreen';
 import EmptyYearlyReportsScreen from './EmptyYearlyReportsScreen';
@@ -60,7 +48,6 @@ import InvoiceAddedScreen from './InvoiceAddedScreen';
 import InvoiceScreen from './InvoiceScreen';
 import UploadInvoiceScreen from './UploadInvoiceScreen';
 import InvoicePreviewScreen from './InvoicePreviewScreen';
-import UploadingInvoiceScreen from './UploadingInvoiceScreen';
 import ProcessingInvoiceScreen from './ProcessingInvoiceScreen';
 import InvoiceSuccessScreen from './InvoiceSuccessScreen';
 
@@ -92,8 +79,8 @@ headerShown:false
 <Stack.Screen name="ForgotPasswordScreen" component={ForgotPasswordScreen}/>
 <Stack.Screen name="SignUpScreen" component={SignUpScreen}/>
 <Stack.Screen name="HomeScreen" component={HomeScreen}/>
-<Stack.Screen name="HomeWithInvoicesScreen" component={HomeWithInvoicesScreen}/>
 <Stack.Screen name="VerifyEmailScreen" component={VerifyEmailScreen}/>
+<Stack.Screen name="VerifyCodeScreen" component={VerifyCodeScreen}/>
 <Stack.Screen name="ResetPasswordScreen" component={ResetPasswordScreen}/>
 <Stack.Screen name="SuccessfulSignUpScreen" component={SuccessfulSignUpScreen}/>
 <Stack.Screen name="FAQScreen" component={FAQScreen}/>
@@ -102,15 +89,7 @@ headerShown:false
 
 <Stack.Screen name="ProfileSettingScreen" component={ProfileSettingScreen}/>
 <Stack.Screen name="ProfileEdit" component={ProfileEditScreen}/>
-<Stack.Screen name="BillsScreen" component={BillsScreen}/>
-<Stack.Screen name="CategoriesScreen" component={CategoriesScreen}/>
-<Stack.Screen name="CategoryGroceries" component={CategoryGroceriesScreen}/>
-<Stack.Screen name="CategoryShopping" component={CategoryShoppingScreen}/>
-<Stack.Screen name="CategoryRestaurants" component={CategoryRestaurantsScreen}/>
-<Stack.Screen name="CategoryTransport" component={CategoryTransportScreen}/>
-<Stack.Screen name="CategoryHealth" component={CategoryHealthScreen}/>
-<Stack.Screen name="CategoryCommitments" component={CategoryCommitmentsScreen}/>
-<Stack.Screen name="CategoryOther" component={CategoryOtherScreen}/>
+
 
 <Stack.Screen name="EmptyCategories" component={EmptyCategoriesScreen}/>
 <Stack.Screen name="EmptyBills" component={EmptyBillsScreen}/>
@@ -125,13 +104,10 @@ headerShown:false
 <Stack.Screen name="SpendingLimit" component={SpendingLimitScreen}/>
 <Stack.Screen name="ChangePassword" component={ChangePasswordScreen}/>
 
-<Stack.Screen name="WeeklyReports" component={WeeklyReportsScreen}/>
-<Stack.Screen name="MonthlyReports" component={MonthlyReportsScreen}/>
-<Stack.Screen name="YearlyReports" component={YearlyReportsScreen}/>
-
 <Stack.Screen name="EmptyWeeklyReports" component={EmptyWeeklyReportsScreen}/>
 <Stack.Screen name="EmptyMonthlyReports" component={EmptyMonthlyReportsScreen}/>
 <Stack.Screen name="EmptyYearlyReports" component={EmptyYearlyReportsScreen}/>
+<Stack.Screen name="AddBill" component={AddBill}/>
 
 <Stack.Screen name="InvoiceDetails" component={InvoiceDetailsScreen}/>
 <Stack.Screen name="BlurScanScreen" component={BlurScanScreen}/>
@@ -140,7 +116,6 @@ headerShown:false
 <Stack.Screen name="InvoiceScreen" component={InvoiceScreen}/>
 <Stack.Screen name="UploadInvoice" component={UploadInvoiceScreen}/>
 <Stack.Screen name="InvoicePreview" component={InvoicePreviewScreen}/>
-<Stack.Screen name="UploadingInvoice"component={UploadingInvoiceScreen}/>
 <Stack.Screen name="ProcessingInvoice"component={ProcessingInvoiceScreen}/>
 <Stack.Screen name="InvoiceSuccess" component={InvoiceSuccessScreen}/>
 </Stack.Navigator>

@@ -60,12 +60,12 @@ const VerifyCodeScreen = ({ navigation }) => {
       />
 
       <View style={verifyCodeStyles.resendRow}>
-  <Text style={verifyCodeStyles.resendText}>ما وصلك الرمز؟</Text>
+        <Text style={verifyCodeStyles.resendText}>ما وصلك الرمز؟</Text>
 
-  <TouchableOpacity onPress={() => console.log('Resend pressed')}>
-    <Text style={verifyCodeStyles.resendLink}>أعد الإرسال</Text>
-  </TouchableOpacity>
-</View>
+        <TouchableOpacity onPress={() => console.log('Resend pressed')}>
+          <Text style={verifyCodeStyles.resendLink}>أعد الإرسال</Text>
+        </TouchableOpacity>
+      </View>
 
       <TouchableOpacity
         style={[

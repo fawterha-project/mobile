@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import { View, Text, Image, StatusBar } from 'react-native';
 
-import { splashStyles } from './styles';
+import { splashStyles, colors } from './styles';
 
 export default function SplashScreen({ navigation }) {
   useEffect(() => {
@@ -15,13 +15,13 @@ export default function SplashScreen({ navigation }) {
 
   return (
     <View style={splashStyles.splashContainer}>
-      <StatusBar barStyle="dark-content" backgroundColor="#FFFFFF" />
+      <StatusBar barStyle="dark-content" backgroundColor={colors.white} />
 
       <View style={splashStyles.splashContent}>
         <Image
           source={{
-              uri: 'asset:/image/fawterha.jpg'
-            }}
+            uri: 'asset:/image/fawterha.jpg',
+          }}
           style={splashStyles.splashLogo}
           resizeMode="contain"
         />

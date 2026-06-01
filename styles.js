@@ -4,25 +4,44 @@ export const colors = {
   white: '#FFFFFF',
   black: '#000000',
   gray: '#9CA3AF',
-
+  errorRed: '#E53935',
   border: '#D9E2EF',
   red: '#DC2626',
-
+  lightErrorRed: '#FFEAEA',
   lightBlue: '#F4F7FF',
   lightBackground: '#F9FAFB',
-
+  progressBackground: '#EEF2FF',
+  shoppingIcon: '#A020F0',
+  lightBlueIcon: '#F2F6FF',
   navShadow: '#000000',
   overlay: 'rgba(0,0,0,0.45)',
-
+  lightGreen: '#EAFBF0',
   lightGray: '#F3F4F6',
   lightRed: '#FEE2E2',
-
+  darkText: '#111827',
   green: '#22C55E',
+  fileIcon: '#DCE7FF',
   yellow: '#FACC15',
   purple: '#8B5CF6',
   cyan: '#12C6D7',
-
+  inputGray: '#6B7280',
   bg: '#EAF1FF', // ← هذا ناقص غالبًا
+  dividerLight: '#E5E7EB',
+  darkGray: '#374151',
+  lightBlueCard: '#F5F7FF',
+  optionBorder: '#EEF2F7',
+  lightBlueCategory: '#EEF4FF',
+  lightPurple: '#F5EEFF',
+  lightYellow: '#FFF7E8',
+  lightPink: '#FFF1F2',
+  lightCyan: '#ECFEFF',
+  placeholderIcon: '#C9CED8',
+  dividerExtraLight: '#F1F1F1',
+  lightGreenBorder: '#D1FAE5',
+  menuDivider: '#BFD3F6',
+  cameraOverlay: 'rgba(0,0,0,0.5)',
+  lightGreenCard: '#ECFDF5',
+  lightWhiteOverlay: 'rgba(255,255,255,0.04)',
 };
 
 export const introStyles = StyleSheet.create({
@@ -162,7 +181,7 @@ export const loginStyles = StyleSheet.create({
     width: 330,
     height: 45,
     borderWidth: 1,
-    borderColor: '#D9E2EF',
+    borderColor: colors.border,
     borderRadius: 8,
     paddingHorizontal: 12,
     textAlign: 'right',
@@ -185,7 +204,7 @@ export const loginStyles = StyleSheet.create({
     width: 330,
     height: 45,
     borderWidth: 1,
-    borderColor: '#D9E2EF',
+    borderColor: colors.border,
     borderRadius: 8,
     flexDirection: 'row',
     alignItems: 'center',
@@ -276,7 +295,7 @@ export const loginStyles = StyleSheet.create({
   },
   errorOverlay: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.45)',
+    backgroundColor: colors.overlay,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -294,7 +313,7 @@ export const loginStyles = StyleSheet.create({
     width: 90,
     height: 90,
     borderRadius: 45,
-    backgroundColor: '#FFEAEA',
+    backgroundColor: colors.lightErrorRed,
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 20,
@@ -303,7 +322,7 @@ export const loginStyles = StyleSheet.create({
   errorTitle: {
     fontSize: 24,
     fontFamily: 'Tajawal-Bold',
-    color: '#E53935',
+    color: colors.errorRed,
     textAlign: 'center',
   },
 
@@ -320,7 +339,7 @@ export const loginStyles = StyleSheet.create({
     width: 180,
     height: 50,
     borderRadius: 14,
-    backgroundColor: '#E53935',
+    backgroundColor: colors.errorRed,
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 25,
@@ -398,7 +417,7 @@ export const signupStyles = StyleSheet.create({
     width: 330,
     height: 45,
     borderWidth: 1,
-    borderColor: '#D9E2EF',
+    borderColor: colors.border,
     borderRadius: 8,
     paddingHorizontal: 12,
     textAlign: 'right',
@@ -421,7 +440,7 @@ export const signupStyles = StyleSheet.create({
     width: 330,
     height: 45,
     borderWidth: 1,
-    borderColor: '#D9E2EF',
+    borderColor: colors.border,
     borderRadius: 8,
     paddingHorizontal: 12,
     textAlign: 'right',
@@ -444,7 +463,7 @@ export const signupStyles = StyleSheet.create({
     width: 330,
     height: 45,
     borderWidth: 1,
-    borderColor: '#D9E2EF',
+    borderColor: colors.border,
     borderRadius: 8,
     flexDirection: 'row',
     alignItems: 'center',
@@ -467,7 +486,7 @@ export const signupStyles = StyleSheet.create({
     width: 330,
     height: 45,
     borderWidth: 1,
-    borderColor: '#D9E2EF',
+    borderColor: colors.border,
     borderRadius: 8,
     flexDirection: 'row',
     alignItems: 'center',
@@ -546,7 +565,7 @@ export const signupStyles = StyleSheet.create({
   },
   passwordOverlay: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.45)',
+    backgroundColor: colors.overlay,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -564,7 +583,7 @@ export const signupStyles = StyleSheet.create({
     width: 90,
     height: 90,
     borderRadius: 45,
-    backgroundColor: '#F2F6FF',
+    backgroundColor: colors.lightBlueIcon,
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 20,
@@ -664,7 +683,7 @@ export const forgotPasswordStyles = StyleSheet.create({
     width: 330,
     height: 45,
     borderWidth: 1,
-    borderColor: '#D9E2EF',
+    borderColor: colors.border,
     borderRadius: 8,
     paddingHorizontal: 12,
     textAlign: 'right',
@@ -710,30 +729,6 @@ export const forgotPasswordStyles = StyleSheet.create({
     fontFamily: 'Tajawal-Bold',
   },
 
-  orText: {
-    position: 'absolute',
-    top: 605,
-    alignSelf: 'center',
-    fontSize: 14,
-    fontFamily: 'Tajawal-Regular',
-    color: colors.black,
-  },
-
-  smsText: {
-    position: 'absolute',
-    top: 630,
-    alignSelf: 'center',
-    fontSize: 14,
-    fontFamily: 'Tajawal-Regular',
-    color: colors.black,
-  },
-
-  phoneIcon: {
-    position: 'absolute',
-    top: 662,
-    alignSelf: 'center',
-  },
-
   rememberText: {
     position: 'absolute',
     top: 755,
@@ -750,172 +745,6 @@ export const forgotPasswordStyles = StyleSheet.create({
   },
 });
 
-export const forgotPasswordPhoneStyles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.white,
-  },
-
-  waveImage: {
-    position: 'absolute',
-    top: 135,
-    left: 0,
-    right: 0,
-    width: '100%',
-    height: 120,
-  },
-
-  mainImage: {
-    position: 'absolute',
-    top: 60,
-    alignSelf: 'center',
-    width: 250,
-    height: 250,
-    zIndex: 2,
-  },
-
-  title: {
-    position: 'absolute',
-    top: 275,
-    alignSelf: 'center',
-    fontSize: 20,
-    fontFamily: 'Tajawal-Regular',
-    color: colors.black,
-  },
-
-  description: {
-    position: 'absolute',
-    top: 315,
-    alignSelf: 'center',
-    width: 260,
-    fontSize: 16,
-    fontFamily: 'Tajawal-Regular',
-    color: colors.gray,
-    textAlign: 'center',
-    lineHeight: 24,
-  },
-
-  phoneLabel: {
-    position: 'absolute',
-    top: 385,
-    right: 45,
-    fontSize: 16,
-    fontFamily: 'Tajawal-Regular',
-    color: colors.gray,
-  },
-
-  phoneBox: {
-    position: 'absolute',
-    top: 415,
-    left: 30,
-    width: 330,
-    height: 45,
-    borderWidth: 1,
-    borderColor: '#D9E2EF',
-    borderRadius: 8,
-    flexDirection: 'row-reverse',
-    alignItems: 'center',
-    paddingHorizontal: 12,
-    backgroundColor: colors.white,
-  },
-
-  phoneInput: {
-    flex: 1,
-    height: 45,
-    textAlign: 'left',
-    fontFamily: 'Tajawal-Regular',
-  },
-
-  countryCode: {
-    fontSize: 13,
-    fontFamily: 'Tajawal-Regular',
-    color: colors.black,
-    marginLeft: 8,
-  },
-
-  resendRow: {
-    position: 'absolute',
-    top: 485,
-    alignSelf: 'center',
-    flexDirection: 'row-reverse',
-    alignItems: 'center',
-  },
-
-  codeText: {
-    fontSize: 13,
-    fontFamily: 'Tajawal-Regular',
-    color: colors.black,
-  },
-
-  resendLink: {
-    fontSize: 13,
-    color: colors.black,
-    fontFamily: 'Tajawal-Regular',
-    textDecorationLine: 'underline',
-    marginRight: 5,
-  },
-
-  verifyButton: {
-    position: 'absolute',
-    top: 535,
-    alignSelf: 'center',
-    width: 220,
-    height: 50,
-    backgroundColor: colors.blue,
-    borderRadius: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
-  verifyButtonDisabled: {
-    opacity: 0.5,
-  },
-
-  verifyButtonText: {
-    color: colors.white,
-    fontSize: 16,
-    fontFamily: 'Tajawal-Bold',
-  },
-
-  orText: {
-    position: 'absolute',
-    top: 605,
-    alignSelf: 'center',
-    fontSize: 14,
-    fontFamily: 'Tajawal-Regular',
-    color: colors.black,
-  },
-
-  smsText: {
-    position: 'absolute',
-    top: 630,
-    alignSelf: 'center',
-    fontSize: 14,
-    fontFamily: 'Tajawal-Regular',
-    color: colors.black,
-  },
-
-  phoneIcon: {
-    position: 'absolute',
-    top: 662,
-    alignSelf: 'center',
-  },
-
-  rememberText: {
-    position: 'absolute',
-    top: 755,
-    alignSelf: 'center',
-    fontSize: 12,
-    fontFamily: 'Tajawal-Regular',
-    color: colors.blue,
-  },
-
-  loginLink: {
-    color: colors.blue,
-    fontFamily: 'Tajawal-Regular',
-    textDecorationLine: 'underline',
-  },
-});
 
 export const verifyCodeStyles = StyleSheet.create({
   container: {
@@ -959,7 +788,7 @@ export const verifyCodeStyles = StyleSheet.create({
     width: 50,
     height: 50,
     borderWidth: 1,
-    borderColor: '#D9E2EF',
+    borderColor: colors.border,
     borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'center',
@@ -1069,7 +898,7 @@ export const verifyEmailStyles = StyleSheet.create({
     width: 50,
     height: 50,
     borderWidth: 1,
-    borderColor: '#D9E2EF',
+    borderColor: colors.border,
     borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'center',
@@ -1517,6 +1346,420 @@ export const faqStyles = StyleSheet.create({
     textDecorationLine: 'underline',
   },
 });
+
+export const homeWithInvoicesStyles = {
+
+  container: {
+    flex: 1,
+    backgroundColor: colors.white,
+  },
+
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 24,
+    marginTop: 45,
+  },
+
+  logo: {
+    alignSelf: 'flex-end',
+    width: 95,
+    height: 40,
+  },
+
+  helloText: {
+    marginTop: 15,
+    textAlign: 'right',
+    fontSize: 25,
+    fontFamily: 'Tajawal-Bold',
+    color: colors.black,
+  },
+
+  subText: {
+    marginTop: 5,
+    textAlign: 'right',
+    fontSize: 16,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+  },
+
+
+  /* scan */
+
+  scanCard: {
+    marginHorizontal: 20,
+    marginTop: 10,
+    backgroundColor: '#0D5BD7',
+    borderRadius: 28,
+    padding: 20,
+    elevation: 5,
+  },
+
+  scanTitle: {
+    fontSize: 20,
+    fontFamily: 'Tajawal-Bold',
+    color: colors.white,
+    textAlign: 'center',
+  },
+
+  scanSub: {
+    fontSize: 16,
+    color: '#DCE8FF',
+    marginTop: 1,
+    textAlign: 'center',
+  },
+
+  scanRow: {
+    flexDirection: 'row-reverse',
+    justifyContent: 'space-between',
+    marginTop: 10,
+  },
+
+  uploadButton: {
+    width: '48%',
+    height: 100,
+    borderRadius: 18,
+    backgroundColor: '#B55CFF',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  cameraButton: {
+    width: '48%',
+    height: 100,
+    borderRadius: 18,
+    backgroundColor: '#3D7BFF',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  scanText: {
+    marginTop: 8,
+    fontSize: 18,
+    fontFamily: 'Tajawal-Medium',
+    color: 'white',
+  },
+
+  supportText: {
+    textAlign: 'center',
+    marginTop: 15,
+    fontSize: 12,
+    color: '#D8E6FF',
+  },
+
+
+  /* sections */
+
+  sectionTitle: {
+    fontSize: 20,
+    fontFamily: 'Tajawal-Bold',
+    color: colors.black,
+    textAlign: 'right',
+  },
+
+  journeySub: {
+    fontSize: 18,
+    color: colors.gray,
+    textAlign: 'right',
+    marginTop: 1,
+  },
+
+
+  /* journey */
+
+  journeyCard: {
+    marginHorizontal: 15,
+    marginTop: 18,
+    backgroundColor: 'white',
+    borderRadius: 24,
+    padding: 20,
+    elevation: 5,
+  },
+
+  timelineContainer: {
+    flexDirection: 'row-reverse',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginTop: 20,
+  },
+
+  stepBlock: {
+    width: '20%',
+    alignItems: 'center',
+  },
+
+  timelineLine: {
+    flex: 1,
+    height: 3,
+    backgroundColor: '#E6EAFF',
+    marginTop: 28,
+    marginHorizontal: 4,
+  },
+
+  stepCircle: {
+    width: 60,
+    height: 60,
+    borderRadius: 29,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 3,
+  },
+
+  stepTitle: {
+    fontSize: 14,
+    fontFamily: 'Tajawal-Bold',
+    textAlign: 'center',
+    marginTop: 5,
+  },
+
+  stepDesc: {
+    fontSize: 12,
+    textAlign: 'center',
+    color: '#8C93A3',
+    marginTop: 4,
+  },
+
+  bottomJourneyText: {
+    fontSize: 14,
+    textAlign: 'center',
+    marginTop: 15,
+    color: '#8C93A3',
+  },
+
+
+  /* categories */
+
+  chartCard: {
+    marginHorizontal: 15,
+    marginTop: 18,
+    backgroundColor: 'white',
+    borderRadius: 24,
+    padding: 15,
+    elevation: 5,
+  },
+
+  categoriesGrid: {
+    flexDirection: 'row-reverse',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    marginTop: 5,
+  },
+
+  categoryItem: {
+    width: '22%',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+
+  categoryCircle: {
+    width: 65,
+    height: 55,
+    borderRadius: 28,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  categoryName: {
+    marginTop: 8,
+    fontSize: 16,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.black,
+  },
+
+  categoryAmount: {
+    fontSize: 12,
+    color: colors.gray,
+    marginTop: 3,
+  },
+
+
+  /* invoices */
+
+  invoiceCard: {
+    marginHorizontal: 15,
+    marginTop: 18,
+    marginBottom: 25,
+    backgroundColor: 'white',
+    borderRadius: 24,
+    padding: 18,
+    elevation: 5,
+  },
+
+  invoiceHeader: {
+    flexDirection: 'row-reverse',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 15,
+  },
+
+  showAll: {
+    fontSize: 16,
+    color: colors.blue,
+    fontFamily: 'Tajawal-Regular',
+  },
+
+  invoiceRow: {
+    height: 78,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ECECEC',
+    flexDirection: 'row-reverse',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 10,
+  },
+
+  invoiceRight: {
+    flexDirection: 'row-reverse',
+    alignItems: 'center',
+    width: '72%',
+    overflow: 'hidden'
+  },
+
+  invoiceLogo: {
+    width: 45,
+    height: 45,
+    borderRadius: 22,
+    marginLeft: 12,
+    backgroundColor: '#F3F4F6',
+  },
+
+  invoiceInfo: {
+    flex: 1,
+    maxWidth: 160
+  },
+
+  invoiceStore: {
+    fontSize: 15,
+    fontFamily: 'Tajawal-Medium',
+    color: colors.black,
+    textAlign: 'right',
+    lineHeight: 22,
+  },
+
+  invoiceDate: {
+    fontSize: 13,
+    marginTop: 4,
+    color: colors.gray,
+    textAlign: 'right',
+  },
+
+  invoiceAmountBox: {
+    width: '28%',
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+  },
+
+  invoiceAmount: {
+    fontSize: 22,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.black,
+  },
+
+  invoiceCurrency: {
+    fontSize: 13,
+    color: colors.gray,
+    marginBottom: 3,
+  },
+
+  emptyIcon: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    backgroundColor: '#F5F7FB',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 15,
+  },
+
+  emptyTitle: {
+    fontSize: 18,
+    fontFamily: 'Tajawal-Bold',
+    color: colors.black,
+    textAlign: 'center',
+  },
+
+  emptySub: {
+    fontSize: 14,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+    marginTop: 8,
+    textAlign: 'center',
+    paddingHorizontal: 20,
+  },
+
+  notificationOverlay: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'rgba(0,0,0,0.35)',
+    paddingHorizontal: 25,
+    paddingTop: 85,
+    alignItems: 'center',
+
+  },
+  notificationModal: {
+    backgroundColor: 'white',
+    borderRadius: 30,
+    padding: 22,
+    maxHeight: 500,
+    width: '100%',
+    elevation: 12
+  },
+  notificationTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'right',
+    marginBottom: 20,
+    color: colors.black
+  },
+
+  notificationCard: {
+    flexDirection: 'row-reverse',
+    alignItems: 'center',
+    backgroundColor: '#FAFAFA',
+    padding: 10,
+    borderRadius: 15,
+    marginBottom: 10
+  },
+
+  notificationIconCircle: {
+    width: 50,
+    height: 50,
+    borderRadius: 28,
+    backgroundColor: '#EEF4FF',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 12
+  },
+
+  notificationContent: {
+    flex: 1
+  },
+
+  notificationCardTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'right',
+    marginBottom: 4
+  },
+
+  notificationMessage: {
+    fontSize: 14,
+    color: '#777',
+    textAlign: 'right',
+    lineHeight: 20
+  },
+
+  emptyNotificationText: {
+    textAlign: 'center',
+    fontSize: 15,
+    color: '#888'
+  },
+
+};
 
 export const homeStyles = StyleSheet.create({
   container: {
@@ -2001,419 +2244,7 @@ export const homeStyles = StyleSheet.create({
   },
 });
 
-export const homeWithInvoicesStyles = {
 
-  container: {
-    flex: 1,
-    backgroundColor: colors.white,
-  },
-
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 24,
-    marginTop: 45,
-  },
-
-  logo: {
-    alignSelf: 'flex-end',
-    width: 95,
-    height: 40,
-  },
-
-  helloText: {
-    marginTop: 15,
-    textAlign: 'right',
-    fontSize: 25,
-    fontFamily: 'Tajawal-Bold',
-    color: colors.black,
-  },
-
-  subText: {
-    marginTop: 5,
-    textAlign: 'right',
-    fontSize: 16,
-    fontFamily: 'Tajawal-Regular',
-    color: colors.gray,
-  },
-
-
-  /* scan */
-
-  scanCard: {
-    marginHorizontal: 20,
-    marginTop: 10,
-    backgroundColor: '#0D5BD7',
-    borderRadius: 28,
-    padding: 20,
-    elevation: 5,
-  },
-
-  scanTitle: {
-    fontSize: 20,
-    fontFamily: 'Tajawal-Bold',
-    color: colors.white,
-    textAlign: 'center',
-  },
-
-  scanSub: {
-    fontSize: 16,
-    color: '#DCE8FF',
-    marginTop: 1,
-    textAlign: 'center',
-  },
-
-  scanRow: {
-    flexDirection: 'row-reverse',
-    justifyContent: 'space-between',
-    marginTop: 10,
-  },
-
-  uploadButton: {
-    width: '48%',
-    height: 100,
-    borderRadius: 18,
-    backgroundColor: '#B55CFF',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
-  cameraButton: {
-    width: '48%',
-    height: 100,
-    borderRadius: 18,
-    backgroundColor: '#3D7BFF',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
-  scanText: {
-    marginTop: 8,
-    fontSize: 18,
-    fontFamily: 'Tajawal-Medium',
-    color: 'white',
-  },
-
-  supportText: {
-    textAlign: 'center',
-    marginTop: 15,
-    fontSize: 12,
-    color: '#D8E6FF',
-  },
-
-
-  /* sections */
-
-  sectionTitle: {
-    fontSize: 20,
-    fontFamily: 'Tajawal-Bold',
-    color: colors.black,
-    textAlign: 'right',
-  },
-
-  journeySub: {
-    fontSize: 18,
-    color: colors.gray,
-    textAlign: 'right',
-    marginTop: 1,
-  },
-
-
-  /* journey */
-
-  journeyCard: {
-    marginHorizontal: 15,
-    marginTop: 18,
-    backgroundColor: 'white',
-    borderRadius: 24,
-    padding: 20,
-    elevation: 5,
-  },
-
-  timelineContainer: {
-    flexDirection: 'row-reverse',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    marginTop: 20,
-  },
-
-  stepBlock: {
-    width: '20%',
-    alignItems: 'center',
-  },
-
-  timelineLine: {
-    flex: 1,
-    height: 3,
-    backgroundColor: '#E6EAFF',
-    marginTop: 28,
-    marginHorizontal: 4,
-  },
-
-  stepCircle: {
-    width: 60,
-    height: 60,
-    borderRadius: 29,
-    justifyContent: 'center',
-    alignItems: 'center',
-    elevation: 3,
-  },
-
-  stepTitle: {
-    fontSize: 14,
-    fontFamily: 'Tajawal-Bold',
-    textAlign: 'center',
-    marginTop: 5,
-  },
-
-  stepDesc: {
-    fontSize: 12,
-    textAlign: 'center',
-    color: '#8C93A3',
-    marginTop: 4,
-  },
-
-  bottomJourneyText: {
-    fontSize: 14,
-    textAlign: 'center',
-    marginTop: 15,
-    color: '#8C93A3',
-  },
-
-
-  /* categories */
-
-  chartCard: {
-    marginHorizontal: 15,
-    marginTop: 18,
-    backgroundColor: 'white',
-    borderRadius: 24,
-    padding: 15,
-    elevation: 5,
-  },
-
-  categoriesGrid: {
-    flexDirection: 'row-reverse',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    marginTop: 5,
-  },
-
-  categoryItem: {
-    width: '22%',
-    alignItems: 'center',
-    marginBottom: 8,
-  },
-
-  categoryCircle: {
-    width: 65,
-    height: 55,
-    borderRadius: 28,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
-  categoryName: {
-    marginTop: 8,
-    fontSize: 16,
-    fontFamily: 'Tajawal-Regular',
-    color: colors.black,
-  },
-
-  categoryAmount: {
-    fontSize: 12,
-    color: colors.gray,
-    marginTop: 3,
-  },
-
-
-  /* invoices */
-
-  invoiceCard: {
-    marginHorizontal: 15,
-    marginTop: 18,
-    marginBottom: 25,
-    backgroundColor: 'white',
-    borderRadius: 24,
-    padding: 18,
-    elevation: 5,
-  },
-
-  invoiceHeader: {
-    flexDirection: 'row-reverse',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 15,
-  },
-
-  showAll: {
-    fontSize: 16,
-    color: colors.blue,
-    fontFamily: 'Tajawal-Regular',
-  },
-
-  invoiceRow: {
-    height: 78,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ECECEC',
-    flexDirection: 'row-reverse',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingVertical: 10,
-  },
-
-  invoiceRight: {
-    flexDirection: 'row-reverse',
-    alignItems: 'center',
-    width: '72%',
-    overflow: 'hidden'
-  },
-
-  invoiceLogo: {
-    width: 45,
-    height: 45,
-    borderRadius: 22,
-    marginLeft: 12,
-    backgroundColor: '#F3F4F6',
-  },
-
-  invoiceInfo: {
-    flex: 1,
-    maxWidth: 160
-  },
-
-  invoiceStore: {
-    fontSize: 15,
-    fontFamily: 'Tajawal-Medium',
-    color: colors.black,
-    textAlign: 'right',
-    lineHeight: 22,
-  },
-
-  invoiceDate: {
-    fontSize: 13,
-    marginTop: 4,
-    color: colors.gray,
-    textAlign: 'right',
-  },
-
-  invoiceAmountBox: {
-    width: '28%',
-    alignItems: 'flex-start',
-    justifyContent: 'center',
-  },
-
-  invoiceAmount: {
-    fontSize: 22,
-    fontFamily: 'Tajawal-Regular',
-    color: colors.black,
-  },
-
-  invoiceCurrency: {
-    fontSize: 13,
-    color: colors.gray,
-    marginBottom: 3,
-  },
-
-  emptyIcon: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    backgroundColor: '#F5F7FB',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 15,
-  },
-
-  emptyTitle: {
-    fontSize: 18,
-    fontFamily: 'Tajawal-Bold',
-    color: colors.black,
-    textAlign: 'center',
-  },
-
-  emptySub: {
-    fontSize: 14,
-    fontFamily: 'Tajawal-Regular',
-    color: colors.gray,
-    marginTop: 8,
-    textAlign: 'center',
-    paddingHorizontal: 20,
-  },
-
-  notificationOverlay: {
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: 'rgba(0,0,0,0.35)',
-    paddingHorizontal: 25,
-    paddingTop: 85,
-    alignItems: 'center',
-
-  },
-  notificationModal: {
-    backgroundColor: 'white',
-    borderRadius: 30,
-    padding: 22,
-    maxHeight: 500,
-    width: '100%',
-    elevation: 12
-  },
-  notificationTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    textAlign: 'right',
-    marginBottom: 20,
-    color: colors.black
-  },
-
-  notificationCard: {
-    flexDirection: 'row-reverse',
-    alignItems: 'center',
-    backgroundColor: '#FAFAFA',
-    padding: 10,
-    borderRadius: 15,
-    marginBottom: 10
-  },
-
-  notificationIconCircle: {
-    width: 50,
-    height: 50,
-    borderRadius: 28,
-    backgroundColor: '#EEF4FF',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: 12
-  },
-
-  notificationContent: {
-    flex: 1
-  },
-
-  notificationCardTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    textAlign: 'right',
-    marginBottom: 4
-  },
-
-  notificationMessage: {
-    fontSize: 14,
-    color: '#777',
-    textAlign: 'right',
-    lineHeight: 20
-  },
-
-  emptyNotificationText: {
-    textAlign: 'center',
-    fontSize: 15,
-    color: '#888'
-  },
-
-};
 
 export const profileStyles = StyleSheet.create({
   container: {
@@ -2535,7 +2366,7 @@ export const profileStyles = StyleSheet.create({
 
   deleteOverlay: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.35)',
+    backgroundColor: colors.deleteOverlay,
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 30,
@@ -2743,7 +2574,7 @@ export const profileEditStyles = StyleSheet.create({
   textInput: {
     flex: 1,
     textAlign: 'right',
-    color: '#6B7280',
+    color: colors.inputGray,
     fontSize: 14,
     fontFamily: 'Tajawal-Regular',
     paddingVertical: 0,
@@ -2756,7 +2587,7 @@ export const profileEditStyles = StyleSheet.create({
   genderValue: {
     flex: 1,
     textAlign: 'right',
-    color: '#6B7280',
+    color: colors.inputGray,
     fontSize: 14,
     fontFamily: 'Tajawal-Regular',
   },
@@ -2777,22 +2608,20 @@ export const profileEditStyles = StyleSheet.create({
     paddingHorizontal: 16,
   },
 
-  genderOptionActive: {
-    backgroundColor: '#D1D5DB',
-  },
+
 
   genderOptionText: {
     width: '100%',
     textAlign: 'right',
     writingDirection: 'rtl',
-    color: '#6B7280',
+    color: colors.inputGray,
     fontSize: 14,
     fontFamily: 'Tajawal-Regular',
   },
 
   genderDivider: {
     height: 1,
-    backgroundColor: '#E5E7EB',
+    backgroundColor: colors.dividerLight,
   },
 
   editButtonsRow: {
@@ -2889,7 +2718,7 @@ export const changePasswordStyles = StyleSheet.create({
     marginTop: 10,
     marginRight: 36,
     textAlign: 'right',
-    color: '#374151',
+    color: colors.darkGray,
     fontSize: 16,
     fontFamily: 'Tajawal-Regular',
   },
@@ -2898,7 +2727,7 @@ export const changePasswordStyles = StyleSheet.create({
     marginTop: 10,
     marginRight: 36,
     textAlign: 'right',
-    color: '#374151',
+    color: colors.darkGray,
     fontSize: 16,
     fontFamily: 'Tajawal-Regular',
   },
@@ -2907,7 +2736,7 @@ export const changePasswordStyles = StyleSheet.create({
     marginTop: 10,
     marginRight: 36,
     textAlign: 'right',
-    color: '#374151',
+    color: colors.darkGray,
     fontSize: 16,
     fontFamily: 'Tajawal-Regular',
   },
@@ -2917,7 +2746,7 @@ export const changePasswordStyles = StyleSheet.create({
     marginHorizontal: 28,
     marginTop: 8,
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: colors.dividerLight,
     borderRadius: 10,
     paddingHorizontal: 14,
     flexDirection: 'row-reverse',
@@ -2930,7 +2759,7 @@ export const changePasswordStyles = StyleSheet.create({
     marginHorizontal: 28,
     marginTop: 8,
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: colors.dividerLight,
     borderRadius: 10,
     paddingHorizontal: 14,
     flexDirection: 'row-reverse',
@@ -2943,7 +2772,7 @@ export const changePasswordStyles = StyleSheet.create({
     marginHorizontal: 28,
     marginTop: 8,
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: colors.dividerLight,
     borderRadius: 10,
     paddingHorizontal: 14,
     flexDirection: 'row-reverse',
@@ -2954,7 +2783,7 @@ export const changePasswordStyles = StyleSheet.create({
   input: {
     flex: 1,
     textAlign: 'right',
-    color: '#111827',
+    color: colors.darkText,
     fontSize: 14,
     fontFamily: 'Tajawal-Regular',
   },
@@ -2968,7 +2797,7 @@ export const changePasswordStyles = StyleSheet.create({
 
   strengthText: {
     fontSize: 12,
-    color: '#6B7280',
+    color: colors.inputGray,
     marginHorizontal: 5,
     fontFamily: 'Tajawal-Regular',
   },
@@ -2982,7 +2811,7 @@ export const changePasswordStyles = StyleSheet.create({
   line: {
     flex: 1,
     height: 4,
-    backgroundColor: '#E5E7EB',
+    backgroundColor: colors.dividerLight,
     borderRadius: 10,
     marginHorizontal: 2,
   },
@@ -3001,14 +2830,14 @@ export const changePasswordStyles = StyleSheet.create({
   errorText: {
     marginRight: 4,
     fontSize: 12,
-    color: '#6B7280',
+    color: colors.inputGray,
     fontFamily: 'Tajawal-Regular',
   },
 
   requirementsBox: {
     marginHorizontal: 28,
     marginTop: 18,
-    backgroundColor: '#F5F7FF',
+    backgroundColor: colors.lightBlueCard,
     borderRadius: 12,
     paddingVertical: 14,
     paddingHorizontal: 18,
@@ -3031,7 +2860,7 @@ export const changePasswordStyles = StyleSheet.create({
   requirementText: {
     marginRight: 6,
     fontSize: 13,
-    color: '#374151',
+    color: colors.darkGray,
     fontFamily: 'Tajawal-Regular',
   },
 
@@ -3170,7 +2999,7 @@ export const spendingLimitStyles = StyleSheet.create({
   optionRow: {
     height: 48,
     borderBottomWidth: 1,
-    borderBottomColor: '#EEF2F7',
+    borderBottomColor: colors.optionBorder,
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -3179,7 +3008,7 @@ export const spendingLimitStyles = StyleSheet.create({
     flex: 1,
     textAlign: 'right',
     fontSize: 16,
-    color: '#0F2A56',
+    color: colors.darkBlueText,
     fontFamily: 'Tajawal-Regular',
     paddingRight: 10,
   },
@@ -3219,21 +3048,6 @@ export const spendingLimitStyles = StyleSheet.create({
     color: colors.white,
     fontSize: 18,
     fontFamily: 'Tajawal-Medium',
-  },
-
-  customInput: {
-    height: 44,
-    borderWidth: 1,
-    borderColor: '#D1D5DB',
-    borderRadius: 10,
-    marginTop: 12,
-    paddingHorizontal: 14,
-    textAlign: 'right',
-    writingDirection: 'rtl',
-    fontSize: 16,
-    color: colors.black,
-    fontFamily: 'Tajawal-Regular',
-    backgroundColor: colors.white,
   },
 });
 
@@ -3292,7 +3106,7 @@ export const billsStyles = StyleSheet.create({
     marginTop: 30,
     borderRadius: 6,
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: colors.dividerLight,
     backgroundColor: colors.white,
     paddingHorizontal: 10,
     flexDirection: 'row-reverse',
@@ -3352,7 +3166,7 @@ export const billsStyles = StyleSheet.create({
   billItem: {
     height: 85,
     borderBottomWidth: 1,
-    borderBottomColor: '#E5E7EB',
+    borderBottomColor: colors.dividerLight,
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -3410,7 +3224,7 @@ export const billsStyles = StyleSheet.create({
     width: 42,
     height: 42,
     borderRadius: 21,
-    backgroundColor: '#F3F4F6',
+    backgroundColor: colors.lightGray,
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 10,
@@ -3447,7 +3261,7 @@ export const categoriesStyles = StyleSheet.create({
     marginTop: 30,
     borderRadius: 6,
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: colors.dividerLight,
     backgroundColor: colors.white,
     paddingHorizontal: 10,
     flexDirection: 'row-reverse',
@@ -3515,7 +3329,7 @@ export const categoriesStyles = StyleSheet.create({
     borderRadius: 8,
     backgroundColor: colors.white,
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: colors.dividerLight,
     paddingHorizontal: 12,
     flexDirection: 'row',
     alignItems: 'center',
@@ -3583,8 +3397,8 @@ export const categoryFoodStyles = StyleSheet.create({
     marginTop: 22,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: '#D1FAE5',
-    backgroundColor: '#ECFDF5',
+    borderColor: colors.lightGreenBorder,
+    backgroundColor: colors.lightGreenCard,
     paddingHorizontal: 18,
     flexDirection: 'row',
     alignItems: 'center',
@@ -3638,7 +3452,7 @@ export const categoryFoodStyles = StyleSheet.create({
     marginTop: 28,
     borderRadius: 6,
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: colors.dividerLight,
     backgroundColor: colors.white,
     paddingHorizontal: 10,
     flexDirection: 'row-reverse',
@@ -3663,7 +3477,7 @@ export const categoryFoodStyles = StyleSheet.create({
   billItem: {
     height: 85,
     borderBottomWidth: 1,
-    borderBottomColor: '#E5E7EB',
+    borderBottomColor: colors.dividerLight,
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -3921,7 +3735,7 @@ export const weeklyReportsStyles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: colors.white,
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: colors.dividerLight,
     elevation: 3,
     paddingHorizontal: 6,
     flexDirection: 'row-reverse',
@@ -3963,7 +3777,7 @@ export const weeklyReportsStyles = StyleSheet.create({
     marginTop: 18,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: colors.dividerLight,
     backgroundColor: colors.white,
     paddingHorizontal: 18,
     flexDirection: 'row',
@@ -4005,7 +3819,7 @@ export const weeklyReportsStyles = StyleSheet.create({
 
   percentText: {
     fontSize: 14,
-    color: '#EF4444',
+    color: colors.errorRed,
     fontFamily: 'Tajawal-Medium',
   },
 
@@ -4021,7 +3835,7 @@ export const weeklyReportsStyles = StyleSheet.create({
     marginTop: 6,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: colors.dividerLight,
     backgroundColor: colors.white,
     paddingHorizontal: 5,
     paddingTop: 5,
@@ -4045,7 +3859,7 @@ export const weeklyReportsStyles = StyleSheet.create({
     borderRadius: 16,
     backgroundColor: colors.white,
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: colors.dividerLight,
     alignItems: 'center',
     justifyContent: 'center',
     elevation: 2,
@@ -4069,7 +3883,7 @@ export const weeklyReportsStyles = StyleSheet.create({
     marginTop: 6,
     borderRadius: 18,
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: colors.dividerLight,
     backgroundColor: colors.white,
     padding: 7,
     elevation: 4,
@@ -4178,7 +3992,6 @@ export const weeklyReportsStyles = StyleSheet.create({
   },
 
 });
-
 export const monthlyReportsStyles = StyleSheet.create({
   ...weeklyReportsStyles,
 });
@@ -4188,14 +4001,14 @@ export const yearlyReportsStyles = StyleSheet.create({
 
   percentText: {
     ...monthlyReportsStyles.percentText,
-    color: '#22C55E',
+    color: colors.green,
   },
 });
 
 export const addBillStyles = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.55)',
+    backgroundColor: colors.darkOverlay,
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
@@ -4243,7 +4056,7 @@ export const addBillStyles = StyleSheet.create({
     width: '100%',
     height: 62,
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: colors.dividerLight,
     borderRadius: 9,
     marginTop: 12,
     paddingHorizontal: 14,
@@ -4275,7 +4088,7 @@ export const addBillStyles = StyleSheet.create({
 export const moreStyles = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.55)',
+    backgroundColor: colors.darkOverlay,
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
@@ -4314,7 +4127,7 @@ export const moreStyles = StyleSheet.create({
   item: {
     height: 56,
     borderBottomWidth: 1,
-    borderBottomColor: '#BFD3F6',
+    borderBottomColor: colors.menuDivider,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-end',
@@ -4367,7 +4180,6 @@ export const moreStyles = StyleSheet.create({
 });
 
 export const invoiceDetailsStyles = StyleSheet.create({
-
   container: {
     flex: 1,
     backgroundColor: colors.white,
@@ -4398,7 +4210,7 @@ export const invoiceDetailsStyles = StyleSheet.create({
     padding: 18,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#BFD3F6',
+    borderColor: colors.cardBorder,
     backgroundColor: colors.white,
   },
 
@@ -4421,7 +4233,7 @@ export const invoiceDetailsStyles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingVertical: 12,
     borderBottomWidth: 1,
-    borderBottomColor: '#EEF2F7',
+    borderBottomColor: colors.rowDivider,
   },
   label: {
     width: 80,
@@ -4439,14 +4251,14 @@ export const invoiceDetailsStyles = StyleSheet.create({
     flexDirection: 'row-reverse',
     paddingBottom: 12,
     borderBottomWidth: 1,
-    borderBottomColor: '#DCE7FA',
+    borderBottomColor: colors.headerDivider,
   },
 
   productRow: {
     flexDirection: 'row-reverse',
     paddingVertical: 14,
     borderBottomWidth: 1,
-    borderBottomColor: '#EEF2F7',
+    borderBottomColor: colors.rowDivider,
   },
 
   cell: {
@@ -4454,20 +4266,6 @@ export const invoiceDetailsStyles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 14,
     color: colors.black,
-  },
-
-  totalBox: {
-    marginTop: 14,
-    backgroundColor: '#EEF4FF',
-    padding: 14,
-    borderRadius: 8,
-  },
-
-  totalText: {
-    fontSize: 18,
-    fontFamily: 'Tajawal-Bold',
-    color: colors.blue,
-    textAlign: 'right',
   },
 
   qrBox: {
@@ -4529,13 +4327,12 @@ export const invoiceDetailsStyles = StyleSheet.create({
     fontFamily: 'Tajawal-Regular',
     color: colors.black,
   },
-
 });
 
 export const supportStyles = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.55)',
+    backgroundColor: colors.darkOverlay,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -4581,7 +4378,7 @@ export const supportStyles = StyleSheet.create({
   contactBox: {
     height: 58,
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: colors.dividerLight,
     borderRadius: 10,
     marginTop: 12,
     flexDirection: 'row-reverse',
@@ -4794,7 +4591,7 @@ export const cameraStyles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(0,0,0,0.55)',
+    backgroundColor: colors.darkOverlay,
     justifyContent: 'center',
     alignItems: 'center',
     paddingBottom: 10,
@@ -4837,7 +4634,7 @@ export const cameraStyles = StyleSheet.create({
     width: 48,
     height: 48,
     borderRadius: 24,
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: colors.cameraOverlay,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -4846,7 +4643,7 @@ export const cameraStyles = StyleSheet.create({
     position: 'absolute',
     width: '100%',
     height: '100%',
-    backgroundColor: 'rgba(0,0,0,0.55)',
+    backgroundColor: colors.darkOverlay,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -4864,7 +4661,7 @@ export const cameraStyles = StyleSheet.create({
     width: 90,
     height: 90,
     borderRadius: 45,
-    backgroundColor: '#F2F6FF',
+    backgroundColor: colors.lightBlueIcon,
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 20,
@@ -4905,7 +4702,7 @@ export const failedScanStyles = {
   scanFrame: {
     ...cameraStyles.scanFrame,
 
-    borderColor: '#FF3B3B',
+    borderColor: colors.errorRed,
     borderWidth: 2,
     borderRadius: 12,
 
@@ -4918,7 +4715,7 @@ export const failedScanStyles = {
     height: 90,
     borderRadius: 45,
 
-    backgroundColor: '#FF2E2E',
+    backgroundColor: colors.errorRed,
 
     justifyContent: 'center',
     alignItems: 'center',
@@ -4953,7 +4750,7 @@ export const blurScanStyles = {
     justifyContent: 'center',
     alignItems: 'center',
 
-    backgroundColor: 'rgba(255,255,255,0.04)',
+    backgroundColor: colors.lightWhiteOverlay,
   },
 
   warningIcon: {
@@ -4980,6 +4777,7 @@ export const blurScanStyles = {
     marginTop: 8,
   },
 };
+
 
 export const invoiceAddedStyles = StyleSheet.create({
   container: {
@@ -5014,45 +4812,8 @@ export const invoiceAddedStyles = StyleSheet.create({
     color: colors.gray,
     marginTop: 10,
   },
-
-  viewButton: {
-    width: '75%',
-    height: 55,
-    borderRadius: 10,
-    backgroundColor: colors.blue,
-
-    justifyContent: 'center',
-    alignItems: 'center',
-
-    marginTop: 70,
-  },
-
-  viewText: {
-    color: colors.white,
-    fontSize: 18,
-    fontFamily: 'Tajawal-Bold',
-  },
-
-  newButton: {
-    width: '75%',
-    height: 55,
-    borderRadius: 10,
-
-    borderWidth: 1.5,
-    borderColor: colors.blue,
-
-    justifyContent: 'center',
-    alignItems: 'center',
-
-    marginTop: 15,
-  },
-
-  newText: {
-    color: colors.blue,
-    fontSize: 18,
-    fontFamily: 'Tajawal-Bold',
-  },
 });
+
 
 export const invoiceStyles = StyleSheet.create({
   container: {
@@ -5078,7 +4839,7 @@ export const invoiceStyles = StyleSheet.create({
 
   card: {
     borderWidth: 1,
-    borderColor: '#E8E8E8',
+    borderColor: colors.dividerLight,
     borderRadius: 15,
     padding: 15,
   },
@@ -5091,7 +4852,7 @@ export const invoiceStyles = StyleSheet.create({
 
   line: {
     height: 1,
-    backgroundColor: '#ECECEC',
+    backgroundColor: colors.dividerLight,
     marginVertical: 15,
   },
 
@@ -5105,7 +4866,7 @@ export const invoiceStyles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 12,
-    backgroundColor: '#E6FAEC',
+    backgroundColor: colors.lightGreen,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -5130,7 +4891,7 @@ export const invoiceStyles = StyleSheet.create({
   detailsRow: {
     flexDirection: 'row',
     borderTopWidth: 1,
-    borderColor: '#ECECEC',
+    borderColor: colors.dividerLight,
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 20,
@@ -5163,13 +4924,13 @@ export const invoiceStyles = StyleSheet.create({
     height: 60,
     borderRadius: 15,
     borderWidth: 1,
-    borderColor: '#ECECEC',
+    borderColor: colors.dividerLight,
     justifyContent: 'center',
     alignItems: 'center',
   },
 
   deleteText: {
-    color: '#FF4D4D',
+    color: colors.errorRed,
     marginTop: 5,
   },
 
@@ -5227,7 +4988,7 @@ export const uploadInvoiceStyles = StyleSheet.create({
     width: 330,
     height: 235,
     borderWidth: 1,
-    borderColor: '#D9E7FF',
+    borderColor: colors.border,
     borderRadius: 20,
     alignItems: 'center',
     backgroundColor: colors.lightBlue,
@@ -5286,7 +5047,7 @@ export const uploadInvoiceStyles = StyleSheet.create({
     width: 330,
     height: 235,
     borderWidth: 1,
-    borderColor: '#D9E7FF',
+    borderColor: colors.border,
     borderRadius: 20,
     alignItems: 'center',
     backgroundColor: colors.lightBlue,
@@ -5335,6 +5096,7 @@ export const uploadInvoiceStyles = StyleSheet.create({
     textAlign: 'right',
   },
 });
+
 export const invoicePreviewStyles = StyleSheet.create({
   container: {
     flex: 1,
@@ -5451,104 +5213,7 @@ export const invoicePreviewStyles = StyleSheet.create({
     fontFamily: 'Tajawal-Bold',
   },
 });
-export const uploadingInvoiceStyles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.white,
-  },
 
-  backIcon: {
-    position: 'absolute',
-    left: 20,
-    top: 55,
-    zIndex: 1,
-  },
-
-  title: {
-    position: 'absolute',
-    top: 110,
-    alignSelf: 'center',
-    fontSize: 20,
-    fontFamily: 'Tajawal-Bold',
-    color: colors.black,
-  },
-
-  circleContainer: {
-    position: 'absolute',
-    top: 190,
-    alignSelf: 'center',
-    width: 220,
-    height: 220,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
-  iconContainer: {
-    position: 'absolute',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
-  percentText: {
-    position: 'absolute',
-    top: 400,
-    alignSelf: 'center',
-    fontSize: 34,
-    fontFamily: 'Tajawal-Bold',
-    color: colors.blue,
-  },
-
-  uploadingTitle: {
-    position: 'absolute',
-    top: 480,
-    alignSelf: 'center',
-    fontSize: 24,
-    fontFamily: 'Tajawal-Bold',
-    color: colors.black,
-  },
-
-  uploadingSubtitle: {
-    position: 'absolute',
-    top: 520,
-    alignSelf: 'center',
-    fontSize: 16,
-    fontFamily: 'Tajawal-Regular',
-    color: colors.gray,
-  },
-
-  securityCard: {
-    position: 'absolute',
-    bottom: 40,
-    left: 25,
-    width: 340,
-    height: 90,
-    backgroundColor: colors.lightBlue,
-    borderRadius: 16,
-    flexDirection: 'row-reverse',
-    alignItems: 'center',
-    paddingHorizontal: 15,
-  },
-
-  securityTextContainer: {
-    flex: 1,
-    marginRight: 10,
-  },
-
-  securityTitle: {
-    fontSize: 16,
-    fontFamily: 'Tajawal-Bold',
-    color: colors.black,
-    textAlign: 'right',
-  },
-
-  securityDescription: {
-    fontSize: 12,
-    fontFamily: 'Tajawal-Regular',
-    color: colors.gray,
-    marginTop: 4,
-    textAlign: 'right',
-  },
-});
 
 export const processingInvoiceStyles = StyleSheet.create({
   container: {
@@ -5612,7 +5277,7 @@ export const processingInvoiceStyles = StyleSheet.create({
     alignSelf: 'center',
     width: 280,
     height: 10,
-    backgroundColor: '#EEF2FF',
+    backgroundColor: colors.progressBackground,
     borderRadius: 10,
   },
 
@@ -5685,11 +5350,10 @@ export const invoiceSuccessStyles = StyleSheet.create({
     width: 180,
     height: 180,
     borderRadius: 90,
-    backgroundColor: '#EAF8EE',
+    backgroundColor: colors.lightGreen,
     justifyContent: 'center',
     alignItems: 'center',
   },
-
   innerCircle: {
     width: 95,
     height: 95,

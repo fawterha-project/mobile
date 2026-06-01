@@ -21,7 +21,8 @@ import {
 } from './styles';
 
 import {
-    verifySignupCode
+    verifySignupCode,
+    verifyCode
 } from './services/userService';
 
 const VerifyEmailScreen = ({
@@ -69,48 +70,53 @@ const VerifyEmailScreen = ({
         };
 
     const handleVerify =
-    async () => {
+        async () => {
 
-        try {
+            try {
 
-            if (
-                source === 'signup'
-            ) {
+                if (
+                    source === 'signup'
+                ) {
 
-                await verifySignupCode(
-                    email,
-                    code
-                );
-
-                setSuccessModalVisible(
-                    true
-                );
-
-            } else {
-
-                navigation.replace(
-                    'ResetPasswordScreen',
-                    {
+                    await verifySignupCode(
                         email,
                         code
-                    }
-                );
+                    );
+
+                    setSuccessModalVisible(
+                        true
+                    );
+
+                } else {
+
+                    await verifyCode(
+                        email,
+                        code
+                    );
+
+                    navigation.replace(
+                        'ResetPasswordScreen',
+                        {
+                            email,
+                            code
+                        }
+                    );
+
+                }
 
             }
 
-        }
+            catch (error) {
 
-        catch (error) {
+                setErrorModalVisible(
+                    true
+                );
 
-            setErrorModalVisible(
-                true
-            );
+                console.log(error);
 
-            console.log(error);
+            }
 
-        }
-
-    };
+        };
 
     return (
 
@@ -324,7 +330,7 @@ const VerifyEmailScreen = ({
                                     );
 
                                     navigation.replace(
-                                        'LoginScreen',
+                                        'SuccessfulSignUpScreen',
                                         {
                                             user: {
                                                 first_name:

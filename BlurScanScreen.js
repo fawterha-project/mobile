@@ -21,7 +21,7 @@ const BlurScanScreen = ({ navigation }) => {
           <MaterialIcons
             name="warning"
             size={90}
-            color="#FFD400"
+            color={colors.yellow}
             style={blurScanStyles.warningIcon}
           />
 

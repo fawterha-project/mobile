@@ -1,20 +1,12 @@
-import React, {
-    useEffect,
-    useState
-} from 'react';
+import React, { useEffect, useState } from 'react';
 
 import EmptyBottomNavigation from './EmptyBottomNavigation';
-import InvoiceSwipeActions
-    from './InvoiceSwipeActions';
-import {
-    getReceipts
-}
-    from './services/homeService';
+import InvoiceSwipeActions from './InvoiceSwipeActions';
+import { getReceipts } from './services/homeService';
 import {
     updateInvoiceCategory,
     deleteReceipt,
-}
-    from './services/receiptService';
+} from './services/receiptService';
 
 import {
     View,
@@ -26,319 +18,126 @@ import {
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-import {
-    categoryFoodStyles,
-    bottomNavStyles,
-    profileStyles,
-    colors,
-} from './styles';
+import { categoryFoodStyles, profileStyles, colors } from './styles';
 
-const BottomTab = ({
-    icon,
-    label,
-    active
-}) => (
-
-    <TouchableOpacity
-        style={bottomNavStyles.tabItem}
-        activeOpacity={0.7}
-    >
-
-        <MaterialIcons
-            name={icon}
-            size={22}
-            color={
-                active
-                    ? colors.blue
-                    : colors.gray
-            }
-        />
-
-        <Text
-            style={[
-                bottomNavStyles.tabText,
-                active &&
-                bottomNavStyles.activeTabText,
-            ]}
-        >
-            {label}
-        </Text>
-
-    </TouchableOpacity>
-
-);
-
-export default function EmptyCategoryCommitmentsScreen({
-    navigation,
-}) {
-    const [
-        receipts,
-        setReceipts
-    ] = useState([]);
-    const [
-    searchText,
-    setSearchText
-] = useState('');
+export default function EmptyCategoryCommitmentsScreen({ navigation }) {
+    const [receipts, setReceipts] = useState([]);
+    const [searchText, setSearchText] = useState('');
 
     useEffect(() => {
-
         loadData();
-
     }, []);
 
+    const loadData = async () => {
+        try {
+            const data = await getReceipts();
 
-    const loadData =
-        async () => {
+            const commitmentsReceipts = data.filter(
+                item => item?.categories?.categorie_name === 'الالتزامات',
+            );
 
-            try {
-
-                const data =
-                    await getReceipts();
-
-                const commitmentsReceipts =
-
-                    data.filter(
-
-                        item =>
-
-                            item?.categories
-                                ?.categorie_name ===
-                            'الالتزامات'
-
-                    );
-
-                setReceipts(
-                    commitmentsReceipts
-                );
-
-            }
-
-            catch (error) {
-
-                console.log(
-                    error
-                );
-
-            }
-
-        };
+            setReceipts(commitmentsReceipts);
+        } catch (error) {
+            console.log(error);
+        }
+    };
     const categoriesMap = {
+        مقاضي: 'b4301466-4e5e-4cf6-b237-68d4224aaed0',
 
-        'مقاضي':
-            'b4301466-4e5e-4cf6-b237-68d4224aaed0',
+        مطاعم: '98be0b0f-bac7-4538-acb3-7e8435cf0c7a',
 
-        'مطاعم':
-            '98be0b0f-bac7-4538-acb3-7e8435cf0c7a',
+        التسوق: 'cdc3f0de-ffac-41d9-8b45-df5c8d310462',
 
-        'التسوق':
-            'cdc3f0de-ffac-41d9-8b45-df5c8d310462',
+        النقل: 'f562b33f-a945-44a9-aab7-88d4024bbb42',
 
-        'النقل':
-            'f562b33f-a945-44a9-aab7-88d4024bbb42',
+        الصحة: '4d4a1594-25da-4e2f-bec7-6abeccca9756',
 
-        'الصحة':
-            '4d4a1594-25da-4e2f-bec7-6abeccca9756',
+        الالتزامات: 'bf5a7c93-bf60-4e45-9167-f1ac86ae2869',
 
-        'الالتزامات':
-            'bf5a7c93-bf60-4e45-9167-f1ac86ae2869',
-
-        'أخرى':
-            '02c80bae-7876-4030-894b-41745bf2c12e',
-
+        أخرى: '02c80bae-7876-4030-894b-41745bf2c12e',
     };
 
-    const handleChangeCategory = async (
-        invoice,
-        categoryName
-    ) => {
-
+    const handleChangeCategory = async (invoice, categoryName) => {
         try {
+            const categoryId = categoriesMap[categoryName];
 
-            const categoryId =
-                categoriesMap[
-                categoryName
-                ];
-
-            await updateInvoiceCategory(
-                invoice.invoice_id,
-                categoryId
-            );
+            await updateInvoiceCategory(invoice.invoice_id, categoryId);
 
             loadData();
-
-        }
-
-        catch (error) {
-
+        } catch (error) {
             console.log(error);
-
         }
-
     };
 
-    const handleDelete = async (
-        invoice
-    ) => {
-
+    const handleDelete = async invoice => {
         try {
-
-            await deleteReceipt(
-                invoice.invoice_id
-            );
+            await deleteReceipt(invoice.invoice_id);
 
             loadData();
-
-        }
-
-        catch (error) {
-
+        } catch (error) {
             console.log(error);
-
         }
-
     };
 
+    const totalAmount = receipts.reduce(
+        (sum, item) => sum + (item.total_price || 0),
 
-    const totalAmount =
-
-        receipts.reduce(
-
-            (sum, item) =>
-
-                sum +
-                (item.total_price || 0),
-
-            0
-
-        );
-        const filteredReceipts =
-
-    receipts.filter(
-
-        item =>
-
-            item.merchant_name
-                ?.toLowerCase()
-                .includes(
-                    searchText
-                        .trim()
-                        .toLowerCase()
-                )
-
+        0,
+    );
+    const filteredReceipts = receipts.filter(item =>
+        item.merchant_name?.toLowerCase().includes(searchText.trim().toLowerCase()),
     );
 
     return (
-
         <View style={categoryFoodStyles.container}>
-
-            <StatusBar
-                barStyle="dark-content"
-                backgroundColor={colors.white}
-            />
+            <StatusBar barStyle="dark-content" backgroundColor={colors.white} />
 
             <View style={profileStyles.statusFake}>
-
-                <Text style={profileStyles.timeText}>
-                    9:41
-                </Text>
+                <Text style={profileStyles.timeText}>9:41</Text>
 
                 <View style={profileStyles.statusIcons}>
-
                     <MaterialIcons
                         name="signal-cellular-4-bar"
                         size={15}
                         color={colors.black}
                     />
 
-                    <MaterialIcons
-                        name="wifi"
-                        size={15}
-                        color={colors.black}
-                    />
+                    <MaterialIcons name="wifi" size={15} color={colors.black} />
 
-                    <MaterialIcons
-                        name="battery-full"
-                        size={18}
-                        color={colors.black}
-                    />
-
+                    <MaterialIcons name="battery-full" size={18} color={colors.black} />
                 </View>
-
             </View>
-
 
             <View style={categoryFoodStyles.headerRow}>
-
                 <TouchableOpacity
                     activeOpacity={0.7}
-                    onPress={() =>
-                        navigation?.goBack?.()
-                    }
+                    onPress={() => navigation?.goBack?.()}
                 >
-
-                    <MaterialIcons
-                        name="chevron-left"
-                        size={32}
-                        color={colors.black}
-                    />
-
+                    <MaterialIcons name="chevron-left" size={32} color={colors.black} />
                 </TouchableOpacity>
 
-                <Text style={categoryFoodStyles.title}>
-                    الالتزامات
-                </Text>
+                <Text style={categoryFoodStyles.title}>الالتزامات</Text>
 
-                <View
-                    style={categoryFoodStyles.headerSpace}
-                />
-
+                <View style={categoryFoodStyles.headerSpace} />
             </View>
-
 
             <View
                 style={[
                     categoryFoodStyles.summaryCard,
                     {
                         borderColor: '#A5F3FC',
-                        backgroundColor: '#ECFEFF',
+                        backgroundColor: colors.lightCyan,
                     },
                 ]}
             >
-
-                <View
-                    style={
-                        categoryFoodStyles.summaryIconBox
-                    }
-                >
-
-                    <MaterialIcons
-                        name="event"
-                        size={42}
-                        color={colors.cyan}
-                    />
-
+                <View style={categoryFoodStyles.summaryIconBox}>
+                    <MaterialIcons name="event" size={42} color={colors.cyan} />
                 </View>
 
+                <View style={categoryFoodStyles.summaryInfo}>
+                    <Text style={categoryFoodStyles.summaryTitle}>الالتزامات</Text>
 
-                <View
-                    style={
-                        categoryFoodStyles.summaryInfo
-                    }
-                >
-
-                    <Text
-                        style={
-                            categoryFoodStyles.summaryTitle
-                        }
-                    >
-                        الالتزامات
-                    </Text>
-
-                    <Text
-                        style={
-                            categoryFoodStyles.summaryCount
-                        }
-                    >
+                    <Text style={categoryFoodStyles.summaryCount}>
                         {receipts.length} فواتير
                     </Text>
 
@@ -346,175 +145,92 @@ export default function EmptyCategoryCommitmentsScreen({
                         style={[
                             categoryFoodStyles.summaryAmount,
                             {
-                                color: colors.cyan
-                            }
+                                color: colors.cyan,
+                            },
                         ]}
                     >
                         {totalAmount} ريال
                     </Text>
 
-                    <Text
-                        style={
-                            categoryFoodStyles.summarySubText
-                        }
-                    >
-                        إجمالي المبلغ
-                    </Text>
-
+                    <Text style={categoryFoodStyles.summarySubText}>إجمالي المبلغ</Text>
                 </View>
-
             </View>
 
-
-            <View
-                style={categoryFoodStyles.searchBox}
-            >
-
-                <MaterialIcons
-                    name="search"
-                    size={22}
-                    color={colors.gray}
-                />
+            <View style={categoryFoodStyles.searchBox}>
+                <MaterialIcons name="search" size={22} color={colors.gray} />
 
                 <TextInput
-    placeholder="ابحث عن فاتورة..."
-    placeholderTextColor={colors.gray}
-    style={categoryFoodStyles.searchInput}
-    value={searchText}
-    onChangeText={setSearchText}
-/>
-
+                    placeholder="ابحث عن فاتورة..."
+                    placeholderTextColor={colors.gray}
+                    style={categoryFoodStyles.searchInput}
+                    value={searchText}
+                    onChangeText={setSearchText}
+                />
             </View>
 
+            {filteredReceipts.length === 0 ? (
+                <View style={categoryFoodStyles.emptyCategoryContent}>
+                    <MaterialIcons name="event" size={82} color={colors.border} />
 
-            {
-
-                filteredReceipts.length === 0
-                    ?
-
-                    <View
-                        style={
-                            categoryFoodStyles.emptyCategoryContent
-                        }
+                    <Text style={categoryFoodStyles.emptyCategoryTitle}>
+                        ما عندك فواتير التزامات
+                    </Text>
+                </View>
+            ) : (
+                filteredReceipts.map(item => (
+                    <InvoiceSwipeActions
+                        key={item.invoice_id}
+                        item={item}
+                        onDelete={handleDelete}
+                        onChangeCategory={handleChangeCategory}
                     >
-
-                        <MaterialIcons
-                            name="event"
-                            size={82}
-                            color={colors.border}
-                        />
-
-                        <Text
-                            style={
-                                categoryFoodStyles.emptyCategoryTitle
+                        <TouchableOpacity
+                            style={categoryFoodStyles.billItem}
+                            activeOpacity={0.8}
+                            onPress={() =>
+                                navigation.navigate('InvoiceDetails', {
+                                    receipt: item,
+                                })
                             }
                         >
+                            <View style={categoryFoodStyles.amountBox}>
+                                <Text style={categoryFoodStyles.amount}>
+                                    {item.total_price}
+                                </Text>
 
-                            ما عندك فواتير التزامات
+                                <Text style={categoryFoodStyles.currency}>ريال</Text>
+                            </View>
 
-                        </Text>
-
-                    </View>
-
-                    :
-
-                   filteredReceipts.map(item => (
-
-                        <InvoiceSwipeActions
-
-                            key={item.invoice_id}
-
-                            item={item}
-
-                            onDelete={
-                                handleDelete
-                            }
-
-                            onChangeCategory={
-                                handleChangeCategory
-                            }
-
-                        >
-
-                            <TouchableOpacity
-
-                                style={categoryFoodStyles.billItem}
-
-                                activeOpacity={0.8}
-
-                                onPress={() =>
-
-                                    navigation.navigate(
-                                        'InvoiceDetails',
-                                        {
-                                            receipt: item
-                                        }
-                                    )
-
-                                }
-
-                            >
-
-                                <View style={categoryFoodStyles.amountBox}>
-
-                                    <Text style={categoryFoodStyles.amount}>
-                                        {item.total_price}
-                                    </Text>
-
-                                    <Text style={categoryFoodStyles.currency}>
-                                        ريال
-                                    </Text>
-
-                                </View>
-
-                                <View style={categoryFoodStyles.billInfo}>
-
-                                    <Text
-                                        numberOfLines={2}
-                                        ellipsizeMode="tail"
-                                        style={categoryFoodStyles.billName}
-                                    >
-                                        {item.merchant_name}
-                                    </Text>
-
-                                    <Text style={categoryFoodStyles.billDate}>
-                                        {item.issued_at?.split('T')[0]}
-                                    </Text>
-
-                                </View>
-
-                                <View
-                                    style={[
-                                        categoryFoodStyles.billLogoCircle,
-                                        {
-                                            backgroundColor: '#EAFBFC',
-                                        },
-                                    ]}
+                            <View style={categoryFoodStyles.billInfo}>
+                                <Text
+                                    numberOfLines={2}
+                                    ellipsizeMode="tail"
+                                    style={categoryFoodStyles.billName}
                                 >
+                                    {item.merchant_name}
+                                </Text>
 
-                                    <MaterialIcons
-                                        name="event"
-                                        size={25}
-                                        color="#12C6D7"
-                                    />
+                                <Text style={categoryFoodStyles.billDate}>
+                                    {item.issued_at?.split('T')[0]}
+                                </Text>
+                            </View>
 
-                                </View>
+                            <View
+                                style={[
+                                    categoryFoodStyles.billLogoCircle,
+                                    {
+                                        backgroundColor: colors.lightCyan,
+                                    },
+                                ]}
+                            >
+                                <MaterialIcons name="event" size={25} color={colors.cyan} />
+                            </View>
+                        </TouchableOpacity>
+                    </InvoiceSwipeActions>
+                ))
+            )}
 
-                            </TouchableOpacity>
-
-                        </InvoiceSwipeActions>
-
-                    ))
-
-            }
-
-
-            <EmptyBottomNavigation
-                navigation={navigation}
-            />
-
+            <EmptyBottomNavigation navigation={navigation} />
         </View>
-
     );
-
 }

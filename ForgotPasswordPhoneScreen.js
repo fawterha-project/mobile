@@ -7,93 +7,90 @@ import {
   Image,
   ImageBackground,
 } from 'react-native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { forgotPasswordPhoneStyles, colors } from './styles';
+import { forgotPasswordStyles, colors } from './styles';
+import {
+    forgotPassword
+}
+from './services/userService';
 
-const ForgotPasswordPhoneScreen = ({ navigation }) => {
-  const [phone, setPhone] = useState('');
+const ForgotPasswordScreen = ({ navigation }) => {
+  const [email, setEmail] = useState('');
 
+const handleVerify = async () => {
+
+  try {
+
+    await forgotPassword(email);
+
+    navigation.navigate(
+      'VerifyEmailScreen',
+      {
+        source: 'forgotPassword',
+        email,
+      }
+    );
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
+
+};
   return (
-    <View style={forgotPasswordPhoneStyles.container}>
-
+    <View style={forgotPasswordStyles.container}>
       <ImageBackground
         source={{
- uri:'asset:/image/backgroundd.png'
-}}
-        style={forgotPasswordPhoneStyles.waveImage}
+ uri:'asset:/image/backgroundd.png'}}
+        style={forgotPasswordStyles.waveImage}
       />
 
       <Image
         source={{
- uri:'asset:/image/forgot_password.png'
-}}
-        style={forgotPasswordPhoneStyles.mainImage}
+ uri:'asset:/image/forgot_password.png'}}
+        style={forgotPasswordStyles.mainImage}
       />
 
-      <Text style={forgotPasswordPhoneStyles.title}>نسيت كلمة السر؟</Text>
+      <Text style={forgotPasswordStyles.title}>نسيت كلمة السر؟</Text>
 
-      <Text style={forgotPasswordPhoneStyles.description}>
-        لا تشيل هم! أدخل رقم جوالك ونرسل لك رمز إعادة تعيين كلمة المرور
+      <Text style={forgotPasswordStyles.description}>
+        لا تشيل هم! أدخل بريدك الإلكتروني ونرسل لك رمز إعادة تعيين كلمة المرور
       </Text>
 
-      <Text style={forgotPasswordPhoneStyles.phoneLabel}>رقم الجوال</Text>
+      <Text style={forgotPasswordStyles.emailLabel}>البريد الإلكتروني</Text>
 
-      <View style={forgotPasswordPhoneStyles.phoneBox}>
-        <TextInput
-          style={forgotPasswordPhoneStyles.phoneInput}
-          keyboardType="phone-pad"
-          maxLength={10}
-          value={phone}
-          onChangeText={(text) => {
-            const cleaned = text.replace(/[^0-9]/g, '');
-            setPhone(cleaned);
-          }}
-        />
-        <Text style={forgotPasswordPhoneStyles.countryCode}>+966</Text>
-      </View>
+      <TextInput
+  style={forgotPasswordStyles.emailInput}
+  keyboardType="email-address"
+  value={email}
+  onChangeText={setEmail}
+/>
+      <View style={forgotPasswordStyles.resendRow}>
+        <Text style={forgotPasswordStyles.codeText}>ما وصلك الرمز؟</Text>
 
-      {/* 👇 أعد الإرسال شغال */}
-      <View style={forgotPasswordPhoneStyles.resendRow}>
-        <Text style={forgotPasswordPhoneStyles.codeText}>ما وصلك الرمز؟</Text>
         <TouchableOpacity onPress={() => console.log('Resend')}>
-          <Text style={forgotPasswordPhoneStyles.resendLink}>أعد الإرسال</Text>
+          <Text style={forgotPasswordStyles.resendLink}>أعد الإرسال</Text>
         </TouchableOpacity>
       </View>
 
       <TouchableOpacity
-        style={[
-          forgotPasswordPhoneStyles.verifyButton,
-          phone.length !== 10 && forgotPasswordPhoneStyles.verifyButtonDisabled,
-        ]}
-        disabled={phone.length !== 10}
+        style={forgotPasswordStyles.verifyButton}
+        onPress={handleVerify}
       >
-        <Text onPress={() => navigation?.push?.('VerifyCode')} style={forgotPasswordPhoneStyles.verifyButtonText}>تحقق</Text>
+        <Text style={forgotPasswordStyles.verifyButtonText}>تحقق</Text>
       </TouchableOpacity>
 
-      <Text style={forgotPasswordPhoneStyles.orText}>أو</Text>
-
-      <Text style={forgotPasswordPhoneStyles.smsText}>إرسال الرمز إلى:</Text>
-
-      {/* 👇 يرجع للإيميل */}
-      <TouchableOpacity
-        style={forgotPasswordPhoneStyles.phoneIcon}
-        onPress={() => navigation.navigate('ForgotPassword')}
-      >
-        <MaterialIcons name="email" size={22} color={colors.black} />
-      </TouchableOpacity>
-
-      <Text style={forgotPasswordPhoneStyles.rememberText}>
+      <Text style={forgotPasswordStyles.rememberText}>
         تذكرت كلمة المرور؟{' '}
         <Text
-          style={forgotPasswordPhoneStyles.loginLink}
-          onPress={() => navigation.navigate('Login')}
+          style={forgotPasswordStyles.loginLink}
+          onPress={() => navigation.navigate('LoginScreen')}
         >
           تسجيل الدخول
         </Text>
       </Text>
-
     </View>
   );
 };
 
-export default ForgotPasswordPhoneScreen;
+export default ForgotPasswordScreen;

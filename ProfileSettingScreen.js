@@ -1,21 +1,8 @@
-import React, {
-  useEffect,
-  useState
-}
-  from 'react';
+import React, { useEffect, useState } from 'react';
 
-import AsyncStorage
-  from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import {
-
-  getProfile,
-
-  deleteAccount
-
-}
-
-  from './services/profileService';
+import { getProfile, deleteAccount } from './services/profileService';
 
 import {
   View,
@@ -26,7 +13,7 @@ import {
   Modal,
 } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { profileStyles, bottomNavStyles, colors } from './styles';
+import { profileStyles, colors } from './styles';
 
 const MenuItem = ({ title, icon, danger, onPress }) => {
   return (
@@ -42,7 +29,9 @@ const MenuItem = ({ title, icon, danger, onPress }) => {
       />
 
       <View style={profileStyles.menuRight}>
-        <Text style={[profileStyles.menuText, danger && profileStyles.deleteText]}>
+        <Text
+          style={[profileStyles.menuText, danger && profileStyles.deleteText]}
+        >
           {title}
         </Text>
 
@@ -56,73 +45,28 @@ const MenuItem = ({ title, icon, danger, onPress }) => {
   );
 };
 
-const BottomTab = ({ icon, label, active, onPress }) => {
-  return (
-    <TouchableOpacity style={bottomNavStyles.tabItem} activeOpacity={0.7}>
-      <MaterialIcons
-        name={icon}
-        size={22}
-        color={active ? colors.blue : colors.gray}
-      />
-      <Text style={[bottomNavStyles.tabText, active && bottomNavStyles.activeTabText]}>
-        {label}
-      </Text>
-    </TouchableOpacity>
-  );
-};
-
 export default function ProfileSettingScreen({ navigation }) {
+  const [deleteModalVisible, setDeleteModalVisible] = React.useState(false);
 
-  const [
-    deleteModalVisible,
-    setDeleteModalVisible
-  ] = React.useState(false);
-
-  const [
-
-    userName,
-
-    setUserName
-
-  ]
-
-    =
-
-    useState('');
+  const [userName, setUserName] = useState('');
 
   useEffect(() => {
-
     loadProfile();
-
   }, []);
 
+  const loadProfile = async () => {
+    try {
+      const user = await getProfile();
 
-  const loadProfile =
-    async () => {
+      setUserName(`${user.first_name || ''} ${user.last_name || ''}`);
+    } catch (error) {
+      console.log(
+        'خطأ البروفايل:',
 
-      try {
-
-        const user =
-          await getProfile();
-
-        setUserName(
-
-          `${user.first_name || ''} ${user.last_name || ''}`);
-      }
-
-      catch (error) {
-
-        console.log(
-
-          'خطأ البروفايل:',
-
-          error
-
-        );
-
-      }
-
-    };
+        error,
+      );
+    }
+  };
 
   return (
     <View style={profileStyles.container}>
@@ -133,7 +77,11 @@ export default function ProfileSettingScreen({ navigation }) {
           <Text style={profileStyles.timeText}>9:41</Text>
 
           <View style={profileStyles.statusIcons}>
-            <MaterialIcons name="signal-cellular-4-bar" size={15} color={colors.black} />
+            <MaterialIcons
+              name="signal-cellular-4-bar"
+              size={15}
+              color={colors.black}
+            />
             <MaterialIcons name="wifi" size={15} color={colors.black} />
             <MaterialIcons name="battery-full" size={18} color={colors.black} />
           </View>
@@ -165,146 +113,87 @@ export default function ProfileSettingScreen({ navigation }) {
         </View>
       </View>
 
-      <Text style={profileStyles.userName}>
-        {userName}</Text>
+      <Text style={profileStyles.userName}>{userName}</Text>
 
       <View style={profileStyles.menuContainer}>
-
         <MenuItem
           title="تعديل حسابي"
           icon="person"
-          onPress={() =>
-            navigation.navigate(
-              'ProfileEdit'
-            )
-          }
+          onPress={() => navigation.navigate('ProfileEdit')}
         />
 
         <MenuItem
           title="تغيير كلمة السر "
           icon="lock"
-          onPress={() =>
-            navigation.navigate(
-              'ChangePassword'
-            )
-          }
+          onPress={() => navigation.navigate('ChangePassword')}
         />
 
         <MenuItem
           title="إدارة حد الإنفاق"
           icon="insert-chart"
-          onPress={() =>
-            navigation.navigate(
-              'SpendingLimit'
-            )
-          }
+          onPress={() => navigation.navigate('SpendingLimit')}
         />
 
         <MenuItem
           title="حذف الحساب"
           icon="warning"
           danger
-          onPress={() =>
-            setDeleteModalVisible(true)
-          }
+          onPress={() => setDeleteModalVisible(true)}
         />
-
       </View>
       <Modal
         visible={deleteModalVisible}
         transparent
         animationType="fade"
-        onRequestClose={() =>
-          setDeleteModalVisible(false)
-        }
+        onRequestClose={() => setDeleteModalVisible(false)}
       >
-
         <View style={profileStyles.deleteOverlay}>
-
           <View style={profileStyles.deleteModalBox}>
-
             <View style={profileStyles.deleteIconCircle}>
-
-              <MaterialIcons
-                name="report"
-                size={50}
-                color={colors.red}
-              />
-
+              <MaterialIcons name="report" size={50} color={colors.red} />
             </View>
 
-            <Text style={profileStyles.deleteModalTitle}>
-              حذف الحساب
-            </Text>
+            <Text style={profileStyles.deleteModalTitle}>حذف الحساب</Text>
 
             <Text style={profileStyles.deleteModalText}>
               هل أنت متأكدة من حذف الحساب؟ لا يمكن التراجع عن هذا الإجراء
             </Text>
 
             <View style={profileStyles.deleteModalButtons}>
-
               <TouchableOpacity
                 style={profileStyles.deleteCancelBtn}
-                onPress={() =>
-                  setDeleteModalVisible(false)
-                }
+                onPress={() => setDeleteModalVisible(false)}
               >
-                <Text style={profileStyles.deleteCancelText}>
-                  إلغاء
-                </Text>
+                <Text style={profileStyles.deleteCancelText}>إلغاء</Text>
               </TouchableOpacity>
 
               <TouchableOpacity
                 style={profileStyles.deleteConfirmBtn}
                 onPress={async () => {
-
                   try {
-
                     await deleteAccount();
 
-                    await AsyncStorage.removeItem(
-                      'userToken'
-                    );
+                    await AsyncStorage.removeItem('userToken');
 
-                    await AsyncStorage.removeItem(
-                      'user'
-                    );
+                    await AsyncStorage.removeItem('user');
 
-                    setDeleteModalVisible(
-                      false
-                    );
+                    setDeleteModalVisible(false);
 
-                    navigation.replace(
-                      'LoginScreen'
-                    );
-
-                  }
-
-                  catch (error) {
-
+                    navigation.replace('LoginScreen');
+                  } catch (error) {
                     console.log(
-
                       'خطأ حذف الحساب:',
 
-                      error
-
+                      error,
                     );
-
                   }
-
                 }}
               >
-                <Text style={profileStyles.deleteConfirmText}>
-                  حذف
-                </Text>
+                <Text style={profileStyles.deleteConfirmText}>حذف</Text>
               </TouchableOpacity>
-
             </View>
-
           </View>
-
         </View>
-
       </Modal>
     </View>
   );
