@@ -11,7 +11,7 @@ import {
   Image,
   TouchableOpacity,
   StatusBar,
-  Alert,
+  Modal,
 } from 'react-native';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -19,11 +19,27 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {
   changePasswordStyles,
   colors,
+  profileStyles,
 } from './styles';
 
 export default function ChangePasswordScreen({
   navigation
 }) {
+
+  const [
+    successModalVisible,
+    setSuccessModalVisible
+  ] = useState(false);
+
+  const [
+    errorModalVisible,
+    setErrorModalVisible
+  ] = useState(false);
+
+  const [
+    errorMessage,
+    setErrorMessage
+  ] = useState('');
 
   const [currentPassword, setCurrentPassword] =
     useState('');
@@ -101,46 +117,22 @@ export default function ChangePasswordScreen({
 
         );
 
-        Alert.alert(
-
-          'تم',
-
-          'تم تحديث كلمة السر بنجاح',
-
-          [
-
-            {
-
-              text: 'حسناً',
-
-              onPress: () => {
-
-                navigation.navigate(
-                  'LoginScreen'
-                );
-
-              }
-
-            }
-
-          ]
-
+        setSuccessModalVisible(
+          true
         );
 
       }
 
       catch (error) {
 
-        Alert.alert(
-
-          'خطأ',
-
+        setErrorMessage(
           error?.message ||
-
           'فشل تغيير كلمة السر'
-
         );
 
+        setErrorModalVisible(
+          true
+        );
       }
 
     };
@@ -477,6 +469,7 @@ export default function ChangePasswordScreen({
 
             </View>
 
+
           ))}
 
       </View>
@@ -508,6 +501,158 @@ export default function ChangePasswordScreen({
         </Text>
 
       </TouchableOpacity>
+      <Modal
+        visible={successModalVisible}
+        transparent
+        animationType="fade"
+      >
+
+        <View style={profileStyles.deleteOverlay}>
+
+          <View style={profileStyles.deleteModalBox}>
+
+            <View
+              style={profileStyles.deleteIconCircle}
+            >
+
+              <MaterialIcons
+                name="check-circle"
+                size={50}
+                color={colors.blue}
+              />
+
+            </View>
+
+            <Text
+              style={[
+                profileStyles.deleteModalTitle,
+                { color: colors.blue }
+              ]}
+            >
+              تم بنجاح
+            </Text>
+
+            <Text
+              style={profileStyles.deleteModalText}
+            >
+              تم تحديث كلمة السر بنجاح
+            </Text>
+
+            <View
+              style={profileStyles.deleteModalButtons}
+            >
+
+              <TouchableOpacity
+                style={{
+                  flex: 1,
+                  height: 46,
+                  borderRadius: 12,
+                  backgroundColor: colors.blue,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+                onPress={() => {
+
+                  setSuccessModalVisible(
+                    false
+                  );
+
+                  navigation.navigate(
+                    'LoginScreen'
+                  );
+
+                }}
+              >
+
+                <Text
+                  style={
+                    profileStyles.deleteConfirmText
+                  }
+                >
+                  حسناً
+                </Text>
+
+              </TouchableOpacity>
+
+            </View>
+
+          </View>
+
+        </View>
+
+      </Modal>
+      <Modal
+        visible={errorModalVisible}
+        transparent
+        animationType="fade"
+      >
+
+        <View style={profileStyles.deleteOverlay}>
+
+          <View style={profileStyles.deleteModalBox}>
+
+            <View
+              style={profileStyles.deleteIconCircle}
+            >
+
+              <MaterialIcons
+                name="error"
+                size={50}
+                color={colors.red}
+              />
+
+            </View>
+
+            <Text
+              style={profileStyles.deleteModalTitle}
+            >
+              خطأ
+            </Text>
+
+            <Text
+              style={profileStyles.deleteModalText}
+            >
+              {errorMessage}
+            </Text>
+
+            <View
+              style={profileStyles.deleteModalButtons}
+            >
+
+              <TouchableOpacity
+                style={{
+                  flex: 1,
+                  height: 46,
+                  borderRadius: 12,
+                  backgroundColor: colors.red,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+                onPress={() =>
+                  setErrorModalVisible(
+                    false
+                  )
+                }
+              >
+
+                <Text
+                  style={
+                    profileStyles.deleteConfirmText
+                  }
+                >
+                  حسناً
+                </Text>
+
+              </TouchableOpacity>
+
+            </View>
+
+          </View>
+
+        </View>
+
+      </Modal>
+
 
     </View>
 

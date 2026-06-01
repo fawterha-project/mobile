@@ -8,7 +8,7 @@ import {
     Text,
     TextInput,
     TouchableOpacity,
-    Alert
+    Modal
 } from 'react-native';
 
 import MaterialIcons
@@ -16,7 +16,8 @@ import MaterialIcons
 
 import {
     verifyEmailStyles,
-    colors
+    colors,
+    profileStyles,
 } from './styles';
 
 import {
@@ -30,6 +31,15 @@ const VerifyEmailScreen = ({
 
     const [code, setCode] =
         useState('');
+    const [
+        successModalVisible,
+        setSuccessModalVisible
+    ] = useState(false);
+
+    const [
+        errorModalVisible,
+        setErrorModalVisible
+    ] = useState(false);
 
     const inputRef =
         useRef(null);
@@ -59,64 +69,48 @@ const VerifyEmailScreen = ({
         };
 
     const handleVerify =
-        async () => {
+    async () => {
 
-            try {
+        try {
 
-                if (source === 'signup') {
+            if (
+                source === 'signup'
+            ) {
 
-                    await verifySignupCode(
-                        email,
-                        code
-                    );
-
-                    Alert.alert(
-                        'نجاح',
-                        'تم التحقق بنجاح',
-                        [
-                            {
-                                text: 'موافق',
-                                onPress: () => {
-
-                                    navigation.replace(
-                                        'HomeScreen',
-                                        {
-                                            user: {
-                                                first_name:
-                                                    user?.first_name
-                                            }
-                                        }
-                                    );
-
-                                }
-                            }
-                        ]
-                    );
-
-                }
-
-                else {
-
-                    navigation.replace(
-                        'ResetPasswordScreen'
-                    );
-
-                }
-
-            }
-
-            catch (error) {
-
-                Alert.alert(
-                    'خطأ',
-                    'رمز التحقق غير صحيح'
+                await verifySignupCode(
+                    email,
+                    code
                 );
 
-                console.log(error);
+                setSuccessModalVisible(
+                    true
+                );
+
+            } else {
+
+                navigation.replace(
+                    'ResetPasswordScreen',
+                    {
+                        email,
+                        code
+                    }
+                );
 
             }
 
-        };
+        }
+
+        catch (error) {
+
+            setErrorModalVisible(
+                true
+            );
+
+            console.log(error);
+
+        }
+
+    };
 
     return (
 
@@ -273,6 +267,163 @@ const VerifyEmailScreen = ({
                 </Text>
 
             </TouchableOpacity>
+            <Modal
+                visible={successModalVisible}
+                transparent
+                animationType="fade"
+            >
+
+                <View style={profileStyles.deleteOverlay}>
+
+                    <View style={profileStyles.deleteModalBox}>
+
+                        <View
+                            style={profileStyles.deleteIconCircle}
+                        >
+
+                            <MaterialIcons
+                                name="check-circle"
+                                size={50}
+                                color={colors.blue}
+                            />
+
+                        </View>
+
+                        <Text
+                            style={[
+                                profileStyles.deleteModalTitle,
+                                { color: colors.blue }
+                            ]}
+                        >
+                            تم بنجاح
+                        </Text>
+
+                        <Text
+                            style={profileStyles.deleteModalText}
+                        >
+                            تم التحقق بنجاح
+                        </Text>
+
+                        <View
+                            style={profileStyles.deleteModalButtons}
+                        >
+
+                            <TouchableOpacity
+                                style={{
+                                    flex: 1,
+                                    height: 46,
+                                    borderRadius: 12,
+                                    backgroundColor: colors.blue,
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                }}
+                                onPress={() => {
+
+                                    setSuccessModalVisible(
+                                        false
+                                    );
+
+                                    navigation.replace(
+                                        'LoginScreen',
+                                        {
+                                            user: {
+                                                first_name:
+                                                    user?.first_name
+                                            }
+                                        }
+                                    );
+
+                                }}
+                            >
+
+                                <Text
+                                    style={
+                                        profileStyles.deleteConfirmText
+                                    }
+                                >
+                                    حسناً
+                                </Text>
+
+                            </TouchableOpacity>
+
+                        </View>
+
+                    </View>
+
+                </View>
+
+            </Modal>
+            <Modal
+                visible={errorModalVisible}
+                transparent
+                animationType="fade"
+            >
+
+                <View style={profileStyles.deleteOverlay}>
+
+                    <View style={profileStyles.deleteModalBox}>
+
+                        <View
+                            style={profileStyles.deleteIconCircle}
+                        >
+
+                            <MaterialIcons
+                                name="error"
+                                size={50}
+                                color={colors.red}
+                            />
+
+                        </View>
+
+                        <Text
+                            style={profileStyles.deleteModalTitle}
+                        >
+                            خطأ
+                        </Text>
+
+                        <Text
+                            style={profileStyles.deleteModalText}
+                        >
+                            رمز التحقق غير صحيح
+                        </Text>
+
+                        <View
+                            style={profileStyles.deleteModalButtons}
+                        >
+
+                            <TouchableOpacity
+                                style={{
+                                    flex: 1,
+                                    height: 46,
+                                    borderRadius: 12,
+                                    backgroundColor: colors.red,
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                }}
+                                onPress={() =>
+                                    setErrorModalVisible(
+                                        false
+                                    )
+                                }
+                            >
+
+                                <Text
+                                    style={
+                                        profileStyles.deleteConfirmText
+                                    }
+                                >
+                                    حسناً
+                                </Text>
+
+                            </TouchableOpacity>
+
+                        </View>
+
+                    </View>
+
+                </View>
+
+            </Modal>
 
         </View>
 

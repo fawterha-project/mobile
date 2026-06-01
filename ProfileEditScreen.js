@@ -9,7 +9,7 @@ import {
   TextInput,
   TouchableOpacity,
   StatusBar,
-  Alert,
+  Modal,
 } from 'react-native';
 
 import MaterialIcons
@@ -62,6 +62,20 @@ export default function ProfileEditScreen({
     setShowGenderOptions
   ] = useState(false);
 
+  const [
+    successModalVisible,
+    setSuccessModalVisible
+  ] = useState(false);
+
+  const [
+    errorModalVisible,
+    setErrorModalVisible
+  ] = useState(false);
+
+  const [
+    errorMessage,
+    setErrorMessage
+  ] = useState('');
 
 
   useEffect(() => {
@@ -175,15 +189,9 @@ export default function ProfileEditScreen({
 
         });
 
-        Alert.alert(
-
-          'نجاح',
-
-          'تم تحديث البيانات'
-
+        setSuccessModalVisible(
+          true
         );
-
-        navigation.goBack();
 
       }
 
@@ -197,14 +205,13 @@ export default function ProfileEditScreen({
 
         );
 
-        Alert.alert(
-
-          'خطأ',
-
+        setErrorMessage(
           error?.message ||
-
           'فشل تحديث بيانات الملف الشخصي'
+        );
 
+        setErrorModalVisible(
+          true
         );
 
       }
@@ -620,6 +627,135 @@ export default function ProfileEditScreen({
         </TouchableOpacity>
 
       </View>
+      <Modal
+  visible={successModalVisible}
+  transparent
+  animationType="fade"
+>
+
+  <View style={profileStyles.deleteOverlay}>
+
+    <View style={profileStyles.deleteModalBox}>
+
+      <View
+        style={profileStyles.deleteIconCircle}
+      >
+
+        <MaterialIcons
+          name="check-circle"
+          size={50}
+          color={colors.blue}
+        />
+
+      </View>
+
+      <Text
+  style={[
+    profileStyles.deleteModalTitle,
+    { color: colors.blue }
+  ]}
+>
+  تم بنجاح
+</Text>
+
+      <Text
+        style={profileStyles.deleteModalText}
+      >
+        تم تحديث البيانات بنجاح
+      </Text>
+
+     <TouchableOpacity
+  style={{
+    width: '100%',
+    height: 46,
+    borderRadius: 12,
+    backgroundColor: colors.blue,
+    alignItems: 'center',
+    justifyContent: 'center',
+  }}
+  onPress={() => {
+
+    setSuccessModalVisible(false);
+
+    navigation.goBack();
+
+  }}
+>
+
+  <Text
+    style={{
+      color: colors.white,
+      fontSize: 16,
+      fontFamily: 'Tajawal-Medium',
+    }}
+  >
+    حسناً
+  </Text>
+
+</TouchableOpacity>
+
+    </View>
+
+  </View>
+
+</Modal>
+
+<Modal
+  visible={errorModalVisible}
+  transparent
+  animationType="fade"
+>
+
+  <View style={profileStyles.deleteOverlay}>
+
+    <View style={profileStyles.deleteModalBox}>
+
+      <View
+        style={profileStyles.deleteIconCircle}
+      >
+
+        <MaterialIcons
+          name="error"
+          size={50}
+          color={colors.red}
+        />
+
+      </View>
+
+      <Text
+        style={profileStyles.deleteModalTitle}
+      >
+        خطأ
+      </Text>
+
+      <Text
+        style={profileStyles.deleteModalText}
+      >
+        {errorMessage}
+      </Text>
+
+      <TouchableOpacity
+        style={profileStyles.deleteConfirmBtn}
+        onPress={() =>
+          setErrorModalVisible(
+            false
+          )
+        }
+      >
+
+        <Text
+          style={profileStyles.deleteConfirmText}
+        >
+          حسناً
+        </Text>
+
+      </TouchableOpacity>
+
+    </View>
+
+  </View>
+
+</Modal>
 
     </View>
 
@@ -677,8 +813,8 @@ function InputField({
           style={profileEditStyles.textInput}
         />
 
-      </View>
 
+      </View>
     </View>
 
   );

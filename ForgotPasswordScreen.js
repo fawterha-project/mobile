@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -9,8 +9,35 @@ import {
 } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { forgotPasswordStyles, colors } from './styles';
+import {
+    forgotPassword
+}
+from './services/userService';
 
 const ForgotPasswordScreen = ({ navigation }) => {
+  const [email, setEmail] = useState('');
+
+const handleVerify = async () => {
+
+  try {
+
+    await forgotPassword(email);
+
+    navigation.navigate(
+      'VerifyEmailScreen',
+      {
+        source: 'forgotPassword',
+        email,
+      }
+    );
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
+
+};
   return (
     <View style={forgotPasswordStyles.container}>
       <ImageBackground
@@ -34,10 +61,11 @@ const ForgotPasswordScreen = ({ navigation }) => {
       <Text style={forgotPasswordStyles.emailLabel}>البريد الإلكتروني</Text>
 
       <TextInput
-        style={forgotPasswordStyles.emailInput}
-        keyboardType="email-address"
-      />
-
+  style={forgotPasswordStyles.emailInput}
+  keyboardType="email-address"
+  value={email}
+  onChangeText={setEmail}
+/>
       <View style={forgotPasswordStyles.resendRow}>
         <Text style={forgotPasswordStyles.codeText}>ما وصلك الرمز؟</Text>
 
@@ -48,11 +76,7 @@ const ForgotPasswordScreen = ({ navigation }) => {
 
       <TouchableOpacity
         style={forgotPasswordStyles.verifyButton}
-        onPress={() =>
-          navigation.navigate('VerifyEmailScreen', {
-            source: 'forgotPassword',
-          })
-        }
+        onPress={handleVerify}
       >
         <Text style={forgotPasswordStyles.verifyButtonText}>تحقق</Text>
       </TouchableOpacity>

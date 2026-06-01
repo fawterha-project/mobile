@@ -78,7 +78,7 @@ style={{flex:1}}
 
 <Stack.Navigator
 
-initialRouteName="LoginScreen"
+initialRouteName="SplashScreen"
 
 screenOptions={{
 headerShown:false

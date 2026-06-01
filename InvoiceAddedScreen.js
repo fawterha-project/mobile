@@ -1,4 +1,6 @@
-import React from 'react';
+import React, {
+  useEffect,
+} from 'react';
 
 import {
   View,
@@ -24,6 +26,21 @@ const InvoiceAddedScreen = ({
     extractedData,
     attachmentId,
   } = route.params || {};
+
+useEffect(() => {
+
+  const timer = setTimeout(() => {
+
+    navigation.navigate(
+      'HomeScreen'
+    );
+
+  }, 3000);
+
+  return () =>
+    clearTimeout(timer);
+
+}, []);
 
   return (
 
@@ -77,69 +94,7 @@ const InvoiceAddedScreen = ({
         style={invoiceAddedStyles.subtitle}
       >
 
-        تقدر تشوفها في الفواتير
-
-      </Text>
-
-
-
-      <TouchableOpacity
-
-        style={
-          invoiceAddedStyles.viewButton
-        }
-
-        onPress={() =>
-          navigation.navigate(
-            'InvoiceDetails',
-            {
-              extractedData,
-              attachmentId,
-            }
-          )
-        }
-
-      >
-
-        <Text
-          style={
-            invoiceAddedStyles.viewText
-          }
-        >
-
-          عرض الفاتورة
-
-        </Text>
-
-      </TouchableOpacity>
-
-
-
-      <TouchableOpacity
-
-        style={
-          invoiceAddedStyles.newButton
-        }
-
-        onPress={() =>
-          navigation.navigate(
-            'CameraScreen'
-          )
-        }
-
-      >
-
-        <Text
-          style={
-            invoiceAddedStyles.newText
-          }
-        >
-
-          إنشاء فاتورة جديدة
-
-        </Text>
-
-      </TouchableOpacity>
+        تقدر تشوفها في خانة الفواتير </Text>
 
     </View>
 

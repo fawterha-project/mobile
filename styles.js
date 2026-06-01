@@ -275,62 +275,62 @@ export const loginStyles = StyleSheet.create({
     opacity: 0.5,
   },
   errorOverlay: {
-  flex: 1,
-  backgroundColor: 'rgba(0,0,0,0.45)',
-  justifyContent: 'center',
-  alignItems: 'center',
-},
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.45)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 
-errorModal: {
-  width: 320,
-  backgroundColor: colors.white,
-  borderRadius: 30,
-  paddingVertical: 30,
-  paddingHorizontal: 25,
-  alignItems: 'center',
-},
+  errorModal: {
+    width: 320,
+    backgroundColor: colors.white,
+    borderRadius: 30,
+    paddingVertical: 30,
+    paddingHorizontal: 25,
+    alignItems: 'center',
+  },
 
-errorIconCircle: {
-  width: 90,
-  height: 90,
-  borderRadius: 45,
-  backgroundColor: '#FFEAEA',
-  justifyContent: 'center',
-  alignItems: 'center',
-  marginBottom: 20,
-},
+  errorIconCircle: {
+    width: 90,
+    height: 90,
+    borderRadius: 45,
+    backgroundColor: '#FFEAEA',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
 
-errorTitle: {
-  fontSize: 24,
-  fontFamily: 'Tajawal-Bold',
-  color: '#E53935',
-  textAlign: 'center',
-},
+  errorTitle: {
+    fontSize: 24,
+    fontFamily: 'Tajawal-Bold',
+    color: '#E53935',
+    textAlign: 'center',
+  },
 
-errorText: {
-  fontSize: 15,
-  fontFamily: 'Tajawal-Regular',
-  color: colors.gray,
-  textAlign: 'center',
-  marginTop: 12,
-  lineHeight: 28,
-},
+  errorText: {
+    fontSize: 15,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+    textAlign: 'center',
+    marginTop: 12,
+    lineHeight: 28,
+  },
 
-errorButton: {
-  width: 180,
-  height: 50,
-  borderRadius: 14,
-  backgroundColor: '#E53935',
-  justifyContent: 'center',
-  alignItems: 'center',
-  marginTop: 25,
-},
+  errorButton: {
+    width: 180,
+    height: 50,
+    borderRadius: 14,
+    backgroundColor: '#E53935',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 25,
+  },
 
-errorButtonText: {
-  color: colors.white,
-  fontSize: 18,
-  fontFamily: 'Tajawal-Bold',
-},
+  errorButtonText: {
+    color: colors.white,
+    fontSize: 18,
+    fontFamily: 'Tajawal-Bold',
+  },
 });
 
 export const signupStyles = StyleSheet.create({
@@ -545,62 +545,62 @@ export const signupStyles = StyleSheet.create({
     opacity: 0.5,
   },
   passwordOverlay: {
-  flex: 1,
-  backgroundColor: 'rgba(0,0,0,0.45)',
-  justifyContent: 'center',
-  alignItems: 'center',
-},
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.45)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 
-passwordModal: {
-  width: 320,
-  backgroundColor: colors.white,
-  borderRadius: 30,
-  paddingVertical: 30,
-  paddingHorizontal: 25,
-  alignItems: 'center',
-},
+  passwordModal: {
+    width: 320,
+    backgroundColor: colors.white,
+    borderRadius: 30,
+    paddingVertical: 30,
+    paddingHorizontal: 25,
+    alignItems: 'center',
+  },
 
-passwordIconCircle: {
-  width: 90,
-  height: 90,
-  borderRadius: 45,
-  backgroundColor: '#F2F6FF',
-  justifyContent: 'center',
-  alignItems: 'center',
-  marginBottom: 20,
-},
+  passwordIconCircle: {
+    width: 90,
+    height: 90,
+    borderRadius: 45,
+    backgroundColor: '#F2F6FF',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
 
-passwordTitle: {
-  fontSize: 24,
-  fontFamily: 'Tajawal-Bold',
-  color: colors.blue,
-  textAlign: 'center',
-},
+  passwordTitle: {
+    fontSize: 24,
+    fontFamily: 'Tajawal-Bold',
+    color: colors.blue,
+    textAlign: 'center',
+  },
 
-passwordText: {
-  fontSize: 15,
-  fontFamily: 'Tajawal-Regular',
-  color: colors.gray,
-  textAlign: 'center',
-  marginTop: 12,
-  lineHeight: 28,
-},
+  passwordText: {
+    fontSize: 15,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.gray,
+    textAlign: 'center',
+    marginTop: 12,
+    lineHeight: 28,
+  },
 
-passwordButton: {
-  width: 180,
-  height: 50,
-  borderRadius: 14,
-  backgroundColor: colors.blue,
-  justifyContent: 'center',
-  alignItems: 'center',
-  marginTop: 25,
-},
+  passwordButton: {
+    width: 180,
+    height: 50,
+    borderRadius: 14,
+    backgroundColor: colors.blue,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 25,
+  },
 
-passwordButtonText: {
-  color: colors.white,
-  fontSize: 18,
-  fontFamily: 'Tajawal-Bold',
-},
+  passwordButtonText: {
+    color: colors.white,
+    fontSize: 18,
+    fontFamily: 'Tajawal-Bold',
+  },
 });
 
 export const forgotPasswordStyles = StyleSheet.create({
@@ -3523,11 +3523,11 @@ export const categoriesStyles = StyleSheet.create({
   },
 
   categoryInfo: {
-  flex: 1,
-  alignItems: 'flex-end',
-  paddingRight: 12,
-  marginLeft: 10,
-},
+    flex: 1,
+    alignItems: 'flex-end',
+    paddingRight: 12,
+    marginLeft: 10,
+  },
 
   categoryName: {
     fontSize: 18,
@@ -3536,13 +3536,13 @@ export const categoriesStyles = StyleSheet.create({
   },
 
   categoryCount: {
-  marginTop: 2,
-  fontSize: 16,
-  color: colors.gray,
-  fontFamily: 'Tajawal-Regular',
-  textAlign: 'right',
-  alignSelf: 'stretch',
-},
+    marginTop: 2,
+    fontSize: 16,
+    color: colors.gray,
+    fontFamily: 'Tajawal-Regular',
+    textAlign: 'right',
+    alignSelf: 'stretch',
+  },
 
   categoryIconBox: {
     width: 40,
@@ -3598,11 +3598,11 @@ export const categoryFoodStyles = StyleSheet.create({
     justifyContent: 'center',
   },
 
-summaryInfo: {
-  flex: 1,
-  alignItems: 'flex-end',
-  paddingLeft: 20,
-},
+  summaryInfo: {
+    flex: 1,
+    alignItems: 'flex-end',
+    paddingLeft: 20,
+  },
 
   summaryTitle: {
     fontSize: 18,
@@ -3611,12 +3611,12 @@ summaryInfo: {
   },
 
   summaryCount: {
-  marginTop: 4,
-  fontSize: 16,
-  color: colors.gray,
-  fontFamily: 'Tajawal-Regular',
-  paddingLeft: 30,
-},
+    marginTop: 4,
+    fontSize: 16,
+    color: colors.gray,
+    fontFamily: 'Tajawal-Regular',
+    paddingLeft: 30,
+  },
 
   summaryAmount: {
     marginTop: 4,
@@ -3669,10 +3669,10 @@ summaryInfo: {
   },
 
   amountBox: {
-  width: 80,
-  alignItems: 'flex-start',
-  marginLeft: 20,
-},
+    width: 80,
+    alignItems: 'flex-start',
+    marginLeft: 20,
+  },
 
   amount: {
     fontSize: 18,
@@ -4374,8 +4374,8 @@ export const invoiceDetailsStyles = StyleSheet.create({
   },
 
   scroll: {
-  flex: 1,
-},
+    flex: 1,
+  },
 
   headerRow: {
     height: 55,
@@ -4417,24 +4417,24 @@ export const invoiceDetailsStyles = StyleSheet.create({
 
   row: {
     flexDirection: 'row-reverse',
+    alignItems: 'flex-start',
     justifyContent: 'space-between',
     paddingVertical: 12,
     borderBottomWidth: 1,
     borderBottomColor: '#EEF2F7',
   },
-
   label: {
+    width: 80,
+    textAlign: 'right',
     fontSize: 16,
     fontFamily: 'Tajawal-Regular',
     color: colors.blue,
   },
-
   value: {
     fontSize: 16,
     fontFamily: 'Tajawal-Regular',
     color: colors.black,
   },
-
   productHeader: {
     flexDirection: 'row-reverse',
     paddingBottom: 12,
@@ -4521,6 +4521,13 @@ export const invoiceDetailsStyles = StyleSheet.create({
     color: colors.white,
     fontSize: 18,
     fontFamily: 'Tajawal-Bold',
+  },
+  longValue: {
+    width: 180,
+    textAlign: 'right',
+    fontSize: 16,
+    fontFamily: 'Tajawal-Regular',
+    color: colors.black,
   },
 
 });
@@ -4991,7 +4998,7 @@ export const invoiceAddedStyles = StyleSheet.create({
   image: {
     width: 270,
     height: 270,
-    marginTop: 50,
+    marginTop: 150,
   },
 
   title: {
@@ -5213,14 +5220,14 @@ export const uploadInvoiceStyles = StyleSheet.create({
     color: colors.gray,
   },
 
- imageCard: {
-  position: 'absolute',
-  top: 145,
-  left: 30,
-  width: 330,
-  height: 235,
+  imageCard: {
+    position: 'absolute',
+    top: 145,
+    left: 30,
+    width: 330,
+    height: 235,
     borderWidth: 1,
-   borderColor: '#D9E7FF',
+    borderColor: '#D9E7FF',
     borderRadius: 20,
     alignItems: 'center',
     backgroundColor: colors.lightBlue,
@@ -5236,9 +5243,9 @@ export const uploadInvoiceStyles = StyleSheet.create({
     marginTop: 25,
   },
 
- cardTitle: {
-  marginTop: 18,
-  fontSize: 16,
+  cardTitle: {
+    marginTop: 18,
+    fontSize: 16,
     fontFamily: 'Tajawal-Bold',
     color: colors.black,
   },
@@ -5251,20 +5258,20 @@ export const uploadInvoiceStyles = StyleSheet.create({
   },
 
   uploadButton: {
-  marginTop: 22,
+    marginTop: 22,
 
-  width: 190,
-  height: 44,
+    width: 190,
+    height: 44,
 
-  backgroundColor: colors.white,
+    backgroundColor: colors.white,
 
-  borderRadius: 12,
+    borderRadius: 12,
 
-  justifyContent: 'center',
-  alignItems: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
 
-  flexDirection: 'row-reverse',
-},
+    flexDirection: 'row-reverse',
+  },
 
   uploadButtonText: {
     color: colors.blue,
@@ -5273,13 +5280,13 @@ export const uploadInvoiceStyles = StyleSheet.create({
   },
 
   pdfCard: {
-  position: 'absolute',
-  top: 400,
-  left: 30,
-  width: 330,
-  height: 235,
+    position: 'absolute',
+    top: 400,
+    left: 30,
+    width: 330,
+    height: 235,
     borderWidth: 1,
-   borderColor: '#D9E7FF',
+    borderColor: '#D9E7FF',
     borderRadius: 20,
     alignItems: 'center',
     backgroundColor: colors.lightBlue,

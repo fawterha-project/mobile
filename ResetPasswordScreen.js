@@ -1,13 +1,26 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
+import React, {
+  useState
+} from 'react';
+import { View, Text, TextInput, Image, TouchableOpacity, Modal } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { resetPasswordStyles, colors } from './styles';
+import { resetPasswordStyles, colors, profileStyles } from './styles';
+import {
+  resetPassword
+} from './services/userService';
 
-const ResetPasswordScreen = ({ navigation }) => {
+const ResetPasswordScreen = ({
+  navigation,
+  route
+}) => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [hidePassword, setHidePassword] = useState(true);
   const [hideConfirmPassword, setHideConfirmPassword] = useState(true);
+  const [
+  successModalVisible,
+  setSuccessModalVisible
+] = useState(false);
+  const {email,code} = route.params || {};
 
   const requirements = [
     { text: '8 أحرف على الأقل', valid: password.length >= 8 },
@@ -26,6 +39,36 @@ const ResetPasswordScreen = ({ navigation }) => {
     password === confirmPassword &&
     confirmPassword.length > 0;
 
+    const handleResetPassword =
+async () => {
+
+  try {
+    console.log('EMAIL:', email);
+console.log('CODE:', code);
+console.log('PASSWORD:', password);
+
+   await resetPassword(
+  email,
+  code,
+  password
+);
+
+setSuccessModalVisible(
+  true
+);
+  }
+
+  catch (error) {
+
+  console.log(
+    'Reset Error:',
+    JSON.stringify(error)
+  );
+
+}
+
+};
+
   return (
     <View style={resetPasswordStyles.container}>
       <TouchableOpacity
@@ -39,14 +82,16 @@ const ResetPasswordScreen = ({ navigation }) => {
 
       <Image
         source={{
-              uri: 'asset:/image/BACKGROUND2.png'}}
+          uri: 'asset:/image/BACKGROUND2.png'
+        }}
         style={resetPasswordStyles.waveImage}
         resizeMode="cover"
       />
 
       <Image
         source={{
-              uri: 'asset:/image/restpass.png'}}
+          uri: 'asset:/image/restpass.png'
+        }}
         style={resetPasswordStyles.image}
         resizeMode="contain"
       />
@@ -148,10 +193,98 @@ const ResetPasswordScreen = ({ navigation }) => {
           resetPasswordStyles.button,
           !canSubmit && resetPasswordStyles.buttonDisabled,
         ]}
-        onPress={() => navigation.replace('LoginScreen')}
+        onPress={
+  handleResetPassword
+}
       >
         <Text style={resetPasswordStyles.buttonText}>تغيير كلمة السر</Text>
       </TouchableOpacity>
+      <Modal
+  visible={successModalVisible}
+  transparent
+  animationType="fade"
+>
+
+  <View style={profileStyles.deleteOverlay}>
+
+    <View style={profileStyles.deleteModalBox}>
+
+      <View
+        style={profileStyles.deleteIconCircle}
+      >
+
+        <MaterialIcons
+          name="check-circle"
+          size={50}
+          color={colors.blue}
+        />
+
+      </View>
+
+      <Text
+        style={[
+          profileStyles.deleteModalTitle,
+          { color: colors.blue }
+        ]}
+      >
+        تم بنجاح
+      </Text>
+
+      <Text
+        style={profileStyles.deleteModalText}
+      >
+        تم تغيير كلمة السر بنجاح
+      </Text>
+
+      <View
+        style={profileStyles.deleteModalButtons}
+      >
+
+        <TouchableOpacity
+          style={{
+            flex: 1,
+            height: 46,
+            borderRadius: 12,
+            backgroundColor: colors.blue,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+          onPress={() => {
+
+            setSuccessModalVisible(
+              false
+            );
+
+            navigation.reset({
+              index: 0,
+              routes: [
+                {
+                  name: 'LoginScreen'
+                }
+              ]
+            });
+
+          }}
+        >
+
+          <Text
+            style={
+              profileStyles.deleteConfirmText
+            }
+          >
+            حسناً
+          </Text>
+
+        </TouchableOpacity>
+
+      </View>
+
+    </View>
+
+  </View>
+
+</Modal>
+      
     </View>
   );
 };

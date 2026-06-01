@@ -92,12 +92,12 @@ export default function InvoiceDetailsScreen({
         <View style={invoiceDetailsStyles.container}>
 
             <ScrollView
-    showsVerticalScrollIndicator={false}
-    style={invoiceDetailsStyles.scroll}
-    contentContainerStyle={{
-        paddingBottom: 80,
-    }}
->
+                showsVerticalScrollIndicator={false}
+                style={invoiceDetailsStyles.scroll}
+                contentContainerStyle={{
+                    paddingBottom: 80,
+                }}
+            >
 
                 <View
                     style={invoiceDetailsStyles.headerRow}>
@@ -187,46 +187,54 @@ export default function InvoiceDetailsScreen({
                             اسم المتجر
                         </Text>
 
-                        <Text style={invoiceDetailsStyles.value}>
+                        <Text
+                            style={invoiceDetailsStyles.longValue}
+                            numberOfLines={3}
+                            ellipsizeMode="tail"
+                        >
                             {invoiceData.merchantName}
                         </Text>
                     </View>
 
                     {
-    receipt?.merchant?.address && (
+                        receipt?.merchant?.address && (
 
-        <View style={invoiceDetailsStyles.row}>
+                            <View style={invoiceDetailsStyles.row}>
 
-            <Text style={invoiceDetailsStyles.label}>
-                عنوان المتجر
-            </Text>
+                                <Text style={invoiceDetailsStyles.label}>
+                                    عنوان المتجر
+                                </Text>
 
-            <Text style={invoiceDetailsStyles.value}>
-                {receipt.merchant.address}
-            </Text>
+                                <Text
+                                    style={invoiceDetailsStyles.longValue}
+                                    numberOfLines={3}
+                                    ellipsizeMode="tail"
+                                >
+                                    {receipt.merchant.address}
+                                </Text>
 
-        </View>
+                            </View>
 
-    )
-}
+                        )
+                    }
 
-                   {
-    receipt?.merchant?.vat_number && (
+                    {
+                        receipt?.merchant?.vat_number && (
 
-        <View style={invoiceDetailsStyles.row}>
+                            <View style={invoiceDetailsStyles.row}>
 
-            <Text style={invoiceDetailsStyles.label}>
-                الرقم الضريبي
-            </Text>
+                                <Text style={invoiceDetailsStyles.label}>
+                                    الرقم الضريبي
+                                </Text>
 
-            <Text style={invoiceDetailsStyles.value}>
-                {receipt.merchant.vat_number}
-            </Text>
+                                <Text style={invoiceDetailsStyles.value}>
+                                    {receipt.merchant.vat_number}
+                                </Text>
 
-        </View>
+                            </View>
 
-    )
-}
+                        )
+                    }
 
                 </View>
 
@@ -264,151 +272,151 @@ export default function InvoiceDetailsScreen({
                     </View>
 
                     {
-    receipt?.invoice_items?.length > 0 ?
+                        receipt?.invoice_items?.length > 0 ?
 
-        receipt.invoice_items.map(
-            (product, index) => (
+                            receipt.invoice_items.map(
+                                (product, index) => (
 
-                <View
-                    key={index}
-                    style={invoiceDetailsStyles.productHeader}
-                >
+                                    <View
+                                        key={index}
+                                        style={invoiceDetailsStyles.productHeader}
+                                    >
 
-                    <Text
-                        style={invoiceDetailsStyles.cell}
-                    >
-                        {product.invoice_item_name}
-                    </Text>
+                                        <Text
+                                            style={invoiceDetailsStyles.cell}
+                                        >
+                                            {product.invoice_item_name}
+                                        </Text>
 
-                    <Text
-                        style={invoiceDetailsStyles.cell}
-                    >
-                        {product.quantity || '-'}
-                    </Text>
+                                        <Text
+                                            style={invoiceDetailsStyles.cell}
+                                        >
+                                            {product.quantity || '-'}
+                                        </Text>
 
-                    <Text
-                        style={invoiceDetailsStyles.cell}
-                    >
-                        {product.price_before_vat || '-'}
-                    </Text>
+                                        <Text
+                                            style={invoiceDetailsStyles.cell}
+                                        >
+                                            {product.price_before_vat || '-'}
+                                        </Text>
 
-                    <Text
-                        style={invoiceDetailsStyles.cell}
-                    >
-                        {product.vat_amount || '-'}
-                    </Text>
+                                        <Text
+                                            style={invoiceDetailsStyles.cell}
+                                        >
+                                            {product.vat_amount || '-'}
+                                        </Text>
 
-                    <Text
-                        style={invoiceDetailsStyles.cell}
-                    >
-                        {product.price_with_vat || '-'}
-                    </Text>
+                                        <Text
+                                            style={invoiceDetailsStyles.cell}
+                                        >
+                                            {product.price_with_vat || '-'}
+                                        </Text>
 
-                </View>
+                                    </View>
 
-            )
+                                )
 
-        )
+                            )
 
-        :
+                            :
 
-        <View
-            style={{
-                padding: 20,
-                alignItems: 'center',
-            }}
-        >
+                            <View
+                                style={{
+                                    padding: 20,
+                                    alignItems: 'center',
+                                }}
+                            >
 
-            <Text>
-                لا توجد تفاصيل منتجات متاحة
-            </Text>
+                                <Text>
+                                    لا توجد تفاصيل منتجات متاحة
+                                </Text>
 
-        </View>
-}
+                            </View>
+                    }
 
-               <View style={invoiceDetailsStyles.card}>
+                    <View style={invoiceDetailsStyles.card}>
 
-    <SectionHeader
-        title="ملخص الفاتورة"
-        icon="payments"
-    />
+                        <SectionHeader
+                            title="ملخص الفاتورة"
+                            icon="payments"
+                        />
 
-    <View style={invoiceDetailsStyles.row}>
+                        <View style={invoiceDetailsStyles.row}>
 
-        <Text style={invoiceDetailsStyles.label}>
-            طريقة الدفع
-        </Text>
+                            <Text style={invoiceDetailsStyles.label}>
+                                طريقة الدفع
+                            </Text>
 
-        <Text style={invoiceDetailsStyles.value}>
-            {invoiceData.paymentMethod}
-        </Text>
+                            <Text style={invoiceDetailsStyles.value}>
+                                {invoiceData.paymentMethod}
+                            </Text>
 
-    </View>
+                        </View>
 
-    {
-    receipt?.subtotal != null && (
+                        {
+                            receipt?.subtotal != null && (
 
-        <View style={invoiceDetailsStyles.row}>
+                                <View style={invoiceDetailsStyles.row}>
 
-            <Text style={invoiceDetailsStyles.label}>
-                المجموع قبل الضريبة
-            </Text>
+                                    <Text style={invoiceDetailsStyles.label}>
+                                        المجموع قبل الضريبة
+                                    </Text>
 
-            <Text style={invoiceDetailsStyles.value}>
-                {receipt.subtotal} ريال
-            </Text>
+                                    <Text style={invoiceDetailsStyles.value}>
+                                        {receipt.subtotal} ريال
+                                    </Text>
 
-        </View>
+                                </View>
 
-    )
-}
-    {
-    receipt?.vat_amount != null && (
+                            )
+                        }
+                        {
+                            receipt?.vat_amount != null && (
 
-        <View style={invoiceDetailsStyles.row}>
+                                <View style={invoiceDetailsStyles.row}>
 
-            <Text style={invoiceDetailsStyles.label}>
-                الضريبة
-            </Text>
+                                    <Text style={invoiceDetailsStyles.label}>
+                                        الضريبة
+                                    </Text>
 
-            <Text style={invoiceDetailsStyles.value}>
-                {receipt.vat_amount} ريال
-            </Text>
+                                    <Text style={invoiceDetailsStyles.value}>
+                                        {receipt.vat_amount} ريال
+                                    </Text>
 
-        </View>
+                                </View>
 
-    )
-}
-    {
-    receipt?.discount_amount != null && (
+                            )
+                        }
+                        {
+                            receipt?.discount_amount != null && (
 
-        <View style={invoiceDetailsStyles.row}>
+                                <View style={invoiceDetailsStyles.row}>
 
-            <Text style={invoiceDetailsStyles.label}>
-                الخصم
-            </Text>
+                                    <Text style={invoiceDetailsStyles.label}>
+                                        الخصم
+                                    </Text>
 
-            <Text style={invoiceDetailsStyles.value}>
-                {receipt.discount_amount} ريال
-            </Text>
+                                    <Text style={invoiceDetailsStyles.value}>
+                                        {receipt.discount_amount} ريال
+                                    </Text>
 
-        </View>
+                                </View>
 
-    )
-}
-    <View style={invoiceDetailsStyles.row}>
+                            )
+                        }
+                        <View style={invoiceDetailsStyles.row}>
 
-        <Text style={invoiceDetailsStyles.label}>
-            الإجمالي
-        </Text>
+                            <Text style={invoiceDetailsStyles.label}>
+                                الإجمالي
+                            </Text>
 
-        <Text style={invoiceDetailsStyles.value}>
-            {invoiceData.total} ريال
-        </Text>
+                            <Text style={invoiceDetailsStyles.value}>
+                                {invoiceData.total} ريال
+                            </Text>
 
-    </View>
+                        </View>
 
-</View>
+                    </View>
 
                     <View style={invoiceDetailsStyles.row}>
 

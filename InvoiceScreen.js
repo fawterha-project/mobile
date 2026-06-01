@@ -10,6 +10,20 @@ import {
     deleteAttachment
 } from './services/receiptService';
 
+const categoryMapper = {
+    "المقاضي والبيت": "المقاضي",
+    "المطاعم والترفيه": "المطاعم",
+    "التسوق والأناقة": "التسوق",
+    "النقل والسيارة": "النقل",
+    "الصحة والعافية": "الصحة",
+    "الفواتير والالتزامات": "الالتزامات",
+    "أخرى": "اخرى",
+};
+
+const getCategoryName = category =>
+    categoryMapper[category] || category;
+
+
 const InvoiceScreen = ({
     navigation,
     route
@@ -126,7 +140,11 @@ const InvoiceScreen = ({
 
                 <View style={invoiceStyles.infoRow}>
                     <View>
-                        <Text style={invoiceStyles.storeName}>
+                        <Text
+                            style={invoiceStyles.storeName}
+                            numberOfLines={2}
+                            ellipsizeMode="tail"
+                        >
                             {
                                 extractedData?.merchant_name ||
                                 'غير معروف'
@@ -171,8 +189,9 @@ const InvoiceScreen = ({
                 <View style={invoiceStyles.detailsRow}>
                     <Text>
                         {
-                            extractedData
-                                ?.suggested_category
+                            getCategoryName(
+                                extractedData?.suggested_category
+                            )
                         }
                     </Text>
                     <Text>الفئة</Text>

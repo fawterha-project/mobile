@@ -144,3 +144,93 @@ export const verifySignupCode = async (
     }
 
 };
+export const forgotPassword = async (
+    email
+) => {
+
+    try {
+
+        const response =
+            await api.post(
+                '/auth/forgot-password',
+                {
+                    email
+                }
+            );
+
+        return response.data;
+
+    }
+
+    catch (error) {
+
+        throw (
+            error.response?.data ||
+            error.message
+        );
+
+    }
+
+};
+export const verifyCode = async (
+    email,
+    code
+) => {
+
+    try {
+
+        const response =
+            await api.post(
+                '/auth/verify-code',
+                {
+                    email,
+                    code
+                }
+            );
+
+        return response.data;
+
+    }
+
+    catch (error) {
+
+        throw (
+            error.response?.data ||
+            error.message
+        );
+
+    }
+
+};
+export const resetPassword = async (
+  email,
+  code,
+  password
+) => {
+
+  try {
+
+    const response =
+      await api.post(
+        '/auth/reset-password',
+        {
+          email,
+          code,
+          newPassword: password
+        }
+      );
+
+    return response.data;
+
+  }
+
+  catch (error) {
+
+    throw (
+      error.response?.data ||
+      error.message
+    );
+
+  }
+
+};
