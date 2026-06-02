@@ -21,11 +21,38 @@ import Svg, { Circle } from 'react-native-svg';
 
 import {
   monthlyReportsStyles,
+  bottomNavStyles,
   profileStyles,
   colors,
 } from './styles';
 
+const BottomTab = ({ icon, label, active, onPress }) => (
+  <TouchableOpacity
+    style={bottomNavStyles.tabItem}
+    activeOpacity={0.7}
+    onPress={onPress}
+  >
+    <MaterialIcons
+      name={icon}
+      size={22}
+      color={
+        active
+          ? colors.blue
+          : colors.gray
+      }
+    />
 
+    <Text
+      style={[
+        bottomNavStyles.tabText,
+        active &&
+        bottomNavStyles.activeTabText
+      ]}
+    >
+      {label}
+    </Text>
+  </TouchableOpacity>
+);
 
 export default function EmptyMonthlyReportsScreen({
   navigation

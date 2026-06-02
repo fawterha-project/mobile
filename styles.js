@@ -11,7 +11,6 @@ export const colors = {
   lightBlue: '#F4F7FF',
   lightBackground: '#F9FAFB',
   progressBackground: '#EEF2FF',
-  shoppingIcon: '#A020F0',
   lightBlueIcon: '#F2F6FF',
   navShadow: '#000000',
   overlay: 'rgba(0,0,0,0.45)',
@@ -2661,6 +2660,7 @@ export const profileEditStyles = StyleSheet.create({
     fontSize: 18,
     fontFamily: 'Tajawal-Medium',
   },
+  
 });
 
 export const changePasswordStyles = StyleSheet.create({
@@ -3229,6 +3229,20 @@ export const billsStyles = StyleSheet.create({
     alignItems: 'center',
     marginRight: 10,
   },
+  emptyContent: {
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
+  paddingBottom: 100, // عشان يتوازن مع البوتوم ناف
+},
+
+emptyText: {
+  marginTop: 12,
+  fontSize: 16,
+  color: colors.black,
+  fontFamily: 'Tajawal-Regular',
+  textAlign: 'center',
+},
 });
 
 export const categoriesStyles = StyleSheet.create({
@@ -3735,7 +3749,7 @@ export const weeklyReportsStyles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: colors.white,
     borderWidth: 1,
-    borderColor: colors.dividerLight,
+    borderColor: '#E5E7EB',
     elevation: 3,
     paddingHorizontal: 6,
     flexDirection: 'row-reverse',
@@ -3777,7 +3791,7 @@ export const weeklyReportsStyles = StyleSheet.create({
     marginTop: 18,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: colors.dividerLight,
+    borderColor: '#E5E7EB',
     backgroundColor: colors.white,
     paddingHorizontal: 18,
     flexDirection: 'row',
@@ -3819,7 +3833,7 @@ export const weeklyReportsStyles = StyleSheet.create({
 
   percentText: {
     fontSize: 14,
-    color: colors.errorRed,
+    color: '#EF4444',
     fontFamily: 'Tajawal-Medium',
   },
 
@@ -3835,7 +3849,7 @@ export const weeklyReportsStyles = StyleSheet.create({
     marginTop: 6,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: colors.dividerLight,
+    borderColor: '#E5E7EB',
     backgroundColor: colors.white,
     paddingHorizontal: 5,
     paddingTop: 5,
@@ -3859,7 +3873,7 @@ export const weeklyReportsStyles = StyleSheet.create({
     borderRadius: 16,
     backgroundColor: colors.white,
     borderWidth: 1,
-    borderColor: colors.dividerLight,
+    borderColor: '#E5E7EB',
     alignItems: 'center',
     justifyContent: 'center',
     elevation: 2,
@@ -3883,7 +3897,7 @@ export const weeklyReportsStyles = StyleSheet.create({
     marginTop: 6,
     borderRadius: 18,
     borderWidth: 1,
-    borderColor: colors.dividerLight,
+    borderColor: '#E5E7EB',
     backgroundColor: colors.white,
     padding: 7,
     elevation: 4,
@@ -3940,10 +3954,10 @@ export const weeklyReportsStyles = StyleSheet.create({
   },
 
   categoryItem: {
-    width: 45,
-    alignItems: 'center',
-    marginBottom: 8,
-  },
+  width: 70,
+  alignItems: 'center',
+  marginBottom: 8,
+},
 
   categoryDot: {
     position: 'absolute',
@@ -3992,6 +4006,7 @@ export const weeklyReportsStyles = StyleSheet.create({
   },
 
 });
+
 export const monthlyReportsStyles = StyleSheet.create({
   ...weeklyReportsStyles,
 });
@@ -4001,7 +4016,7 @@ export const yearlyReportsStyles = StyleSheet.create({
 
   percentText: {
     ...monthlyReportsStyles.percentText,
-    color: colors.green,
+    color: '#22C55E',
   },
 });
 

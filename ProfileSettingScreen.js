@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { getProfile, deleteAccount } from './services/profileService';
-
 import {
   View,
   Text,
@@ -11,11 +10,14 @@ import {
   StatusBar,
   ImageBackground,
   Modal,
+  TextInput,
 } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { profileStyles, colors } from './styles';
 
+
 const MenuItem = ({ title, icon, danger, onPress }) => {
+
   return (
     <TouchableOpacity
       activeOpacity={0.8}
@@ -49,6 +51,9 @@ export default function ProfileSettingScreen({ navigation }) {
   const [deleteModalVisible, setDeleteModalVisible] = React.useState(false);
 
   const [userName, setUserName] = useState('');
+  const [userEmail, setUserEmail] = useState('');
+  const [deletePassword, setDeletePassword] = useState('');
+
 
   useEffect(() => {
     loadProfile();
@@ -59,6 +64,7 @@ export default function ProfileSettingScreen({ navigation }) {
       const user = await getProfile();
 
       setUserName(`${user.first_name || ''} ${user.last_name || ''}`);
+      setUserEmail(user.email || '');
     } catch (error) {
       console.log(
         'خطأ البروفايل:',
@@ -67,6 +73,8 @@ export default function ProfileSettingScreen({ navigation }) {
       );
     }
   };
+  const [successDeleteVisible, setSuccessDeleteVisible] =
+    useState(false);
 
   return (
     <View style={profileStyles.container}>
@@ -113,7 +121,22 @@ export default function ProfileSettingScreen({ navigation }) {
         </View>
       </View>
 
-      <Text style={profileStyles.userName}>{userName}</Text>
+      <Text style={profileStyles.userName}>
+        {userName}
+      </Text>
+
+      <Text
+        style={{
+          textAlign: 'center',
+          marginTop: -25,
+          marginBottom: 25,
+          fontSize: 16,
+          color: colors.inputGray,
+          fontFamily: 'Taja..wal-bold',
+        }}
+      >
+        {userEmail}
+      </Text>
 
       <View style={profileStyles.menuContainer}>
         <MenuItem
@@ -158,6 +181,23 @@ export default function ProfileSettingScreen({ navigation }) {
             <Text style={profileStyles.deleteModalText}>
               هل أنت متأكدة من حذف الحساب؟ لا يمكن التراجع عن هذا الإجراء
             </Text>
+            <TextInput
+              value={deletePassword}
+              onChangeText={setDeletePassword}
+              placeholder="أدخل كلمة المرور"
+              secureTextEntry
+              style={{
+                width: '100%',
+                height: 46,
+                borderWidth: 1,
+                borderColor: colors.border,
+                borderRadius: 12,
+                paddingHorizontal: 12,
+                marginBottom: 20,
+                backgroundColor: colors.white,
+                textAlign: 'right',
+              }}
+            />
 
             <View style={profileStyles.deleteModalButtons}>
               <TouchableOpacity
@@ -170,16 +210,23 @@ export default function ProfileSettingScreen({ navigation }) {
               <TouchableOpacity
                 style={profileStyles.deleteConfirmBtn}
                 onPress={async () => {
+                  console.log('DELETE BUTTON PRESSED');
                   try {
-                    await deleteAccount();
+                    if (!deletePassword.trim()) {
+
+                      alert('الرجاء إدخال كلمة المرور');
+
+                      return;
+
+                    }
+                    await deleteAccount(deletePassword);
 
                     await AsyncStorage.removeItem('userToken');
 
                     await AsyncStorage.removeItem('user');
-
                     setDeleteModalVisible(false);
 
-                    navigation.replace('LoginScreen');
+                    setSuccessDeleteVisible(true);
                   } catch (error) {
                     console.log(
                       'خطأ حذف الحساب:',
@@ -192,6 +239,67 @@ export default function ProfileSettingScreen({ navigation }) {
                 <Text style={profileStyles.deleteConfirmText}>حذف</Text>
               </TouchableOpacity>
             </View>
+          </View>
+        </View>
+      </Modal>
+      <Modal
+        visible={successDeleteVisible}
+        transparent
+        animationType="fade"
+      >
+        <View style={profileStyles.deleteOverlay}>
+          <View style={profileStyles.deleteModalBox}>
+            <View style={profileStyles.deleteIconCircle}>
+              <MaterialIcons
+                name="check-circle"
+                size={50}
+                color={colors.blue}
+              />
+            </View>
+
+            <Text
+              style={[
+                profileStyles.deleteModalTitle,
+                { color: colors.blue }
+              ]}
+            >
+              تم بنجاح
+            </Text>
+
+            <Text style={profileStyles.deleteModalText}>
+              تم حذف الحساب بنجاح
+            </Text>
+
+            <TouchableOpacity
+              style={{
+                width: '100%',
+                height: 46,
+                borderRadius: 12,
+                backgroundColor: colors.blue,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+              onPress={() => {
+                setSuccessDeleteVisible(false);
+
+                navigation.reset({
+                  index: 0,
+                  routes: [
+                    { name: 'LoginScreen' }
+                  ],
+                });
+              }}
+            >
+              <Text
+                style={{
+                  color: colors.white,
+                  fontSize: 16,
+                  fontFamily: 'Tajawal-Medium',
+                }}
+              >
+                حسناً
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
       </Modal>

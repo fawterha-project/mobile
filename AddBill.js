@@ -49,7 +49,7 @@ const AddBill = ({ visible, onClose, navigation }) => {
 
               setTimeout(() => {
                 navigation.navigate(
-                  'UploadInvoice'
+                  'CameraScreen'
                 );
               }, 300);
             }}

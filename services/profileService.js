@@ -168,14 +168,20 @@ export const updateExpenseLimit =
     };
 
 export const deleteAccount =
-    async () => {
+    async (password) => {
 
         try {
 
             const response =
                 await api.delete(
 
-                    '/auth/delete-account'
+                    '/auth/account',
+
+                    {
+                        data: {
+                            password,
+                        },
+                    }
 
                 );
 

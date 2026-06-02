@@ -11,10 +11,11 @@ import {
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { LineChart } from 'react-native-chart-kit';
-import Svg, { Circle } from 'react-native-svg';
+import Svg, { Circle, G } from 'react-native-svg';
 
 import {
   weeklyReportsStyles,
+  bottomNavStyles,
   profileStyles,
   colors,
 } from './styles';
@@ -22,6 +23,26 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import api from './services/api';
+
+const BottomTab = ({ icon, label, active, onPress }) => (
+  <TouchableOpacity
+    style={bottomNavStyles.tabItem}
+    activeOpacity={0.7}
+    onPress={onPress}
+  >
+    <MaterialIcons
+      name={icon}
+      size={22}
+      color={active ? colors.blue : colors.gray}
+    />
+
+    <Text
+      style={[bottomNavStyles.tabText, active && bottomNavStyles.activeTabText]}
+    >
+      {label}
+    </Text>
+  </TouchableOpacity>
+);
 
 export default function EmptyWeeklyReportsScreen({ navigation }) {
   const [weeklyData, setWeeklyData] = useState(null);
@@ -38,6 +59,10 @@ export default function EmptyWeeklyReportsScreen({ navigation }) {
         `/reports/weekly?users_id=${user.users_id}`,
       );
 
+      console.log(
+        'WEEKLY REPORT DATA:',
+        JSON.stringify(response.data.weekly, null, 2),
+      );
       setWeeklyData(response.data.weekly);
       console.log('الويكلي:', response.data.weekly);
     } catch (error) {
@@ -53,6 +78,7 @@ export default function EmptyWeeklyReportsScreen({ navigation }) {
 
   const circumference = 2 * Math.PI * radius;
 
+  let cumulativePercent = 0;
 
   return (
     <View style={weeklyReportsStyles.container}>
@@ -246,8 +272,8 @@ export default function EmptyWeeklyReportsScreen({ navigation }) {
           </View>
 
           <View style={weeklyReportsStyles.categoriesGrid}>
-            {weeklyData?.categories?.length > 0
-              ? weeklyData.categories.map((item, index) => (
+            {weeklyData?.categories?.length > 0 ? (
+              weeklyData.categories.map((item, index) => (
                 <View key={index} style={weeklyReportsStyles.categoryItem}>
                   <View
                     style={[
@@ -262,7 +288,7 @@ export default function EmptyWeeklyReportsScreen({ navigation }) {
                     style={[
                       weeklyReportsStyles.categoryCircle,
                       {
-                        backgroundColor: item.bg_color || '#F6EAFF',
+                        backgroundColor: item.bg_color || colors.lightPurple,
                       },
                     ]}
                   >
@@ -281,116 +307,32 @@ export default function EmptyWeeklyReportsScreen({ navigation }) {
                     <Text style={weeklyReportsStyles.categoryAmount}>
                       {item.total}
                     </Text>
+
                     <Text style={weeklyReportsStyles.categoryCurrency}>
                       ريال
                     </Text>
                   </View>
                 </View>
               ))
-              : [
-                {
-                  icon: 'shopping-basket',
-                  name: ' المقاضي',
-                  amount: '0',
-                  iconColor: colors.green,
-                  bgColor: colors.lightGreen,
-                  dotColor: colors.green,
-                },
-
-                {
-                  icon: 'restaurant',
-                  name: 'المطاعم',
-                  amount: '0',
-                  iconColor: colors.blue,
-                  bgColor: colors.lightBlueCategory,
-                  dotColor: colors.blue,
-                },
-
-                {
-                  icon: 'shopping-bag',
-                  name: 'التسوق',
-                  amount: '0',
-                  iconColor: colors.purple,
-                  bgColor: colors.lightPurple,
-                  dotColor: colors.purple,
-                },
-
-                {
-                  icon: 'directions-bus',
-                  name: 'النقل',
-                  amount: '0',
-                  iconColor: colors.yellow,
-                  bgColor: colors.lightYellow,
-                  dotColor: colors.yellow,
-                },
-
-                {
-                  icon: 'favorite-border',
-                  name: 'الصحة',
-                  amount: '0',
-                  iconColor: colors.red,
-                  bgColor: colors.lightPink,
-                  dotColor: colors.red,
-                },
-
-                {
-                  icon: 'event',
-                  name: 'الالتزامات',
-                  amount: '0',
-                  iconColor: colors.cyan,
-                  bgColor: colors.lightCyan,
-                  dotColor: colors.cyan,
-                },
-
-                {
-                  icon: 'more-horiz',
-                  name: 'أخرى',
-                  amount: '0',
-                  iconColor: colors.gray,
-                  bgColor: colors.lightGray,
-                  dotColor: colors.gray,
-                },
-              ].map((item, index) => (
-                <View key={index} style={weeklyReportsStyles.categoryItem}>
-                  <View
-                    style={[
-                      weeklyReportsStyles.categoryDot,
-                      {
-                        backgroundColor: item.dotColor,
-                      },
-                    ]}
-                  />
-
-                  <View
-                    style={[
-                      weeklyReportsStyles.categoryCircle,
-                      {
-                        backgroundColor: item.bgColor,
-                      },
-                    ]}
-                  >
-                    <MaterialIcons
-                      name={item.icon}
-                      size={21}
-                      color={item.iconColor}
-                    />
-                  </View>
-
-                  <Text style={weeklyReportsStyles.categoryName}>
-                    {item.name}
-                  </Text>
-
-                  <View style={weeklyReportsStyles.amountRow}>
-                    <Text style={weeklyReportsStyles.categoryAmount}>
-                      {item.amount}
-                    </Text>
-
-                    <Text style={weeklyReportsStyles.categoryCurrency}>
-                      ريال
-                    </Text>
-                  </View>
-                </View>
-              ))}
+            ) : (
+              <View
+                style={{
+                  width: '100%',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  paddingVertical: 30,
+                }}
+              >
+                <Text
+                  style={{
+                    color: colors.gray,
+                    fontSize: 14,
+                  }}
+                >
+                  لا توجد فئات إنفاق حتى الآن
+                </Text>
+              </View>
+            )}
           </View>
         </View>
       </View>

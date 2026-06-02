@@ -20,6 +20,9 @@ import {
     profileStyles,
 } from './styles';
 
+import AsyncStorage
+    from '@react-native-async-storage/async-storage';
+
 import {
     verifySignupCode,
     verifyCode
@@ -323,7 +326,15 @@ const VerifyEmailScreen = ({
                                     alignItems: 'center',
                                     justifyContent: 'center',
                                 }}
-                                onPress={() => {
+                                onPress={async () => {
+
+                                    await AsyncStorage.setItem(
+                                        'user',
+                                        JSON.stringify({
+                                            first_name:
+                                                user?.first_name
+                                        })
+                                    );
 
                                     setSuccessModalVisible(
                                         false
